@@ -1,0 +1,82 @@
+{
+  "schema_version": 5,
+  "run_id": "20260509T191751Z",
+  "created_at": "2026-05-09T19:17:51Z",
+  "updated_at": "2026-05-09T19:17:51Z",
+  "product_slug": "redirect-manager",
+  "product_root": "products/redirect-manager",
+  "status": "discovery",
+  "prd_input_mode": "brain_dump_only",
+  "platform_target": "marketplace",
+  "task_breakdown_style": "tdd",
+  "scope_dial": {
+    "rigor": "standard",
+    "track": "full",
+    "ui_variants": "3",
+    "docs_at_ship": "full"
+  },
+  "ui_design": {
+    "proposal_count": 0,
+    "divergence": "moderate",
+    "variant_paths": [],
+    "selected_variant_path": null
+  },
+  "source": {
+    "kind": "raw_idea",
+    "values": [
+      "Raw idea: Redirect Manager — Sitecore Marketplace client-side app with three extension points (Context Panel, Dashboard Widget per site, Full Page) for CRUD over Redirect Map items at /sitecore/content/{COLLECTION}/{SITE}/Settings/Redirects/* via Authoring GraphQL, with import/export and hybrid usage analytics.",
+      "Reference screenshots: Redirect Map item form fields — Type (Server Transfer / 301 / 302 / 307), Preserve QS, Preserve Language, Mapping (regex source -> target rows), Include virtual folder."
+    ],
+    "analysis_mode": "greenfield",
+    "source_analysis_artifact": null,
+    "content_dump": null,
+    "assets_bundle": null
+  },
+  "canonical_artifacts": {
+    "brain_dump": "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260509T191751Z.md",
+    "prd": "products/redirect-manager/project-planning/PRD/prd-NNN.md",
+    "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-NNN.md",
+    "architecture": null,
+    "task_breakdown": null,
+    "task_breakdown_pre_qa": null,
+    "qa_report": null,
+    "implementation_runbook": null,
+    "content_model": null,
+    "content_examples": null,
+    "ship_report": null,
+    "friction_log": null
+  },
+  "friction_log": {
+    "path": "products/redirect-manager/project-planning/workflow/friction-log-20260509T191751Z.md",
+    "min_severity": "medium",
+    "enabled": true
+  },
+  "stage_history": [
+    {
+      "stage": "discovery",
+      "agent": "01-rubber-ducky",
+      "entered_at": "2026-05-09T19:17:51Z",
+      "exited_at": "2026-05-09T19:17:51Z",
+      "outcome": "completed",
+      "error": null
+    }
+  ],
+  "implementation": {
+    "mode": "pipeline",
+    "target_directory": "products/redirect-manager/site",
+    "branch_name": null,
+    "remote_url": null,
+    "status": "not_started",
+    "resumed_from_stage": null
+  },
+  "smoke_outcomes": {},
+  "notes": [
+    "Greenfield concept brief generated 2026-05-09 via /rubber-ducky.",
+    "Three Marketplace extension points (Context Panel, Dashboard Widget, Full Page) sharing one data layer (Sitecore Authoring GraphQL for rules + Upstash Redis for telemetry).",
+    "Hybrid analytics: Upstash via Vercel Marketplace (single shared DB, multitenant by key prefix). Sync of consolidated counter back to Sitecore is DEFERRED to a follow-on PRD so the MVP requires no Sitecore template changes.",
+    "MVP defers regex-pattern matching in Context Panel; explicit UI banner required.",
+    "Multilingual + versioned CRUD is in scope from MVP; Authoring GraphQL must thread language/version correctly.",
+    "Head-app counter increment + 404 reporting is OUT of scope for this product (separate codebase).",
+    "Next: /create-prd against this brain-dump. Scope dial to be set at /create-prd kickoff."
+  ]
+}
