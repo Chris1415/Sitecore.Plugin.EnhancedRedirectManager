@@ -2,10 +2,10 @@
   "schema_version": 5,
   "run_id": "20260509T191751Z",
   "created_at": "2026-05-09T19:17:51Z",
-  "updated_at": "2026-05-09T19:17:51Z",
+  "updated_at": "2026-05-09T20:30:00Z",
   "product_slug": "redirect-manager",
   "product_root": "products/redirect-manager",
-  "status": "discovery",
+  "status": "spec_ready",
   "prd_input_mode": "brain_dump_only",
   "platform_target": "marketplace",
   "task_breakdown_style": "tdd",
@@ -16,7 +16,7 @@
     "docs_at_ship": "full"
   },
   "ui_design": {
-    "proposal_count": 0,
+    "proposal_count": 3,
     "divergence": "moderate",
     "variant_paths": [],
     "selected_variant_path": null
@@ -34,8 +34,8 @@
   },
   "canonical_artifacts": {
     "brain_dump": "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260509T191751Z.md",
-    "prd": "products/redirect-manager/project-planning/PRD/prd-NNN.md",
-    "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-NNN.md",
+    "prd": "products/redirect-manager/project-planning/PRD/prd-000.md",
+    "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-000.md",
     "architecture": null,
     "task_breakdown": null,
     "task_breakdown_pre_qa": null,
@@ -59,24 +59,55 @@
       "exited_at": "2026-05-09T19:17:51Z",
       "outcome": "completed",
       "error": null
+    },
+    {
+      "stage": "discovery",
+      "agent": "02-product-manager",
+      "entered_at": "2026-05-09T19:30:00Z",
+      "exited_at": "2026-05-09T20:00:00Z",
+      "outcome": "completed",
+      "error": null
+    },
+    {
+      "stage": "discovery_summary",
+      "agent": "02-product-manager",
+      "entered_at": "2026-05-09T20:00:00Z",
+      "exited_at": "2026-05-09T20:05:00Z",
+      "outcome": "confirmed",
+      "error": null
+    },
+    {
+      "stage": "spec_ready",
+      "agent": "02-product-manager",
+      "entered_at": "2026-05-09T20:05:00Z",
+      "exited_at": "2026-05-09T20:30:00Z",
+      "outcome": "completed",
+      "error": null
     }
   ],
   "implementation": {
     "mode": "pipeline",
     "target_directory": "products/redirect-manager/site",
-    "branch_name": null,
-    "remote_url": null,
+    "branch_name": "prd-000",
+    "remote_url": "https://github.com/Chris1415/Sitecore.Plugin.EnhancedRedirectManager.git",
     "status": "not_started",
     "resumed_from_stage": null
   },
   "smoke_outcomes": {},
   "notes": [
     "Greenfield concept brief generated 2026-05-09 via /rubber-ducky.",
-    "Three Marketplace extension points (Context Panel, Dashboard Widget, Full Page) sharing one data layer (Sitecore Authoring GraphQL for rules + Upstash Redis for telemetry).",
-    "Hybrid analytics: Upstash via Vercel Marketplace (single shared DB, multitenant by key prefix). Sync of consolidated counter back to Sitecore is DEFERRED to a follow-on PRD so the MVP requires no Sitecore template changes.",
-    "MVP defers regex-pattern matching in Context Panel; explicit UI banner required.",
-    "Multilingual + versioned CRUD is in scope from MVP; Authoring GraphQL must thread language/version correctly.",
-    "Head-app counter increment + 404 reporting is OUT of scope for this product (separate codebase).",
-    "Next: /create-prd against this brain-dump. Scope dial to be set at /create-prd kickoff."
+    "Three Marketplace extension points (Context Panel, Dashboard Widget, Full Page) sharing Authoring GraphQL as single canonical data source.",
+    "PRD-000 MVP is en-language-only and pure CRUD — multilingual, analytics, sync-back, concurrent-edit detection are all deferred to follow-on PRDs (revised 2026-05-09 after PM critical review).",
+    "Import matches by Sitecore item GUID (ADR-0009); JSON includes the GUID for every item.",
+    "Import has 3 actions only: create / overwrite / skip. The merge action was collapsed into overwrite during critical review (Q-CR-1).",
+    "Real-tenant Authoring/Preview GraphQL response shape captured during PM critical-review answers — fields are { name, jsonValue } array; UrlMapping is URL-encoded source=target pairs joined by '&'; RedirectType enum has 'ServerTransfer' confirmed plus 301/302/307 names TBV.",
+    "discovery_level: standard",
+    "discovery_summary: confirmed",
+    "critical_review: completed",
+    "critical_review_level: standard",
+    "sitecore_discovery: completed",
+    "sdk_surface_split: n/a (2 new SDK surfaces: xmc.authoring.graphql + xmc.sites — below 3-surface threshold)",
+    "base_branch: main (PRD-000, no predecessor)",
+    "Next: /architect (full track per scope_dial; produce architecture blueprint + 3 UI variants + ADR refinement). Stakeholder will validate Authoring GraphQL mutations against real tenant during architecture; capture fixtures into tests/fixtures/graphql/ before /task-breakdown."
   ]
 }
