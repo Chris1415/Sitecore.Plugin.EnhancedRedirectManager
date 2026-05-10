@@ -1,0 +1,18 @@
+{
+  "data": {
+    "data": [
+      {
+        "id": "5aae1eeaea2440bf96f11f43da82c77b",
+        "name": "my-collection",
+        "displayName": "My Collection",
+        "description": "Primary site collection"
+      },
+      {
+        "id": "7b2e4c9f-1234-5678-abcd-ef0123456789",
+        "name": "secondary-collection",
+        "displayName": "Secondary Collection",
+        "description": null
+      }
+    ]
+  }
+}

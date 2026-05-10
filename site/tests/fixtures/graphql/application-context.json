@@ -1,0 +1,18 @@
+{
+  "id": "app-123",
+  "url": "https://localhost:3000",
+  "name": "redirect-manager",
+  "type": "xmc:pages:contextpanel",
+  "resourceAccess": [
+    {
+      "resourceId": "resource-abc",
+      "tenantId": "tenant-abc-123",
+      "tenantName": "my-tenant",
+      "tenantDisplayName": "My Tenant",
+      "context": {
+        "live": "live-context-id-xyz",
+        "preview": "preview-context-id-xyz"
+      }
+    }
+  ]
+}

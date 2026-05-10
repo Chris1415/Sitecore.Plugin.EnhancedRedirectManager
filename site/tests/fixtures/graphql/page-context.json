@@ -1,0 +1,16 @@
+{
+  "siteInfo": {
+    "name": "my-site",
+    "displayName": "My Site",
+    "startItemId": "{A1B2C3D4-E5F6-7890-ABCD-EF0123456789}",
+    "collectionId": "5aae1eeaea2440bf96f11f43da82c77b"
+  },
+  "pageInfo": {
+    "url": "/foo/bar",
+    "route": "/foo/bar",
+    "path": "/sitecore/content/my-collection/my-site/Home/foo/bar",
+    "id": "{B2C3D4E5-F6A7-8901-BCDE-F01234567890}",
+    "name": "bar",
+    "language": "en"
+  }
+}

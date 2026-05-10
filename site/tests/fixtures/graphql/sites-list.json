@@ -1,0 +1,20 @@
+{
+  "data": {
+    "data": [
+      {
+        "id": "497f6eca-6276-4993-bfeb-53cbbbba6f08",
+        "name": "my-site",
+        "displayName": "My Site",
+        "description": "A test site for redirect management",
+        "collectionId": "5aae1eeaea2440bf96f11f43da82c77b"
+      },
+      {
+        "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+        "name": "another-site",
+        "displayName": "Another Site",
+        "description": null,
+        "collectionId": "5aae1eeaea2440bf96f11f43da82c77b"
+      }
+    ]
+  }
+}

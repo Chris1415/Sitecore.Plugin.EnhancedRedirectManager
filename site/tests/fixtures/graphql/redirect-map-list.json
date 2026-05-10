@@ -1,0 +1,23 @@
+{
+  "data": {
+    "item": {
+      "children": {
+        "results": [
+          {
+            "itemId": "{E39157F3-A81F-4692-B05D-178D48C836DE}",
+            "name": "My Redirect Map",
+            "fields": [
+              { "name": "RedirectType", "jsonValue": { "value": "ServerTransfer" } },
+              { "name": "UrlMapping", "jsonValue": { "value": "%2ftest=%2FnewTest&%2fhello=%2Fworld" } },
+              { "name": "PreserveQueryString", "jsonValue": { "value": "0" } },
+              { "name": "PreserveLanguage", "jsonValue": { "value": "0" } },
+              { "name": "IncludeVirtualFolder", "jsonValue": { "value": "1" } },
+              { "name": "__Updated", "jsonValue": { "value": "20260509T120000Z" } },
+              { "name": "__Created", "jsonValue": { "value": "20260509T100000Z" } }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
