@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add redirect — pick map — Site Atlas v3</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="poc-bar">
+      <div>
+        <a href="index.html">&larr; Hub</a> · Context Panel — Add Redirect modal
+        (step 1 — pick map)
+      </div>
+      <div class="right">
+        <button
+          class="btn btn-outline btn-sm"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+          type="button"
+        >
+          Toggle theme
+        </button>
+      </div>
+    </header>
+
+    <main class="frame-context" role="main" aria-label="Pages context panel">
+      <!-- Background context (faded behind overlay) -->
+      <div class="frame-context-content" aria-hidden="true" style="opacity: 0.35; pointer-events: none">
+        <div class="alert alert-warning">
+          <svg
+            class="alert-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 9v4" />
+            <path
+              d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"
+            />
+            <path d="M12 17h.01" />
+          </svg>
+          <div class="alert-body">
+            <div class="alert-title">Direct-string matches only</div>
+          </div>
+        </div>
+        <div>
+          <span class="context-heading-label">Redirects affecting</span>
+          <span class="context-heading-path">/products/launch-2026</span>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal overlay -->
+    <div class="overlay" role="dialog" aria-modal="true" aria-labelledby="add-redirect-title">
+      <div class="dialog">
+        <div class="dialog-header">
+          <h2 class="dialog-title" id="add-redirect-title">Add redirect for this page</h2>
+          <a
+            href="context-panel.html"
+            class="btn btn-icon btn-ghost"
+            aria-label="Close dialog"
+            title="Close"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="dialog-body">
+          <label class="label" for="map-search">
+            Pick a Redirect Map for
+            <span class="mono text-sm">/products/launch-2026</span>
+          </label>
+          <input
+            id="map-search"
+            type="search"
+            class="input"
+            placeholder="Search existing maps..."
+            aria-label="Search Redirect Maps"
+          />
+
+          <div class="map-pick-list" role="listbox" aria-label="Redirect Maps">
+            <a
+              href="context-panel-create-new-map.html"
+              class="map-pick-item"
+              role="option"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+                style="color: hsl(var(--primary))"
+              >
+                <path d="M5 12h14" />
+                <path d="M12 5v14" />
+              </svg>
+              <span class="map-pick-name map-pick-create"
+                >Create new Redirect Map</span
+              >
+            </a>
+
+            <a
+              href="context-panel-add-existing.html"
+              class="map-pick-item"
+              role="option"
+            >
+              <span class="map-pick-name">Marketing Campaigns 2026</span>
+              <span class="badge badge-bold-primary">301</span>
+              <span class="map-pick-meta">2h ago</span>
+            </a>
+
+            <a
+              href="context-panel-add-existing.html"
+              class="map-pick-item"
+              role="option"
+            >
+              <span class="map-pick-name">Product Renames</span>
+              <span class="badge badge-bold-primary">302</span>
+              <span class="map-pick-meta">3d ago</span>
+            </a>
+
+            <a
+              href="context-panel-add-existing.html"
+              class="map-pick-item"
+              role="option"
+            >
+              <span class="map-pick-name">Internal Reorg</span>
+              <span class="badge badge-bold-primary">Server&nbsp;Transfer</span>
+              <span class="map-pick-meta">Apr 28</span>
+            </a>
+
+            <a
+              href="context-panel-add-existing.html"
+              class="map-pick-item"
+              role="option"
+            >
+              <span class="map-pick-name">Legacy URL Cleanup</span>
+              <span class="badge badge-bold-primary">301</span>
+              <span class="map-pick-meta">Apr 14</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="dialog-footer">
+          <a href="context-panel.html" class="btn btn-ghost">Cancel</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

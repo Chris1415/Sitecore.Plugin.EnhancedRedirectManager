@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Page — site selected, no maps — Site Atlas v3</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="poc-bar">
+      <div>
+        <a href="index.html">&larr; Hub</a> · Full Page — site selected, zero
+        Redirect Maps
+      </div>
+      <div class="right">
+        <button
+          class="btn btn-outline btn-sm"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+          type="button"
+        >
+          Toggle theme
+        </button>
+      </div>
+    </header>
+
+    <div class="frame-fullpage" role="main">
+      <div class="fullpage-topbar">
+        <span class="app-name">Redirect Manager</span>
+        <div class="fullpage-actions">
+          <a href="full-page-import-preview.html" class="btn btn-ghost btn-sm">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            <span class="label-extra">Import</span>
+          </a>
+          <button class="btn btn-ghost btn-sm" aria-disabled="true">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span class="label-extra">Export</span>
+          </button>
+          <a
+            href="full-page-create-redirect-map.html"
+            class="btn btn-primary btn-sm"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14" />
+              <path d="M12 5v14" />
+            </svg>
+            New Redirect Map
+          </a>
+        </div>
+      </div>
+
+      <nav class="fullpage-minimap is-wide" aria-hidden="true">
+        <span class="minimap-node is-collection">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 7h18M3 12h18M3 17h18" />
+          </svg>
+          Brand Sites
+        </span>
+        <span class="minimap-arrow">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m9 6 6 6-6 6" />
+          </svg>
+        </span>
+        <span class="minimap-node is-here">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+          FinanceHub
+        </span>
+        <span class="minimap-arrow">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m9 6 6 6-6 6" />
+          </svg>
+        </span>
+        <span class="minimap-counter">
+          <strong>0</strong> Redirect Maps · <strong>0</strong> mappings
+        </span>
+      </nav>
+      <div class="fullpage-breadcrumb is-narrow">
+        <strong>Brand Sites</strong> / <strong>FinanceHub</strong> · 0 maps
+      </div>
+
+      <div class="fullpage-main">
+        <aside class="fullpage-picker">
+          <div class="picker-section">
+            <label class="label" for="picker-collection">Site collection</label>
+            <select id="picker-collection" class="input">
+              <option>Brand Sites</option>
+            </select>
+          </div>
+          <div class="picker-section">
+            <label class="label" for="picker-site">Site</label>
+            <select id="picker-site" class="input">
+              <option>FinanceHub</option>
+            </select>
+          </div>
+          <div class="picker-active-card">
+            <div class="picker-active-name">FinanceHub</div>
+            <div class="picker-active-host">finance.example.com</div>
+            <div>
+              <span class="badge">en</span>
+              <span class="badge">0 maps</span>
+            </div>
+          </div>
+        </aside>
+
+        <section class="fullpage-content">
+          <div class="empty-state">
+            <svg
+              class="empty-svg"
+              viewBox="0 0 96 72"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.25"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect
+                x="6"
+                y="10"
+                width="84"
+                height="52"
+                rx="4"
+                stroke-dasharray="3 3"
+              />
+              <circle cx="48" cy="36" r="6" stroke-dasharray="2 2" />
+            </svg>
+            <div class="empty-heading">No Redirect Maps in this site</div>
+            <div class="empty-body">
+              Create the first one to start managing redirects.
+            </div>
+            <a
+              href="full-page-create-redirect-map.html"
+              class="btn btn-primary"
+              style="margin-top: 0.5rem"
+            >
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="M12 5v14" />
+              </svg>
+              New Redirect Map
+            </a>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

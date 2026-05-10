@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirect Manager — Operator Console (v1) POC</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="portal-shell">
+      <div class="portal-shell__hd">
+        <div>
+          <h1>Redirect Manager — Operator Console (v1) POC</h1>
+          <p>Three Cloud Portal extension-point surfaces. Click any tile or state link to open the matching frame.</p>
+        </div>
+        <span class="blok-badge blok-badge--info">Variant 1 of 3 — moderate divergence</span>
+      </div>
+
+      <div class="poc-banner">
+        <span class="glyph" data-icon="info" data-size="14"></span>
+        <span>Static HTML clickdummy. No backend. Placeholder data only. Built with Blok semantic tokens — Geist Sans + Geist Mono. Honors host light/dark via prefers-color-scheme.</span>
+      </div>
+
+      <div class="surface-grid">
+        <div class="surface-tile">
+          <div class="surface-tile__hd">
+            <a href="context-panel.html" style="text-decoration:none; color:inherit;"><h2 class="surface-tile__title">Context Panel</h2></a>
+            <span class="surface-tile__route">/context-panel</span>
+          </div>
+          <p class="surface-tile__desc">Pages editor sidebar. Lists redirects affecting the current page, grouped by parent Redirect Map. 320–400 px wide.</p>
+          <div class="surface-tile__states">
+            <a href="context-panel.html">default</a>
+            <a href="context-panel-empty.html">empty</a>
+            <a href="context-panel-error.html">error</a>
+            <a href="context-panel-loading.html">loading</a>
+            <a href="context-panel-add-modal.html">add modal</a>
+            <a href="context-panel-add-existing.html">add to existing</a>
+            <a href="context-panel-create-new-map.html">create new map</a>
+            <a href="context-panel-edit-row.html">edit row</a>
+          </div>
+        </div>
+
+        <div class="surface-tile">
+          <div class="surface-tile__hd">
+            <a href="dashboard-widget.html" style="text-decoration:none; color:inherit;"><h2 class="surface-tile__title">Dashboard Widget</h2></a>
+            <span class="surface-tile__route">/dashboard-widget</span>
+          </div>
+          <p class="surface-tile__desc">Per-site at-a-glance counters. Three stat tiles + footnote. 300–800 px × 200–400 px. Read-only in MVP.</p>
+          <div class="surface-tile__states">
+            <a href="dashboard-widget.html">default</a>
+            <a href="dashboard-widget-empty.html">empty</a>
+            <a href="dashboard-widget-loading.html">loading</a>
+            <a href="dashboard-widget-error.html">error</a>
+          </div>
+        </div>
+
+        <div class="surface-tile">
+          <div class="surface-tile__hd">
+            <a href="full-page.html" style="text-decoration:none; color:inherit;"><h2 class="surface-tile__title">Full Page</h2></a>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">Power-user CRUD + JSON import/export. Two-pane layout (280 px rail + fluid right pane). 1024–1920 px.</p>
+          <div class="surface-tile__states">
+            <a href="full-page.html">default</a>
+            <a href="full-page-empty-no-selection.html">no selection</a>
+            <a href="full-page-no-redirects.html">no maps</a>
+            <a href="full-page-create-redirect-map.html">create map</a>
+            <a href="full-page-edit-redirect-map.html">edit map</a>
+            <a href="full-page-import-preview.html">import preview</a>
+            <a href="full-page-import-summary.html">import summary</a>
+            <a href="full-page-error.html">error</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="surface-grid" style="grid-template-columns: 1fr; max-width: 80rem;">
+        <div class="surface-tile" style="cursor:default;">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Reading guide</h2>
+            <span class="surface-tile__route">click-targets.md</span>
+          </div>
+          <p class="surface-tile__desc">
+            All click targets across all 17 frames are enumerated in
+            <a href="click-targets.md" style="color: var(--primary);">click-targets.md</a> (open as text).
+            Each link in this POC navigates to a static HTML file representing one post-state — interactions are
+            faithful per-frame, not actually wired (no JS state machine).
+          </p>
+          <div class="surface-tile__states">
+            <a href="click-targets.md">click-targets.md</a>
+            <a href="../../project-planning/ui-design/ui-design-20260509T191751Z-v1.md">v1 spec</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Full Page — no selection · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <span class="blok-breadcrumb__item">Pick a collection to begin</span>
+        </nav>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" disabled>
+            <span class="glyph" data-icon="upload" data-size="14"></span>
+            Import
+          </button>
+          <button class="blok-btn blok-btn--outline" disabled>
+            <span class="glyph" data-icon="download" data-size="14"></span>
+            Export
+          </button>
+          <button class="blok-btn blok-btn--primary" disabled>
+            <span class="glyph" data-icon="plus" data-size="14"></span>
+            New map
+          </button>
+        </div>
+      </header>
+
+      <div class="fp-body">
+        <aside class="fp-rail" aria-label="Pick a collection">
+          <div class="fp-rail__pickers">
+            <div>
+              <label class="blok-label">Collection</label>
+              <select class="blok-select">
+                <option value="" disabled selected>Pick a collection</option>
+                <option>SneakerCo</option>
+                <option>BootsBrand</option>
+              </select>
+            </div>
+            <div>
+              <label class="blok-label">Site</label>
+              <select class="blok-select" disabled>
+                <option>Pick a collection first</option>
+              </select>
+            </div>
+          </div>
+          <div class="fp-rail__list-hd">
+            <span>Redirect maps</span>
+          </div>
+          <div class="fp-rail__list" style="display:flex; align-items:center; justify-content:center; padding:1.5rem 1rem;">
+            <div class="blok-empty" style="padding:0;">
+              <span class="blok-empty__icon glyph" data-icon="layout" data-size="20"></span>
+              <p class="blok-empty__title">No site selected</p>
+              <p class="blok-empty__sub">Pick a collection and site to see its redirect maps.</p>
+            </div>
+          </div>
+        </aside>
+
+        <main class="fp-pane" aria-label="Redirect map detail (empty)">
+          <div class="fp-pane__inner" style="display:flex; align-items:center; justify-content:center; min-height:60vh;">
+            <div class="blok-empty">
+              <span class="blok-empty__icon glyph" data-icon="inbox" data-size="22"></span>
+              <p class="blok-empty__title">Pick a site to begin</p>
+              <p class="blok-empty__sub">Choose a collection and site in the left rail. The redirect maps for that site will appear here.</p>
+              <p class="blok-empty__sub" style="font-size:var(--text-2xs); margin-top:0.75rem;">
+                Tip: <kbd style="font-family:var(--font-mono); font-size:var(--text-2xs); padding:0.125rem 0.375rem; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--background);">↑</kbd>
+                <kbd style="font-family:var(--font-mono); font-size:var(--text-2xs); padding:0.125rem 0.375rem; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--background);">↓</kbd>
+                to navigate the list,
+                <kbd style="font-family:var(--font-mono); font-size:var(--text-2xs); padding:0.125rem 0.375rem; border:1px solid var(--border); border-radius:var(--radius-sm); background:var(--background);">Enter</kbd>
+                to open.
+              </p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <p style="text-align:center; padding:0.75rem 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground); border-top:1px solid var(--border);">
+      <a href="index.html">← Back to all surfaces</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

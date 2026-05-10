@@ -16,6 +16,9 @@ This directory holds ADRs for this product workspace.
 | ADR-0008 | `UrlMapping` field encoding contract — URL-encoded `=`/`&`-delimited pairs | Accepted |
 | ADR-0009 | Import matching by Sitecore item GUID (not by item name) | Accepted |
 | ADR-0010 | MVP language scope = `en` only; multilingual deferred to PRD-001 | Accepted |
+| ADR-0011 | Extension-point identifiers, route URLs, and root-route policy | Accepted |
+| ADR-0012 | List virtualization — `react-virtuoso` | Accepted |
+| ADR-0013 | Real-tenant fixture-capture workflow | Accepted |
 
 ## Next number
 

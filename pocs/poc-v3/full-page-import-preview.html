@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Import preview — Site Atlas v3</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="poc-bar">
+      <div>
+        <a href="index.html">&larr; Hub</a> · Full Page — Import preview (3-action picker)
+      </div>
+      <div class="right">
+        <button
+          class="btn btn-outline btn-sm"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+          type="button"
+        >
+          Toggle theme
+        </button>
+      </div>
+    </header>
+
+    <div class="frame-fullpage" role="main">
+      <div class="fullpage-topbar">
+        <span class="app-name">Redirect Manager</span>
+        <div class="fullpage-actions">
+          <span class="text-xs muted">Importing into <strong style="color: hsl(var(--foreground))">MarketingHub</strong></span>
+        </div>
+      </div>
+
+      <div class="fullpage-main" style="grid-template-columns: 1fr">
+        <section class="fullpage-content" style="padding: 1.5rem 2rem">
+          <div
+            class="row-between"
+            style="margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem"
+          >
+            <div>
+              <h2
+                style="
+                  margin: 0;
+                  font-size: 1.25rem;
+                  font-weight: 700;
+                  letter-spacing: -0.01em;
+                "
+              >
+                Importing 7 items
+              </h2>
+              <div class="text-sm muted">
+                from <span class="mono">redirects-financehub-2026-04-12.json</span>
+              </div>
+            </div>
+            <div class="row" style="gap: 0.5rem">
+              <label class="text-xs muted" for="bulk-action">Apply same action to all conflicts:</label>
+              <select id="bulk-action" class="input" style="width: 12rem">
+                <option value="">(none — choose per item)</option>
+                <option>Create</option>
+                <option>Overwrite</option>
+                <option>Skip</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="alert" style="margin-bottom: 1rem">
+            <svg
+              class="alert-icon"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 16v-4" />
+              <path d="M12 8h.01" />
+            </svg>
+            <div class="alert-body text-sm">
+              Tip: export the current site before applying — it gives you a clean
+              rollback if something goes wrong.
+            </div>
+          </div>
+
+          <!-- New items section -->
+          <div class="section-h">New items · 4 will be created</div>
+          <div class="atlas-list" style="margin-bottom: 1.25rem">
+            <article class="atlas-row">
+              <header class="atlas-row-header">
+                <span class="atlas-chevron" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="M12 5v14" />
+                  </svg>
+                </span>
+                <span class="atlas-row-name">Q1 Promo Campaign</span>
+                <div class="atlas-row-tags">
+                  <span class="badge badge-bold-primary">301</span>
+                  <span class="badge">8 mappings</span>
+                </div>
+                <div class="atlas-row-meta">
+                  <span class="badge badge-primary">Create</span>
+                </div>
+                <span></span>
+              </header>
+            </article>
+            <article class="atlas-row">
+              <header class="atlas-row-header">
+                <span class="atlas-chevron" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="M12 5v14" />
+                  </svg>
+                </span>
+                <span class="atlas-row-name">Black Friday Redirects</span>
+                <div class="atlas-row-tags">
+                  <span class="badge badge-bold-primary">302</span>
+                  <span class="badge">14 mappings</span>
+                </div>
+                <div class="atlas-row-meta">
+                  <span class="badge badge-primary">Create</span>
+                </div>
+                <span></span>
+              </header>
+            </article>
+          </div>
+
+          <!-- Conflicting items section -->
+          <div class="section-h" style="color: hsl(var(--foreground))">
+            Conflicting items · 3 require an action
+          </div>
+
+          <div class="atlas-list">
+            <!-- Conflict 1: Decided -->
+            <article class="atlas-row">
+              <header class="atlas-row-header">
+                <span class="atlas-chevron" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m9 6 6 6-6 6" />
+                  </svg>
+                </span>
+                <span class="atlas-row-name">Marketing Campaigns 2026</span>
+                <div class="atlas-row-tags">
+                  <span class="badge badge-bold-primary">301</span>
+                  <span class="badge">12 mappings (in source) · 14 (incoming)</span>
+                </div>
+                <div class="atlas-row-meta">
+                  <div class="toggle-group" role="radiogroup" aria-label="Action for Marketing Campaigns 2026">
+                    <button class="toggle-button" role="radio" aria-pressed="false">Create</button>
+                    <button class="toggle-button" role="radio" aria-pressed="true">Overwrite</button>
+                    <button class="toggle-button" role="radio" aria-pressed="false">Skip</button>
+                  </div>
+                </div>
+                <span></span>
+              </header>
+            </article>
+
+            <!-- Conflict 2: Expanded with diff -->
+            <article class="atlas-row is-expanded">
+              <header class="atlas-row-header">
+                <span class="atlas-chevron" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m9 6 6 6-6 6" />
+                  </svg>
+                </span>
+                <span class="atlas-row-name">Product Renames</span>
+                <div class="atlas-row-tags">
+                  <span class="badge badge-bold-primary">302 → 301</span>
+                  <span class="badge">6 mappings (3 changed)</span>
+                </div>
+                <div class="atlas-row-meta">
+                  <div class="toggle-group" role="radiogroup" aria-label="Action for Product Renames">
+                    <button class="toggle-button" role="radio" aria-pressed="false">Create</button>
+                    <button class="toggle-button" role="radio" aria-pressed="false">Overwrite</button>
+                    <button class="toggle-button" role="radio" aria-pressed="true">Skip</button>
+                  </div>
+                </div>
+                <span></span>
+              </header>
+
+              <div class="atlas-row-body">
+                <div class="text-xs muted" style="margin-bottom: 0.5rem">
+                  Field-by-field changes
+                </div>
+                <div class="stack-sm">
+                  <div class="diff-row diff-context">
+                    <span></span>
+                    <span>RedirectType: <strong>302</strong></span>
+                  </div>
+                  <div class="diff-row diff-remove">
+                    <span></span>
+                    <span>RedirectType: 302</span>
+                  </div>
+                  <div class="diff-row diff-add">
+                    <span></span>
+                    <span>RedirectType: 301</span>
+                  </div>
+                  <div class="diff-row diff-context">
+                    <span></span>
+                    <span>/products/launch-2026 → /products/edition-x</span>
+                  </div>
+                  <div class="diff-row diff-add">
+                    <span></span>
+                    <span>/products/launch-spring → /products/edition-x</span>
+                  </div>
+                  <div class="diff-row diff-remove">
+                    <span></span>
+                    <span>/products/old-launch → /products/launch-2026</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Conflict 3: Undecided -->
+            <article
+              class="atlas-row"
+              style="border-color: hsl(var(--destructive) / 0.4)"
+            >
+              <header class="atlas-row-header">
+                <span class="atlas-chevron" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m9 6 6 6-6 6" />
+                  </svg>
+                </span>
+                <span class="atlas-row-name">Internal Reorg</span>
+                <div class="atlas-row-tags">
+                  <span class="badge badge-bold-primary">Server&nbsp;Transfer</span>
+                  <span class="badge">29 mappings (12 changed)</span>
+                  <span class="badge badge-destructive">Action required</span>
+                </div>
+                <div class="atlas-row-meta">
+                  <div class="toggle-group" role="radiogroup" aria-label="Action for Internal Reorg">
+                    <button class="toggle-button" role="radio" aria-pressed="false">Create</button>
+                    <button class="toggle-button" role="radio" aria-pressed="false">Overwrite</button>
+                    <button class="toggle-button" role="radio" aria-pressed="false">Skip</button>
+                  </div>
+                </div>
+                <span></span>
+              </header>
+            </article>
+          </div>
+
+          <div
+            class="row-between"
+            style="
+              margin-top: 1.25rem;
+              padding-top: 1rem;
+              border-top: 1px solid hsl(var(--border));
+            "
+          >
+            <div class="text-sm muted">
+              <strong style="color: hsl(var(--foreground))">2 of 3</strong>
+              conflicts decided · Confirm import disabled until all resolved
+            </div>
+            <div class="row" style="gap: 0.5rem">
+              <a href="full-page.html" class="btn btn-ghost">Cancel</a>
+              <button class="btn btn-primary" aria-disabled="true">
+                Confirm import
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

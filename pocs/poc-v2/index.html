@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Redirect Manager — POC v2 (Editor's Studio)</title>
+<link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+<main style="max-width: 1100px; margin: 0 auto; padding: 3rem 2rem;">
+
+  <header style="margin-bottom: 2.5rem;">
+    <span class="kicker">Clickdummy · variant 2 of 3</span>
+    <h1 style="font-size: 2.25rem; font-weight: 600; letter-spacing: -0.02em; margin: 0.25rem 0 0.5rem;">Editor's Studio</h1>
+    <p class="text-muted-foreground" style="font-size: 1rem; max-width: 38rem; margin: 0;">
+      The redirect set is a manuscript; the operator is the editor. Type-led hierarchy, generous whitespace,
+      one elevation level. Nested progressive-disclosure cards keep mappings inside their parent map.
+    </p>
+    <div style="display: flex; gap: 0.5rem; margin-top: 1rem; flex-wrap: wrap;">
+      <span class="chip">Geist Sans / Geist Mono</span>
+      <span class="chip">Blok semantic tokens</span>
+      <span class="chip">Light + dark first-class</span>
+      <span class="chip">WCAG 2.1 AA</span>
+    </div>
+  </header>
+
+  <section class="index-section">
+    <h2>Context Panel — <span style="text-transform: none; letter-spacing: normal; color: hsl(var(--muted-foreground)); font-weight: 400;">Pages editor sidebar (320–400 px)</span></h2>
+    <div class="index-grid">
+      <a class="index-card" href="context-panel.html">
+        <span class="title">Default</span>
+        <span class="desc">Soft warning banner + 2 expanded Redirect Map cards with inline mapping rows.</span>
+      </a>
+      <a class="index-card" href="context-panel-empty.html">
+        <span class="title">Empty</span>
+        <span class="desc">No matching redirects — calm illustration + headline + primary CTA.</span>
+      </a>
+      <a class="index-card" href="context-panel-add-modal.html">
+        <span class="title">Add — modal (pick a map)</span>
+        <span class="desc">Searchable list with "+ Create new Redirect Map" featured at the top.</span>
+      </a>
+      <a class="index-card" href="context-panel-add-existing.html">
+        <span class="title">Add — picked existing map</span>
+        <span class="desc">Inline form: source pre-populated read-only, target focused, sticky footer.</span>
+      </a>
+      <a class="index-card" href="context-panel-create-new-map.html">
+        <span class="title">Add — create new map</span>
+        <span class="desc">Fuller form: name, type dropdown (empty initially), three flag toggles, first mapping row.</span>
+      </a>
+      <a class="index-card" href="context-panel-edit-row.html">
+        <span class="title">Edit row inline</span>
+        <span class="desc">Mapping row swapped to two inputs in place; cancel + save sticky bottom.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="index-section">
+    <h2>Dashboard Widget — <span style="text-transform: none; letter-spacing: normal; color: hsl(var(--muted-foreground)); font-weight: 400;">per-site card (300–800 px × 200–400 px)</span></h2>
+    <div class="index-grid">
+      <a class="index-card" href="dashboard-widget.html">
+        <span class="title">Default — populated</span>
+        <span class="desc">3 large numerals over generous whitespace + footnote caveat.</span>
+      </a>
+      <a class="index-card" href="dashboard-widget-empty.html">
+        <span class="title">Empty</span>
+        <span class="desc">Calm illustration + "No redirects configured" + secondary link out.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="index-section">
+    <h2>Full Page — <span style="text-transform: none; letter-spacing: normal; color: hsl(var(--muted-foreground)); font-weight: 400;">power-user surface (1024–1920 px)</span></h2>
+    <div class="index-grid">
+      <a class="index-card" href="full-page.html">
+        <span class="title">Default — site selected</span>
+        <span class="desc">Two-pane: 280 px sidebar + fluid content. Card 2 expanded showing nested mappings.</span>
+      </a>
+      <a class="index-card" href="full-page-empty-no-selection.html">
+        <span class="title">First-load — nothing picked</span>
+        <span class="desc">Sidebar shows collections; content pane shows "Pick a collection to begin".</span>
+      </a>
+      <a class="index-card" href="full-page-no-redirects.html">
+        <span class="title">Site selected — zero maps</span>
+        <span class="desc">Friendly empty state with "+ Create your first Redirect Map" primary CTA.</span>
+      </a>
+      <a class="index-card" href="full-page-create-redirect-map.html">
+        <span class="title">Drawer — create new map</span>
+        <span class="desc">480 px right drawer, name + type + 3 toggles + first mapping; type empty initially.</span>
+      </a>
+      <a class="index-card" href="full-page-edit-redirect-map.html">
+        <span class="title">Drawer — edit map</span>
+        <span class="desc">Pre-filled with existing values; reorder via drag handle; sticky footer.</span>
+      </a>
+      <a class="index-card" href="full-page-import-preview.html">
+        <span class="title">Import — review step</span>
+        <span class="desc">Per-item NEW / CONFLICT picker, "apply same to all conflicts", confirm-disabled-until-decided.</span>
+      </a>
+      <a class="index-card" href="full-page-import-summary.html">
+        <span class="title">Import — summary step</span>
+        <span class="desc">Per-item created / overwrote / skipped / failed outcomes; "Retry failed" affordance.</span>
+      </a>
+      <a class="index-card" href="full-page-error.html">
+        <span class="title">Error — friendly banner</span>
+        <span class="desc">"Couldn't save Spring Launch Map" + Show technical details expanded.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="index-section">
+    <h2>Reference</h2>
+    <div class="index-grid">
+      <a class="index-card" href="click-targets.md">
+        <span class="title">click-targets.md</span>
+        <span class="desc">Every clickable element on every screen and the post-state file it leads to.</span>
+      </a>
+      <div class="index-card" style="cursor: default;">
+        <span class="title">Theme split convention</span>
+        <span class="desc">Many screens render light + dark side-by-side so QA can spot drift early.</span>
+      </div>
+      <div class="index-card" style="cursor: default;">
+        <span class="title">Sample data</span>
+        <span class="desc">3 sites in 2 collections, 4–6 maps per site, 3–12 mappings per map, mix of redirect types.</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-muted-foreground" style="font-size: 0.75rem; padding-top: 1.5rem; border-top: 1px solid hsl(var(--border)); margin-top: 2rem;">
+    Source spec: <span class="font-mono">products/redirect-manager/project-planning/ui-design/ui-design-20260509T191751Z-v2.md</span>
+    · Static placeholder data only. No build step, no backend.
+  </footer>
+
+</main>
+</body>
+</html>

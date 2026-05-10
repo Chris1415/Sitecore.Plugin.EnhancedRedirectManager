@@ -2,10 +2,10 @@
   "schema_version": 5,
   "run_id": "20260509T191751Z",
   "created_at": "2026-05-09T19:17:51Z",
-  "updated_at": "2026-05-09T20:30:00Z",
+  "updated_at": "2026-05-10T14:00:00Z",
   "product_slug": "redirect-manager",
   "product_root": "products/redirect-manager",
-  "status": "spec_ready",
+  "status": "implementation_in_progress",
   "prd_input_mode": "brain_dump_only",
   "platform_target": "marketplace",
   "task_breakdown_style": "tdd",
@@ -18,8 +18,20 @@
   "ui_design": {
     "proposal_count": 3,
     "divergence": "moderate",
-    "variant_paths": [],
-    "selected_variant_path": null
+    "variant_paths": [
+      "products/redirect-manager/project-planning/ui-design/ui-design-20260509T191751Z-v1.md",
+      "products/redirect-manager/project-planning/ui-design/ui-design-20260509T191751Z-v2.md",
+      "products/redirect-manager/project-planning/ui-design/ui-design-20260509T191751Z-v3.md"
+    ],
+    "selected_variant_path": "products/redirect-manager/project-planning/ui-design/ui-design-20260509T191751Z-v1.md",
+    "selected_poc_path": "products/redirect-manager/pocs/poc-v1"
+  },
+  "architecture": {
+    "extension_points": [
+      { "extension_point": "xmc:pages:contextpanel", "route_url": "/context-panel", "registered": false },
+      { "extension_point": "xmc:dashboardblocks", "route_url": "/dashboard-widget", "registered": false },
+      { "extension_point": "xmc:fullscreen", "route_url": "/full-page", "registered": false }
+    ]
   },
   "source": {
     "kind": "raw_idea",
@@ -36,15 +48,30 @@
     "brain_dump": "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260509T191751Z.md",
     "prd": "products/redirect-manager/project-planning/PRD/prd-000.md",
     "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-000.md",
-    "architecture": null,
-    "task_breakdown": null,
+    "architecture": "products/redirect-manager/project-planning/architecture/architecture-20260509T191751Z.md",
+    "task_breakdown": "products/redirect-manager/project-planning/plans/task-breakdown-20260509T191751Z.md",
     "task_breakdown_pre_qa": null,
     "qa_report": null,
-    "implementation_runbook": null,
+    "implementation_runbook": "products/redirect-manager/project-planning/plans/implementation-runbook-20260509T191751Z.md",
     "content_model": null,
     "content_examples": null,
     "ship_report": null,
-    "friction_log": null
+    "friction_log": null,
+    "adrs": [
+      "products/redirect-manager/project-planning/ADR/adr-0001-use-adrs-as-architecture-backbone.md",
+      "products/redirect-manager/project-planning/ADR/adr-0002-marketplace-sdk-mode-a-scaffold.md",
+      "products/redirect-manager/project-planning/ADR/adr-0003-authoring-graphql-as-canonical-source.md",
+      "products/redirect-manager/project-planning/ADR/adr-0004-three-prd-phasing.md",
+      "products/redirect-manager/project-planning/ADR/adr-0005-context-panel-exact-match-only.md",
+      "products/redirect-manager/project-planning/ADR/adr-0006-import-conflict-resolution-three-actions.md",
+      "products/redirect-manager/project-planning/ADR/adr-0007-tenant-identifier-tenantid.md",
+      "products/redirect-manager/project-planning/ADR/adr-0008-urlmapping-encoding-contract.md",
+      "products/redirect-manager/project-planning/ADR/adr-0009-import-match-by-item-guid.md",
+      "products/redirect-manager/project-planning/ADR/adr-0010-mvp-language-scope-en-only.md",
+      "products/redirect-manager/project-planning/ADR/adr-0011-extension-points-and-routes.md",
+      "products/redirect-manager/project-planning/ADR/adr-0012-list-virtualization-react-virtuoso.md",
+      "products/redirect-manager/project-planning/ADR/adr-0013-real-tenant-fixture-capture-workflow.md"
+    ]
   },
   "friction_log": {
     "path": "products/redirect-manager/project-planning/workflow/friction-log-20260509T191751Z.md",
@@ -83,6 +110,49 @@
       "exited_at": "2026-05-09T20:30:00Z",
       "outcome": "completed",
       "error": null
+    },
+    {
+      "stage": "architecture_ready",
+      "agent": "04-software-architect",
+      "entered_at": "2026-05-10T07:30:00Z",
+      "exited_at": "2026-05-10T08:00:00Z",
+      "outcome": "completed",
+      "error": null
+    },
+    {
+      "stage": "ui_ready",
+      "agent": "05-ui-designer",
+      "entered_at": "2026-05-10T08:30:00Z",
+      "exited_at": "2026-05-10T11:30:00Z",
+      "outcome": "completed",
+      "error": null
+    },
+    {
+      "stage": "plan_ready",
+      "agent": "06-lead-developer",
+      "entered_at": "2026-05-10T10:30:00Z",
+      "exited_at": "2026-05-10T11:10:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "67 tasks across 10 epics (A-J). Sub-agent hit usage limit on the manifest-write step; manifest finalized by Team Lead post-recovery."
+    },
+    {
+      "stage": "qa_ready",
+      "agent": "07-qa-specialist",
+      "entered_at": "2026-05-10T14:00:00Z",
+      "exited_at": "2026-05-10T14:00:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "In-place enrichment: § 9 TDD contract (9.1-9.11) + § 10 per-task specs (~110 RED test cases). 12 assumed-shape annotations lifted into divergence-detection coverage. smoke_outcomes initialized to all pending. task_breakdown_style confirmed tdd."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-1",
+      "agent": "08-developer",
+      "entered_at": "2026-05-10T14:30:00Z",
+      "exited_at": "2026-05-10T15:30:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 1 — T001-T007 + T062 skeleton. Scaffold via shadcn@latest add quickstart-with-client-side-xmc.json succeeded (Next 16.1.7 + Turbopack, 5 static routes). 32 Blok primitives installed. 3 extension routes + root notFound() per ADR-0011. Theme: dark-mode --primary-foreground override carried into both .dark and @media blocks. Lint: 0 errors / 2 baseline warnings. Build: PASS. Tests: 10 passing + 5 it.todo placeholders (T062 final lands in Tranche 8). Surprises captured: (a) @blok/dropdown does not exist in registry, correct slug is @blok/dropdown-menu — task breakdown § 4c-3 fixed; (b) Blok Nova preset uses .dark class only, no @media block; (c) @blok/draggable's dnd-context.tsx has react-hooks/set-state-in-effect lint suppression as a Blok-component-drift workaround — friction to flag at /code-review."
     }
   ],
   "implementation": {
@@ -90,10 +160,16 @@
     "target_directory": "products/redirect-manager/site",
     "branch_name": "prd-000",
     "remote_url": "https://github.com/Chris1415/Sitecore.Plugin.EnhancedRedirectManager.git",
-    "status": "not_started",
+    "status": "in_progress",
     "resumed_from_stage": null
   },
-  "smoke_outcomes": {},
+  "smoke_outcomes": {
+    "host_frame_smoke":         { "outcome": "pending", "notes": null },
+    "crud_round_trip":          { "outcome": "pending", "notes": null },
+    "import_export_round_trip": { "outcome": "pending", "notes": null },
+    "live_walkthrough":         { "outcome": "pending", "notes": null },
+    "registration":             { "outcome": "pending", "notes": null }
+  },
   "notes": [
     "Greenfield concept brief generated 2026-05-09 via /rubber-ducky.",
     "Three Marketplace extension points (Context Panel, Dashboard Widget, Full Page) sharing Authoring GraphQL as single canonical data source.",
@@ -108,6 +184,12 @@
     "sitecore_discovery: completed",
     "sdk_surface_split: n/a (2 new SDK surfaces: xmc.authoring.graphql + xmc.sites — below 3-surface threshold)",
     "base_branch: main (PRD-000, no predecessor)",
-    "Next: /architect (full track per scope_dial; produce architecture blueprint + 3 UI variants + ADR refinement). Stakeholder will validate Authoring GraphQL mutations against real tenant during architecture; capture fixtures into tests/fixtures/graphql/ before /task-breakdown."
+    "Architecture (2026-05-10): extension-point identifiers locked to xmc:pages:contextpanel /context-panel, xmc:dashboardblocks /dashboard-widget, xmc:fullscreen /full-page. Root / returns notFound() per provider-trap mitigation. 3 new ADRs added (0011-0013). Below ADR-density gate.",
+    "Architecture (2026-05-10): OQ-1 RESOLVED — wrapper is xmc.sites.listSites (verified from .d.ts). OQ-3 promoted to OQ-A (which PagesContext field is matcher key). Two new sub-OQs added: OQ-B (createItem accepts caller-supplied id?), OQ-C (boolean field repr on writes).",
+    "Architecture (2026-05-10): CAPTURE PENDING list — page-context.json, sites-list.json, collections-list.json, application-context.json, redirect-type-enum.json, template-id.json, create.json, update.json, delete.json. Real-tenant paired-session capture required before /task-breakdown opens (ADR-0013).",
+    "UI design (2026-05-10): 3 variants produced (v1 Operator Console, v2 Editor's Studio, v3 Site Atlas). 3 POC clickdummies produced. Stakeholder selected v1. Two post-selection fixes applied: (a) dark-mode --primary-foreground contrast fix (white-on-lavender bug from Nova preset/sibling globals.css inherited as override-to-dark-tone), (b) per-page Light/Dark/System theme toggle injected via theme-toggle.js. Both folded into v1 spec § 7.",
+    "ADR-0013 revised 2026-05-10 from hard pre-/task-breakdown gate to progressive learning loop. Operator chose to proceed with assumed shapes (sourced from PRD § 9 captured Authoring read shape + Sitecore plugin skill docs + sibling-app evidence in last-edit-trail and component-usage-atlas). Divergences will be captured-and-fixed as they surface during /implement and /test. Paired-session capture remains available on-demand.",
+    "SDK Sandbox idea filed in storage/marketplace-app-ideas.md (2026-05-10) as the long-term answer to the architecture-stage capture friction. Once shipped, Sandbox replaces the paired-session protocol with self-service capture.",
+    "Next: /task-breakdown immediately. Tasks touching unverified shapes are annotated assumed-shape: <fixture-filename>; QA enrichment will list them in § 9 test contract; smoke gates at /test re-run calls against real tenant."
   ]
 }

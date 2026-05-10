@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Full Page — Import preview · Editor's Studio</title>
+<link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+<nav style="padding: 0.5rem 1rem; border-bottom: 1px solid hsl(var(--border)); display: flex; gap: 1rem; align-items: center; font-size: 0.8125rem;">
+  <a href="index.html" style="color: hsl(var(--muted-foreground)); text-decoration: none;">&larr; All screens</a>
+  <span style="color: hsl(var(--muted-foreground));">·</span>
+  <span class="font-medium">Full Page — Import preview (Step 2 of 3)</span>
+</nav>
+
+<main class="frame frame-fullpage" style="padding: 2rem; min-height: calc(100vh - 40px);">
+
+  <header style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem;">
+    <div style="flex: 1;">
+      <span class="kicker">Import · into Northwind Marketing</span>
+      <h1 style="font-size: 1.5rem; font-weight: 600; letter-spacing: -0.015em; margin: 0.25rem 0 0;">Review changes</h1>
+      <p style="margin: 0.25rem 0 0; font-size: 0.875rem; color: hsl(var(--muted-foreground));">
+        From <span class="font-mono">redirects-northwind-investors-2026-05-08.json</span> · 5 incoming items
+      </p>
+    </div>
+    <a href="full-page.html" class="btn btn-ghost btn-icon" aria-label="Cancel import">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+    </a>
+  </header>
+
+  <div class="stepper" style="margin-bottom: 1.25rem;">
+    <span class="step done">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><path d="M20 6 9 17l-5-5"/></svg>
+      Upload
+    </span>
+    <span class="sep">/</span>
+    <span class="step active">Review</span>
+    <span class="sep">/</span>
+    <span class="step">Apply</span>
+  </div>
+
+  <!-- Sticky bulk action bar -->
+  <div style="position: sticky; top: 0; z-index: 10; background-color: hsl(var(--background) / 0.95); backdrop-filter: blur(8px); padding: 0.75rem 1rem; border: 1px solid hsl(var(--border)); border-radius: var(--radius); margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+    <div style="display: flex; gap: 0.5rem; align-items: center; flex: 1; min-width: 280px;">
+      <span style="font-size: 0.8125rem; color: hsl(var(--muted-foreground));">
+        <span style="color: hsl(var(--foreground)); font-weight: 500;">2 conflicts</span> need a decision · <span style="color: hsl(var(--foreground));">3 new</span> ready
+      </span>
+    </div>
+    <div style="display: flex; gap: 0.5rem; align-items: center;">
+      <span class="kicker" style="font-size: 0.6875rem;">Apply to all conflicts:</span>
+      <div class="radio-group">
+        <button>Create</button>
+        <button>Overwrite</button>
+        <button>Skip</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width: 56rem; display: flex; flex-direction: column; gap: 0.75rem;">
+
+    <!-- Row 1 — NEW -->
+    <article class="card" style="padding: 1.25rem 1.5rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start;">
+        <span class="chip chip-accent" style="margin-top: 0.25rem;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          New
+        </span>
+        <div style="flex: 1; min-width: 0;">
+          <p style="margin: 0; font-size: 1.125rem; font-weight: 500;">Investor Relations Migrations</p>
+          <p style="margin: 0.25rem 0 0; font-size: 0.8125rem; color: hsl(var(--muted-foreground));">
+            <span class="font-mono tabular">5</span> mappings · 301 · GUID <span class="font-mono">…A211F</span>
+          </p>
+        </div>
+        <div class="radio-group">
+          <button class="selected">Create</button>
+          <button disabled style="opacity: 0.5;">Overwrite</button>
+          <button>Skip</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Row 2 — CONFLICT (with diff expanded) -->
+    <article class="card" style="padding: 1.25rem 1.5rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start;">
+        <span class="chip chip-warning" style="margin-top: 0.25rem;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          Conflict
+        </span>
+        <div style="flex: 1; min-width: 0;">
+          <p style="margin: 0; font-size: 1.125rem; font-weight: 500;">Legacy Path Cleanup</p>
+          <p style="margin: 0.25rem 0 0; font-size: 0.8125rem; color: hsl(var(--muted-foreground));">
+            <span class="font-mono tabular">9</span> mappings incoming vs <span class="font-mono tabular">7</span> current · GUID <span class="font-mono">…836DE</span>
+          </p>
+          <button style="margin-top: 0.625rem; background: transparent; border: none; padding: 0; font-size: 0.8125rem; color: hsl(var(--muted-foreground)); cursor: pointer; display: inline-flex; align-items: center; gap: 0.25rem; font-family: inherit;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(90deg);"><path d="m9 18 6-6-6-6"/></svg>
+            Hide diff
+          </button>
+
+          <div style="margin-top: 0.75rem; display: flex; flex-direction: column; gap: 0.625rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.75rem;">
+              <div>
+                <span class="kicker" style="display: block; margin-bottom: 0.25rem;">Current</span>
+                <div style="font-family: 'Geist Mono', monospace; font-size: 0.8125rem;">302 · Preserve QS · Preserve language</div>
+              </div>
+              <div>
+                <span class="kicker" style="display: block; margin-bottom: 0.25rem;">Incoming</span>
+                <div style="font-family: 'Geist Mono', monospace; font-size: 0.8125rem;">301 · Preserve QS · <span style="color: hsl(var(--muted-foreground)); text-decoration: line-through;">Preserve language</span></div>
+              </div>
+            </div>
+
+            <div class="diff">
+              <div class="line unchanged"><span class="marker"> </span><span>/old/spring → /spring-campaign</span></div>
+              <div class="line unchanged"><span class="marker"> </span><span>/old/summer → /summer-campaign</span></div>
+              <div class="line removed"><span class="marker">−</span><span>/old/promo → /promo</span></div>
+              <div class="line added"><span class="marker">+</span><span>/old/promo → /promotions</span></div>
+              <div class="line unchanged"><span class="marker"> </span><span>/old/blog/2023 → /blog</span></div>
+              <div class="line unchanged"><span class="marker"> </span><span>/old/news → /news</span></div>
+              <div class="line added"><span class="marker">+</span><span>/old/about/team → /about</span></div>
+              <div class="line added"><span class="marker">+</span><span>/old/contact-us → /contact</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="radio-group" aria-label="Action for Legacy Path Cleanup">
+          <button>Create</button>
+          <button>Overwrite</button>
+          <button>Skip</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Row 3 — NEW -->
+    <article class="card" style="padding: 1.25rem 1.5rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start;">
+        <span class="chip chip-accent" style="margin-top: 0.25rem;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          New
+        </span>
+        <div style="flex: 1;">
+          <p style="margin: 0; font-size: 1.125rem; font-weight: 500;">Quarterly Report URLs</p>
+          <p style="margin: 0.25rem 0 0; font-size: 0.8125rem; color: hsl(var(--muted-foreground));">
+            <span class="font-mono tabular">3</span> mappings · ServerTransfer · GUID <span class="font-mono">…BC44E</span>
+          </p>
+        </div>
+        <div class="radio-group">
+          <button class="selected">Create</button>
+          <button disabled style="opacity: 0.5;">Overwrite</button>
+          <button>Skip</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Row 4 — CONFLICT (no diff yet) -->
+    <article class="card" style="padding: 1.25rem 1.5rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start;">
+        <span class="chip chip-warning" style="margin-top: 0.25rem;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          Conflict
+        </span>
+        <div style="flex: 1;">
+          <p style="margin: 0; font-size: 1.125rem; font-weight: 500;">Marketing Campaigns 2025</p>
+          <p style="margin: 0.25rem 0 0; font-size: 0.8125rem; color: hsl(var(--muted-foreground));">
+            <span class="font-mono tabular">7</span> mappings incoming vs <span class="font-mono tabular">7</span> current · GUID <span class="font-mono">…F18E2</span>
+          </p>
+          <button style="margin-top: 0.625rem; background: transparent; border: none; padding: 0; font-size: 0.8125rem; color: hsl(var(--muted-foreground)); cursor: pointer; display: inline-flex; align-items: center; gap: 0.25rem; font-family: inherit;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            Show diff
+          </button>
+        </div>
+        <div class="radio-group" aria-label="Action for Marketing Campaigns 2025">
+          <button>Create</button>
+          <button>Overwrite</button>
+          <button>Skip</button>
+        </div>
+      </div>
+    </article>
+
+    <!-- Row 5 — NEW -->
+    <article class="card" style="padding: 1.25rem 1.5rem;">
+      <div style="display: flex; gap: 1rem; align-items: flex-start;">
+        <span class="chip chip-accent" style="margin-top: 0.25rem;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+          New
+        </span>
+        <div style="flex: 1;">
+          <p style="margin: 0; font-size: 1.125rem; font-weight: 500;">Career Page Renames</p>
+          <p style="margin: 0.25rem 0 0; font-size: 0.8125rem; color: hsl(var(--muted-foreground));">
+            <span class="font-mono tabular">12</span> mappings · 307 · GUID <span class="font-mono">…0142A</span>
+          </p>
+        </div>
+        <div class="radio-group">
+          <button class="selected">Create</button>
+          <button disabled style="opacity: 0.5;">Overwrite</button>
+          <button>Skip</button>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Sticky bottom bar -->
+  <div style="position: sticky; bottom: 0; margin-top: 1.5rem; padding: 0.875rem 1rem; background-color: hsl(var(--background) / 0.95); backdrop-filter: blur(8px); border-top: 1px solid hsl(var(--border)); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+    <a href="full-page.html" class="btn btn-outline">Back</a>
+    <p style="margin: 0; font-size: 0.8125rem; color: hsl(var(--muted-foreground));">
+      Confirm enabled once every conflict has an action.
+    </p>
+    <button class="btn btn-primary" disabled aria-disabled="true">
+      Confirm import (3 actions)
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </button>
+  </div>
+
+</main>
+
+</body>
+</html>

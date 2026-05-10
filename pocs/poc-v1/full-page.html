@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Full Page — default · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell">
+      <!-- Top action row -->
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="full-page-empty-no-selection.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <a class="blok-breadcrumb__item" href="full-page.html">MainSite</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Marketing campaigns</span>
+        </nav>
+        <div class="fp-topbar__actions">
+          <a class="blok-btn blok-btn--outline" href="full-page-import-preview.html">
+            <span class="glyph" data-icon="upload" data-size="14"></span>
+            Import
+          </a>
+          <button class="blok-btn blok-btn--outline">
+            <span class="glyph" data-icon="download" data-size="14"></span>
+            Export
+          </button>
+          <a class="blok-btn blok-btn--primary" href="full-page-create-redirect-map.html">
+            <span class="glyph" data-icon="plus" data-size="14"></span>
+            New map
+          </a>
+        </div>
+      </header>
+
+      <div class="fp-body">
+        <!-- Left rail -->
+        <aside class="fp-rail" aria-label="Redirect maps">
+          <div class="fp-rail__pickers">
+            <div>
+              <label class="blok-label">Collection</label>
+              <select class="blok-select">
+                <option>SneakerCo</option>
+                <option>BootsBrand</option>
+              </select>
+            </div>
+            <div>
+              <label class="blok-label">Site</label>
+              <select class="blok-select">
+                <option>MainSite</option>
+                <option>CampaignSite</option>
+                <option>EUStore</option>
+                <option>USStore</option>
+              </select>
+            </div>
+          </div>
+          <div class="fp-rail__list-hd">
+            <span>Redirect maps</span>
+            <span class="mono">12</span>
+          </div>
+          <div class="fp-rail__list" role="listbox">
+            <div class="fp-rail-row" role="option" aria-selected="true">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Marketing campaigns</span>
+                <span class="fp-rail-row__meta">12 mappings · 3 days ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">301</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Legacy product URLs</span>
+                <span class="fp-rail-row__meta">28 mappings · 2 wk ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">302</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">A/B test variants</span>
+                <span class="fp-rail-row__meta">6 mappings · 1 mo ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">Server Transfer</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Geo-IP fallbacks</span>
+                <span class="fp-rail-row__meta">4 mappings · 1 mo ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">307</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">404 rescue chain</span>
+                <span class="fp-rail-row__meta">9 mappings · 3 mo ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">301</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Holiday landing pages 2025</span>
+                <span class="fp-rail-row__meta">7 mappings · 5 mo ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">302</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Influencer partner links</span>
+                <span class="fp-rail-row__meta">15 mappings · 6 mo ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">301</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Affiliate trackers</span>
+                <span class="fp-rail-row__meta">3 mappings · 7 mo ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">307</span>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Right pane -->
+        <main class="fp-pane" aria-label="Redirect map detail">
+          <div class="fp-pane__inner">
+            <!-- Section 1 — Map attributes -->
+            <section class="fp-section">
+              <header class="fp-section__hd">
+                <span class="fp-section__lbl">Map attributes</span>
+                <span class="guid-badge" title="Click to copy: {E39157F3-A81F-4692-B05D-178D48C836DE}">
+                  <span class="glyph" data-icon="copy" data-size="11"></span>
+                  78D48C836DE
+                </span>
+              </header>
+
+              <div class="fp-form-grid">
+                <div class="fp-field" style="grid-column: span 2;">
+                  <label class="blok-label blok-label--required">Name</label>
+                  <input class="blok-input" type="text" value="Marketing campaigns" />
+                </div>
+                <div class="fp-field">
+                  <label class="blok-label blok-label--required">Type</label>
+                  <select class="blok-select">
+                    <option value="301" selected>301 — Permanent</option>
+                    <option value="302">302 — Found</option>
+                    <option value="307">307 — Temporary</option>
+                    <option value="ServerTransfer">Server Transfer</option>
+                  </select>
+                </div>
+                <div class="fp-field">
+                  <label class="blok-label" style="margin-bottom:0.5rem;">Flags</label>
+                  <div class="fp-flags">
+                    <label class="blok-checkbox"><input type="checkbox" checked /> Preserve query string</label>
+                    <label class="blok-checkbox"><input type="checkbox" /> Preserve language</label>
+                    <label class="blok-checkbox"><input type="checkbox" /> Include virtual folder</label>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <hr class="blok-separator" />
+
+            <!-- Section 2 — Mappings table -->
+            <section class="fp-section">
+              <header class="fp-section__hd">
+                <span class="fp-section__lbl">Mappings</span>
+                <span class="fp-section__sub">12 rows · drag to reorder</span>
+              </header>
+
+              <div class="fp-mappings">
+                <div class="fp-mappings__hd">
+                  <span></span>
+                  <span>Source</span>
+                  <span></span>
+                  <span>Target</span>
+                  <span style="text-align:right;">Actions</span>
+                </div>
+
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle" aria-label="Reorder mapping. Press Space to grab, arrow keys to move.">
+                    <span class="glyph" data-icon="grip-vertical" data-size="14"></span>
+                  </span>
+                  <input class="blok-input blok-input--mono" type="text" value="/products/sneakers/air-max-90" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" value="/campaigns/summer-2026/sneakers" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono" type="text" value="/legacy/airmax" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" value="/products/sneakers/air-max-90" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono" type="text" value="/legacy/sneaker-deals" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" value="/campaigns/summer-2026" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono" type="text" value="/promo/airmax-launch" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" value="/campaigns/summer-2026/sneakers" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono" type="text" value="/sale/black-friday-2025" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" value="/campaigns/black-friday-2025-archive" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono" type="text" value="/blog/tags/airmax-90" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" value="/products/sneakers/air-max-90" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="fp-mappings__add">
+                  <button class="blok-btn blok-btn--ghost" style="width:100%; justify-content:flex-start;">
+                    <span class="glyph" data-icon="plus" data-size="14"></span>
+                    Add mapping
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <!-- Section 3 — Bottom action row -->
+            <div class="fp-bottom">
+              <button class="blok-btn blok-btn--destructive-outline">
+                <span class="glyph" data-icon="trash" data-size="14"></span>
+                Delete map
+              </button>
+              <div class="fp-bottom__actions">
+                <button class="blok-btn blok-btn--ghost">Cancel</button>
+                <button class="blok-btn blok-btn--primary">
+                  <span class="glyph" data-icon="save" data-size="14"></span>
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <!-- Success toast (visual cue) -->
+      <div class="toast-shelf">
+        <div class="blok-toast blok-toast--success" role="status" aria-live="polite">
+          <span class="blok-toast__icon" aria-hidden="true">&#x2713;</span>
+          Mapping updated
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align:center; padding:0.75rem 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground); border-top:1px solid var(--border);">
+      <a href="index.html">← Back to all surfaces</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

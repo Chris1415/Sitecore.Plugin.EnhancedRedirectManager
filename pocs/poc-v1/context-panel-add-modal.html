@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Context Panel — add modal · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="cp-frame-shell">
+      <aside class="cp-frame" aria-label="Add a redirect for this page">
+        <div class="cp-frame__head">
+          <span>Pages · Context panel</span>
+          <span class="cp-frame__head__chip">/context-panel</span>
+        </div>
+
+        <!-- Dialog overlay scoped to the panel viewport -->
+        <div style="position:relative; flex:1; min-height:0;">
+          <div class="cp-body" style="filter: blur(2px); opacity: 0.4; pointer-events: none;">
+            <div class="blok-alert" role="note">
+              <span class="blok-alert__icon glyph" data-icon="info" data-size="14"></span>
+              <div class="blok-alert__body">Direct-string matches only — regex pattern matches are not yet covered.</div>
+            </div>
+            <div class="cp-callout">
+              <span class="cp-callout__icon glyph" data-icon="map-pin" data-size="14"></span>
+              <span>On</span>
+              <span class="cp-callout__url">/products/sneakers/air-max-90</span>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div style="position:absolute; inset:0; display:flex; align-items:flex-start; justify-content:center; padding:0.75rem; background:rgba(0,0,0,0.45);">
+            <div class="blok-dialog" style="max-width:100%; width:100%;">
+              <div class="blok-dialog__header">
+                <h2 class="blok-dialog__title">Add a redirect</h2>
+                <p class="blok-dialog__sub">For <span class="mono" style="color:var(--foreground); font-size:var(--text-xs);">/products/sneakers/air-max-90</span></p>
+              </div>
+              <div class="blok-dialog__body" style="padding:0.5rem;">
+                <div class="blok-command">
+                  <div class="blok-command__search">
+                    <span class="glyph" data-icon="search" data-size="14" style="color:var(--muted-foreground);"></span>
+                    <input type="text" placeholder="Search redirect maps…" />
+                  </div>
+                  <div class="blok-command__list">
+                    <a class="blok-command__item blok-command__item--primary" href="context-panel-create-new-map.html">
+                      <span style="display:inline-flex; align-items:center; gap:0.4rem;">
+                        <span class="glyph" data-icon="plus" data-size="14"></span>
+                        Create new Redirect Map
+                      </span>
+                    </a>
+                    <a class="blok-command__item" href="context-panel-add-existing.html" data-active="true">
+                      <span>Marketing campaigns</span>
+                      <span class="blok-command__item__meta">3 days ago</span>
+                    </a>
+                    <a class="blok-command__item" href="context-panel-add-existing.html">
+                      <span>Legacy product URLs</span>
+                      <span class="blok-command__item__meta">2 weeks ago</span>
+                    </a>
+                    <a class="blok-command__item" href="context-panel-add-existing.html">
+                      <span>A/B test variants</span>
+                      <span class="blok-command__item__meta">1 month ago</span>
+                    </a>
+                    <a class="blok-command__item" href="context-panel-add-existing.html">
+                      <span>Geo-IP fallbacks</span>
+                      <span class="blok-command__item__meta">3 months ago</span>
+                    </a>
+                    <a class="blok-command__item" href="context-panel-add-existing.html">
+                      <span>404 rescue chain</span>
+                      <span class="blok-command__item__meta">6 months ago</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="blok-dialog__footer">
+                <a class="blok-btn blok-btn--ghost" href="context-panel.html">Cancel</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <p style="text-align:center; padding:0 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground);">
+      <a href="index.html">← Back to all surfaces</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

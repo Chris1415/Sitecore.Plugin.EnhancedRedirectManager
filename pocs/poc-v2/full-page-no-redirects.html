@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Full Page — site has no redirects · Editor's Studio</title>
+<link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+<nav style="padding: 0.5rem 1rem; border-bottom: 1px solid hsl(var(--border)); display: flex; gap: 1rem; align-items: center; font-size: 0.8125rem;">
+  <a href="index.html" style="color: hsl(var(--muted-foreground)); text-decoration: none;">&larr; All screens</a>
+  <span style="color: hsl(var(--muted-foreground));">·</span>
+  <span class="font-medium">Full Page — site has no Redirect Maps</span>
+</nav>
+
+<main class="frame frame-fullpage" style="padding: 2rem; min-height: calc(100vh - 40px);">
+
+  <header style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem;">
+    <div style="flex: 1;">
+      <h1 style="font-size: 1.5rem; font-weight: 600; letter-spacing: -0.015em; margin: 0;">Redirects</h1>
+      <p style="margin: 0.25rem 0 0; font-size: 0.875rem; color: hsl(var(--muted-foreground));">Manage redirect maps and mappings across your sites.</p>
+    </div>
+    <a href="full-page-import-preview.html" class="btn btn-outline">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+      Import
+    </a>
+    <button class="btn btn-outline" disabled aria-disabled="true" title="Nothing to export — site has no redirects yet.">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+      Export
+    </button>
+  </header>
+
+  <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <span class="kicker" style="display: block; margin-bottom: 0.5rem;">Collection</span>
+        <button class="sidebar-item active">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+          <span>Marketing</span>
+        </button>
+      </div>
+      <div class="sidebar-section">
+        <span class="kicker" style="display: block; margin-bottom: 0.5rem;">Sites</span>
+        <button class="sidebar-item active" aria-pressed="true">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Promo 2026</span>
+        </button>
+        <button class="sidebar-item">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Northwind Marketing</span>
+        </button>
+        <button class="sidebar-item">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Northwind Investors</span>
+        </button>
+      </div>
+    </aside>
+
+    <section style="flex: 1; min-width: 0;">
+
+      <div style="display: flex; align-items: flex-end; gap: 1rem; margin-bottom: 1.25rem;">
+        <div style="flex: 1;">
+          <h2 style="font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; margin: 0;">Promo 2026</h2>
+          <p style="margin: 0.25rem 0 0; font-size: 0.8125rem; color: hsl(var(--muted-foreground));">No redirect maps yet.</p>
+        </div>
+      </div>
+
+      <div class="empty-state" style="padding: 4rem 1.5rem; max-width: 36rem; margin: 0 auto;">
+        <div class="illustration" style="width: 120px; height: 120px;" aria-hidden="true">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 4-4h10l4 4"/><path d="M21 9v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9"/><path d="M9 14h6"/></svg>
+        </div>
+        <h3 style="font-size: 1.125rem;">No redirect maps for Promo 2026</h3>
+        <p>Create your first map to start redirecting URLs on this site, or import a JSON export from another environment.</p>
+        <div style="display: flex; gap: 0.5rem; margin-top: 0.75rem;">
+          <a href="full-page-create-redirect-map.html" class="btn btn-primary">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            Create your first Redirect Map
+          </a>
+          <a href="full-page-import-preview.html" class="btn btn-outline">Import JSON</a>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+</body>
+</html>

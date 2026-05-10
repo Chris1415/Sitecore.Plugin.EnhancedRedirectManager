@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Full Page — first load (nothing selected) · Editor's Studio</title>
+<link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+<nav style="padding: 0.5rem 1rem; border-bottom: 1px solid hsl(var(--border)); display: flex; gap: 1rem; align-items: center; font-size: 0.8125rem;">
+  <a href="index.html" style="color: hsl(var(--muted-foreground)); text-decoration: none;">&larr; All screens</a>
+  <span style="color: hsl(var(--muted-foreground));">·</span>
+  <span class="font-medium">Full Page — first load (nothing selected)</span>
+</nav>
+
+<main class="frame frame-fullpage" style="padding: 2rem; min-height: calc(100vh - 40px);">
+
+  <header style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem;">
+    <div style="flex: 1;">
+      <h1 style="font-size: 1.5rem; font-weight: 600; letter-spacing: -0.015em; margin: 0;">Redirects</h1>
+      <p style="margin: 0.25rem 0 0; font-size: 0.875rem; color: hsl(var(--muted-foreground));">Manage redirect maps and mappings across your sites.</p>
+    </div>
+    <button class="btn btn-outline" disabled aria-disabled="true">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+      Import
+    </button>
+    <button class="btn btn-outline" disabled aria-disabled="true">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+      Export
+    </button>
+  </header>
+
+  <div style="display: flex; gap: 1.5rem; align-items: flex-start;">
+
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <span class="kicker" style="display: block; margin-bottom: 0.5rem;">Collection</span>
+        <button class="sidebar-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          <span>Marketing</span>
+        </button>
+        <button class="sidebar-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          <span>Sales</span>
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <span class="kicker" style="display: block; margin-bottom: 0.5rem;">Sites</span>
+        <p style="margin: 0; font-size: 0.8125rem; color: hsl(var(--muted-foreground)); padding: 0.5rem 0.625rem; line-height: 1.4;">
+          Pick a collection to see its sites.
+        </p>
+      </div>
+    </aside>
+
+    <section style="flex: 1; min-width: 0;">
+
+      <div class="empty-state" style="padding: 5rem 1.5rem; max-width: 36rem; margin: 0 auto;">
+        <div class="illustration" style="width: 120px; height: 120px;" aria-hidden="true">
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7l-2-2H5a2 2 0 0 0-2 2z"/></svg>
+        </div>
+        <h3 style="font-size: 1.125rem;">Pick a collection to begin</h3>
+        <p>Select a site collection on the left to load its sites and Redirect Maps.</p>
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+</body>
+</html>

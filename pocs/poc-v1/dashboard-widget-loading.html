@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard Widget — loading · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="dw-frame-shell">
+      <section class="dw-frame" aria-label="Loading redirect counts" aria-busy="true">
+        <header class="dw-head">
+          <h2 class="dw-head__title">Redirects</h2>
+          <span class="dw-head__site">MainSite · SneakerCo</span>
+        </header>
+
+        <div role="status" aria-live="polite" style="position:absolute; left:-9999px;">Loading redirect counts.</div>
+
+        <div class="dw-tiles">
+          <div class="dw-tile">
+            <span class="blok-skeleton" style="height:32px; width:64px;"></span>
+            <span class="blok-skeleton" style="height:11px; width:90px; margin-top:0.25rem;"></span>
+          </div>
+          <hr class="blok-separator blok-separator--vertical" />
+          <div class="dw-tile">
+            <span class="blok-skeleton" style="height:32px; width:72px;"></span>
+            <span class="blok-skeleton" style="height:11px; width:100px; margin-top:0.25rem;"></span>
+          </div>
+          <hr class="blok-separator blok-separator--vertical" />
+          <div class="dw-tile">
+            <span class="blok-skeleton" style="height:18px; width:96px;"></span>
+            <span class="blok-skeleton" style="height:11px; width:80px; margin-top:0.5rem;"></span>
+          </div>
+        </div>
+
+        <p class="dw-foot">Redirect counts only — usage analytics ship in a follow-on release.</p>
+      </section>
+    </div>
+
+    <p style="text-align:center; padding:0 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground);">
+      <a href="index.html">← Back to all surfaces</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

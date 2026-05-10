@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Page — Site Atlas — default — v3</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="poc-bar">
+      <div>
+        <a href="index.html">&larr; Hub</a> · Full Page — default with site
+        selected and one map expanded
+      </div>
+      <div class="right">
+        <span class="muted">≥1280px shows full minimap</span>
+        <button
+          class="btn btn-outline btn-sm"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+          type="button"
+        >
+          Toggle theme
+        </button>
+      </div>
+    </header>
+
+    <div class="frame-fullpage" role="main" aria-label="Redirect Manager — full page">
+      <!-- Topbar -->
+      <div class="fullpage-topbar">
+        <div class="row" style="gap: 0.625rem">
+          <span class="app-name">Redirect Manager</span>
+        </div>
+        <div class="fullpage-actions">
+          <a href="full-page-import-preview.html" class="btn btn-ghost btn-sm">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            <span class="label-extra">Import</span>
+          </a>
+          <button class="btn btn-ghost btn-sm">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span class="label-extra">Export</span>
+          </button>
+          <a
+            href="full-page-create-redirect-map.html"
+            class="btn btn-primary btn-sm"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14" />
+              <path d="M12 5v14" />
+            </svg>
+            New Redirect Map
+          </a>
+        </div>
+      </div>
+
+      <!-- Atlas minimap (≥1280px) -->
+      <nav
+        class="fullpage-minimap is-wide"
+        aria-hidden="true"
+      >
+        <span class="minimap-node is-collection">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M3 7h18M3 12h18M3 17h18" />
+          </svg>
+          Brand Sites
+        </span>
+        <span class="minimap-arrow" aria-hidden="true">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m9 6 6 6-6 6" />
+          </svg>
+        </span>
+        <span class="minimap-node is-here">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+          MarketingHub
+        </span>
+        <span class="minimap-arrow" aria-hidden="true">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m9 6 6 6-6 6" />
+          </svg>
+        </span>
+        <span class="minimap-counter"
+          ><strong>3</strong> Redirect Maps · <strong>47</strong> mappings</span
+        >
+      </nav>
+      <h2 class="sr-only">
+        In collection Brand Sites, site MarketingHub, viewing 3 Redirect Maps
+        totalling 47 mappings.
+      </h2>
+
+      <!-- 1024-1279 fallback breadcrumb (hidden ≥1280) -->
+      <div class="fullpage-breadcrumb is-narrow">
+        <strong>Brand Sites</strong> / <strong>MarketingHub</strong> ·
+        <strong>3</strong> maps · <strong>47</strong> mappings
+      </div>
+
+      <!-- Two-pane main -->
+      <div class="fullpage-main">
+        <!-- Left: picker -->
+        <aside class="fullpage-picker" aria-label="Site picker">
+          <div class="picker-section">
+            <label class="label" for="picker-collection"
+              >Site collection</label
+            >
+            <select id="picker-collection" class="input">
+              <option>Brand Sites</option>
+              <option>Acquisition Brands</option>
+            </select>
+          </div>
+
+          <div class="picker-section">
+            <label class="label" for="picker-site">Site</label>
+            <select id="picker-site" class="input">
+              <option>MarketingHub</option>
+              <option>FinanceHub</option>
+              <option>SupportHub</option>
+              <option>EventsHub</option>
+            </select>
+          </div>
+
+          <div
+            class="picker-active-card"
+            role="status"
+            aria-label="Active site"
+          >
+            <div class="picker-active-name">MarketingHub</div>
+            <div class="picker-active-host">marketing.example.com</div>
+            <div>
+              <span class="badge">en</span>
+              <span class="badge">3 maps</span>
+            </div>
+          </div>
+
+          <div class="section-h">Other sites in this collection</div>
+          <div class="stack-sm">
+            <a
+              href="full-page-no-redirects.html"
+              class="map-pick-item"
+              style="border: 1px solid hsl(var(--border))"
+            >
+              <span class="map-pick-name">FinanceHub</span>
+              <span class="map-pick-meta">0 maps</span>
+            </a>
+            <a
+              href="full-page.html"
+              class="map-pick-item"
+              style="border: 1px solid hsl(var(--border))"
+            >
+              <span class="map-pick-name">SupportHub</span>
+              <span class="map-pick-meta">5 maps</span>
+            </a>
+            <a
+              href="full-page.html"
+              class="map-pick-item"
+              style="border: 1px solid hsl(var(--border))"
+            >
+              <span class="map-pick-name">EventsHub</span>
+              <span class="map-pick-meta">2 maps</span>
+            </a>
+          </div>
+        </aside>
+
+        <!-- Right: redirect list -->
+        <section class="fullpage-content" aria-label="Redirect Maps for MarketingHub">
+          <div
+            class="row-between"
+            style="margin-bottom: 0.875rem"
+          >
+            <h2
+              style="
+                margin: 0;
+                font-size: 1.125rem;
+                font-weight: 700;
+                letter-spacing: -0.01em;
+              "
+            >
+              Redirect Maps
+            </h2>
+            <div class="row text-xs muted" style="gap: 0.5rem">
+              <span>3 of 3</span>
+              <span aria-hidden="true">·</span>
+              <span>collapse-on-expand-other&nbsp;<em>off</em></span>
+            </div>
+          </div>
+
+          <div class="atlas-list">
+            <!-- Collapsed parent row -->
+            <article class="atlas-row">
+              <header class="atlas-row-header">
+                <span class="atlas-chevron" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m9 6 6 6-6 6" />
+                  </svg>
+                </span>
+                <span class="atlas-row-name">Marketing Campaigns 2026</span>
+                <div class="atlas-row-tags">
+                  <span class="badge badge-bold-primary">301</span>
+                  <span class="badge">12 mappings</span>
+                  <span class="badge badge-ghost">Q-string preserved</span>
+                </div>
+                <div class="atlas-row-meta">
+                  <span>Updated 2h ago</span>
+                </div>
+                <button
+                  class="btn btn-icon btn-ghost"
+                  aria-label="Map options"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="1" />
+                    <circle cx="19" cy="12" r="1" />
+                    <circle cx="5" cy="12" r="1" />
+                  </svg>
+                </button>
+              </header>
+            </article>
+
+            <!-- EXPANDED parent row — Atlas signature border -->
+            <article class="atlas-row is-expanded">
+              <header class="atlas-row-header">
+                <span class="atlas-chevron" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m9 6 6 6-6 6" />
+                  </svg>
+                </span>
+                <span class="atlas-row-name">Product Renames</span>
+                <div class="atlas-row-tags">
+                  <span class="badge badge-bold-primary">302</span>
+                  <span class="badge">6 mappings</span>
+                  <span class="badge badge-ghost">Vfolder included</span>
+                </div>
+                <div class="atlas-row-meta">
+                  <span>Updated 3d ago</span>
+                </div>
+                <a
+                  href="full-page-edit-redirect-map.html"
+                  class="btn btn-icon btn-ghost"
+                  aria-label="Map options"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="1" />
+                    <circle cx="19" cy="12" r="1" />
+                    <circle cx="5" cy="12" r="1" />
+                  </svg>
+                </a>
+              </header>
+
+              <div class="atlas-row-body">
+                <div class="atlas-mapping">
+                  <span class="atlas-mapping-grip" aria-hidden="true">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="9" cy="6" r="1" />
+                      <circle cx="9" cy="12" r="1" />
+                      <circle cx="9" cy="18" r="1" />
+                      <circle cx="15" cy="6" r="1" />
+                      <circle cx="15" cy="12" r="1" />
+                      <circle cx="15" cy="18" r="1" />
+                    </svg>
+                  </span>
+                  <div class="arrow-row">
+                    <span class="url url-source">/products/launch-2026</span>
+                    <span class="arrow" aria-hidden="true">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.25"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </span>
+                    <span class="url url-target">/products/edition-x</span>
+                  </div>
+                  <div class="atlas-mapping-actions">
+                    <button class="btn btn-icon btn-ghost" aria-label="Edit">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                        />
+                      </svg>
+                    </button>
+                    <button class="btn btn-icon btn-ghost" aria-label="Delete">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M3 6h18" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="atlas-mapping">
+                  <span class="atlas-mapping-grip" aria-hidden="true">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="9" cy="6" r="1" />
+                      <circle cx="9" cy="12" r="1" />
+                      <circle cx="9" cy="18" r="1" />
+                      <circle cx="15" cy="6" r="1" />
+                      <circle cx="15" cy="12" r="1" />
+                      <circle cx="15" cy="18" r="1" />
+                    </svg>
+                  </span>
+                  <div class="arrow-row">
+                    <span class="url url-source"
+                      >/products/old-edition-name</span
+                    >
+                    <span class="arrow" aria-hidden="true">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.25"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </span>
+                    <span class="url url-target">/products/edition-x</span>
+                  </div>
+                  <div class="atlas-mapping-actions">
+                    <button class="btn btn-icon btn-ghost" aria-label="Edit">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                        />
+                      </svg>
+                    </button>
+                    <button class="btn btn-icon btn-ghost" aria-label="Delete">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M3 6h18" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="atlas-mapping">
+                  <span class="atlas-mapping-grip" aria-hidden="true">
+                    <svg
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="9" cy="6" r="1" />
+                      <circle cx="9" cy="12" r="1" />
+                      <circle cx="9" cy="18" r="1" />
+                      <circle cx="15" cy="6" r="1" />
+                      <circle cx="15" cy="12" r="1" />
+                      <circle cx="15" cy="18" r="1" />
+                    </svg>
+                  </span>
+                  <div class="arrow-row">
+                    <span class="url url-source">/products/legacy-x</span>
+                    <span class="arrow" aria-hidden="true">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.25"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M5 12h14" />
+                        <path d="m12 5 7 7-7 7" />
+                      </svg>
+                    </span>
+                    <span class="url url-target">/products/edition-x</span>
+                  </div>
+                  <div class="atlas-mapping-actions">
+                    <button class="btn btn-icon btn-ghost" aria-label="Edit">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                        />
+                      </svg>
+                    </button>
+                    <button class="btn btn-icon btn-ghost" aria-label="Delete">
+                      <svg
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M3 6h18" />
+                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <button class="atlas-add-mapping" type="button">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="M12 5v14" />
+                  </svg>
+                  Add mapping
+                </button>
+              </div>
+            </article>
+
+            <!-- Collapsed parent row — Internal Reorg -->
+            <article class="atlas-row">
+              <header class="atlas-row-header">
+                <span class="atlas-chevron" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m9 6 6 6-6 6" />
+                  </svg>
+                </span>
+                <span class="atlas-row-name">Internal Reorg</span>
+                <div class="atlas-row-tags">
+                  <span class="badge badge-bold-primary">Server&nbsp;Transfer</span>
+                  <span class="badge">29 mappings</span>
+                  <span class="badge badge-ghost">Q-string preserved</span>
+                </div>
+                <div class="atlas-row-meta">
+                  <span>Updated Apr 28</span>
+                </div>
+                <button class="btn btn-icon btn-ghost" aria-label="Map options">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <circle cx="12" cy="12" r="1" />
+                    <circle cx="19" cy="12" r="1" />
+                    <circle cx="5" cy="12" r="1" />
+                  </svg>
+                </button>
+              </header>
+            </article>
+          </div>
+        </section>
+      </div>
+
+      <!-- Success toast -->
+      <div class="toast" role="status" aria-live="polite">
+        <span class="toast-icon" aria-hidden="true">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M20 6 9 17l-5-5" />
+          </svg>
+        </span>
+        Mapping saved.
+      </div>
+    </div>
+  </body>
+</html>
