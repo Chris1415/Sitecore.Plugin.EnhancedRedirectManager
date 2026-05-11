@@ -4,45 +4,51 @@
  * Dashboard Widget extension point (xmc:dashboardblocks).
  * Route: /dashboard-widget
  *
- * TEMPORARY — Tranche 2 capture helper. Auto-fetches xmc.sites.listSites
- * and xmc.sites.listCollections so the operator can paste both into
- * tests/fixtures/graphql/. Tranche 4 (T031–T034) replaces this with the
- * real Dashboard Widget UI (3 stat tiles + footnote).
+ * Tranche 4 (T031–T034): Real Operator Console (v1) UI.
+ * Replaces the Tranche 2 capture-helper that was here previously.
+ *
+ * Site resolution (OQ-7): Dashboard Widget runs in the per-site dashboard context.
+ * The SDK exposes the site via application.context, but the full Sitecore path
+ * to Settings/Redirects requires knowing the collection name.
+ *
+ * Current implementation:
+ * - Uses `resources[0].tenantId` for the tenant (ADR-0007)
+ * - Builds a best-effort sitePath from application.context app name:
+ *   /sitecore/content/solo/<appName>/Settings/Redirects
+ *   TODO (OQ-7): derive collection name dynamically at Tranche 6 smoke capture.
+ *   For now hardcoded against the captured solo-website site (collection: solo).
+ *
+ * iframe constraints per § 4c-4: 300–800 px × 200–400 px. Single widget.
  */
 
-import {
-  useAppContext,
-  useMarketplaceClient,
-} from "@/components/providers/marketplace";
-import { listCollections, listSites } from "@/lib/sdk/sites";
+import { DashboardWidget } from "@/components/dashboard-widget/DashboardWidget";
+import { useMarketplaceClient, useAppContext } from "@/components/providers/marketplace";
 import { requireContextId } from "@/lib/sdk/require-context-id";
-import { CaptureHelper } from "@/components/dev/capture-helper";
 
 export default function DashboardWidgetPage() {
   const client = useMarketplaceClient();
   const appCtx = useAppContext();
   const sitecoreContextId = requireContextId(appCtx);
 
+  // TODO (OQ-7): derive site name and collection dynamically.
+  // For now, use the app name from appCtx which maps to the site name on the tenant
+  // that performed capture point #1 (solo-website, collection: solo).
+  // Operator must override these with real values after Tranche 6 smoke.
+  const appName = appCtx?.name ?? "solo-website";
+  const siteName = appName;
+
+  // TODO (OQ-7): collection name is hardcoded as 'solo' — derived from capture.
+  // Real tenants may have different collection names. Tranche 6 will capture this.
+  const collectionName = "solo";
+  const sitePath = `/sitecore/content/${collectionName}/${siteName}/Settings/Redirects`;
+
   return (
-    <main className="p-4 max-w-3xl">
-      <h1 className="text-lg font-semibold">Dashboard Widget — capture helper</h1>
-      <p className="text-muted-foreground text-sm mt-1 mb-4">
-        Invokes <code>xmc.sites.listSites</code> and{" "}
-        <code>xmc.sites.listCollections</code> against the current tenant.
-        Copy the JSON into the fixture file. The full Dashboard Widget UI
-        ships in Tranche 4.
-      </p>
-
-      <CaptureHelper
-        label="xmc.sites.listSites"
-        fixtureFile="sites-list.json"
-        fetcher={() => listSites(client, sitecoreContextId)}
-      />
-
-      <CaptureHelper
-        label="xmc.sites.listCollections"
-        fixtureFile="collections-list.json"
-        fetcher={() => listCollections(client, sitecoreContextId)}
+    <main className="p-3">
+      <DashboardWidget
+        client={client}
+        sitecoreContextId={sitecoreContextId}
+        siteName={siteName}
+        sitePath={sitePath}
       />
     </main>
   );

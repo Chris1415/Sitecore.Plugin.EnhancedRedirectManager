@@ -76,8 +76,62 @@ describe('structural guards', () => {
     ).toHaveLength(0);
   });
 
-  it.todo('three extension routes registered + root returns notFound()');
-  it.todo('app/globals.css carries the dark-mode --primary-foreground override in both .dark blocks');
+  it('three extension routes registered + root returns notFound()', () => {
+    // Verify the three extension point route directories exist
+    const routes = ['context-panel', 'dashboard-widget', 'full-page'];
+    for (const route of routes) {
+      const routeDir = path.join(SITE_ROOT, 'app', route);
+      expect(
+        fs.existsSync(routeDir),
+        `Expected extension route directory to exist: app/${route}/`,
+      ).toBe(true);
+      const pageFile = path.join(routeDir, 'page.tsx');
+      expect(
+        fs.existsSync(pageFile),
+        `Expected page.tsx to exist in app/${route}/`,
+      ).toBe(true);
+    }
+
+    // Verify root page calls notFound() (ADR-0011)
+    const rootPage = path.join(SITE_ROOT, 'app', 'page.tsx');
+    expect(fs.existsSync(rootPage), 'Expected app/page.tsx to exist').toBe(true);
+    const rootContent = fs.readFileSync(rootPage, 'utf-8');
+    expect(
+      rootContent,
+      'Root page must call notFound() to prevent hanging MarketplaceProvider init',
+    ).toContain('notFound()');
+  });
+
+  it('app/globals.css carries the dark-mode --primary-foreground override in both .dark blocks', () => {
+    // ADR-0004 / blok-theming: --primary-foreground collapses to white-on-lavender in
+    // Nova preset dark mode. Both the .dark selector and @media prefers-color-scheme: dark
+    // must override it to var(--color-blackAlpha-900) for legible primary buttons.
+    const globalsCss = path.join(SITE_ROOT, 'app', 'globals.css');
+    expect(fs.existsSync(globalsCss), 'Expected app/globals.css to exist').toBe(true);
+
+    const content = fs.readFileSync(globalsCss, 'utf-8');
+
+    // Must have .dark block with the override
+    expect(
+      content,
+      'globals.css must have a .dark selector block',
+    ).toContain('.dark');
+
+    // Must have @media (prefers-color-scheme: dark) block with the override
+    expect(
+      content,
+      'globals.css must have a @media (prefers-color-scheme: dark) block',
+    ).toContain('@media (prefers-color-scheme: dark)');
+
+    // Both blocks must carry --primary-foreground: var(--color-blackAlpha-900)
+    // Count occurrences of the specific override
+    const overridePattern = /--primary-foreground:\s*var\(--color-blackAlpha-900\)/g;
+    const matches = content.match(overridePattern) ?? [];
+    expect(
+      matches.length,
+      'globals.css must carry --primary-foreground: var(--color-blackAlpha-900) in BOTH dark blocks (.dark + @media prefers-color-scheme: dark)',
+    ).toBeGreaterThanOrEqual(2);
+  });
   it.todo('no raw-HTML React injection on user data');
   it.todo('no outline: none without a replacement focus style');
 });
