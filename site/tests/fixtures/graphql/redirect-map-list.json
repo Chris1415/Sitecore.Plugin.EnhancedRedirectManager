@@ -9,6 +9,7 @@
             {
               "itemId": "e39157f3a81f4692b05d178d48c836de",
               "name": "My Redirect Map",
+              "template": { "name": "Redirect Map" },
               "IncludeVirtualFolder": { "value": "1" },
               "PreserveQueryString": { "value": "" },
               "RedirectType": { "value": "ServerTransfer" },
@@ -19,6 +20,7 @@
             {
               "itemId": "590b53834e394203abe42bd6e575615a",
               "name": "Test Group",
+              "template": { "name": "Redirect Map Grouping" },
               "IncludeVirtualFolder": null,
               "PreserveQueryString": null,
               "RedirectType": null,

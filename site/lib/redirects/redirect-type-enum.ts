@@ -22,11 +22,16 @@
 import type { RedirectType } from '@/lib/domain/types';
 
 /**
- * All valid RedirectType values.
- * ServerTransfer: verified from real-tenant capture.
- * 301/302/307: assumed-shape — pending Tranche 6 real-tenant enum introspection (OQ-8).
+ * All valid RedirectType values shown in the operator UI.
+ *
+ * Real-tenant confirmed 2026-05-11: '307' is NOT exposed on the Redirect Map
+ * template's RedirectType droplist (operator confirmed head-app resolver doesn't
+ * honour it). Three values only: 301, 302, ServerTransfer.
+ *
+ * ServerTransfer: verified from real-tenant capture (PRD § 9).
+ * 301 / 302: assumed wire-enum names — pending Tranche 6 write-surface capture (OQ-8).
  */
-export const REDIRECT_TYPES = ['301', '302', '307', 'ServerTransfer'] as const satisfies readonly RedirectType[];
+export const REDIRECT_TYPES = ['301', '302', 'ServerTransfer'] as const satisfies readonly RedirectType[];
 
 /**
  * Type guard — returns true if the value is a recognized RedirectType.
@@ -38,8 +43,6 @@ export function isValidRedirectType(value: string): value is RedirectType {
 /**
  * Operator-friendly display labels for use in dropdowns and badges.
  * Exact copy matches UI v1 § 4 dropdown labels.
- *
- * assumed-shape: tests/fixtures/graphql/redirect-type-enum.json
  */
 export function redirectTypeDisplayName(value: RedirectType): string {
   switch (value) {
@@ -47,8 +50,6 @@ export function redirectTypeDisplayName(value: RedirectType): string {
       return '301 Permanent';
     case '302':
       return '302 Found';
-    case '307':
-      return '307 Temporary';
     case 'ServerTransfer':
       return 'Server Transfer';
   }

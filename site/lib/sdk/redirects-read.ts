@@ -33,10 +33,16 @@ interface WireFieldValue {
 }
 
 /** Wire shape for a single Redirect Map item using aliased field(name:) accessors.
- *  Each known field is its own property on the item — no inner connection / nodes list. */
+ *  Each known field is its own property on the item — no inner connection / nodes list.
+ *
+ *  `template { name }` carries the Sitecore template name so we can filter out
+ *  non-Redirect-Map siblings — see decodeWireItem below. Operator confirmed
+ *  2026-05-11 that "Redirect Map Grouping" items live alongside real Redirect
+ *  Maps under /Settings/Redirects/ and must be ignored. */
 interface WireItem {
   itemId?: string
   name?: string
+  template?: { name?: string } | null
   IncludeVirtualFolder?: WireFieldValue
   PreserveQueryString?: WireFieldValue
   RedirectType?: WireFieldValue
@@ -71,13 +77,32 @@ function parseBoolField(field: WireFieldValue | undefined): boolean {
 }
 
 /**
- * Decode a wire item into the domain RedirectMapItem.
- * Returns null and logs a warning if the item is missing required fields.
+ * Names of Sitecore templates that are NOT Redirect Maps and must be filtered out
+ * of the children list. Operator confirmed 2026-05-11:
+ * - "Redirect Map Grouping" lives alongside Redirect Map items under
+ *   /Settings/Redirects/ as an organisational template. It has none of the
+ *   Redirect Map fields (RedirectType / UrlMapping / Preserve* / IncludeVirtualFolder).
  *
- * The query aliases each field as a top-level property on the item via
- * Authoring's `field(name:)` accessor — so the wire shape is flat, not
- * the deep `fields { nodes { name value } }` connection we tried first.
- * Lighter query = fewer fields fetched, faster response, simpler decode.
+ * NOTE — possible nested hierarchy (Tranche 6+): operators may place "Redirect Map
+ * Grouping" items as folders containing Redirect Maps beneath. The current query
+ * traverses one level (`children { nodes { ... } }`); deep traversal is a follow-on.
+ * For now: skip groupings entirely. Their children are invisible to the app until
+ * the recursive traversal lands.
+ */
+const NON_REDIRECT_MAP_TEMPLATES = new Set<string>(['Redirect Map Grouping'])
+
+/**
+ * Decode a wire item into the domain RedirectMapItem.
+ * Returns null when:
+ * - the item is missing id or name (shouldn't happen for real Sitecore items)
+ * - the item is a known non-Redirect-Map template (e.g. "Redirect Map Grouping")
+ * - the item lacks the Redirect Map signature fields entirely (defensive heuristic
+ *   for templates whose name we haven't enumerated yet)
+ *
+ * The query aliases each field as a top-level property on the item via Authoring's
+ * `field(name:)` accessor. `template { name }` is fetched so we can filter precisely.
+ * Items whose template doesn't define a field return `null` for that field — that's
+ * the defensive heuristic for unknown grouping/folder templates.
  */
 function decodeWireItem(wire: WireItem): RedirectMapItem | null {
   if (!wire.itemId || !wire.name) {
@@ -85,6 +110,24 @@ function decodeWireItem(wire: WireItem): RedirectMapItem | null {
       "[redirect-manager] Skipping redirect map item with missing id or name",
       wire
     )
+    return null
+  }
+
+  // Precise filter: known non-Redirect-Map template names.
+  const templateName = wire.template?.name
+  if (templateName && NON_REDIRECT_MAP_TEMPLATES.has(templateName)) {
+    return null
+  }
+
+  // Defensive heuristic: any item lacking BOTH RedirectType and UrlMapping fields
+  // is not a Redirect Map (the template doesn't declare these fields). This catches
+  // grouping templates we haven't enumerated by name yet.
+  const hasRedirectMapSignature =
+    wire.RedirectType !== null &&
+    wire.RedirectType !== undefined &&
+    wire.UrlMapping !== null &&
+    wire.UrlMapping !== undefined
+  if (!hasRedirectMapSignature) {
     return null
   }
 
@@ -143,6 +186,7 @@ export const GET_REDIRECTS_FOR_SITE = `
         nodes {
           itemId
           name
+          template { name }
           IncludeVirtualFolder: field(name: "IncludeVirtualFolder") { value }
           PreserveQueryString:  field(name: "PreserveQueryString")  { value }
           RedirectType:         field(name: "RedirectType")         { value }

@@ -51,11 +51,15 @@ describe('listRedirectMaps', () => {
     expect(callArg.body, 'body must be INSIDE params, not at top level').toBeUndefined();
   });
 
-  it('RED-2: double .data.data unwrap on mutate — returns RedirectMapItem[]', async () => {
+  it('RED-2: double .data.data unwrap + Redirect Map Grouping filter — returns only real Redirect Maps', async () => {
+    // Fixture has 2 children but one is a "Redirect Map Grouping" template
+    // (template name verified against real tenant 2026-05-11). The grouping
+    // must be filtered out — only the real Redirect Map item is returned.
     const client = makeStubClient(redirectMapListFixture);
     const result = await listRedirectMaps(client, CTX_ID, SITE_PATH);
     expect(Array.isArray(result)).toBe(true);
-    expect(result).toHaveLength(2);
+    expect(result).toHaveLength(1);
+    expect(result[0].name).toBe('My Redirect Map');
   });
 
   it('RED-3: per-item field decoding — fully-populated Redirect Map (captured real-tenant)', async () => {
@@ -76,20 +80,48 @@ describe('listRedirectMaps', () => {
     });
   });
 
-  it('RED-3b: empty / all-null fields — decoder falls back gracefully (captured "Test Group" item)', async () => {
+  it('RED-3b: "Redirect Map Grouping" items are filtered out by template name', async () => {
+    // The captured "Test Group" item has template.name = "Redirect Map Grouping"
+    // and all redirect-specific fields null. The decoder MUST return null for it
+    // so listRedirectMaps doesn't surface it as a fake Redirect Map with defaults.
     const client = makeStubClient(redirectMapListFixture);
     const result = await listRedirectMaps(client, CTX_ID, SITE_PATH);
-    const empty = result[1];
-    expect(empty).toMatchObject({
-      id: '590b53834e394203abe42bd6e575615a',
-      name: 'Test Group',
-      redirectType: 'ServerTransfer', // null → default fallback
-      preserveQueryString: false,
-      preserveLanguage: false,
-      includeVirtualFolder: false,
-      mappings: [],                   // null UrlMapping → empty list, no throw
-      updatedAt: '20260509T183806Z',
-    });
+    expect(result.find((m) => m.name === 'Test Group')).toBeUndefined();
+  });
+
+  it('RED-3c: defensive heuristic — items lacking RedirectType + UrlMapping fields are filtered', async () => {
+    // If a future template name appears that we haven't enumerated in
+    // NON_REDIRECT_MAP_TEMPLATES, the heuristic (no RedirectType + no UrlMapping
+    // = not a Redirect Map) still filters it out so the operator never sees
+    // ghost redirects with default values.
+    const unknownTemplateFixture = {
+      data: {
+        data: {
+          item: {
+            itemId: 'root',
+            name: 'Redirects',
+            children: {
+              nodes: [
+                {
+                  itemId: 'unknown-item-id',
+                  name: 'Future Grouping Template',
+                  template: { name: 'Some Unknown Folder Template' },
+                  IncludeVirtualFolder: null,
+                  PreserveQueryString: null,
+                  RedirectType: null,
+                  PreserveLanguage: null,
+                  UrlMapping: null,
+                  __Updated: { value: '20260511T100000Z' },
+                },
+              ],
+            },
+          },
+        },
+      },
+    };
+    const client = makeStubClient(unknownTemplateFixture);
+    const result = await listRedirectMaps(client, CTX_ID, SITE_PATH);
+    expect(result).toEqual([]);
   });
 
   it('RED-4: malformed UrlMapping segment — warn-and-skip, no throw', async () => {

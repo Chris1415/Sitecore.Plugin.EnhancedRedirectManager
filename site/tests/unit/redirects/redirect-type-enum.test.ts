@@ -1,10 +1,11 @@
 /**
  * T021 — lib/redirects/redirect-type-enum.ts RED tests
  *
- * assumed-shape: tests/fixtures/graphql/redirect-type-enum.json
- * (301/302/307 enum names are unverified — assumed shape; closed at Tranche 6 capture)
+ * Real-tenant confirmed 2026-05-11: '307' is NOT a valid RedirectType on the
+ * Redirect Map template (operator removed it from the user-facing list).
+ * '301', '302', and 'ServerTransfer' only.
  *
- * Tests written BEFORE the implementation (TDD RED phase).
+ * '301'/'302' wire-enum names remain assumed pending Tranche 6 write capture (OQ-8).
  */
 
 import { describe, it, expect } from 'vitest';
@@ -15,28 +16,27 @@ import {
 } from '@/lib/redirects/redirect-type-enum';
 
 describe('REDIRECT_TYPES', () => {
-  it('contains exactly 4 values', () => {
-    expect(REDIRECT_TYPES).toHaveLength(4);
+  it('contains exactly 3 values (307 removed 2026-05-11)', () => {
+    expect(REDIRECT_TYPES).toHaveLength(3);
   });
 
-  it('contains ServerTransfer (verified)', () => {
+  it('contains ServerTransfer (verified real-tenant)', () => {
     expect(REDIRECT_TYPES).toContain('ServerTransfer');
   });
 
-  it('contains 301 (assumed-shape)', () => {
+  it('contains 301 (assumed wire-enum name, OQ-8)', () => {
     expect(REDIRECT_TYPES).toContain('301');
   });
 
-  it('contains 302 (assumed-shape)', () => {
+  it('contains 302 (assumed wire-enum name, OQ-8)', () => {
     expect(REDIRECT_TYPES).toContain('302');
   });
 
-  it('contains 307 (assumed-shape)', () => {
-    expect(REDIRECT_TYPES).toContain('307');
+  it('does NOT contain 307 (invalid on the Redirect Map template)', () => {
+    expect(REDIRECT_TYPES).not.toContain('307');
   });
 
-  it('is readonly (cannot be mutated at runtime via TypeScript)', () => {
-    // Just verify the shape — a readonly tuple can still be array-like
+  it('is array-like', () => {
     expect(Array.isArray(REDIRECT_TYPES)).toBe(true);
   });
 });
@@ -54,8 +54,8 @@ describe('isValidRedirectType', () => {
     expect(isValidRedirectType('302')).toBe(true);
   });
 
-  it('returns true for 307', () => {
-    expect(isValidRedirectType('307')).toBe(true);
+  it('returns FALSE for 307 (removed from the valid set)', () => {
+    expect(isValidRedirectType('307')).toBe(false);
   });
 
   it('returns false for unknown string', () => {
@@ -85,11 +85,6 @@ describe('redirectTypeDisplayName', () => {
   it('returns operator-friendly label for 302', () => {
     const label = redirectTypeDisplayName('302');
     expect(label).toBe('302 Found');
-  });
-
-  it('returns operator-friendly label for 307', () => {
-    const label = redirectTypeDisplayName('307');
-    expect(label).toBe('307 Temporary');
   });
 
   it('all enum values have non-empty display names', () => {

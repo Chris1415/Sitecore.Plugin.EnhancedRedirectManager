@@ -42,8 +42,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { REDIRECT_TYPES, redirectTypeDisplayName } from "@/lib/redirects/redirect-type-enum";
 import type { RedirectMapItem, RedirectType } from "@/lib/domain/types";
+
+/**
+ * Direction of the redirect relative to the current page.
+ * - "from" — current page is the SOURCE (visitors leave this page; default)
+ * - "to"   — current page is the TARGET (visitors land HERE from elsewhere)
+ */
+export type RedirectDirection = "from" | "to";
 
 export interface AddRedirectModalProps {
   open: boolean;
@@ -52,7 +60,10 @@ export interface AddRedirectModalProps {
   existingMaps: RedirectMapItem[];
   /** Called on successful add — triggers list refresh + canvas reload */
   onSuccess: () => void;
-  /** Called to execute write operations */
+  /** Called to execute write operations.
+   *  `source` and `target` already reflect the operator's direction choice —
+   *  the caller does NOT need to know which one was pre-populated.
+   */
   onAddToExistingMap: (
     mapId: string,
     source: string,
@@ -83,7 +94,10 @@ export function AddRedirectModal({
 }: AddRedirectModalProps) {
   const [step, setStep] = useState<Step>("pick");
   const [selectedMap, setSelectedMap] = useState<RedirectMapItem | null>(null);
-  const [target, setTarget] = useState("");
+  /** Direction relative to the current page. "from" = current page is source (default). */
+  const [direction, setDirection] = useState<RedirectDirection>("from");
+  /** The user-typed counterpart URL — semantics flip based on `direction`. */
+  const [otherUrl, setOtherUrl] = useState("");
   const [newMapName, setNewMapName] = useState("");
   const [newRedirectType, setNewRedirectType] = useState<RedirectType | "">("");
   const [newPreserveQS, setNewPreserveQS] = useState(false);
@@ -92,9 +106,16 @@ export function AddRedirectModal({
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  /** Resolve { source, target } from direction + pageRoute + otherUrl. */
+  function resolvedPair(): { source: string; target: string } {
+    return direction === "from"
+      ? { source: pageRoute, target: otherUrl.trim() }
+      : { source: otherUrl.trim(), target: pageRoute };
+  }
+
   function isDirty(): boolean {
-    if (step === "add-existing") return target.trim().length > 0;
-    if (step === "create-new") return newMapName.trim().length > 0 || target.trim().length > 0;
+    if (step === "add-existing") return otherUrl.trim().length > 0;
+    if (step === "create-new") return newMapName.trim().length > 0 || otherUrl.trim().length > 0;
     return false;
   }
 
@@ -106,7 +127,8 @@ export function AddRedirectModal({
       // Reset state on close
       setStep("pick");
       setSelectedMap(null);
-      setTarget("");
+      setDirection("from");
+      setOtherUrl("");
       setNewMapName("");
       setNewRedirectType("");
       setError(null);
@@ -124,8 +146,8 @@ export function AddRedirectModal({
   }
 
   async function handleSaveExisting() {
-    if (!selectedMap || !target.trim()) {
-      setError("Target URL is required.");
+    if (!selectedMap || !otherUrl.trim()) {
+      setError(direction === "from" ? "Target URL is required." : "Source URL is required.");
       return;
     }
     setSaving(true);
@@ -133,7 +155,8 @@ export function AddRedirectModal({
     try {
       // TODO (Tranche 6): write surface assumed-shape — updateRedirectMap must
       // append the new mapping to selectedMap.mappings then serialize.
-      await onAddToExistingMap(selectedMap.id, pageRoute, target.trim(), selectedMap);
+      const { source, target } = resolvedPair();
+      await onAddToExistingMap(selectedMap.id, source, target, selectedMap);
       onSuccess();
       handleOpenChange(false);
     } catch (err) {
@@ -146,7 +169,8 @@ export function AddRedirectModal({
   async function handleSaveNew() {
     if (!newMapName.trim()) { setError("Name is required."); return; }
     if (!newRedirectType) { setError("Redirect type is required."); return; }
-    if (!pageRoute.trim() || !target.trim()) { setError("Source and target are required."); return; }
+    const { source, target } = resolvedPair();
+    if (!source.trim() || !target.trim()) { setError("Source and target are required."); return; }
     setSaving(true);
     setError(null);
     try {
@@ -157,8 +181,8 @@ export function AddRedirectModal({
         preserveQueryString: newPreserveQS,
         preserveLanguage: newPreserveLang,
         includeVirtualFolder: newIncludeVF,
-        source: pageRoute,
-        target: target.trim(),
+        source,
+        target,
       });
       onSuccess();
       handleOpenChange(false);
@@ -193,8 +217,10 @@ export function AddRedirectModal({
         {step === "add-existing" && selectedMap && (
           <AddExistingStep
             pageRoute={pageRoute}
-            target={target}
-            onTargetChange={setTarget}
+            direction={direction}
+            onDirectionChange={setDirection}
+            otherUrl={otherUrl}
+            onOtherUrlChange={setOtherUrl}
             selectedMap={selectedMap}
             error={error}
             saving={saving}
@@ -206,8 +232,10 @@ export function AddRedirectModal({
         {step === "create-new" && (
           <CreateNewStep
             pageRoute={pageRoute}
-            target={target}
-            onTargetChange={setTarget}
+            direction={direction}
+            onDirectionChange={setDirection}
+            otherUrl={otherUrl}
+            onOtherUrlChange={setOtherUrl}
             name={newMapName}
             onNameChange={setNewMapName}
             redirectType={newRedirectType}
@@ -269,10 +297,42 @@ function PickStep({
   );
 }
 
+/**
+ * Direction picker — "From this page" (current page is source — default)
+ * vs "To this page" (current page is target). A valid redirect can land
+ * either way; operator decides per mapping.
+ */
+function DirectionTabs({
+  value,
+  onValueChange,
+}: {
+  value: RedirectDirection;
+  onValueChange: (v: RedirectDirection) => void;
+}) {
+  return (
+    <div className="space-y-1">
+      <Label>Direction</Label>
+      <Tabs value={value} onValueChange={(v) => onValueChange(v as RedirectDirection)}>
+        <TabsList className="w-full grid grid-cols-2">
+          <TabsTrigger value="from">From this page</TabsTrigger>
+          <TabsTrigger value="to">To this page</TabsTrigger>
+        </TabsList>
+      </Tabs>
+      <p className="text-xs text-muted-foreground">
+        {value === "from"
+          ? "Visitors hitting this page get redirected to your target URL."
+          : "Visitors hitting another URL get redirected to this page."}
+      </p>
+    </div>
+  );
+}
+
 function AddExistingStep({
   pageRoute,
-  target,
-  onTargetChange,
+  direction,
+  onDirectionChange,
+  otherUrl,
+  onOtherUrlChange,
   selectedMap,
   error,
   saving,
@@ -280,38 +340,65 @@ function AddExistingStep({
   onBack,
 }: {
   pageRoute: string;
-  target: string;
-  onTargetChange: (v: string) => void;
+  direction: RedirectDirection;
+  onDirectionChange: (v: RedirectDirection) => void;
+  otherUrl: string;
+  onOtherUrlChange: (v: string) => void;
   selectedMap: RedirectMapItem;
   error: string | null;
   saving: boolean;
   onSave: () => void;
   onBack: () => void;
 }) {
+  const otherLabel = direction === "from" ? "Target" : "Source";
+  const otherPlaceholder = direction === "from" ? "/destination-path" : "/origin-path";
   return (
     <div className="space-y-3">
-      <div className="space-y-1">
-        <Label>Source (pre-populated)</Label>
-        <Input value={pageRoute} readOnly className="bg-muted font-mono text-xs" />
-      </div>
-      <div className="space-y-1">
-        <Label htmlFor="add-existing-target">Target</Label>
-        <Input
-          id="add-existing-target"
-          value={target}
-          onChange={(e) => onTargetChange(e.target.value)}
-          placeholder="/destination-path"
-          className="font-mono text-xs"
-          autoFocus
-        />
-      </div>
+      <DirectionTabs value={direction} onValueChange={onDirectionChange} />
+      {direction === "from" ? (
+        <>
+          <div className="space-y-1">
+            <Label>Source (this page)</Label>
+            <Input value={pageRoute} readOnly className="bg-muted font-mono text-xs" />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="add-existing-other">{otherLabel}</Label>
+            <Input
+              id="add-existing-other"
+              value={otherUrl}
+              onChange={(e) => onOtherUrlChange(e.target.value)}
+              placeholder={otherPlaceholder}
+              className="font-mono text-xs"
+              autoFocus
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="space-y-1">
+            <Label htmlFor="add-existing-other">{otherLabel}</Label>
+            <Input
+              id="add-existing-other"
+              value={otherUrl}
+              onChange={(e) => onOtherUrlChange(e.target.value)}
+              placeholder={otherPlaceholder}
+              className="font-mono text-xs"
+              autoFocus
+            />
+          </div>
+          <div className="space-y-1">
+            <Label>Target (this page)</Label>
+            <Input value={pageRoute} readOnly className="bg-muted font-mono text-xs" />
+          </div>
+        </>
+      )}
       <p className="text-xs text-muted-foreground">
         Type: {redirectTypeDisplayName(selectedMap.redirectType)} ·{" "}
         Inherits map flags.
       </p>
       {error && <p role="alert" className="text-destructive text-xs">{error}</p>}
       <div className="flex gap-2">
-        <Button onClick={onSave} disabled={saving || !target.trim()} className="flex-1">
+        <Button onClick={onSave} disabled={saving || !otherUrl.trim()} className="flex-1">
           {saving ? "Saving…" : "Add redirect"}
         </Button>
         <Button variant="outline" onClick={onBack} disabled={saving}>
@@ -324,8 +411,10 @@ function AddExistingStep({
 
 function CreateNewStep({
   pageRoute,
-  target,
-  onTargetChange,
+  direction,
+  onDirectionChange,
+  otherUrl,
+  onOtherUrlChange,
   name,
   onNameChange,
   redirectType,
@@ -342,8 +431,10 @@ function CreateNewStep({
   onBack,
 }: {
   pageRoute: string;
-  target: string;
-  onTargetChange: (v: string) => void;
+  direction: RedirectDirection;
+  onDirectionChange: (v: RedirectDirection) => void;
+  otherUrl: string;
+  onOtherUrlChange: (v: string) => void;
   name: string;
   onNameChange: (v: string) => void;
   redirectType: string;
@@ -359,6 +450,8 @@ function CreateNewStep({
   onSave: () => void;
   onBack: () => void;
 }) {
+  const otherLabel = direction === "from" ? "First mapping — target" : "First mapping — source";
+  const otherPlaceholder = direction === "from" ? "/destination-path" : "/origin-path";
   return (
     <div className="space-y-3">
       <div className="space-y-1">
@@ -412,25 +505,47 @@ function CreateNewStep({
           <Label htmlFor="new-ivf" className="text-sm font-normal">Include Virtual Folder</Label>
         </div>
       </div>
-      <div className="space-y-1">
-        <Label>First mapping — source</Label>
-        <Input value={pageRoute} readOnly className="bg-muted font-mono text-xs" />
-      </div>
-      <div className="space-y-1">
-        <Label htmlFor="new-map-target">First mapping — target</Label>
-        <Input
-          id="new-map-target"
-          value={target}
-          onChange={(e) => onTargetChange(e.target.value)}
-          placeholder="/destination-path"
-          className="font-mono text-xs"
-        />
-      </div>
+      <DirectionTabs value={direction} onValueChange={onDirectionChange} />
+      {direction === "from" ? (
+        <>
+          <div className="space-y-1">
+            <Label>First mapping — source (this page)</Label>
+            <Input value={pageRoute} readOnly className="bg-muted font-mono text-xs" />
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="new-map-other">{otherLabel}</Label>
+            <Input
+              id="new-map-other"
+              value={otherUrl}
+              onChange={(e) => onOtherUrlChange(e.target.value)}
+              placeholder={otherPlaceholder}
+              className="font-mono text-xs"
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="space-y-1">
+            <Label htmlFor="new-map-other">{otherLabel}</Label>
+            <Input
+              id="new-map-other"
+              value={otherUrl}
+              onChange={(e) => onOtherUrlChange(e.target.value)}
+              placeholder={otherPlaceholder}
+              className="font-mono text-xs"
+            />
+          </div>
+          <div className="space-y-1">
+            <Label>First mapping — target (this page)</Label>
+            <Input value={pageRoute} readOnly className="bg-muted font-mono text-xs" />
+          </div>
+        </>
+      )}
       {error && <p role="alert" className="text-destructive text-xs">{error}</p>}
       <div className="flex gap-2">
         <Button
           onClick={onSave}
-          disabled={saving || !name.trim() || !redirectType || !target.trim()}
+          disabled={saving || !name.trim() || !redirectType || !otherUrl.trim()}
           className="flex-1"
         >
           {saving ? "Creating…" : "Create map"}
