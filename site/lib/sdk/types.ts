@@ -7,3 +7,4 @@
  */
 
 export type { ClientSDK } from "@sitecore-marketplace-sdk/client";
+export type { Sites } from "@sitecore-marketplace-sdk/xmc";
