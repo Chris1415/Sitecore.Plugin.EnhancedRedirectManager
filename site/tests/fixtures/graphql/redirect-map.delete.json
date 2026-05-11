@@ -1,7 +1,9 @@
 {
   "data": {
-    "deleteItem": {
-      "successful": true
+    "data": {
+      "deleteItem": {
+        "successful": true
+      }
     }
   }
 }

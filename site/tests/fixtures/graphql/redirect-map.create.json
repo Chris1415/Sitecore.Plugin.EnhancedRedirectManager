@@ -1,8 +1,10 @@
 {
   "data": {
-    "createItem": {
-      "itemId": "{NEWITEM-A81F-4692-B05D-178D48C836DE}",
-      "name": "New Redirect Map"
+    "data": {
+      "createItem": {
+        "itemId": "{NEWITEM-A81F-4692-B05D-178D48C836DE}",
+        "name": "New Redirect Map"
+      }
     }
   }
 }

@@ -21,7 +21,14 @@ import type { ApplicationContext } from '@sitecore-marketplace-sdk/client';
  * Do NOT use `.live` in this codebase until PRD-001+ changes this policy.
  */
 export function requireContextId(appCtx: ApplicationContext): string {
-  const preview = appCtx?.resourceAccess?.[0]?.context?.preview;
+  // The SDK ApplicationContext type exposes BOTH `resourceAccess` (current) AND
+  // `resources` (deprecated). Real tenants in the wild return one OR the other
+  // depending on the gateway version — `xmc-sitecoresaa516c-chahdevexjoee24-...`
+  // returned only `resources` 2026-05-11. Check both so the wrapper works
+  // regardless of which field the gateway populates.
+  const preview =
+    appCtx?.resourceAccess?.[0]?.context?.preview ??
+    appCtx?.resources?.[0]?.context?.preview;
   if (!preview) {
     throw new Error(
       'Sitecore context unavailable — app not bound to a resource',

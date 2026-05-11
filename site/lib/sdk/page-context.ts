@@ -26,6 +26,9 @@
 
 import type { ClientSDK, PagesContext } from '@sitecore-marketplace-sdk/client';
 
+/** Re-export so call sites outside lib/sdk/* (e.g. routes) don't import the SDK package directly. */
+export type { PagesContext };
+
 /** Function to stop the subscription */
 export type UnsubscribeFn = () => void;
 

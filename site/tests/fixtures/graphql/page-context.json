@@ -1,16 +1,284 @@
 {
   "siteInfo": {
-    "name": "my-site",
-    "displayName": "My Site",
-    "startItemId": "{A1B2C3D4-E5F6-7890-ABCD-EF0123456789}",
-    "collectionId": "5aae1eeaea2440bf96f11f43da82c77b"
+    "id": "c541f0fd-54fc-4834-8967-a16af0bd68cb",
+    "hostId": "1b0fa531-78bc-40a5-9bb3-84804fb2e3d6",
+    "name": "solo-website",
+    "displayName": "solo-website",
+    "language": "en",
+    "appName": "solo-website",
+    "layoutServiceConfig": "https://xmc-48ylxal2ay8p1g52ekbbj9-eh.sitecorecloud.io/api/editing/config",
+    "renderingEngineEndpointUrl": "https://xmc-48ylxal2ay8p1g52ekbbj9-eh.sitecorecloud.io/api/editing/render",
+    "renderingEngineApplicationUrl": "https://xmc-48ylxal2ay8p1g52ekbbj9-eh.sitecorecloud.io",
+    "pointOfSale": [
+      {
+        "language": "en",
+        "name": "solo-website"
+      }
+    ],
+    "startItemId": "a1628138-496f-4464-bfc7-8c723131a9c4",
+    "supportedLanguages": [
+      "en",
+      "de-DE"
+    ],
+    "collectionId": "343b1245e77541cda8f2094b70531eb3",
+    "brandKitId": "d584f742-23f5-4b68-a193-0493f9ecd135",
+    "mediaRoot": "/sitecore/media library/Project/solo/solo-website",
+    "settings": {},
+    "properties": {
+      "isSxaSite": true,
+      "tagsFolderId": "575b763b-4e58-4a99-8243-c1a9c92b0d1d",
+      "isLocalDatasourcesEnabled": true,
+      "linkSettings": "ItselfOnly",
+      "isLinkableSite": false
+    }
   },
   "pageInfo": {
-    "url": "/foo/bar",
-    "route": "/foo/bar",
-    "path": "/sitecore/content/my-collection/my-site/Home/foo/bar",
-    "id": "{B2C3D4E5-F6A7-8901-BCDE-F01234567890}",
-    "name": "bar",
-    "language": "en"
+    "name": "Home",
+    "id": "a1628138-496f-4464-bfc7-8c723131a9c4",
+    "version": 3,
+    "versionName": "3",
+    "revision": "d81a436e-50e3-4dc6-97c9-f08e5a166a61",
+    "versions": [
+      {
+        "name": "Home",
+        "id": "a1628138-496f-4464-bfc7-8c723131a9c4",
+        "version": 1,
+        "versionName": "",
+        "revision": "bdab8c3a-0965-491e-9d55-53760236fb3a",
+        "versions": [],
+        "displayName": "Home",
+        "icon": "",
+        "path": "/sitecore/content/solo/solo-website/Home",
+        "url": "/?sc_site=solo-website",
+        "hasChildren": true,
+        "ancestors": [],
+        "language": "en",
+        "parent": {
+          "id": "c541f0fd-54fc-4834-8967-a16af0bd68cb"
+        },
+        "workflow": null,
+        "template": {
+          "name": "Page",
+          "id": "6c515802-f43d-4f45-b4e5-a5aafc5dbd76",
+          "displayName": null,
+          "baseTemplateIds": null,
+          "path": "/sitecore/templates/Project/solo/Page"
+        },
+        "fields": [],
+        "isFolder": false,
+        "isLatestPublishableVersion": false,
+        "creationDate": "2025-12-09T14:10:17Z",
+        "updatedDate": "2026-02-24T10:13:23Z",
+        "createdBy": "sitecore\\christian.hahn@sitecore.com",
+        "updatedBy": "sitecore\\christian.hahn@sitecore.com",
+        "permissions": {
+          "canWrite": true,
+          "canDelete": true,
+          "canRename": true,
+          "canCreate": true,
+          "canPublish": true,
+          "canWriteLanguage": true
+        },
+        "locking": {
+          "lockedByCurrentUser": false,
+          "isLocked": false
+        },
+        "publishing": {
+          "hasPublishableVersion": true,
+          "isPublishable": true,
+          "validFromDate": "0001-01-01T00:00:00Z",
+          "validToDate": "9999-12-31T23:59:59.9999999Z",
+          "isAvailableToPublish": true
+        },
+        "presentationDetails": "{\"devices\":[{\"id\":\"fe5d7fdf-89c0-4d99-9aa3-b5fbd009c9f3\",\"layoutId\":\"96e5f4ba-a2cf-4a4c-a4e7-64da88226362\",\"placeholders\":[],\"renderings\":[{\"id\":\"1b2e53e4-de31-4939-bc02-5300d3d2f2b4\",\"instanceId\":\"030f251c-0c5e-4335-aa6b-33e680e80bfe\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"local:/Data/Home Content Top Banner\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E98903B2-1B3E-422F-97E3-2025F97D6786}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"1\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"e3f00105-e545-457d-b7ca-a88a66d931ea\",\"placeholderKey\":\"headless-main\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{6FF94533-AB61-44B9-B0A5-9F46F133A821}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"2\"}},{\"id\":\"610847cb-fa25-4576-bcfc-c31fa767229d\",\"instanceId\":\"17272b28-36fe-422e-bf45-434692275da2\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"1db01d13-2526-4837-ab03-89180e76769e\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{39E2E531-2F86-4FDE-96D4-1FC23A58450E}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"4\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"643fb2ef-4203-43db-b03d-706ecf9c30c7\",\"placeholderKey\":\"headless-main\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"10\"}},{\"id\":\"1b2e53e4-de31-4939-bc02-5300d3d2f2b4\",\"instanceId\":\"0213ca4b-89c6-45a1-8146-b0dea3221ebb\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"local:/Data/Home Content Closing Banner\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{CE799BE2-95CC-4EDD-9C14-87AC76E211A8}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"3\"}},{\"id\":\"70840465-d181-4afc-bcb6-7c20d44f9a41\",\"instanceId\":\"d3e3a15a-f33b-4807-a86e-d12facb5b2e2\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"local:/Data/Home Top News\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{A2312F47-649C-4157-A693-B15E107FCB43}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"5\"}},{\"id\":\"1873eac5-f6a1-4bf3-98ca-bee3a8db8a59\",\"instanceId\":\"a9f4b59c-930c-4535-897a-3980f4b88958\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"f1253fa6-f597-471b-89d2-a0fbf54c2742\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"9\"}},{\"id\":\"515269b9-a578-4a42-87da-abcc38669016\",\"instanceId\":\"30901b18-bfcd-482f-873e-84f541022e45\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"e1710c44-cfc7-4ae6-b7c6-d1a00c6b67a6\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{310ADC05-3AFD-42D5-8217-14413430EEF6}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"12\"}},{\"id\":\"7e560dd8-7e1c-4843-ae1a-6571a04a2973\",\"instanceId\":\"f768f15c-83aa-4221-866f-dddc63a9f680\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"local:/Data/Event To Promote\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E6577BB6-C6C5-4E3D-B6B7-1E89243CDF89}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"13\"}},{\"id\":\"666b48fa-e692-4b86-bea3-9d02d4d42a3c\",\"instanceId\":\"25070820-528a-4f79-9505-8cc6154242f1\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"local:/Data/Highlight Text\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E0160D26-C6F3-44AE-BBAC-012E1709EB07}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"22\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"02a9c24e-f829-4c1a-a243-4e90e1a563a0\",\"placeholderKey\":\"/headless-main/container-10\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"21\"}},{\"id\":\"83bfe96a-d8bb-49fa-9d86-ece0947780df\",\"instanceId\":\"d46ff223-680c-4d4a-b8e5-30563b9e6155\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"d9666721-371a-49f6-9f60-4966e6b924f0\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"15\"}},{\"id\":\"e787abcf-5c20-4aa4-95bb-da565ad4da85\",\"instanceId\":\"d298f640-6330-4014-a956-4e89535fb233\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"2c5b484e-f394-416a-ae51-3d9a2f270751\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"14\"}},{\"id\":\"c22707ff-fe76-4943-a544-bb8215ca9a76\",\"instanceId\":\"f22d5d01-2a21-4b0e-b769-21efa8c30e79\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"ec4fa353-d17e-404b-aff8-f9ec4644e613\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"17\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"03642a95-7496-478d-990a-08cbf31e0dcf\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{A6BB4BEF-E598-4EA9-B31B-24B06F3104EA}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{ED69C40B-E45B-4171-B713-18E9C686BDED}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"18\",\"HoverBorder\":\"hover:border-orange-500\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"ed83c697-59f8-4010-ab22-4a99bf1d1e5c\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{1D626D9D-5302-4741-97FD-882DD0A5016D}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{7F2DD48B-A21A-43B1-8CD3-FD2DAE4115CF}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{5CB22812-69BA-41B8-BD85-7C33573FA674}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"19\",\"HoverBorder\":\"hover:border-blue-500\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"8219e579-6290-4f11-b9ac-2ddcab41a35c\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{8D17B4D1-6D8D-4323-853C-7DC5D5FD9FDE}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{7F2DD48B-A21A-43B1-8CD3-FD2DAE4115CF}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{B18C72CF-F827-4B91-9056-CF2303E0CB52}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"20\",\"HoverBorder\":\"hover:border-purple-500\"}}]}]}",
+        "layoutEditingKind": "FINAL",
+        "route": "/",
+        "hasPresentation": true
+      },
+      {
+        "name": "Home",
+        "id": "a1628138-496f-4464-bfc7-8c723131a9c4",
+        "version": 2,
+        "versionName": "Test",
+        "revision": "3759ce91-e083-4167-9247-3a878cc79226",
+        "versions": [],
+        "displayName": "Home",
+        "icon": "",
+        "path": "/sitecore/content/solo/solo-website/Home",
+        "url": "/?sc_site=solo-website",
+        "hasChildren": true,
+        "ancestors": [],
+        "language": "en",
+        "parent": {
+          "id": "c541f0fd-54fc-4834-8967-a16af0bd68cb"
+        },
+        "workflow": null,
+        "template": {
+          "name": "Page",
+          "id": "6c515802-f43d-4f45-b4e5-a5aafc5dbd76",
+          "displayName": null,
+          "baseTemplateIds": null,
+          "path": "/sitecore/templates/Project/solo/Page"
+        },
+        "fields": [],
+        "isFolder": false,
+        "isLatestPublishableVersion": false,
+        "creationDate": "2026-05-04T10:54:43Z",
+        "updatedDate": "2026-05-04T10:54:44Z",
+        "createdBy": "sitecore\\christian.hahn@sitecore.com",
+        "updatedBy": "sitecore\\christian.hahn@sitecore.com",
+        "permissions": {
+          "canWrite": true,
+          "canDelete": true,
+          "canRename": true,
+          "canCreate": true,
+          "canPublish": true,
+          "canWriteLanguage": true
+        },
+        "locking": {
+          "lockedByCurrentUser": false,
+          "isLocked": false
+        },
+        "publishing": {
+          "hasPublishableVersion": true,
+          "isPublishable": true,
+          "validFromDate": "2026-05-04T10:54:43Z",
+          "validToDate": "9999-12-31T23:59:59.9999999Z",
+          "isAvailableToPublish": true
+        },
+        "presentationDetails": "{\"devices\":[{\"id\":\"fe5d7fdf-89c0-4d99-9aa3-b5fbd009c9f3\",\"layoutId\":\"96e5f4ba-a2cf-4a4c-a4e7-64da88226362\",\"placeholders\":[],\"renderings\":[{\"id\":\"1b2e53e4-de31-4939-bc02-5300d3d2f2b4\",\"instanceId\":\"030f251c-0c5e-4335-aa6b-33e680e80bfe\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"local:/Data/Home Content Top Banner\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E98903B2-1B3E-422F-97E3-2025F97D6786}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"1\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"e3f00105-e545-457d-b7ca-a88a66d931ea\",\"placeholderKey\":\"headless-main\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{6FF94533-AB61-44B9-B0A5-9F46F133A821}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"2\"}},{\"id\":\"610847cb-fa25-4576-bcfc-c31fa767229d\",\"instanceId\":\"17272b28-36fe-422e-bf45-434692275da2\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"1db01d13-2526-4837-ab03-89180e76769e\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{39E2E531-2F86-4FDE-96D4-1FC23A58450E}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"4\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"643fb2ef-4203-43db-b03d-706ecf9c30c7\",\"placeholderKey\":\"headless-main\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"10\"}},{\"id\":\"1b2e53e4-de31-4939-bc02-5300d3d2f2b4\",\"instanceId\":\"0213ca4b-89c6-45a1-8146-b0dea3221ebb\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"local:/Data/Home Content Closing Banner\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{CE799BE2-95CC-4EDD-9C14-87AC76E211A8}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"3\"}},{\"id\":\"70840465-d181-4afc-bcb6-7c20d44f9a41\",\"instanceId\":\"d3e3a15a-f33b-4807-a86e-d12facb5b2e2\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"local:/Data/Home Top News\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{A2312F47-649C-4157-A693-B15E107FCB43}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"5\"}},{\"id\":\"1873eac5-f6a1-4bf3-98ca-bee3a8db8a59\",\"instanceId\":\"a9f4b59c-930c-4535-897a-3980f4b88958\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"f1253fa6-f597-471b-89d2-a0fbf54c2742\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"9\"}},{\"id\":\"515269b9-a578-4a42-87da-abcc38669016\",\"instanceId\":\"30901b18-bfcd-482f-873e-84f541022e45\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"e1710c44-cfc7-4ae6-b7c6-d1a00c6b67a6\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{310ADC05-3AFD-42D5-8217-14413430EEF6}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"12\"}},{\"id\":\"7e560dd8-7e1c-4843-ae1a-6571a04a2973\",\"instanceId\":\"f768f15c-83aa-4221-866f-dddc63a9f680\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"local:/Data/Event To Promote\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E6577BB6-C6C5-4E3D-B6B7-1E89243CDF89}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"13\"}},{\"id\":\"666b48fa-e692-4b86-bea3-9d02d4d42a3c\",\"instanceId\":\"25070820-528a-4f79-9505-8cc6154242f1\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"local:/Data/Highlight Text\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E0160D26-C6F3-44AE-BBAC-012E1709EB07}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"22\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"02a9c24e-f829-4c1a-a243-4e90e1a563a0\",\"placeholderKey\":\"/headless-main/container-10\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"21\"}},{\"id\":\"83bfe96a-d8bb-49fa-9d86-ece0947780df\",\"instanceId\":\"d46ff223-680c-4d4a-b8e5-30563b9e6155\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"d9666721-371a-49f6-9f60-4966e6b924f0\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"15\"}},{\"id\":\"e787abcf-5c20-4aa4-95bb-da565ad4da85\",\"instanceId\":\"d298f640-6330-4014-a956-4e89535fb233\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"2c5b484e-f394-416a-ae51-3d9a2f270751\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"14\"}},{\"id\":\"c22707ff-fe76-4943-a544-bb8215ca9a76\",\"instanceId\":\"f22d5d01-2a21-4b0e-b769-21efa8c30e79\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"ec4fa353-d17e-404b-aff8-f9ec4644e613\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"17\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"03642a95-7496-478d-990a-08cbf31e0dcf\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{A6BB4BEF-E598-4EA9-B31B-24B06F3104EA}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{ED69C40B-E45B-4171-B713-18E9C686BDED}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"18\",\"HoverBorder\":\"hover:border-orange-500\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"ed83c697-59f8-4010-ab22-4a99bf1d1e5c\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{1D626D9D-5302-4741-97FD-882DD0A5016D}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{7F2DD48B-A21A-43B1-8CD3-FD2DAE4115CF}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{5CB22812-69BA-41B8-BD85-7C33573FA674}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"19\",\"HoverBorder\":\"hover:border-blue-500\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"8219e579-6290-4f11-b9ac-2ddcab41a35c\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{8D17B4D1-6D8D-4323-853C-7DC5D5FD9FDE}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{7F2DD48B-A21A-43B1-8CD3-FD2DAE4115CF}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{B18C72CF-F827-4B91-9056-CF2303E0CB52}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"20\",\"HoverBorder\":\"hover:border-purple-500\"}}]}]}",
+        "layoutEditingKind": "FINAL",
+        "route": "/",
+        "hasPresentation": true
+      },
+      {
+        "name": "Home",
+        "id": "a1628138-496f-4464-bfc7-8c723131a9c4",
+        "version": 3,
+        "versionName": "3",
+        "revision": "d81a436e-50e3-4dc6-97c9-f08e5a166a61",
+        "versions": [],
+        "displayName": "Home",
+        "icon": "",
+        "path": "/sitecore/content/solo/solo-website/Home",
+        "url": "/?sc_site=solo-website",
+        "hasChildren": true,
+        "ancestors": [],
+        "language": "en",
+        "parent": {
+          "id": "c541f0fd-54fc-4834-8967-a16af0bd68cb"
+        },
+        "workflow": null,
+        "template": {
+          "name": "Page",
+          "id": "6c515802-f43d-4f45-b4e5-a5aafc5dbd76",
+          "displayName": null,
+          "baseTemplateIds": null,
+          "path": "/sitecore/templates/Project/solo/Page"
+        },
+        "fields": [],
+        "isFolder": false,
+        "isLatestPublishableVersion": true,
+        "creationDate": "2026-05-04T10:54:48Z",
+        "updatedDate": "2026-05-04T10:54:48Z",
+        "createdBy": "sitecore\\christian.hahn@sitecore.com",
+        "updatedBy": "sitecore\\christian.hahn@sitecore.com",
+        "permissions": {
+          "canWrite": true,
+          "canDelete": true,
+          "canRename": true,
+          "canCreate": true,
+          "canPublish": true,
+          "canWriteLanguage": true
+        },
+        "locking": {
+          "lockedByCurrentUser": false,
+          "isLocked": false
+        },
+        "publishing": {
+          "hasPublishableVersion": true,
+          "isPublishable": true,
+          "validFromDate": "2026-05-04T10:54:48Z",
+          "validToDate": "9999-12-31T23:59:59.9999999Z",
+          "isAvailableToPublish": true
+        },
+        "presentationDetails": "{\"devices\":[{\"id\":\"fe5d7fdf-89c0-4d99-9aa3-b5fbd009c9f3\",\"layoutId\":\"96e5f4ba-a2cf-4a4c-a4e7-64da88226362\",\"placeholders\":[],\"renderings\":[{\"id\":\"1b2e53e4-de31-4939-bc02-5300d3d2f2b4\",\"instanceId\":\"030f251c-0c5e-4335-aa6b-33e680e80bfe\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"local:/Data/Home Content Top Banner\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E98903B2-1B3E-422F-97E3-2025F97D6786}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"1\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"e3f00105-e545-457d-b7ca-a88a66d931ea\",\"placeholderKey\":\"headless-main\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{6FF94533-AB61-44B9-B0A5-9F46F133A821}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"2\"}},{\"id\":\"610847cb-fa25-4576-bcfc-c31fa767229d\",\"instanceId\":\"17272b28-36fe-422e-bf45-434692275da2\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"1db01d13-2526-4837-ab03-89180e76769e\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{39E2E531-2F86-4FDE-96D4-1FC23A58450E}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"4\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"643fb2ef-4203-43db-b03d-706ecf9c30c7\",\"placeholderKey\":\"headless-main\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"10\"}},{\"id\":\"1b2e53e4-de31-4939-bc02-5300d3d2f2b4\",\"instanceId\":\"0213ca4b-89c6-45a1-8146-b0dea3221ebb\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"local:/Data/Home Content Closing Banner\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{CE799BE2-95CC-4EDD-9C14-87AC76E211A8}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"3\"}},{\"id\":\"70840465-d181-4afc-bcb6-7c20d44f9a41\",\"instanceId\":\"d3e3a15a-f33b-4807-a86e-d12facb5b2e2\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"local:/Data/Home Top News\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{A2312F47-649C-4157-A693-B15E107FCB43}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"5\"}},{\"id\":\"1873eac5-f6a1-4bf3-98ca-bee3a8db8a59\",\"instanceId\":\"a9f4b59c-930c-4535-897a-3980f4b88958\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"f1253fa6-f597-471b-89d2-a0fbf54c2742\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"9\"}},{\"id\":\"515269b9-a578-4a42-87da-abcc38669016\",\"instanceId\":\"30901b18-bfcd-482f-873e-84f541022e45\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"e1710c44-cfc7-4ae6-b7c6-d1a00c6b67a6\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{310ADC05-3AFD-42D5-8217-14413430EEF6}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"12\"}},{\"id\":\"7e560dd8-7e1c-4843-ae1a-6571a04a2973\",\"instanceId\":\"f768f15c-83aa-4221-866f-dddc63a9f680\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"local:/Data/Event To Promote\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E6577BB6-C6C5-4E3D-B6B7-1E89243CDF89}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"13\"}},{\"id\":\"666b48fa-e692-4b86-bea3-9d02d4d42a3c\",\"instanceId\":\"25070820-528a-4f79-9505-8cc6154242f1\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"local:/Data/Highlight Text\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E0160D26-C6F3-44AE-BBAC-012E1709EB07}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"22\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"02a9c24e-f829-4c1a-a243-4e90e1a563a0\",\"placeholderKey\":\"/headless-main/container-10\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"21\"}},{\"id\":\"83bfe96a-d8bb-49fa-9d86-ece0947780df\",\"instanceId\":\"d46ff223-680c-4d4a-b8e5-30563b9e6155\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"d9666721-371a-49f6-9f60-4966e6b924f0\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"15\"}},{\"id\":\"e787abcf-5c20-4aa4-95bb-da565ad4da85\",\"instanceId\":\"d298f640-6330-4014-a956-4e89535fb233\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"2c5b484e-f394-416a-ae51-3d9a2f270751\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"14\"}},{\"id\":\"c22707ff-fe76-4943-a544-bb8215ca9a76\",\"instanceId\":\"f22d5d01-2a21-4b0e-b769-21efa8c30e79\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"ec4fa353-d17e-404b-aff8-f9ec4644e613\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"17\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"03642a95-7496-478d-990a-08cbf31e0dcf\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{A6BB4BEF-E598-4EA9-B31B-24B06F3104EA}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{ED69C40B-E45B-4171-B713-18E9C686BDED}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"18\",\"HoverBorder\":\"hover:border-orange-500\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"ed83c697-59f8-4010-ab22-4a99bf1d1e5c\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{1D626D9D-5302-4741-97FD-882DD0A5016D}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{7F2DD48B-A21A-43B1-8CD3-FD2DAE4115CF}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{5CB22812-69BA-41B8-BD85-7C33573FA674}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"19\",\"HoverBorder\":\"hover:border-blue-500\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"8219e579-6290-4f11-b9ac-2ddcab41a35c\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{8D17B4D1-6D8D-4323-853C-7DC5D5FD9FDE}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{7F2DD48B-A21A-43B1-8CD3-FD2DAE4115CF}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{B18C72CF-F827-4B91-9056-CF2303E0CB52}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"20\",\"HoverBorder\":\"hover:border-purple-500\"}}]}]}",
+        "layoutEditingKind": "FINAL",
+        "route": "/",
+        "hasPresentation": true
+      }
+    ],
+    "displayName": "Home",
+    "icon": "",
+    "path": "/sitecore/content/solo/solo-website/Home",
+    "url": "/?sc_site=solo-website",
+    "hasChildren": true,
+    "ancestors": [],
+    "language": "en",
+    "parent": {
+      "id": "c541f0fd-54fc-4834-8967-a16af0bd68cb"
+    },
+    "workflow": null,
+    "template": {
+      "name": "Page",
+      "id": "6c515802-f43d-4f45-b4e5-a5aafc5dbd76",
+      "displayName": null,
+      "baseTemplateIds": [
+        "47151711-26ca-434e-8132-d3e0b7d26683",
+        "371d5fbb-5498-4d94-ab2b-e3b70eebe78c",
+        "4414a1f9-826a-4647-8df4-ed6a95e64c43",
+        "6650fb34-7ea1-4245-a919-5cc0f002a6d7",
+        "f39a594a-7bc9-4db0-baa1-88543409c1f9",
+        "3f8a6a5d-7b1a-4566-8cd4-0a50f3030bd8",
+        "1930bbeb-7805-471a-a3be-4858ac7cf696",
+        "646f4b34-708c-41c2-9f4b-2661849777f3",
+        "f5bc7ae4-f62d-47cd-9afb-2c9f85d8313b",
+        "18420296-d8fc-4d93-a79e-2a2b0367a92c",
+        "4d30906d-0b49-4fa7-969d-bf90157357ea",
+        "6ef07334-7fba-4845-bf0a-cd5b2000c75a",
+        "38a2f441-db17-4039-90e2-6a32f7a81706",
+        "823ecf5f-ae72-40b5-bc87-cb425fe7e5f6",
+        "af530c7b-8b87-458b-80ce-239d1e1b9e60",
+        "6495cf23-de9c-48b7-9d3c-05e2418b3cae",
+        "ab811af4-393c-4a46-acd7-81d30917e7f4",
+        "1597272c-c823-4aac-86f8-ca9cc4d573b5",
+        "0aa6d3f8-c9d0-401f-83aa-a41433c24767",
+        "93f3a8fa-9e5a-4848-a5ad-42aad11a4871",
+        "2491819e-0c61-4f5a-903c-e10fcd9d302a",
+        "06f366e6-a7e6-470b-9ec9-cd29a4f6c8e8",
+        "4070ef7f-793d-42ae-aa66-e5820c608343"
+      ],
+      "path": "/sitecore/templates/Project/solo/Page"
+    },
+    "fields": [],
+    "isFolder": false,
+    "isLatestPublishableVersion": true,
+    "creationDate": "2026-05-04T10:54:48Z",
+    "updatedDate": "2026-05-04T10:54:48Z",
+    "createdBy": "sitecore\\christian.hahn@sitecore.com",
+    "updatedBy": "sitecore\\christian.hahn@sitecore.com",
+    "permissions": {
+      "canWrite": true,
+      "canDelete": true,
+      "canRename": true,
+      "canCreate": true,
+      "canPublish": true,
+      "canWriteLanguage": true
+    },
+    "locking": {
+      "lockedByCurrentUser": false,
+      "isLocked": false
+    },
+    "publishing": {
+      "hasPublishableVersion": true,
+      "isPublishable": true,
+      "validFromDate": "2026-05-04T10:54:48Z",
+      "validToDate": "9999-12-31T23:59:59.9999999Z",
+      "isAvailableToPublish": true
+    },
+    "presentationDetails": "{\"devices\":[{\"id\":\"fe5d7fdf-89c0-4d99-9aa3-b5fbd009c9f3\",\"layoutId\":\"96e5f4ba-a2cf-4a4c-a4e7-64da88226362\",\"placeholders\":[],\"renderings\":[{\"id\":\"1b2e53e4-de31-4939-bc02-5300d3d2f2b4\",\"instanceId\":\"030f251c-0c5e-4335-aa6b-33e680e80bfe\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"local:/Data/Home Content Top Banner\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E98903B2-1B3E-422F-97E3-2025F97D6786}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"1\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"e3f00105-e545-457d-b7ca-a88a66d931ea\",\"placeholderKey\":\"headless-main\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{6FF94533-AB61-44B9-B0A5-9F46F133A821}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"2\"}},{\"id\":\"610847cb-fa25-4576-bcfc-c31fa767229d\",\"instanceId\":\"17272b28-36fe-422e-bf45-434692275da2\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"1db01d13-2526-4837-ab03-89180e76769e\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{39E2E531-2F86-4FDE-96D4-1FC23A58450E}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"4\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"643fb2ef-4203-43db-b03d-706ecf9c30c7\",\"placeholderKey\":\"headless-main\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"10\"}},{\"id\":\"1b2e53e4-de31-4939-bc02-5300d3d2f2b4\",\"instanceId\":\"0213ca4b-89c6-45a1-8146-b0dea3221ebb\",\"placeholderKey\":\"headless-main\",\"dataSource\":\"local:/Data/Home Content Closing Banner\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{CE799BE2-95CC-4EDD-9C14-87AC76E211A8}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"3\"}},{\"id\":\"70840465-d181-4afc-bcb6-7c20d44f9a41\",\"instanceId\":\"d3e3a15a-f33b-4807-a86e-d12facb5b2e2\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"local:/Data/Home Top News\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{A2312F47-649C-4157-A693-B15E107FCB43}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"5\"}},{\"id\":\"1873eac5-f6a1-4bf3-98ca-bee3a8db8a59\",\"instanceId\":\"a9f4b59c-930c-4535-897a-3980f4b88958\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"f1253fa6-f597-471b-89d2-a0fbf54c2742\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"9\"}},{\"id\":\"515269b9-a578-4a42-87da-abcc38669016\",\"instanceId\":\"30901b18-bfcd-482f-873e-84f541022e45\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"e1710c44-cfc7-4ae6-b7c6-d1a00c6b67a6\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{310ADC05-3AFD-42D5-8217-14413430EEF6}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"12\"}},{\"id\":\"7e560dd8-7e1c-4843-ae1a-6571a04a2973\",\"instanceId\":\"f768f15c-83aa-4221-866f-dddc63a9f680\",\"placeholderKey\":\"/headless-main/container-2\",\"dataSource\":\"local:/Data/Event To Promote\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E6577BB6-C6C5-4E3D-B6B7-1E89243CDF89}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"13\"}},{\"id\":\"666b48fa-e692-4b86-bea3-9d02d4d42a3c\",\"instanceId\":\"25070820-528a-4f79-9505-8cc6154242f1\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"local:/Data/Highlight Text\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"{E0160D26-C6F3-44AE-BBAC-012E1709EB07}\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"22\"}},{\"id\":\"d122365f-25ee-4de4-87ca-f3c5dce5fdeb\",\"instanceId\":\"02a9c24e-f829-4c1a-a243-4e90e1a563a0\",\"placeholderKey\":\"/headless-main/container-10\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"BackgroundImage\":\"\",\"Styles\":\"|{A594CB07-6E9A-4DEE-A20E-38C756B31DE1}\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"21\"}},{\"id\":\"83bfe96a-d8bb-49fa-9d86-ece0947780df\",\"instanceId\":\"d46ff223-680c-4d4a-b8e5-30563b9e6155\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"d9666721-371a-49f6-9f60-4966e6b924f0\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"15\"}},{\"id\":\"e787abcf-5c20-4aa4-95bb-da565ad4da85\",\"instanceId\":\"d298f640-6330-4014-a956-4e89535fb233\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"2c5b484e-f394-416a-ae51-3d9a2f270751\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"14\"}},{\"id\":\"c22707ff-fe76-4943-a544-bb8215ca9a76\",\"instanceId\":\"f22d5d01-2a21-4b0e-b769-21efa8c30e79\",\"placeholderKey\":\"/headless-main/container-10\",\"dataSource\":\"ec4fa353-d17e-404b-aff8-f9ec4644e613\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"17\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"03642a95-7496-478d-990a-08cbf31e0dcf\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{A6BB4BEF-E598-4EA9-B31B-24B06F3104EA}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{ED69C40B-E45B-4171-B713-18E9C686BDED}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"18\",\"HoverBorder\":\"hover:border-orange-500\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"ed83c697-59f8-4010-ab22-4a99bf1d1e5c\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{1D626D9D-5302-4741-97FD-882DD0A5016D}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{7F2DD48B-A21A-43B1-8CD3-FD2DAE4115CF}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{5CB22812-69BA-41B8-BD85-7C33573FA674}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"19\",\"HoverBorder\":\"hover:border-blue-500\"}},{\"id\":\"badf3139-49d9-4238-b226-09d4cc0923c8\",\"instanceId\":\"8219e579-6290-4f11-b9ac-2ddcab41a35c\",\"placeholderKey\":\"/headless-main/container-10/container-21\",\"dataSource\":\"{8D17B4D1-6D8D-4323-853C-7DC5D5FD9FDE}\",\"parameters\":{\"GridParameters\":\"{F61E01E9-711A-4C99-AE30-4E28463E1DF7}|{7F2DD48B-A21A-43B1-8CD3-FD2DAE4115CF}|{CC7B2D28-7CA7-434F-8894-BC24885E2F94}\",\"Color\":\"{B18C72CF-F827-4B91-9056-CF2303E0CB52}\",\"FieldNames\":\"\",\"Styles\":\"\",\"RenderingIdentifier\":\"\",\"CSSStyles\":\"\",\"DynamicPlaceholderId\":\"20\",\"HoverBorder\":\"hover:border-purple-500\"}}]}]}",
+    "layoutEditingKind": "FINAL",
+    "route": "/",
+    "hasPresentation": true
   }
 }

@@ -126,14 +126,22 @@ export async function createRedirectMap(
 
   devLog('createRedirectMap REQUEST', { sitecoreContextId, variables });
 
+  // Envelope contract (verified against real tenant 2026-05-11):
+  // - `body` lives INSIDE `params`, not at the top level — Marketplace SDK / hey-api wrapper.
+  // - Response is DOUBLE-unwrapped: `result.data.data.createItem` is the GraphQL body.
+  // - No `as never` cast needed; the type accepts this shape natively.
+  // See: memory `reference_marketplace_sdk_envelope_authoring_graphql.md`.
   const result = await client.mutate('xmc.authoring.graphql', {
-    params: { query: { sitecoreContextId } },
-    body: { query: CREATE_REDIRECT_MAP, variables },
-  } as never);
+    params: {
+      query: { sitecoreContextId },
+      body: { query: CREATE_REDIRECT_MAP, variables },
+    },
+  });
 
   devLog('createRedirectMap RESPONSE', result);
 
-  const data = (result as { data?: { createItem?: { itemId?: string; name?: string } } })?.data;
+  // DOUBLE `.data.data` unwrap — outer is SDK wrapper, inner is GraphQL body.
+  const data = (result.data?.data as { createItem?: { itemId?: string; name?: string } } | undefined);
   return {
     ok: Boolean(data?.createItem?.itemId),
     itemId: data?.createItem?.itemId,
@@ -159,14 +167,17 @@ export async function updateRedirectMap(
 
   devLog('updateRedirectMap REQUEST', { sitecoreContextId, variables });
 
+  // Envelope: body inside params + double-unwrap (see createRedirectMap above).
   const result = await client.mutate('xmc.authoring.graphql', {
-    params: { query: { sitecoreContextId } },
-    body: { query: UPDATE_REDIRECT_MAP, variables },
-  } as never);
+    params: {
+      query: { sitecoreContextId },
+      body: { query: UPDATE_REDIRECT_MAP, variables },
+    },
+  });
 
   devLog('updateRedirectMap RESPONSE', result);
 
-  const data = (result as { data?: { updateItem?: { itemId?: string } } })?.data;
+  const data = (result.data?.data as { updateItem?: { itemId?: string } } | undefined);
   return {
     ok: Boolean(data?.updateItem?.itemId),
     itemId: data?.updateItem?.itemId,
@@ -185,14 +196,17 @@ export async function deleteRedirectMap(
 
   devLog('deleteRedirectMap REQUEST', { sitecoreContextId, variables });
 
+  // Envelope: body inside params + double-unwrap (see createRedirectMap above).
   const result = await client.mutate('xmc.authoring.graphql', {
-    params: { query: { sitecoreContextId } },
-    body: { query: DELETE_REDIRECT_MAP, variables },
-  } as never);
+    params: {
+      query: { sitecoreContextId },
+      body: { query: DELETE_REDIRECT_MAP, variables },
+    },
+  });
 
   devLog('deleteRedirectMap RESPONSE', result);
 
-  const data = (result as { data?: { deleteItem?: { successful?: boolean } } })?.data;
+  const data = (result.data?.data as { deleteItem?: { successful?: boolean } } | undefined);
   return {
     ok: Boolean(data?.deleteItem?.successful),
   };

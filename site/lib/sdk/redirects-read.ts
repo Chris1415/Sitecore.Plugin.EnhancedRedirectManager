@@ -21,29 +21,37 @@
  * Depends on: T009 (requireContextId), T016 (domain types — RedirectMapItem, Mapping)
  */
 
-import type { ClientSDK } from '@sitecore-marketplace-sdk/client';
-import type { RedirectMapItem, Mapping, RedirectType } from '@/lib/domain/types';
+import type { ClientSDK } from "@sitecore-marketplace-sdk/client"
+import type { RedirectMapItem, Mapping, RedirectType } from "@/lib/domain/types"
 
-/** Wire shape for a single field in the Authoring GraphQL response */
-interface WireField {
-  name: string;
-  jsonValue?: { value?: string };
+/** Wire shape for an individual aliased field accessor on a Redirect Map item.
+ *  Authoring's `Item.field(name: String!): ItemField` returns a single field.
+ *  We alias each field by name in the GraphQL query so the response is flat. */
+interface WireFieldValue {
+  value?: string
 }
 
-/** Wire shape for a single item result from the children query */
+/** Wire shape for a single Redirect Map item using aliased field(name:) accessors.
+ *  Each known field is its own property on the item — no inner connection / nodes list. */
 interface WireItem {
-  itemId?: string;
-  name?: string;
-  fields?: WireField[];
+  itemId?: string
+  name?: string
+  IncludeVirtualFolder?: WireFieldValue
+  PreserveQueryString?: WireFieldValue
+  RedirectType?: WireFieldValue
+  PreserveLanguage?: WireFieldValue
+  UrlMapping?: WireFieldValue
+  __Updated?: WireFieldValue
 }
 
-/** Wire shape for the full Authoring GraphQL children response */
+/** Wire shape for the full Authoring GraphQL children response.
+ *  ItemConnection — Relay-style with `nodes` (flattened) | `edges` | `pageInfo`. We use `nodes`. */
 interface WireChildrenResponse {
   item?: {
     children?: {
-      results?: WireItem[];
-    };
-  };
+      nodes?: WireItem[]
+    }
+  }
 }
 
 /**
@@ -54,90 +62,128 @@ interface WireChildrenResponse {
  * NOTE: Tranche 3 T017 implements the full round-trip parser in lib/url-mapping/parse.ts.
  * This inline version handles the read path only.
  */
-function parseUrlMapping(raw: string): { mappings: Mapping[]; warnings: string[] } {
-  if (!raw) return { mappings: [], warnings: [] };
-  const segments = raw.split('&');
-  const mappings: Mapping[] = [];
-  const warnings: string[] = [];
+function parseUrlMapping(raw: string): {
+  mappings: Mapping[]
+  warnings: string[]
+} {
+  if (!raw) return { mappings: [], warnings: [] }
+  const segments = raw.split("&")
+  const mappings: Mapping[] = []
+  const warnings: string[] = []
 
   for (const segment of segments) {
     // Find the FIRST = (source strings may contain = which must be percent-encoded per ADR-0008)
-    const eqIdx = segment.indexOf('=');
+    const eqIdx = segment.indexOf("=")
     if (eqIdx === -1) {
-      warnings.push(`Malformed UrlMapping segment (no '=' separator): "${segment}"`);
-      continue;
+      warnings.push(
+        `Malformed UrlMapping segment (no '=' separator): "${segment}"`
+      )
+      continue
     }
-    const source = decodeURIComponent(segment.slice(0, eqIdx));
-    const target = decodeURIComponent(segment.slice(eqIdx + 1));
-    if (!source && !target) continue;
-    mappings.push({ source, target });
+    const source = decodeURIComponent(segment.slice(0, eqIdx))
+    const target = decodeURIComponent(segment.slice(eqIdx + 1))
+    if (!source && !target) continue
+    mappings.push({ source, target })
   }
-  return { mappings, warnings };
+  return { mappings, warnings }
 }
 
 /**
- * Parse the boolean flag from a field jsonValue.
- * Authoring GraphQL returns boolean flags as "0"/"1" strings (assumed — TBV at T065).
+ * Parse the boolean flag from an Authoring ItemField.value.
+ * Authoring returns ItemField.value: String! — booleans serialize as "0"/"1" or "true"/"false"
+ * (OQ-C confirmed 2026-05-11: real tenant returns "1" for true, "" empty string for false —
+ * neither "0" nor "false"). The check below accepts all three forms on read.
  */
-function parseBoolField(field: WireField | undefined): boolean {
-  const val = field?.jsonValue?.value;
-  if (val === '1' || val === 'true') return true;
-  return false;
+function parseBoolField(field: WireFieldValue | undefined): boolean {
+  const val = field?.value
+  if (val === "1" || val === "true") return true
+  return false
 }
 
 /**
  * Decode a wire item into the domain RedirectMapItem.
  * Returns null and logs a warning if the item is missing required fields.
+ *
+ * The query aliases each field as a top-level property on the item via
+ * Authoring's `field(name:)` accessor — so the wire shape is flat, not
+ * the deep `fields { nodes { name value } }` connection we tried first.
+ * Lighter query = fewer fields fetched, faster response, simpler decode.
  */
 function decodeWireItem(wire: WireItem): RedirectMapItem | null {
   if (!wire.itemId || !wire.name) {
-    console.warn('[redirect-manager] Skipping redirect map item with missing id or name', wire);
-    return null;
+    console.warn(
+      "[redirect-manager] Skipping redirect map item with missing id or name",
+      wire
+    )
+    return null
   }
 
-  const fieldMap = new Map<string, WireField>();
-  for (const f of wire.fields ?? []) {
-    fieldMap.set(f.name, f);
-  }
-
-  const rawUrlMapping = fieldMap.get('UrlMapping')?.jsonValue?.value ?? '';
-  const { mappings, warnings } = parseUrlMapping(rawUrlMapping);
+  const rawUrlMapping = wire.UrlMapping?.value ?? ""
+  const { mappings, warnings } = parseUrlMapping(rawUrlMapping)
 
   if (warnings.length > 0) {
     for (const w of warnings) {
-      console.warn(`[redirect-manager] UrlMapping parse warning on item "${wire.name}": ${w}`);
+      console.warn(
+        `[redirect-manager] UrlMapping parse warning on item "${wire.name}": ${w}`
+      )
     }
   }
 
-  const redirectType = (fieldMap.get('RedirectType')?.jsonValue?.value ?? 'ServerTransfer') as RedirectType;
-  const updatedAt = fieldMap.get('__Updated')?.jsonValue?.value ?? '';
+  const redirectType = (wire.RedirectType?.value ??
+    "ServerTransfer") as RedirectType
+  const updatedAt = wire.__Updated?.value ?? ""
 
   return {
     id: wire.itemId,
     name: wire.name,
     redirectType,
-    preserveQueryString: parseBoolField(fieldMap.get('PreserveQueryString')),
-    preserveLanguage: parseBoolField(fieldMap.get('PreserveLanguage')),
-    includeVirtualFolder: parseBoolField(fieldMap.get('IncludeVirtualFolder')),
+    preserveQueryString: parseBoolField(wire.PreserveQueryString),
+    preserveLanguage: parseBoolField(wire.PreserveLanguage),
+    includeVirtualFolder: parseBoolField(wire.IncludeVirtualFolder),
     updatedAt,
     mappings,
-  };
+  }
 }
 
-/** GraphQL query to list Redirect Map children under a site's Settings/Redirects path */
-const GET_REDIRECTS_FOR_SITE = `
+/**
+ * GraphQL query to list all children under a site's Settings/Redirects path.
+ *
+ * Two design choices verified against real tenant 2026-05-11:
+ *
+ * 1. `item(where: { path, language })` — Authoring's Query.item only accepts
+ *    `where: ItemQueryInput` (not flat path/language args — that's the Edge schema).
+ *
+ * 2. **Aliased `field(name:)` accessors** for each known Redirect Map field instead
+ *    of the heavy `fields(excludeStandardFields, ownFields, withLanguageFallback)
+ *    { nodes { name value } }` connection. The connection variant pulls every field
+ *    on the item (30+ for SXA pages, including __Sortorder / __Semantics / __Created /
+ *    __Source / __Standard values / etc.); the aliased variant pulls only the 5 fields
+ *    we use + __Updated. Lighter request, smaller response, simpler decoder.
+ *
+ * No template-ID filter — returns ALL children. Real-tenant `/Settings/Redirects/` is
+ * always a Redirect Maps folder so a filter is unnecessary. Items missing any of the
+ * named fields just return `null` value, which decodeWireItem handles.
+ */
+export const GET_REDIRECTS_FOR_SITE = `
   query GetRedirectsForSite($sitePath: String!) {
-    item(path: $sitePath, language: "en") {
-      children(includeTemplateIDs: ["{REDIRECT_MAP_TEMPLATE_GUID}"]) {
-        results {
+    item(where: { path: $sitePath, language: "en" }) {
+      name
+      itemId
+      children {
+        nodes {
           itemId
           name
-          fields(ownFields: false) { name jsonValue }
+          IncludeVirtualFolder: field(name: "IncludeVirtualFolder") { value }
+          PreserveQueryString:  field(name: "PreserveQueryString")  { value }
+          RedirectType:         field(name: "RedirectType")         { value }
+          PreserveLanguage:     field(name: "PreserveLanguage")     { value }
+          UrlMapping:           field(name: "UrlMapping")           { value }
+          __Updated:            field(name: "__Updated")            { value }
         }
       }
     }
   }
-`;
+`
 
 /**
  * Lists Redirect Map items under the given site's Settings/Redirects path.
@@ -149,24 +195,139 @@ const GET_REDIRECTS_FOR_SITE = `
 export async function listRedirectMaps(
   client: ClientSDK,
   sitecoreContextId: string,
-  sitePath: string,
+  sitePath: string
 ): Promise<RedirectMapItem[]> {
-  const result = await client.mutate('xmc.authoring.graphql', {
-    params: { query: { sitecoreContextId } },
-    body: {
-      query: GET_REDIRECTS_FOR_SITE,
-      variables: { sitePath },
+  const result = await client.mutate("xmc.authoring.graphql", {
+    params: {
+      query: { sitecoreContextId },
+      body: {
+        query: GET_REDIRECTS_FOR_SITE,
+        variables: { sitePath },
+      },
     },
-  } as never);
+  })
+
+  console.error("HERE")
 
   // SINGLE .data unwrap (mutate — see sitecore:marketplace-sdk-client § 8b)
-  const root = (result as { data?: WireChildrenResponse })?.data;
-  const items = root?.item?.children?.results ?? [];
+  const root = result.data?.data as WireChildrenResponse
+  const items = root?.item?.children?.nodes ?? []
 
-  const decoded: RedirectMapItem[] = [];
+  const decoded: RedirectMapItem[] = []
   for (const wire of items) {
-    const item = decodeWireItem(wire as WireItem);
-    if (item) decoded.push(item);
+    const item = decodeWireItem(wire as WireItem)
+    if (item) decoded.push(item)
   }
-  return decoded;
+  return decoded
+}
+
+/**
+ * Raw-wire variant — returns the full Authoring GraphQL response WITHOUT decoding.
+ *
+ * Tranche 2 capture helper uses this so the operator can paste the verbatim wire
+ * envelope into tests/fixtures/graphql/redirect-map-list.json. Production code
+ * should use `listRedirectMaps` (decoded) — this raw export exists only for the
+ * capture-helper UI on /full-page. The Tranche 4+ rewrite removes the call site.
+ */
+export async function fetchRedirectMapsRaw(
+  client: ClientSDK,
+  sitecoreContextId: string,
+  sitePath: string
+): Promise<unknown> {
+  if (process.env.NODE_ENV !== "production") {
+    console.log("[redirect-manager:dev:capture] fetchRedirectMapsRaw REQUEST", {
+      sitecoreContextId,
+      sitePath,
+      query: GET_REDIRECTS_FOR_SITE.trim(),
+      variables: { sitePath },
+    })
+  }
+  try {
+    const result = await client.mutate("xmc.authoring.graphql", {
+      params: {
+        query: { sitecoreContextId },
+        body: {
+          query: GET_REDIRECTS_FOR_SITE,
+          variables: { sitePath },
+        },
+      },
+    })
+
+    // The SDK returns an envelope { data?, error?, request?, response? }.
+    // The Fetch Response body is already consumed by the SDK before return —
+    // cloning it errors. Instead, surface the SDK's own parsed `error` plus
+    // the response status / headers / request URL so the GraphQL error is
+    // visible without trying to re-read the stream.
+    if (process.env.NODE_ENV !== "production") {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const r = result as any
+      const httpResponse: Response | undefined = r?.response
+      const httpRequest: Request | undefined = r?.request
+      // Collect headers into a plain object (Headers are not enumerable via Object.entries).
+      const responseHeaders: Record<string, string> = {}
+      if (
+        httpResponse?.headers &&
+        typeof httpResponse.headers.forEach === "function"
+      ) {
+        httpResponse.headers.forEach((value, key) => {
+          responseHeaders[key] = value
+        })
+      }
+      console.log("[redirect-manager:dev:capture] fetchRedirectMapsRaw HTTP", {
+        status: httpResponse?.status,
+        statusText: httpResponse?.statusText,
+        requestUrl: httpRequest?.url,
+        requestMethod: httpRequest?.method,
+        responseHeaders,
+        // The SDK puts the parsed error body here when !response.ok
+        sdkError: r?.error,
+        // The SDK puts the parsed data body here when response.ok
+        sdkData: r?.data,
+        // Inspect ALL enumerable keys on the envelope to spot anything we missed
+        envelopeKeys: Object.keys(r ?? {}),
+        // Try various conventional places hey-api / openapi-fetch use for error info
+        alternateErrorFields: {
+          "error.message": r?.error?.message,
+          "error.errors": r?.error?.errors,
+          "error.body": r?.error?.body,
+          message: r?.message,
+        },
+      })
+    }
+
+    if (process.env.NODE_ENV !== "production") {
+      console.log(
+        "[redirect-manager:dev:capture] fetchRedirectMapsRaw RESPONSE OK",
+        result
+      )
+    }
+    return result
+  } catch (err) {
+    if (process.env.NODE_ENV !== "production") {
+      // The SDK wraps fetch errors in an envelope where `error`/`request`/`response`
+      // are non-enumerable, so JSON.stringify renders them as `{}`. Reach through
+      // explicitly so the GraphQL error body actually appears in the console.
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const e = err as any
+      console.error(
+        "[redirect-manager:dev:capture] fetchRedirectMapsRaw FAILED",
+        {
+          message: e?.message ?? String(err),
+          responseStatus: e?.response?.status,
+          responseStatusText: e?.response?.statusText,
+          responseBody: e?.response?.data ?? e?.response?.body ?? e?.body,
+          errorCode: e?.code,
+          rawError: e,
+        }
+      )
+    }
+    // Re-shape so the helper UI's CaptureDiagnostics can render the GraphQL errors.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const e = err as any
+    const errBody = e?.response?.data ?? e?.response?.body
+    if (errBody && typeof errBody === "object") {
+      return errBody
+    }
+    throw err
+  }
 }
