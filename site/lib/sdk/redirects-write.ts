@@ -26,7 +26,8 @@
  */
 
 import type { ClientSDK } from '@sitecore-marketplace-sdk/client';
-import type { RedirectMapAttributes, Mapping } from '@/lib/domain/types';
+import type { RedirectMapAttributes } from '@/lib/domain/types';
+import { serializeMappings } from '@/lib/url-mapping/serialize';
 
 /** Input for creating a new Redirect Map item */
 export interface CreateRedirectMapInput extends RedirectMapAttributes {
@@ -53,18 +54,8 @@ export interface WriteResult {
   itemId?: string;
 }
 
-/**
- * Inline UrlMapping serializer — URL-encodes source=target pairs joined by &.
- * ADR-0008: uppercase hex encoding.
- * NOTE: Tranche 3 T017 implements the full round-trip serializer in lib/url-mapping/serialize.ts.
- * This implementation will be replaced by the canonical one in Tranche 3.
- */
-function serializeMappings(mappings: Mapping[]): string {
-  return mappings
-    .map((m) => `${encodeURIComponent(m.source)}=${encodeURIComponent(m.target)}`)
-    .join('&')
-    .replace(/%[0-9a-f]{2}/g, (match) => match.toUpperCase());
-}
+// serializeMappings is now the canonical lib/url-mapping/serialize.ts implementation (T018, Tranche 3).
+// Imported above — the inline copy has been removed.
 
 /**
  * Build the fields array for create/update mutations.

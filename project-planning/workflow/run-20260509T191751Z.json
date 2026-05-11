@@ -164,6 +164,15 @@
       "notes": "Tranche 2 — T008-T015 (SDK plumbing). All 9 SDK call wrappers built under lib/sdk/: sites.ts, redirects-read.ts, redirects-write.ts (3 mutations), page-context.ts, application-context.ts, canvas-reload.ts, require-context-id.ts. T008 Provider verified. T016 lib/domain/types.ts created early as a stub (Tranche 3 completes) — needed by T011/T012 for RedirectMapItem import. 9 assumed-shape fixtures landed in tests/fixtures/graphql/. 34 new RED tests (49 total now passing). SDK boundary lock structural test active and PASSING — caught and correctly excluded the scaffold's components/examples/ tree. Divergence-detection [redirect-manager:dev:capture] logs in T012/T013/T014, all gated on NODE_ENV != production. Lint 0 errors / 2 baseline warnings. Build PASS. Surprises: (a) pages.context subscribe pattern uses Path A (subscribe-via-query); the onSuccess callback receives PagesContext directly with no .data envelope — verified against sdk-types.d.ts; (b) Authoring.GraphqlData type requires url: '/graphql' literal, wrapper uses 'as never' cast on the options object (matches sibling-app pattern); (c) scaffold-example boundary hit — components/examples/built-in-auth/with-xmc/list-languages.tsx imports xmc directly; SDK boundary scan now excludes examples/ since scaffold examples are not production code. CAPTURE GATE NEXT: operator boots in real Cloud Portal Test App, watches console for [redirect-manager:dev:capture] logs covering pageInfo.url/route/path, sites/collections shapes, application-context tenantId/contextId; any divergence → fixture replacement + RED-test re-run."
     },
     {
+      "stage": "implementation_in_progress.tranche-3",
+      "agent": "08-developer",
+      "entered_at": "2026-05-11T15:00:00Z",
+      "exited_at": "2026-05-11T15:15:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 3 — T016-T021 domain layer. 8 new modules under lib/{domain,url-mapping,import-export,match,redirects}/. parseSitecoreCompactDate handles yyyyMMddTHHmmssZ (captured __Updated format). UrlMapping parse/serialize per ADR-0008 with fast-check property tests (3 invariants × 100 iterations = 300 property-test runs + 7 concrete cases + the captured fixture %2ftest=%2FnewTest&%2fhello=%2Fworld). Zod v4 schema for redirect-manager/v1 (T019). GUID-keyed diff classifier per ADR-0009. Exact-string Context Panel matcher per ADR-0005. RedirectType enum with introspection-fallback shape (T021 — 301/302/307 names still UNVERIFIED, Tranche 6). redirects-read.ts and redirects-write.ts updated to import canonical parse/serialize (inline copies removed). Lint 0/2 baseline; build PASS; tests 144 passing + 4 it.todo (was 50+4 — added 94 new tests). Surprises: Zod v4 errorMap renamed to error+check; fast-check hex-case test relaxed to letter-only check. No real-tenant interaction required for Tranche 3 — domain layer is pure modules."
+    },
+    {
       "stage": "implementation_in_progress.tranche-2.capture-and-fixup",
       "agent": "08-developer",
       "entered_at": "2026-05-11T09:00:00Z",

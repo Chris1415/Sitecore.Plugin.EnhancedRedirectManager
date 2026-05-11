@@ -22,7 +22,8 @@
  */
 
 import type { ClientSDK } from "@sitecore-marketplace-sdk/client"
-import type { RedirectMapItem, Mapping, RedirectType } from "@/lib/domain/types"
+import type { RedirectMapItem, RedirectType } from "@/lib/domain/types"
+import { parseUrlMapping } from "@/lib/url-mapping/parse"
 
 /** Wire shape for an individual aliased field accessor on a Redirect Map item.
  *  Authoring's `Item.field(name: String!): ItemField` returns a single field.
@@ -54,39 +55,8 @@ interface WireChildrenResponse {
   }
 }
 
-/**
- * Parse a raw UrlMapping field value into Mapping pairs.
- * ADR-0008: URL-encoded source=target pairs joined by &.
- * Malformed segments (no = separator) produce a warning and are skipped.
- *
- * NOTE: Tranche 3 T017 implements the full round-trip parser in lib/url-mapping/parse.ts.
- * This inline version handles the read path only.
- */
-function parseUrlMapping(raw: string): {
-  mappings: Mapping[]
-  warnings: string[]
-} {
-  if (!raw) return { mappings: [], warnings: [] }
-  const segments = raw.split("&")
-  const mappings: Mapping[] = []
-  const warnings: string[] = []
-
-  for (const segment of segments) {
-    // Find the FIRST = (source strings may contain = which must be percent-encoded per ADR-0008)
-    const eqIdx = segment.indexOf("=")
-    if (eqIdx === -1) {
-      warnings.push(
-        `Malformed UrlMapping segment (no '=' separator): "${segment}"`
-      )
-      continue
-    }
-    const source = decodeURIComponent(segment.slice(0, eqIdx))
-    const target = decodeURIComponent(segment.slice(eqIdx + 1))
-    if (!source && !target) continue
-    mappings.push({ source, target })
-  }
-  return { mappings, warnings }
-}
+// parseUrlMapping is now the canonical lib/url-mapping/parse.ts implementation (T017, Tranche 3).
+// Imported above — the inline copy has been removed.
 
 /**
  * Parse the boolean flag from an Authoring ItemField.value.
