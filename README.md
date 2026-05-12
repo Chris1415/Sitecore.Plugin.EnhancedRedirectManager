@@ -3,12 +3,13 @@
 A Sitecore Marketplace client-side app that gives content authors, site managers, and Sitecore implementers a purpose-built UI for redirect operations across an XM Cloud tenant. It replaces the awkward Content-Editor workflow for managing items under `/sitecore/content/{COLLECTION}/{SITE}/Settings/Redirects/*` and surfaces redirects where editors already work — inside the Pages editor, on the site dashboard, and on a dedicated full-page workshop.
 
 <p align="center">
-  <img src="docs/screenshots/full-page.png" alt="Redirect Manager — Full Page surface" width="640" />
+  <img src="docs/screenshots/full-page.png" alt="Redirect Manager — Full Page surface" width="720" />
 </p>
 <p align="center">
-  <img src="docs/screenshots/context-panel.png" alt="Context Panel inside Pages editor" height="280" />
-  &nbsp;
-  <img src="docs/screenshots/dashboard-widget.png" alt="Dashboard Widget on a site dashboard" height="200" />
+  <img src="docs/screenshots/context-panel.png" alt="Context Panel inside Pages editor" width="720" />
+</p>
+<p align="center">
+  <img src="docs/screenshots/dashboard-widget.png" alt="Dashboard Widget on a site dashboard" width="720" />
 </p>
 
 ## What this does
