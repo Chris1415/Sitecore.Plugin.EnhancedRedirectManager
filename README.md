@@ -1,6 +1,6 @@
 # Redirect Manager
 
-A Sitecore Marketplace client-side app that gives content authors, site managers, and Sitecore implementers a purpose-built UI for redirect operations across an XM Cloud tenant. It replaces the awkward Content-Editor workflow for managing items under `/sitecore/content/{COLLECTION}/{SITE}/Settings/Redirects/*` and surfaces redirects where editors already work — inside the Pages editor, on the site dashboard, and on a dedicated full-page workshop.
+A Sitecore Marketplace client-side app that gives content authors, site managers, and Sitecore implementers a purpose-built UI for redirect operations across a SitecoreAI tenant. It replaces the awkward Content-Editor workflow for managing items under `/sitecore/content/{COLLECTION}/{SITE}/Settings/Redirects/*` and surfaces redirects where editors already work — inside the Pages editor, on the site dashboard, and on a dedicated full-page workshop.
 
 <p align="center">
   <img src="docs/screenshots/full-page.png" alt="Redirect Manager — Full Page surface" width="720" />
@@ -50,7 +50,7 @@ Marketplace apps cannot run at plain `http://localhost` — Cloud Portal embeds 
    - `xmc:pages:contextpanel` → `/context-panel`
    - `xmc:dashboardblocks` → `/dashboard-widget`
    - `xmc:fullscreen` → `/full-page`
-4. **An XM Cloud tenant** where the Cloud Portal user has Authoring GraphQL write access on `Settings/Redirects` items.
+4. **A SitecoreAI tenant** where the Cloud Portal user has Authoring GraphQL write access on `Settings/Redirects` items.
 
 ### Install and run
 
