@@ -1,0 +1,44 @@
+{
+  "data": {
+    "data": {
+      "item": {
+        "name": "Redirects",
+        "itemId": "114deb02977d45f7800a0562623e83b6",
+        "children": {
+          "nodes": [
+            {
+              "itemId": "e39157f3a81f4692b05d178d48c836de",
+              "name": "My Redirect Map",
+              "template": { "name": "Redirect Map" },
+              "IncludeVirtualFolder": { "value": "1" },
+              "PreserveQueryString": { "value": "" },
+              "RedirectType": { "value": "ServerTransfer" },
+              "PreserveLanguage": { "value": "" },
+              "UrlMapping": { "value": "%2ftest=%2FnewTest&%2fhello=%2Fworld" },
+              "__Updated": { "value": "20260509T183802Z" }
+            },
+            {
+              "itemId": "590b53834e394203abe42bd6e575615a",
+              "name": "Test Group",
+              "template": { "name": "Redirect Map Grouping" },
+              "IncludeVirtualFolder": null,
+              "PreserveQueryString": null,
+              "RedirectType": null,
+              "PreserveLanguage": null,
+              "UrlMapping": null,
+              "__Updated": { "value": "20260509T183806Z" }
+            }
+          ]
+        }
+      }
+    },
+    "extensions": {
+      "tracing": {
+        "_comment": "Apollo / Hot Chocolate tracing extension. Real captures include verbose resolver-level timing data (~3900 lines). Stubbed here so tests can verify the decoder ignores result.data.extensions and drills into result.data.data only.",
+        "version": 1
+      }
+    }
+  },
+  "request": {},
+  "response": {}
+}

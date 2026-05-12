@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Add redirect — existing map — Site Atlas v3</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="poc-bar">
+      <div>
+        <a href="index.html">&larr; Hub</a> · Context Panel — Add Redirect modal
+        (step 2a — existing map)
+      </div>
+      <div class="right">
+        <button
+          class="btn btn-outline btn-sm"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+          type="button"
+        >
+          Toggle theme
+        </button>
+      </div>
+    </header>
+
+    <main class="frame-context" role="main" aria-label="Pages context panel">
+      <div class="frame-context-content" aria-hidden="true" style="opacity: 0.35; pointer-events: none">
+        <div class="alert alert-warning">
+          <svg
+            class="alert-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 9v4" />
+            <path
+              d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"
+            />
+            <path d="M12 17h.01" />
+          </svg>
+          <div class="alert-body">
+            <div class="alert-title">Direct-string matches only</div>
+          </div>
+        </div>
+        <div>
+          <span class="context-heading-label">Redirects affecting</span>
+          <span class="context-heading-path">/products/launch-2026</span>
+        </div>
+      </div>
+    </main>
+
+    <div class="overlay" role="dialog" aria-modal="true" aria-labelledby="add-existing-title">
+      <div class="dialog">
+        <div class="dialog-header">
+          <div>
+            <h2 class="dialog-title" id="add-existing-title">Add to "Marketing Campaigns 2026"</h2>
+            <div class="text-xs muted" style="margin-top: 0.25rem">
+              <span class="badge badge-bold-primary">301</span>
+              &nbsp; Q-string preserved · Lang preserved
+            </div>
+          </div>
+          <a
+            href="context-panel-add-modal.html"
+            class="btn btn-icon btn-ghost"
+            aria-label="Back to map list"
+            title="Back"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="dialog-body">
+          <div class="field">
+            <label for="src" class="label">Source URL</label>
+            <input
+              id="src"
+              class="input is-mono"
+              type="text"
+              value="/products/launch-2026"
+              aria-describedby="src-help"
+            />
+            <div id="src-help" class="text-xs muted" style="margin-top: 0.25rem">
+              Pre-filled to the current page. Editable if you need a different
+              source.
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="tgt" class="label">Target URL <span class="muted">(required)</span></label>
+            <input
+              id="tgt"
+              class="input is-mono"
+              type="text"
+              placeholder="/launch-2026"
+              required
+            />
+          </div>
+
+          <div class="alert alert-warning" style="margin-top: 0.625rem">
+            <svg
+              class="alert-icon"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 16v-4" />
+              <path d="M12 8h.01" />
+            </svg>
+            <div class="alert-body text-xs">
+              Type and flags are inherited from the parent map. Change them in
+              the Full Page if needed.
+            </div>
+          </div>
+        </div>
+
+        <div class="dialog-footer">
+          <a href="context-panel-add-modal.html" class="btn btn-ghost">Back</a>
+          <a href="context-panel.html" class="btn btn-primary">Save redirect</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Context Panel — error · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="cp-frame-shell">
+      <aside class="cp-frame" aria-label="Failed to load redirects">
+        <div class="cp-frame__head">
+          <span>Pages · Context panel</span>
+          <span class="cp-frame__head__chip">/context-panel</span>
+        </div>
+
+        <div class="cp-body">
+          <div class="blok-alert" role="note">
+            <span class="blok-alert__icon glyph" data-icon="info" data-size="14"></span>
+            <div class="blok-alert__body">
+              Direct-string matches only — regex pattern matches are not yet covered.
+            </div>
+          </div>
+
+          <div class="cp-callout">
+            <span class="cp-callout__icon glyph" data-icon="map-pin" data-size="14"></span>
+            <span>On</span>
+            <span class="cp-callout__url">/products/sneakers/air-max-90</span>
+          </div>
+
+          <hr class="blok-separator" />
+
+          <div class="blok-alert blok-alert--destructive" role="alert" aria-live="assertive">
+            <span class="blok-alert__icon" aria-hidden="true">&#x2715;</span>
+            <div class="blok-alert__body">
+              <p class="blok-alert__title">Couldn't load redirects for this page.</p>
+              <p style="margin:0 0 0.5rem;">The Sitecore Authoring API returned an error. Check Cloud Portal access and try again.</p>
+              <details>
+                <summary style="cursor:pointer; font-size:var(--text-xs); color:var(--destructive-foreground); font-weight:500;">Show technical details</summary>
+                <pre style="margin:0.5rem 0 0; font-family:var(--font-mono); font-size:var(--text-2xs); color:var(--muted-foreground); background:var(--background); border:1px solid var(--border); padding:0.5rem; border-radius:var(--radius-sm); white-space:pre-wrap; word-break:break-all;">GraphQL error (request id 7c4f-…-2a9b)
+operation: GetRedirectsForSite
+path: /sitecore/content/SneakerCo/MainSite/Settings/Redirects
+status: 500
+message: "Internal server error while resolving children"</pre>
+              </details>
+              <button class="blok-btn blok-btn--destructive-outline blok-btn--sm" style="margin-top:0.5rem;">
+                <span class="glyph" data-icon="refresh" data-size="14"></span>
+                Retry
+              </button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <p style="text-align:center; padding:0 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground);">
+      <a href="index.html">← Back to all surfaces</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

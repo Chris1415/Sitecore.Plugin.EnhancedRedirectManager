@@ -2,10 +2,10 @@
   "schema_version": 5,
   "run_id": "20260509T191751Z",
   "created_at": "2026-05-09T19:17:51Z",
-  "updated_at": "2026-05-09T19:17:51Z",
+  "updated_at": "2026-05-12T12:05:00Z",
   "product_slug": "redirect-manager",
   "product_root": "products/redirect-manager",
-  "status": "discovery",
+  "status": "shipped",
   "prd_input_mode": "brain_dump_only",
   "platform_target": "marketplace",
   "task_breakdown_style": "tdd",
@@ -16,10 +16,22 @@
     "docs_at_ship": "full"
   },
   "ui_design": {
-    "proposal_count": 0,
+    "proposal_count": 3,
     "divergence": "moderate",
-    "variant_paths": [],
-    "selected_variant_path": null
+    "variant_paths": [
+      "products/redirect-manager/project-planning/ui-design/ui-design-20260509T191751Z-v1.md",
+      "products/redirect-manager/project-planning/ui-design/ui-design-20260509T191751Z-v2.md",
+      "products/redirect-manager/project-planning/ui-design/ui-design-20260509T191751Z-v3.md"
+    ],
+    "selected_variant_path": "products/redirect-manager/project-planning/ui-design/ui-design-20260509T191751Z-v1.md",
+    "selected_poc_path": "products/redirect-manager/pocs/poc-v1"
+  },
+  "architecture": {
+    "extension_points": [
+      { "extension_point": "xmc:pages:contextpanel", "route_url": "/context-panel", "registered": false },
+      { "extension_point": "xmc:dashboardblocks", "route_url": "/dashboard-widget", "registered": false },
+      { "extension_point": "xmc:fullscreen", "route_url": "/full-page", "registered": false }
+    ]
   },
   "source": {
     "kind": "raw_idea",
@@ -34,17 +46,32 @@
   },
   "canonical_artifacts": {
     "brain_dump": "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260509T191751Z.md",
-    "prd": "products/redirect-manager/project-planning/PRD/prd-NNN.md",
-    "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-NNN.md",
-    "architecture": null,
-    "task_breakdown": null,
+    "prd": "products/redirect-manager/project-planning/PRD/prd-000.md",
+    "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-000.md",
+    "architecture": "products/redirect-manager/project-planning/architecture/architecture-20260509T191751Z.md",
+    "task_breakdown": "products/redirect-manager/project-planning/plans/task-breakdown-20260509T191751Z.md",
     "task_breakdown_pre_qa": null,
     "qa_report": null,
-    "implementation_runbook": null,
+    "implementation_runbook": "products/redirect-manager/project-planning/plans/implementation-runbook-20260509T191751Z.md",
     "content_model": null,
     "content_examples": null,
-    "ship_report": null,
-    "friction_log": null
+    "ship_report": "products/redirect-manager/project-planning/plans/ship-report-20260512T120000Z.md",
+    "friction_log": null,
+    "adrs": [
+      "products/redirect-manager/project-planning/ADR/adr-0001-use-adrs-as-architecture-backbone.md",
+      "products/redirect-manager/project-planning/ADR/adr-0002-marketplace-sdk-mode-a-scaffold.md",
+      "products/redirect-manager/project-planning/ADR/adr-0003-authoring-graphql-as-canonical-source.md",
+      "products/redirect-manager/project-planning/ADR/adr-0004-three-prd-phasing.md",
+      "products/redirect-manager/project-planning/ADR/adr-0005-context-panel-exact-match-only.md",
+      "products/redirect-manager/project-planning/ADR/adr-0006-import-conflict-resolution-three-actions.md",
+      "products/redirect-manager/project-planning/ADR/adr-0007-tenant-identifier-tenantid.md",
+      "products/redirect-manager/project-planning/ADR/adr-0008-urlmapping-encoding-contract.md",
+      "products/redirect-manager/project-planning/ADR/adr-0009-import-match-by-item-guid.md",
+      "products/redirect-manager/project-planning/ADR/adr-0010-mvp-language-scope-en-only.md",
+      "products/redirect-manager/project-planning/ADR/adr-0011-extension-points-and-routes.md",
+      "products/redirect-manager/project-planning/ADR/adr-0012-list-virtualization-react-virtuoso.md",
+      "products/redirect-manager/project-planning/ADR/adr-0013-real-tenant-fixture-capture-workflow.md"
+    ]
   },
   "friction_log": {
     "path": "products/redirect-manager/project-planning/workflow/friction-log-20260509T191751Z.md",
@@ -59,24 +86,227 @@
       "exited_at": "2026-05-09T19:17:51Z",
       "outcome": "completed",
       "error": null
+    },
+    {
+      "stage": "discovery",
+      "agent": "02-product-manager",
+      "entered_at": "2026-05-09T19:30:00Z",
+      "exited_at": "2026-05-09T20:00:00Z",
+      "outcome": "completed",
+      "error": null
+    },
+    {
+      "stage": "discovery_summary",
+      "agent": "02-product-manager",
+      "entered_at": "2026-05-09T20:00:00Z",
+      "exited_at": "2026-05-09T20:05:00Z",
+      "outcome": "confirmed",
+      "error": null
+    },
+    {
+      "stage": "spec_ready",
+      "agent": "02-product-manager",
+      "entered_at": "2026-05-09T20:05:00Z",
+      "exited_at": "2026-05-09T20:30:00Z",
+      "outcome": "completed",
+      "error": null
+    },
+    {
+      "stage": "architecture_ready",
+      "agent": "04-software-architect",
+      "entered_at": "2026-05-10T07:30:00Z",
+      "exited_at": "2026-05-10T08:00:00Z",
+      "outcome": "completed",
+      "error": null
+    },
+    {
+      "stage": "ui_ready",
+      "agent": "05-ui-designer",
+      "entered_at": "2026-05-10T08:30:00Z",
+      "exited_at": "2026-05-10T11:30:00Z",
+      "outcome": "completed",
+      "error": null
+    },
+    {
+      "stage": "plan_ready",
+      "agent": "06-lead-developer",
+      "entered_at": "2026-05-10T10:30:00Z",
+      "exited_at": "2026-05-10T11:10:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "67 tasks across 10 epics (A-J). Sub-agent hit usage limit on the manifest-write step; manifest finalized by Team Lead post-recovery."
+    },
+    {
+      "stage": "qa_ready",
+      "agent": "07-qa-specialist",
+      "entered_at": "2026-05-10T14:00:00Z",
+      "exited_at": "2026-05-10T14:00:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "In-place enrichment: § 9 TDD contract (9.1-9.11) + § 10 per-task specs (~110 RED test cases). 12 assumed-shape annotations lifted into divergence-detection coverage. smoke_outcomes initialized to all pending. task_breakdown_style confirmed tdd."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-1",
+      "agent": "08-developer",
+      "entered_at": "2026-05-10T14:30:00Z",
+      "exited_at": "2026-05-10T15:30:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 1 — T001-T007 + T062 skeleton. Scaffold via shadcn@latest add quickstart-with-client-side-xmc.json succeeded (Next 16.1.7 + Turbopack, 5 static routes). 32 Blok primitives installed. 3 extension routes + root notFound() per ADR-0011. Theme: dark-mode --primary-foreground override carried into both .dark and @media blocks. Lint: 0 errors / 2 baseline warnings. Build: PASS. Tests: 10 passing + 5 it.todo placeholders (T062 final lands in Tranche 8). Surprises captured: (a) @blok/dropdown does not exist in registry, correct slug is @blok/dropdown-menu — task breakdown § 4c-3 fixed; (b) Blok Nova preset uses .dark class only, no @media block; (c) @blok/draggable's dnd-context.tsx has react-hooks/set-state-in-effect lint suppression as a Blok-component-drift workaround — friction to flag at /code-review."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-2",
+      "agent": "08-developer",
+      "entered_at": "2026-05-10T16:00:00Z",
+      "exited_at": "2026-05-10T16:45:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 2 — T008-T015 (SDK plumbing). All 9 SDK call wrappers built under lib/sdk/: sites.ts, redirects-read.ts, redirects-write.ts (3 mutations), page-context.ts, application-context.ts, canvas-reload.ts, require-context-id.ts. T008 Provider verified. T016 lib/domain/types.ts created early as a stub (Tranche 3 completes) — needed by T011/T012 for RedirectMapItem import. 9 assumed-shape fixtures landed in tests/fixtures/graphql/. 34 new RED tests (49 total now passing). SDK boundary lock structural test active and PASSING — caught and correctly excluded the scaffold's components/examples/ tree. Divergence-detection [redirect-manager:dev:capture] logs in T012/T013/T014, all gated on NODE_ENV != production. Lint 0 errors / 2 baseline warnings. Build PASS. Surprises: (a) pages.context subscribe pattern uses Path A (subscribe-via-query); the onSuccess callback receives PagesContext directly with no .data envelope — verified against sdk-types.d.ts; (b) Authoring.GraphqlData type requires url: '/graphql' literal, wrapper uses 'as never' cast on the options object (matches sibling-app pattern); (c) scaffold-example boundary hit — components/examples/built-in-auth/with-xmc/list-languages.tsx imports xmc directly; SDK boundary scan now excludes examples/ since scaffold examples are not production code. CAPTURE GATE NEXT: operator boots in real Cloud Portal Test App, watches console for [redirect-manager:dev:capture] logs covering pageInfo.url/route/path, sites/collections shapes, application-context tenantId/contextId; any divergence → fixture replacement + RED-test re-run."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-5",
+      "agent": "08-developer",
+      "entered_at": "2026-05-11T16:00:00Z",
+      "exited_at": "2026-05-11T16:14:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 5 — T035-T040 Full Page read paths. Replaced the /full-page CaptureHelper UI with the real Operator Console (v1) admin surface. 6 new components under components/full-page/: FullPage (two-pane orchestrator with 960px tabbed fallback), CollectionPicker (T036), SitePicker (T037 — filtered by collectionId), RedirectMapList (T038 — react-virtuoso virtualized + 2px primary left-edge selection stripe), RedirectMapDetail (T039 — read-only detail with flag chips only-when-true, mappings table mono font, no edit/delete buttons in Tranche 5 — those land in Tranche 6), TopActionRow (T040 — Breadcrumb + Import/Export/+New stubs marked TODO Tranche 6/7). components/dev/capture-helper.tsx DELETED — no remaining route uses it. lib/sdk/types.ts gained a Sites re-export so components don't import @sitecore-marketplace-sdk/xmc directly. OQ-7 still hardcoded: sitePath built as /sitecore/content/{collection.name}/{site.name}/Settings/Redirects — Tranche 6 capture may refine. 4 Blok API surprises caught at build: Alert variant=danger (not destructive), Badge colorScheme (not variant), Sites.SiteCollection.id is string|null|undefined required ?? '' guards, displayName vs name distinction matters for tests. Tabbed fallback at <960px via window.innerWidth+resize listener (jsdom-friendly). Lint 0/2 baseline; build PASS; tests 236 passing + 2 it.todo across 32 test files (was 200+2 / 26 files in Tranche 4 fixup — added 36 new tests)."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-4",
+      "agent": "08-developer",
+      "entered_at": "2026-05-11T15:15:00Z",
+      "exited_at": "2026-05-11T15:31:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 4 — T022-T034 Context Panel + Dashboard Widget. Replaced the Tranche 2 capture-helper UIs on /context-panel and /dashboard-widget with the real Operator Console (v1) UI. /full-page still uses CaptureHelper (Tranche 5 territory). New components: context-panel/{ContextPanel,RegexBanner,MatchedMapGroup,InlineEditForm,AddRedirectModal}.tsx + dashboard-widget/{DashboardWidget,StatTile}.tsx. Context Panel uses pageInfo.route as matcher key (OQ-A closed). Dashboard Widget aggregateStats(): total maps, total mappings (sum of mappings.length), max __Updated formatted via parseSitecoreCompactDate + Intl.DateTimeFormat. lib/sdk/types.ts added as a clean re-export of ClientSDK so components don't import the SDK package directly (SDK boundary). Two structural guards turned from it.todo to real assertions (three-routes + dark-mode --primary-foreground override). Two remaining it.todo (raw-HTML injection + outline-none) stay for Tranche 8. OQ-7 OPEN: Dashboard Widget site path hardcodes collection name 'solo' with TODO; appName from appCtx used as siteName; both flagged for Tranche 6 capture. Context Panel write paths (create/edit/delete) wired through lib/sdk/redirects-write.ts but UNTESTED against real tenant — assumed-shape comments mark each write call site. State coverage complete (default/loading/empty/error/focus/success-toast) per POC. Accessibility: axe-core + focus-visible + sr-only live regions. Fixes: useEffect→IIFE for react-hooks/set-state-in-effect; Button colorScheme='danger' (no destructive variant in Blok). Test count: 200 passing + 2 it.todo (was 144+4 in Tranche 3). 26 test files (up from 19)."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-3",
+      "agent": "08-developer",
+      "entered_at": "2026-05-11T15:00:00Z",
+      "exited_at": "2026-05-11T15:15:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 3 — T016-T021 domain layer. 8 new modules under lib/{domain,url-mapping,import-export,match,redirects}/. parseSitecoreCompactDate handles yyyyMMddTHHmmssZ (captured __Updated format). UrlMapping parse/serialize per ADR-0008 with fast-check property tests (3 invariants × 100 iterations = 300 property-test runs + 7 concrete cases + the captured fixture %2ftest=%2FnewTest&%2fhello=%2Fworld). Zod v4 schema for redirect-manager/v1 (T019). GUID-keyed diff classifier per ADR-0009. Exact-string Context Panel matcher per ADR-0005. RedirectType enum with introspection-fallback shape (T021 — 301/302/307 names still UNVERIFIED, Tranche 6). redirects-read.ts and redirects-write.ts updated to import canonical parse/serialize (inline copies removed). Lint 0/2 baseline; build PASS; tests 144 passing + 4 it.todo (was 50+4 — added 94 new tests). Surprises: Zod v4 errorMap renamed to error+check; fast-check hex-case test relaxed to letter-only check. No real-tenant interaction required for Tranche 3 — domain layer is pure modules."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-2.capture-and-fixup",
+      "agent": "08-developer",
+      "entered_at": "2026-05-11T09:00:00Z",
+      "exited_at": "2026-05-11T15:00:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Capture Point #1 closed. Captured fixtures for application-context, page-context, sites-list, collections-list, redirect-map-list from real tenant xmc-sitecoresaa516c-chahdevexjoee24-proda41d.sitecorecloud.io. THREE major contract corrections landed: (1) Marketplace SDK envelope for client.mutate('xmc.authoring.graphql') — body MUST be INSIDE params, not at top level; the `as never` cast was hiding a real type error. Wrong shape sends malformed request, gateway returns HTTP 400 with empty body. (2) Module-key mutations are DOUBLE-unwrap (result.data.data), NOT single — previous skill docs and sibling apps (last-edit-trail, component-usage-atlas) were wrong. Updated both sitecore:marketplace-sdk-client § 8b + sitecore:marketplace-sdk-xmc § 3 + response-unwrap-matrix.md reference. (3) OQ-A CLOSED: Context Panel matcher key is pageInfo.route (clean published path '/'), NOT pageInfo.url ('/?sc_site=solo-website' — includes sc_site qs). Other findings: requireContextId now checks both appCtx.resourceAccess AND appCtx.resources (deprecated field, what this tenant returns). Boolean fields serialize as '1' (true) / '' (false) on read surface. __Updated field uses Sitecore compact format yyyyMMddTHHmmssZ not ISO-8601 — Tranche 3 will parse. Lighter GraphQL query: aliased Item.field(name:) accessors instead of fields(...) connection — ~75% smaller response. Added components/dev/capture-helper.tsx as a temporary Tranche 2 capture UI (replaced by real surface UI in Tranche 4+). All 12 assumed-shape annotations: 5 captured (page-context, application-context, sites-list, collections-list, redirect-map-list), 7 still PENDING for Tranche 6 (write surface — create/update/delete + redirect-type-enum non-ServerTransfer values + boolean write rep + createItem caller-supplied id). 2 new memory entries saved: reference_marketplace_sdk_envelope_authoring_graphql.md + reference_sitecore_field_aliased_accessor_query_pattern.md. 50 tests passing + 4 it.todo (was 49). Lint + build clean."
+    },
+    {
+      "stage": "implementation_in_progress.theme-switcher",
+      "agent": "08-developer",
+      "entered_at": "2026-05-11T20:20:00Z",
+      "exited_at": "2026-05-11T20:32:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Env-gated 3-state theme switcher (Light/Dark/System) + 'd' hotkey. NEXT_PUBLIC_REDIRECT_MANAGER_THEME_SWITCHER=true to enable. After feedback iteration, switcher is inline (not fixed/floating): TopActionRow (left, Full Page), card header (Dashboard Widget), slim row above regex banner (Context Panel). Visual treatment: variant=ghost, size=icon-sm, text-muted-foreground hover:text-foreground. matchMedia polyfill added to vitest.setup.ts (next-themes requirement). 3 RED tests in tests/theme/theme-switcher-env-gating.test.tsx. Lint 0/2 baseline, build PASS."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-7",
+      "agent": "08-developer",
+      "entered_at": "2026-05-11T22:00:00Z",
+      "exited_at": "2026-05-11T22:48:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 7 — Import/Export. T047 Export: new lib/import-export/serialize.ts (buildExportPayload + serializeExportToJson + buildExportFilename); FullPage handleExport refetches maps, opens blob URL in new tab (iframe-sandbox-safe). After operator feedback: Export turned into a DropdownMenu with three options — Open in new tab, Copy to clipboard, Download (disabled w/ 'Soon' badge for future native download). T048-T053 Import wizard: new ImportRedirectMapModal with 4 steps (Upload — file picker + textarea paste fallback; Preview — classification table with per-row action select + collapsible drill-down showing scalar diffs and mappings buckets added/removed/changed; Applying — progress bar; Summary — totals + newly-minted GUID warning per ADR-0009). New lib/import-export/apply.ts: pure batch executor with progress callback, per-item failure capture, sequential ordering. Extended lib/import-export/diff.ts with buildScalarDiffs + buildMappingsDiff for the drill-down. Plus several Context Panel fixes discovered during validation: (1) Add Redirect modal didn't close on success — moved handleOpenChange(false) ahead of fire-and-forget onSuccess; (2) silent-failure toasts — all CP write handlers now check result.ok and throw on failure; (3) PLACEHOLDER GUIDs replaced with runtime discovery (resolveItemIdByPath + discoverRedirectMapTemplateId) — same path as Full Page; (4) duplicate mapping detection moved to parent with fresh refetch — toasts error instead of inline; (5) modal table conflict badge + chevron centered (operator design polish). 282 tests passing + 2 todo (was 245+2 — added 8 apply tests, 9 diff-helper tests, 11 serialize tests, plus a handful of UI checks). Lint 0/2 baseline, build clean."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-9",
+      "agent": "08-developer",
+      "entered_at": "2026-05-12T09:30:00Z",
+      "exited_at": "2026-05-12T09:46:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 9 — ship-ready docs. Wrote 4 docs under site/docs/: (1) registration.md — Cloud Portal Test App registration runbook with 8-field paste-in for App Studio + the three extension-point/route mappings (xmc:pages:contextpanel → /context-panel, xmc:dashboardblocks → /dashboard-widget, xmc:fullscreen → /full-page) per ADR-0011 + scopes + tenant assignment; (2) smoke-crud.md — m3 round-trip checklist with 7 sections (read, create, field update, mappings table, dup detection, delete, stopwatch); (3) smoke-import-export.md — m4 round-trip with deterministic modifications (rename / type change / flag toggle / mapping add / mapping remove / target change / new item), drill-down verification, action resolution, and explicit re-import-creates-duplicate test for ADR-0009 GUID-mint caveat; (4) smoke-live-walkthrough.md — m5 5-minute unscripted exploration with quality checklist (console hygiene, loading states, dark mode, etc); (5) host-frame-smoke.md — T064 deferred from automated harness to documented manual procedure, with optional Playwright recipe pointing at sitecore:marketplace-sdk-host-frame-testing skill. 284 tests passing, lint 0/2 baseline, build clean. Ready for /ship — operator runs the three smoke checklists in real tenant, records outcomes in smoke_outcomes, then /ship handles commit/push/PR."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-8",
+      "agent": "08-developer",
+      "entered_at": "2026-05-12T09:20:00Z",
+      "exited_at": "2026-05-12T09:28:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 8 — Cross-surface polish + structural guard finalisation. T062: all 5 guards now real (were 1 real + 2 active + 2 it.todo). New guards: (a) raw HTML injection ban via dangerously*SetInnerHTML — whitelisted components/ui/* Blok primitives; (b) outline-none / outline:none without paired focus-visible: replacement — caught and fixed 2 real violations in CollectionPicker.tsx:106 and SitePicker.tsx:134 (changed focus:outline-none focus:ring-1 → focus-visible:outline-none focus-visible:ring-1 — proper WCAG 2.4.7 pattern). T055 focus-visible audit and T058 dark-mode contrast verification subsumed by the structural guards. T056 aria-live audit: spot check confirmed ContextPanel has role=status aria-live=polite live region; DashboardWidget has its own loading announcement; FullPage uses Sonner which provides global aria-live region automatically. T057 monochrome glyph audit: non-issue — lucide-react icons are currentColor vectors, no multi-tone color drift risk. 284 tests passing (was 282+2 todo — both .todo guards lifted to real). Lint 0/2 baseline, build clean."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-6b",
+      "agent": "08-developer",
+      "entered_at": "2026-05-11T21:15:00Z",
+      "exited_at": "2026-05-11T21:28:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 6b — Full Page write UI. (1) Mounted Toaster in app/layout.tsx — latent Tranche 4 bug: toast() calls in ContextPanel were silent because no <Toaster /> Provider was rendered. Now mounted at root, both Context Panel and Full Page toasts work. (2) Write-capture helper removed (components/dev/ deleted, isWriteCaptureEnabled flag dropped, .env.example trimmed). (3) New file lib/sdk/redirects-discover.ts: resolveItemIdByPath + discoverRedirectMapTemplateId — needed by + New map modal to find the parent Settings/Redirects folder GUID and the Redirect Map template GUID at runtime (template GUID is per-tenant). (4) New modal NewRedirectMapModal: discovery on open with 3 error states (missing-parent, missing-template, error); on success shows form (name, RedirectType select, 3 flag checkboxes); fires createRedirectMap; toast + pendingSelectId pattern for parent re-select. (5) New modal DeleteMapConfirmModal: AlertDialog with map name + mapping count + destructive Confirm. (6) RedirectMapDetail rewritten as editable: click name → inline rename (renameRedirectMap mutation), RedirectType dropdown → updateRedirectMap, 3 flag checkboxes → updateRedirectMap, mappings table with hover-revealed edit/delete per row + inline edit + 'Add mapping' inline row at bottom, delete-map button (opens confirm modal). All writes through Sonner toasts. (7) RedirectMapList: refreshKey prop + onLoaded callback so FullPage can force refetch after writes and reconcile selectedMap. (8) FullPage orchestrates modals + listRefreshKey + pendingSelectId (auto-select new map after create). (9) TopActionRow's '+ New map' button wired to onCreateClick callback. (10) Tests: RedirectMapDetail.test.tsx rewritten (10 RED, all green) to match editable design; new DeleteMapConfirmModal.test.tsx (4 RED, all green); new NewRedirectMapModal.test.tsx (4 RED, all green). Removed obsolete write-capture-helper component. 254 passing + 2 todo (was 245+2). Lint 0/2 baseline, build clean. Ready for operator host-frame smoke test."
+    },
+    {
+      "stage": "implementation_in_progress.tranche-6a",
+      "agent": "08-developer",
+      "entered_at": "2026-05-11T20:35:00Z",
+      "exited_at": "2026-05-11T21:10:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Tranche 6a — write-surface real-tenant capture session. All 7 outstanding assumed-shape annotations CLOSED. Findings: (1) `id` field rejected by CreateItemInput — schema introspection confirms it isn't defined; closes OQ-B / ADR-0009 with a definitive NO: cross-env imports always mint a fresh GUID on `create` actions (import summary must surface 'newly minted GUID' indicator). (2) createItem/updateItem/renameItem mutations all return { item { ... } } — NOT flat itemId. Wrappers updated. (3) RedirectType wire values: ServerTransfer / Redirect301 / Redirect302. Redirect307 is rejected by head-app resolver (string-level acceptance from server but no behavior). Removed from REDIRECT_TYPES + domain RedirectType union. Domain now matches wire format directly (Redirect301/Redirect302/ServerTransfer) — no mapper needed. (4) Boolean write repr: canonical '0' / '1' strings (wire also tolerates 'true'/'false' but '0'/'1' is what we ship). (5) UrlMapping serialize round-trip verified against ADR-0008 encoding. (6) Rename via updateItem.name is REJECTED (EXEC_INVALID_TYPE — name not a UpdateItemInput field). Must use dedicated `renameItem(input: RenameItemInput! { itemId, newName })` mutation. Added renameRedirectMap wrapper. (7) deleteItem { successful } selection confirmed. Built temporary components/dev/write-capture-helper.tsx (env-gated via NEXT_PUBLIC_REDIRECT_MANAGER_WRITE_CAPTURE=true) with introspection probes (Mutation schema, CreateItemInput shape, RedirectType enum probe — confirmed RedirectType is a String field, not GraphQL enum) and live mutation buttons. Operator ran probes against real tenant; full log captured. Fixtures updated with real envelopes: redirect-map.create/update/delete.json + new redirect-map.rename.json. Tests 245 passing + 2 todo (was 245 — RED-2/6/7 in redirects-write.test.ts updated to assert the corrected { item { itemId } } envelope). Lint 0/2 baseline, build PASS. Ready for Tranche 6b (Full Page write UI)."
+    },
+    {
+      "stage": "documented",
+      "agent": "09-doc-writer",
+      "entered_at": "2026-05-12T11:20:00Z",
+      "exited_at": "2026-05-12T11:30:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Heavy doc pass per scope_dial.docs_at_ship=full. Wrote 4 files at product root: README.md (hero gallery referencing docs/screenshots/{full-page,context-panel,dashboard-widget}.png — operator to drop captures), CHANGELOG.md (Unreleased scaffold; PRD-000 entry to be prepended at /ship), docs/architecture.md (10-section narrative synthesizing 13 ADRs + Tranche 2/6a inline SDK findings — Marketplace Client-Side variant, 3 extension points, lib/sdk boundary, UrlMapping contract, import-export semantics, testing strategy), docs/decisions.md (curated ADR table grouped by theme: Sitecore platform / Domain / Phasing / Frontend / Process + a 'Notable findings' section for inline SDK discoveries that aren't ADRs but have ADR-level authority — envelope shape, double-unwrap, pageInfo.route, RedirectType wire values, boolean repr, aliased field accessor, renameItem requirement, ApplicationContext tenant-scoping). Ready for operator smoke validation + /ship."
+    },
+    {
+      "stage": "shipped",
+      "agent": "02-product-manager",
+      "entered_at": "2026-05-12T12:00:00Z",
+      "exited_at": "2026-05-12T12:05:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "PRD-000 closed as `shipped`. All 5 smoke_outcomes passed (registration, host_frame_smoke, crud_round_trip, import_export_round_trip, live_walkthrough) — operator confirmed: 'Checked the app all great move to ship'. Ship report at project-planning/plans/ship-report-20260512T120000Z.md classifies all 10 user stories + 16 FRs + 10 NFRs as delivered; 11 items deferred by design per ADR-0004 phasing; 6 known limitations documented; 13/13 ADRs compliant; 0 friction events captured this run. CHANGELOG PRD-000 entry prepended in /ship (full-mode docs path — /document had run earlier and left CHANGELOG scaffolded; /ship filled the entry inline using the ship-report classification table as source of truth)."
     }
   ],
   "implementation": {
     "mode": "pipeline",
     "target_directory": "products/redirect-manager/site",
-    "branch_name": null,
-    "remote_url": null,
-    "status": "not_started",
+    "branch_name": "prd-000",
+    "remote_url": "https://github.com/Chris1415/Sitecore.Plugin.EnhancedRedirectManager.git",
+    "status": "in_progress",
     "resumed_from_stage": null
   },
-  "smoke_outcomes": {},
+  "smoke_outcomes": {
+    "host_frame_smoke":         { "outcome": "passed", "notes": "Operator confirmed 2026-05-12: dashboard widget validated post-cleanup; visual surfaces match POC v1 selected variant.", "recorded_at": "2026-05-12T12:00:00Z" },
+    "crud_round_trip":          { "outcome": "passed", "notes": "Operator confirmed 2026-05-12 via real-tenant CHAH DevEx Journey / PROD: create / edit / delete of My Redirect Map 2 with 6 mappings (/hello → /world, /whatever → /11, /whatever2 → /Me, /testi → /Me, /testiii → /, / → Test).", "recorded_at": "2026-05-12T12:00:00Z" },
+    "import_export_round_trip": { "outcome": "passed", "notes": "Operator confirmed 2026-05-12: 4-step import wizard exercised on real tenant; export menu (open / copy / download-soon) verified.", "recorded_at": "2026-05-12T12:00:00Z" },
+    "live_walkthrough":         { "outcome": "passed", "notes": "Operator confirmed 2026-05-12: extended live walkthrough across all 3 surfaces; concluded 'Checked the app all great move to ship'.", "recorded_at": "2026-05-12T12:00:00Z" },
+    "registration":             { "outcome": "passed", "notes": "Cloud Portal Test App 'Dog feeding App' registered with all 3 extension points (xmc:pages:contextpanel → /context-panel, xmc:dashboardblocks → /dashboard-widget, xmc:fullscreen → /full-page) reachable.", "recorded_at": "2026-05-12T12:00:00Z" }
+  },
   "notes": [
     "Greenfield concept brief generated 2026-05-09 via /rubber-ducky.",
-    "Three Marketplace extension points (Context Panel, Dashboard Widget, Full Page) sharing one data layer (Sitecore Authoring GraphQL for rules + Upstash Redis for telemetry).",
-    "Hybrid analytics: Upstash via Vercel Marketplace (single shared DB, multitenant by key prefix). Sync of consolidated counter back to Sitecore is DEFERRED to a follow-on PRD so the MVP requires no Sitecore template changes.",
-    "MVP defers regex-pattern matching in Context Panel; explicit UI banner required.",
-    "Multilingual + versioned CRUD is in scope from MVP; Authoring GraphQL must thread language/version correctly.",
-    "Head-app counter increment + 404 reporting is OUT of scope for this product (separate codebase).",
-    "Next: /create-prd against this brain-dump. Scope dial to be set at /create-prd kickoff."
+    "Three Marketplace extension points (Context Panel, Dashboard Widget, Full Page) sharing Authoring GraphQL as single canonical data source.",
+    "PRD-000 MVP is en-language-only and pure CRUD — multilingual, analytics, sync-back, concurrent-edit detection are all deferred to follow-on PRDs (revised 2026-05-09 after PM critical review).",
+    "Import matches by Sitecore item GUID (ADR-0009); JSON includes the GUID for every item.",
+    "Import has 3 actions only: create / overwrite / skip. The merge action was collapsed into overwrite during critical review (Q-CR-1).",
+    "Real-tenant Authoring/Preview GraphQL response shape captured during PM critical-review answers — fields are { name, jsonValue } array; UrlMapping is URL-encoded source=target pairs joined by '&'; RedirectType enum has 'ServerTransfer' confirmed plus 301/302/307 names TBV.",
+    "discovery_level: standard",
+    "discovery_summary: confirmed",
+    "critical_review: completed",
+    "critical_review_level: standard",
+    "sitecore_discovery: completed",
+    "sdk_surface_split: n/a (2 new SDK surfaces: xmc.authoring.graphql + xmc.sites — below 3-surface threshold)",
+    "base_branch: main (PRD-000, no predecessor)",
+    "Architecture (2026-05-10): extension-point identifiers locked to xmc:pages:contextpanel /context-panel, xmc:dashboardblocks /dashboard-widget, xmc:fullscreen /full-page. Root / returns notFound() per provider-trap mitigation. 3 new ADRs added (0011-0013). Below ADR-density gate.",
+    "Architecture (2026-05-10): OQ-1 RESOLVED — wrapper is xmc.sites.listSites (verified from .d.ts). OQ-3 promoted to OQ-A (which PagesContext field is matcher key). Two new sub-OQs added: OQ-B (createItem accepts caller-supplied id?), OQ-C (boolean field repr on writes).",
+    "Architecture (2026-05-10): CAPTURE PENDING list — page-context.json, sites-list.json, collections-list.json, application-context.json, redirect-type-enum.json, template-id.json, create.json, update.json, delete.json. Real-tenant paired-session capture required before /task-breakdown opens (ADR-0013).",
+    "UI design (2026-05-10): 3 variants produced (v1 Operator Console, v2 Editor's Studio, v3 Site Atlas). 3 POC clickdummies produced. Stakeholder selected v1. Two post-selection fixes applied: (a) dark-mode --primary-foreground contrast fix (white-on-lavender bug from Nova preset/sibling globals.css inherited as override-to-dark-tone), (b) per-page Light/Dark/System theme toggle injected via theme-toggle.js. Both folded into v1 spec § 7.",
+    "ADR-0013 revised 2026-05-10 from hard pre-/task-breakdown gate to progressive learning loop. Operator chose to proceed with assumed shapes (sourced from PRD § 9 captured Authoring read shape + Sitecore plugin skill docs + sibling-app evidence in last-edit-trail and component-usage-atlas). Divergences will be captured-and-fixed as they surface during /implement and /test. Paired-session capture remains available on-demand.",
+    "SDK Sandbox idea filed in storage/marketplace-app-ideas.md (2026-05-10) as the long-term answer to the architecture-stage capture friction. Once shipped, Sandbox replaces the paired-session protocol with self-service capture.",
+    "Next: /task-breakdown immediately. Tasks touching unverified shapes are annotated assumed-shape: <fixture-filename>; QA enrichment will list them in § 9 test contract; smoke gates at /test re-run calls against real tenant."
   ]
 }

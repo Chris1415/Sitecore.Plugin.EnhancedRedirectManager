@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Full Page — import summary · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="full-page-empty-no-selection.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <a class="blok-breadcrumb__item" href="full-page.html">MainSite</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Import complete</span>
+        </nav>
+      </header>
+
+      <div class="fp-body">
+        <aside class="fp-rail" aria-label="Redirect maps">
+          <div class="fp-rail__pickers">
+            <div>
+              <label class="blok-label">Collection</label>
+              <select class="blok-select"><option>SneakerCo</option></select>
+            </div>
+            <div>
+              <label class="blok-label">Site</label>
+              <select class="blok-select"><option>MainSite</option></select>
+            </div>
+          </div>
+          <div class="fp-rail__list-hd">
+            <span>Redirect maps</span>
+            <span class="mono">20</span>
+          </div>
+          <div class="fp-rail__list" role="listbox">
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Marketing campaigns</span>
+                <span class="fp-rail-row__meta">12 mappings · just now</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">301</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Spring 2026 launch</span>
+                <span class="fp-rail-row__meta">7 mappings · just now</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">301</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Legacy product URLs</span>
+                <span class="fp-rail-row__meta">32 mappings · just now</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">302</span>
+            </div>
+          </div>
+        </aside>
+
+        <main class="fp-pane" aria-label="Import summary">
+          <div class="fp-pane__inner">
+            <div class="fp-import-summary">
+              <h2>Import completed with issues</h2>
+              <p>
+                Finished applying <strong style="color:var(--foreground); font-family:var(--font-mono);">redirects-staging-2026-05-09.json</strong> to MainSite (SneakerCo).
+              </p>
+              <div class="fp-import-counts">
+                <span class="blok-badge blok-badge--success">8 created</span>
+                <span class="blok-badge blok-badge--info">14 overwritten</span>
+                <span class="blok-badge blok-badge--muted">2 skipped</span>
+                <span class="blok-badge blok-badge--destructive">2 failed</span>
+              </div>
+            </div>
+
+            <div class="blok-progress" aria-label="Import progress" role="progressbar" aria-valuenow="100" aria-valuemax="100">
+              <div class="blok-progress__bar" style="width:100%;"></div>
+            </div>
+            <p style="font-size:var(--text-xs); color:var(--muted-foreground); margin:0;">
+              <span class="mono">22</span> of <span class="mono">24</span> items applied successfully (<span class="mono">23.4 s</span>).
+            </p>
+
+            <hr class="blok-separator" />
+
+            <!-- Failed items -->
+            <section class="fp-section">
+              <header class="fp-section__hd">
+                <span class="fp-section__lbl" style="color:var(--destructive);">Failed (2)</span>
+                <span class="fp-section__sub">Retry only the failed items below.</span>
+              </header>
+
+              <div class="fp-import-list">
+                <div class="fp-import-row" style="grid-template-rows: auto auto;">
+                  <span class="fp-import-row__chevron"><span class="glyph" data-icon="alert-triangle" data-size="14" style="color:var(--destructive);"></span></span>
+                  <div class="fp-import-row__main">
+                    <span class="fp-import-row__title">
+                      <span class="blok-badge blok-badge--destructive">Failed</span>
+                      A/B test variants
+                    </span>
+                    <span class="fp-import-row__guid">…44A2B1882E5C</span>
+                  </div>
+                  <span class="fp-import-row__indicator"></span>
+                  <span class="blok-badge blok-badge--outline">overwrite attempted</span>
+
+                  <div class="fp-import-row__diff" style="background: var(--destructive-background);">
+                    <p style="margin:0 0 0.375rem; font-size:var(--text-xs); font-weight:500; color:var(--destructive-foreground);">
+                      Couldn't apply this map.
+                    </p>
+                    <details>
+                      <summary style="cursor:pointer; font-size:var(--text-xs); color:var(--destructive-foreground);">Show technical details</summary>
+                      <pre style="margin:0.5rem 0 0; font-family:var(--font-mono); font-size:var(--text-2xs); color:var(--muted-foreground); background:var(--background); border:1px solid var(--border); padding:0.5rem; border-radius:var(--radius-sm); white-space:pre-wrap;">GraphQL error
+operation: updateItem
+itemId: {44A2B188-2E5C-9F3D-88E1-44A2B188C7B4}
+status: 403
+message: "Insufficient permissions to update field 'UrlMapping' on this item"</pre>
+                    </details>
+                  </div>
+                </div>
+
+                <div class="fp-import-row" style="grid-template-rows: auto auto;">
+                  <span class="fp-import-row__chevron"><span class="glyph" data-icon="alert-triangle" data-size="14" style="color:var(--destructive);"></span></span>
+                  <div class="fp-import-row__main">
+                    <span class="fp-import-row__title">
+                      <span class="blok-badge blok-badge--destructive">Failed</span>
+                      Affiliate trackers
+                    </span>
+                    <span class="fp-import-row__guid">…3A1B7C0928F3</span>
+                  </div>
+                  <span class="fp-import-row__indicator"></span>
+                  <span class="blok-badge blok-badge--outline">create attempted</span>
+
+                  <div class="fp-import-row__diff" style="background: var(--destructive-background);">
+                    <p style="margin:0 0 0.375rem; font-size:var(--text-xs); font-weight:500; color:var(--destructive-foreground);">
+                      Couldn't create this map — name already exists in target.
+                    </p>
+                    <details>
+                      <summary style="cursor:pointer; font-size:var(--text-xs); color:var(--destructive-foreground);">Show technical details</summary>
+                      <pre style="margin:0.5rem 0 0; font-family:var(--font-mono); font-size:var(--text-2xs); color:var(--muted-foreground); background:var(--background); border:1px solid var(--border); padding:0.5rem; border-radius:var(--radius-sm); white-space:pre-wrap;">GraphQL error
+operation: createItem
+status: 409
+message: "Item with name 'Affiliate trackers' already exists in /sitecore/content/SneakerCo/MainSite/Settings/Redirects"</pre>
+                    </details>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <details>
+              <summary style="cursor:pointer; font-size:var(--text-sm); color:var(--muted-foreground); padding:0.25rem 0;">View all 22 successful items</summary>
+              <div class="fp-import-list" style="margin-top:0.5rem;">
+                <div class="fp-import-row">
+                  <span class="fp-import-row__chevron"><span class="glyph" data-icon="check" data-size="14" style="color:var(--success);"></span></span>
+                  <div class="fp-import-row__main">
+                    <span class="fp-import-row__title">
+                      <span class="blok-badge blok-badge--success">Created</span>
+                      Spring 2026 launch
+                    </span>
+                    <span class="fp-import-row__guid">…6E5C9F3D88E1</span>
+                  </div>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="fp-import-row">
+                  <span class="fp-import-row__chevron"><span class="glyph" data-icon="check" data-size="14" style="color:var(--success);"></span></span>
+                  <div class="fp-import-row__main">
+                    <span class="fp-import-row__title">
+                      <span class="blok-badge blok-badge--info">Overwritten</span>
+                      Marketing campaigns
+                    </span>
+                    <span class="fp-import-row__guid">…78D48C836DE</span>
+                  </div>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="fp-import-row">
+                  <span class="fp-import-row__chevron"><span class="glyph" data-icon="check" data-size="14" style="color:var(--success);"></span></span>
+                  <div class="fp-import-row__main">
+                    <span class="fp-import-row__title">
+                      <span class="blok-badge blok-badge--info">Overwritten</span>
+                      Legacy product URLs
+                    </span>
+                    <span class="fp-import-row__guid">…2E5C9F3D88E1</span>
+                  </div>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="fp-import-row">
+                  <span class="fp-import-row__chevron"><span class="glyph" data-icon="check" data-size="14" style="color:var(--success);"></span></span>
+                  <div class="fp-import-row__main">
+                    <span class="fp-import-row__title">
+                      <span class="blok-badge blok-badge--success">Created</span>
+                      Influencer Q2 partners
+                    </span>
+                    <span class="fp-import-row__guid">…1A8E33F921B7</span>
+                  </div>
+                  <span></span>
+                  <span></span>
+                </div>
+                <div class="fp-import-row">
+                  <span class="fp-import-row__chevron"><span class="glyph" data-icon="check" data-size="14" style="color:var(--muted-foreground);"></span></span>
+                  <div class="fp-import-row__main">
+                    <span class="fp-import-row__title">
+                      <span class="blok-badge blok-badge--muted">Skipped</span>
+                      Geo-IP fallbacks
+                    </span>
+                    <span class="fp-import-row__guid">…C7B41E0928F3</span>
+                  </div>
+                  <span></span>
+                  <span></span>
+                </div>
+              </div>
+            </details>
+
+            <div class="fp-bottom">
+              <button class="blok-btn blok-btn--outline">
+                <span class="glyph" data-icon="refresh" data-size="14"></span>
+                Retry failed items only
+              </button>
+              <div class="fp-bottom__actions">
+                <a class="blok-btn blok-btn--primary" href="full-page.html">Done</a>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <p style="text-align:center; padding:0.75rem 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground); border-top:1px solid var(--border);">
+      <a href="index.html">← Back to all surfaces</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

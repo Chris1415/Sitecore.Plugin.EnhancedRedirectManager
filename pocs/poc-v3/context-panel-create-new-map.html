@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create new map — Site Atlas v3</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="poc-bar">
+      <div>
+        <a href="index.html">&larr; Hub</a> · Context Panel — Add Redirect modal
+        (step 2b — create new map)
+      </div>
+      <div class="right">
+        <button
+          class="btn btn-outline btn-sm"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+          type="button"
+        >
+          Toggle theme
+        </button>
+      </div>
+    </header>
+
+    <main class="frame-context" role="main" aria-label="Pages context panel">
+      <div class="frame-context-content" aria-hidden="true" style="opacity: 0.35; pointer-events: none">
+        <div class="alert alert-warning">
+          <svg
+            class="alert-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 9v4" />
+            <path
+              d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"
+            />
+            <path d="M12 17h.01" />
+          </svg>
+          <div class="alert-body">
+            <div class="alert-title">Direct-string matches only</div>
+          </div>
+        </div>
+        <div>
+          <span class="context-heading-label">Redirects affecting</span>
+          <span class="context-heading-path">/products/launch-2026</span>
+        </div>
+      </div>
+    </main>
+
+    <div class="overlay" role="dialog" aria-modal="true" aria-labelledby="create-map-title">
+      <div class="dialog">
+        <div class="dialog-header">
+          <h2 class="dialog-title" id="create-map-title">Create new Redirect Map</h2>
+          <a
+            href="context-panel-add-modal.html"
+            class="btn btn-icon btn-ghost"
+            aria-label="Back"
+            title="Back"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </a>
+        </div>
+
+        <div class="dialog-body">
+          <div class="field">
+            <label for="newmap-name" class="label">Map name</label>
+            <input
+              id="newmap-name"
+              class="input"
+              type="text"
+              placeholder="e.g. Holiday 2026 Campaign"
+            />
+          </div>
+
+          <div class="field">
+            <label for="newmap-type" class="label"
+              >Redirect type <span class="muted">(required)</span></label
+            >
+            <select id="newmap-type" class="input">
+              <option value="" selected>Pick a type…</option>
+              <option value="301">301 — Permanent</option>
+              <option value="302">302 — Temporary</option>
+              <option value="307">307 — Temporary (preserve method)</option>
+              <option value="ServerTransfer">Server Transfer</option>
+            </select>
+            <div class="field-error" hidden>
+              Pick a redirect type before saving.
+            </div>
+          </div>
+
+          <fieldset
+            style="border: 0; padding: 0; margin: 0 0 0.625rem"
+            aria-labelledby="flags-legend"
+          >
+            <legend
+              id="flags-legend"
+              class="label"
+              style="margin-bottom: 0.5rem"
+            >
+              Flags
+            </legend>
+            <label class="checkbox-row">
+              <span class="checkbox" aria-hidden="true"></span>
+              Preserve query string
+            </label>
+            <label class="checkbox-row">
+              <span class="checkbox is-checked" aria-hidden="true">
+                <svg
+                  width="10"
+                  height="10"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+              </span>
+              Preserve language
+            </label>
+            <label class="checkbox-row">
+              <span class="checkbox" aria-hidden="true"></span>
+              Include virtual folder
+            </label>
+          </fieldset>
+
+          <div class="section-h" style="margin-top: 1rem">First mapping</div>
+
+          <div class="field">
+            <label for="newmap-src" class="label">Source URL</label>
+            <input
+              id="newmap-src"
+              class="input is-mono"
+              type="text"
+              value="/products/launch-2026"
+            />
+          </div>
+
+          <div class="field" style="margin-bottom: 0">
+            <label for="newmap-tgt" class="label"
+              >Target URL <span class="muted">(required)</span></label
+            >
+            <input
+              id="newmap-tgt"
+              class="input is-mono"
+              type="text"
+              placeholder="/launch-2026"
+            />
+          </div>
+        </div>
+
+        <div class="dialog-footer">
+          <a href="context-panel-add-modal.html" class="btn btn-ghost">Back</a>
+          <a href="context-panel.html" class="btn btn-primary">Save</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

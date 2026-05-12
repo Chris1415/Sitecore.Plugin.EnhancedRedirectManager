@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Full Page — error · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="full-page-empty-no-selection.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <a class="blok-breadcrumb__item" href="full-page.html">MainSite</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Marketing campaigns</span>
+        </nav>
+        <div class="fp-topbar__actions">
+          <a class="blok-btn blok-btn--outline" href="full-page-import-preview.html">
+            <span class="glyph" data-icon="upload" data-size="14"></span>
+            Import
+          </a>
+          <button class="blok-btn blok-btn--outline">
+            <span class="glyph" data-icon="download" data-size="14"></span>
+            Export
+          </button>
+          <a class="blok-btn blok-btn--primary" href="full-page-create-redirect-map.html">
+            <span class="glyph" data-icon="plus" data-size="14"></span>
+            New map
+          </a>
+        </div>
+      </header>
+
+      <div class="fp-body">
+        <aside class="fp-rail" aria-label="Redirect maps">
+          <div class="fp-rail__pickers">
+            <div>
+              <label class="blok-label">Collection</label>
+              <select class="blok-select"><option>SneakerCo</option></select>
+            </div>
+            <div>
+              <label class="blok-label">Site</label>
+              <select class="blok-select"><option>MainSite</option></select>
+            </div>
+          </div>
+          <div class="fp-rail__list-hd">
+            <span>Redirect maps</span>
+            <span class="mono">12</span>
+          </div>
+          <div class="fp-rail__list" role="listbox">
+            <div class="fp-rail-row" role="option" aria-selected="true">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Marketing campaigns</span>
+                <span class="fp-rail-row__meta">12 mappings · 3 days ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">301</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Legacy product URLs</span>
+                <span class="fp-rail-row__meta">28 mappings · 2 wk ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">302</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">A/B test variants</span>
+                <span class="fp-rail-row__meta">6 mappings · 1 mo ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">Server Transfer</span>
+            </div>
+          </div>
+        </aside>
+
+        <main class="fp-pane" aria-label="Error loading redirect map">
+          <div class="fp-pane__inner">
+            <div class="blok-alert blok-alert--destructive" role="alert" aria-live="assertive">
+              <span class="blok-alert__icon" aria-hidden="true">&#x2715;</span>
+              <div class="blok-alert__body">
+                <p class="blok-alert__title">Couldn't save this Redirect Map.</p>
+                <p style="margin:0 0 0.5rem;">The Sitecore Authoring API rejected the update. Try again, or check Cloud Portal access on this tenant.</p>
+                <details open>
+                  <summary style="cursor:pointer; font-size:var(--text-xs); color:var(--destructive-foreground); font-weight:500;">Show technical details</summary>
+                  <pre style="margin:0.5rem 0 0; font-family:var(--font-mono); font-size:var(--text-2xs); color:var(--muted-foreground); background:var(--background); border:1px solid var(--border); padding:0.625rem; border-radius:var(--radius-sm); white-space:pre-wrap; word-break:break-all;">GraphQL error (request id 18a2-…-c41b)
+operation: updateItem
+itemId: {E39157F3-A81F-4692-B05D-178D48C836DE}
+status: 422
+message: "Field 'RedirectType' value 'CustomType' is not a valid enum member.
+          Allowed: ServerTransfer | 301 | 302 | 307."
+locations: [{ line: 4, column: 9 }]
+path: ["updateItem", "input", "fields", 0, "value"]</pre>
+                </details>
+                <div style="display:flex; gap:0.5rem; margin-top:0.625rem;">
+                  <button class="blok-btn blok-btn--destructive blok-btn--sm">
+                    <span class="glyph" data-icon="refresh" data-size="14"></span>
+                    Retry
+                  </button>
+                  <button class="blok-btn blok-btn--ghost blok-btn--sm">Dismiss</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Form is still visible but in aria-busy state -->
+            <section class="fp-section" aria-busy="true" style="opacity:0.65;">
+              <header class="fp-section__hd">
+                <span class="fp-section__lbl">Map attributes</span>
+                <span class="guid-badge">
+                  <span class="glyph" data-icon="copy" data-size="11"></span>
+                  78D48C836DE
+                </span>
+              </header>
+
+              <div class="fp-form-grid">
+                <div class="fp-field" style="grid-column: span 2;">
+                  <label class="blok-label">Name</label>
+                  <input class="blok-input" type="text" value="Marketing campaigns" disabled />
+                </div>
+                <div class="fp-field">
+                  <label class="blok-label">Type</label>
+                  <select class="blok-select" disabled>
+                    <option>301 — Permanent</option>
+                  </select>
+                </div>
+                <div class="fp-field">
+                  <label class="blok-label" style="margin-bottom:0.5rem;">Flags</label>
+                  <div class="fp-flags">
+                    <label class="blok-checkbox"><input type="checkbox" checked disabled /> Preserve query string</label>
+                    <label class="blok-checkbox"><input type="checkbox" disabled /> Preserve language</label>
+                    <label class="blok-checkbox"><input type="checkbox" disabled /> Include virtual folder</label>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <p style="text-align:center; padding:0.75rem 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground); border-top:1px solid var(--border);">
+      <a href="index.html">← Back to all surfaces</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

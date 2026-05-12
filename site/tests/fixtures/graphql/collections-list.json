@@ -1,0 +1,25 @@
+[
+  {
+    "id": "343b1245e77541cda8f2094b70531eb3",
+    "name": "solo",
+    "description": "",
+    "displayName": "solo",
+    "sortOrder": 100,
+    "createdBy": "sitecore\\christian.hahn@sitecore.com",
+    "created": "2025-12-09T14:10:07+00:00",
+    "permissions": {
+      "canAdmin": true,
+      "canWrite": true,
+      "canCreate": true,
+      "canDelete": true,
+      "canRename": true,
+      "canRead": true,
+      "canPublish": false,
+      "canDuplicate": false,
+      "canWriteLanguage": true
+    },
+    "settings": {
+      "itemPath": "/sitecore/content/solo"
+    }
+  }
+]

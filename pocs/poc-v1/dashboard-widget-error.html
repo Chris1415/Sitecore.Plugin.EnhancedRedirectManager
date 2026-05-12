@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard Widget — error · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="dw-frame-shell">
+      <section class="dw-frame" aria-label="Error loading redirect counts">
+        <header class="dw-head">
+          <h2 class="dw-head__title">Redirects</h2>
+          <span class="dw-head__site">MainSite · SneakerCo</span>
+        </header>
+
+        <div class="blok-alert blok-alert--destructive" role="alert" aria-live="assertive">
+          <span class="blok-alert__icon" aria-hidden="true">&#x2715;</span>
+          <div class="blok-alert__body">
+            <p class="blok-alert__title">Couldn't load redirect counts.</p>
+            <p style="margin: 0 0 0.5rem;">The Sitecore Authoring API didn't respond. Try again, or check Cloud Portal access.</p>
+            <details>
+              <summary style="cursor:pointer; font-size:var(--text-xs); color:var(--destructive-foreground); font-weight:500;">Show technical details</summary>
+              <pre style="margin: 0.5rem 0 0; font-family:var(--font-mono); font-size:var(--text-2xs); background:var(--background); border:1px solid var(--border); padding:0.5rem; border-radius:var(--radius-sm); white-space:pre-wrap;">GraphQL timeout (request id e91a-…-77d4)
+operation: GetRedirectStats
+status: 504 (gateway timeout after 30s)</pre>
+            </details>
+            <button class="blok-btn blok-btn--destructive-outline blok-btn--sm" style="margin-top:0.5rem;">
+              <span class="glyph" data-icon="refresh" data-size="14"></span>
+              Retry
+            </button>
+          </div>
+        </div>
+
+        <p class="dw-foot">Redirect counts only — usage analytics ship in a follow-on release.</p>
+      </section>
+    </div>
+
+    <p style="text-align:center; padding:0 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground);">
+      <a href="index.html">← Back to all surfaces</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

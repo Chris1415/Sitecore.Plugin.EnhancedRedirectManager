@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Full Page — create redirect map · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="full-page-empty-no-selection.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <a class="blok-breadcrumb__item" href="full-page.html">MainSite</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">New redirect map</span>
+        </nav>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" disabled>
+            <span class="glyph" data-icon="upload" data-size="14"></span>
+            Import
+          </button>
+          <button class="blok-btn blok-btn--outline">
+            <span class="glyph" data-icon="download" data-size="14"></span>
+            Export
+          </button>
+          <button class="blok-btn blok-btn--primary" disabled aria-disabled="true">
+            <span class="glyph" data-icon="plus" data-size="14"></span>
+            New map
+          </button>
+        </div>
+      </header>
+
+      <div class="fp-body">
+        <aside class="fp-rail" aria-label="Redirect maps">
+          <div class="fp-rail__pickers">
+            <div>
+              <label class="blok-label">Collection</label>
+              <select class="blok-select"><option>SneakerCo</option></select>
+            </div>
+            <div>
+              <label class="blok-label">Site</label>
+              <select class="blok-select"><option>MainSite</option></select>
+            </div>
+          </div>
+          <div class="fp-rail__list-hd">
+            <span>Redirect maps</span>
+            <span class="mono">12</span>
+          </div>
+          <div class="fp-rail__list" role="listbox">
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Marketing campaigns</span>
+                <span class="fp-rail-row__meta">12 mappings · 3 days ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">301</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Legacy product URLs</span>
+                <span class="fp-rail-row__meta">28 mappings · 2 wk ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">302</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">A/B test variants</span>
+                <span class="fp-rail-row__meta">6 mappings · 1 mo ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">Server Transfer</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Geo-IP fallbacks</span>
+                <span class="fp-rail-row__meta">4 mappings · 1 mo ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">307</span>
+            </div>
+          </div>
+        </aside>
+
+        <main class="fp-pane" aria-label="Create new redirect map">
+          <div class="fp-pane__inner">
+            <section class="fp-section">
+              <header class="fp-section__hd">
+                <span class="fp-section__lbl">New redirect map</span>
+                <span class="fp-section__sub" style="color:var(--muted-foreground);">GUID assigned on save</span>
+              </header>
+
+              <div class="fp-form-grid">
+                <div class="fp-field" style="grid-column: span 2;">
+                  <label class="blok-label blok-label--required">Name</label>
+                  <input class="blok-input" type="text" placeholder="e.g. Spring 2026 launch" autofocus />
+                </div>
+                <div class="fp-field">
+                  <label class="blok-label blok-label--required">Type</label>
+                  <select class="blok-select" required>
+                    <option value="" disabled selected>Pick a type…</option>
+                    <option value="301">301 — Permanent</option>
+                    <option value="302">302 — Found</option>
+                    <option value="307">307 — Temporary</option>
+                    <option value="ServerTransfer">Server Transfer</option>
+                  </select>
+                  <p class="blok-helper">Required — pick before saving.</p>
+                </div>
+                <div class="fp-field">
+                  <label class="blok-label" style="margin-bottom:0.5rem;">Flags</label>
+                  <div class="fp-flags">
+                    <label class="blok-checkbox"><input type="checkbox" /> Preserve query string</label>
+                    <label class="blok-checkbox"><input type="checkbox" /> Preserve language</label>
+                    <label class="blok-checkbox"><input type="checkbox" /> Include virtual folder</label>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <hr class="blok-separator" />
+
+            <section class="fp-section">
+              <header class="fp-section__hd">
+                <span class="fp-section__lbl">Mappings</span>
+                <span class="fp-section__sub">Empty maps allowed — add rows now or later.</span>
+              </header>
+
+              <div class="fp-mappings">
+                <div class="fp-mappings__hd">
+                  <span></span>
+                  <span>Source</span>
+                  <span></span>
+                  <span>Target</span>
+                  <span style="text-align:right;">Actions</span>
+                </div>
+
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono" type="text" placeholder="/source/path" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" placeholder="/target/path" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="fp-mapping-row fp-mapping-row--invalid">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono blok-input--invalid" type="text" value="" placeholder="/source/path" aria-invalid="true" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" value="/destination" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+                <div style="grid-column:1 / -1; padding:0 0.625rem 0.5rem; font-size:var(--text-2xs); color:var(--destructive);">
+                  Source is required.
+                </div>
+
+                <div class="fp-mappings__add">
+                  <button class="blok-btn blok-btn--ghost" style="width:100%; justify-content:flex-start;">
+                    <span class="glyph" data-icon="plus" data-size="14"></span>
+                    Add mapping
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <div class="fp-bottom fp-bottom--right">
+              <div class="fp-bottom__actions">
+                <a class="blok-btn blok-btn--ghost" href="full-page.html">Cancel</a>
+                <button class="blok-btn blok-btn--primary">
+                  <span class="glyph" data-icon="save" data-size="14"></span>
+                  Create map
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <p style="text-align:center; padding:0.75rem 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground); border-top:1px solid var(--border);">
+      <a href="index.html">← Back to all surfaces</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

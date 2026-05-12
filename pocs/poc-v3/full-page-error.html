@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Page — error — Site Atlas v3</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="poc-bar">
+      <div>
+        <a href="index.html">&larr; Hub</a> · Full Page — friendly error
+        (technical details expanded)
+      </div>
+      <div class="right">
+        <button
+          class="btn btn-outline btn-sm"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+          type="button"
+        >
+          Toggle theme
+        </button>
+      </div>
+    </header>
+
+    <div class="frame-fullpage" role="main">
+      <div class="fullpage-topbar">
+        <span class="app-name">Redirect Manager</span>
+        <div class="fullpage-actions">
+          <button class="btn btn-ghost btn-sm">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            <span class="label-extra">Import</span>
+          </button>
+          <button class="btn btn-ghost btn-sm">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <span class="label-extra">Export</span>
+          </button>
+        </div>
+      </div>
+
+      <nav class="fullpage-minimap is-wide" aria-hidden="true">
+        <span class="minimap-node is-collection">Brand Sites</span>
+        <span class="minimap-arrow">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m9 6 6 6-6 6" />
+          </svg>
+        </span>
+        <span class="minimap-node is-here">MarketingHub</span>
+        <span class="minimap-arrow">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="m9 6 6 6-6 6" />
+          </svg>
+        </span>
+        <span class="minimap-counter">
+          <strong>3</strong> Redirect Maps · <strong>47</strong> mappings
+        </span>
+      </nav>
+
+      <div class="fullpage-main">
+        <aside class="fullpage-picker">
+          <div class="picker-section">
+            <label class="label">Site collection</label>
+            <select class="input"><option>Brand Sites</option></select>
+          </div>
+          <div class="picker-section">
+            <label class="label">Site</label>
+            <select class="input"><option>MarketingHub</option></select>
+          </div>
+          <div class="picker-active-card">
+            <div class="picker-active-name">MarketingHub</div>
+            <div class="picker-active-host">marketing.example.com</div>
+          </div>
+        </aside>
+
+        <section class="fullpage-content">
+          <div
+            class="alert alert-destructive"
+            role="alert"
+            style="margin-bottom: 1rem"
+          >
+            <svg
+              class="alert-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              style="color: hsl(var(--destructive))"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="m15 9-6 6" />
+              <path d="m9 9 6 6" />
+            </svg>
+            <div class="alert-body">
+              <div class="alert-title">Couldn't save this Redirect Map</div>
+              <div style="margin-bottom: 0.5rem">
+                Sitecore rejected the request. You can retry, or check the
+                technical details for more context.
+              </div>
+
+              <details open>
+                <summary class="collapsible-summary">
+                  Hide technical details
+                </summary>
+                <pre
+                  class="codeblock"
+                  style="margin-top: 0.625rem"
+                >GraphQL error response
+
+  errors: [
+    {
+      message: "Field 'RedirectType' cannot accept value 'NotARealValue'.",
+      locations: [{ line: 4, column: 7 }],
+      path: ["updateItem", "input", "fields", 0, "value"],
+      extensions: {
+        code: "BAD_USER_INPUT",
+        operationName: "UpdateRedirectMap"
+      }
+    }
+  ]
+
+  request:
+    mutation UpdateRedirectMap($input: UpdateItemInput!) {
+      updateItem(input: $input) { itemId, name }
+    }</pre>
+              </details>
+
+              <div class="row" style="gap: 0.5rem; margin-top: 0.75rem">
+                <a href="full-page.html" class="btn btn-primary btn-sm">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M21 12a9 9 0 1 1-3-6.7L21 8" />
+                    <path d="M21 3v5h-5" />
+                  </svg>
+                  Retry
+                </a>
+                <a href="full-page.html" class="btn btn-ghost btn-sm"
+                  >Dismiss</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <h2
+            style="
+              margin: 0 0 0.875rem;
+              font-size: 1.125rem;
+              font-weight: 700;
+              letter-spacing: -0.01em;
+            "
+          >
+            Redirect Maps
+          </h2>
+
+          <div class="atlas-list" style="opacity: 0.6">
+            <article class="atlas-row">
+              <header class="atlas-row-header">
+                <span class="atlas-chevron"></span>
+                <span class="atlas-row-name">Marketing Campaigns 2026</span>
+                <div class="atlas-row-tags">
+                  <span class="badge badge-bold-primary">301</span>
+                  <span class="badge">12 mappings</span>
+                </div>
+                <div class="atlas-row-meta">
+                  <span>Updated 2h ago</span>
+                </div>
+                <span></span>
+              </header>
+            </article>
+            <article class="atlas-row">
+              <header class="atlas-row-header">
+                <span class="atlas-chevron"></span>
+                <span class="atlas-row-name">Product Renames</span>
+                <div class="atlas-row-tags">
+                  <span class="badge badge-bold-primary">302</span>
+                  <span class="badge">6 mappings</span>
+                </div>
+                <div class="atlas-row-meta">
+                  <span>Updated 3d ago</span>
+                </div>
+                <span></span>
+              </header>
+            </article>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

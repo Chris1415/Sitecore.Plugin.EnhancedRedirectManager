@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Context Panel — default — Site Atlas v3</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="poc-bar">
+      <div>
+        <a href="index.html">&larr; Hub</a> · Context Panel — default state
+      </div>
+      <div class="right">
+        <span class="muted">~360px wide · iframe</span>
+        <button
+          class="btn btn-outline btn-sm"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+          type="button"
+        >
+          Toggle theme
+        </button>
+      </div>
+    </header>
+
+    <main class="frame-context" role="main" aria-label="Pages context panel">
+      <div class="frame-context-content">
+        <!-- Persistent regex banner — non-dismissible -->
+        <div class="alert alert-warning" role="status">
+          <svg
+            class="alert-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M12 9v4" />
+            <path
+              d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"
+            />
+            <path d="M12 17h.01" />
+          </svg>
+          <div class="alert-body">
+            <div class="alert-title">Direct-string matches only</div>
+            <div>Regex pattern matches are not yet covered.</div>
+          </div>
+        </div>
+
+        <!-- Page-context heading -->
+        <div>
+          <span class="context-heading-label">Redirects affecting</span>
+          <span class="context-heading-path">/products/launch-2026</span>
+        </div>
+
+        <!-- Counter sentence -->
+        <div class="context-counter">
+          <strong>3</strong> Redirect Maps · <strong>5</strong> mappings
+        </div>
+
+        <!-- Add CTA -->
+        <a
+          href="context-panel-add-modal.html"
+          class="btn btn-primary btn-block"
+        >
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14" />
+            <path d="M12 5v14" />
+          </svg>
+          Add redirect for this page
+        </a>
+
+        <!-- Group cards -->
+
+        <!-- Group 1: Marketing Campaigns 2026 -->
+        <article class="group-card">
+          <header class="group-card-header">
+            <span class="group-card-name">Marketing Campaigns 2026</span>
+            <span class="badge badge-bold-primary">301</span>
+            <div class="group-card-flags">
+              <span class="badge badge-ghost">Q-string preserved</span>
+              <span class="badge badge-ghost">Lang preserved</span>
+            </div>
+          </header>
+
+          <div class="mapping-row">
+            <div>
+              <div class="arrow-row">
+                <span class="url url-source url-emphasis"
+                  >/products/launch-2026</span
+                >
+                <span class="arrow" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </span>
+                <span class="url url-target">/launch</span>
+              </div>
+              <div class="mapping-row-meta">
+                <span class="badge badge-xs">from this page</span>
+                <span class="muted text-xs">301 · permanent</span>
+              </div>
+            </div>
+            <div class="mapping-row-actions">
+              <a
+                href="context-panel-edit-row.html"
+                class="btn btn-icon btn-ghost"
+                aria-label="Edit mapping"
+                title="Edit mapping"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                  />
+                </svg>
+              </a>
+              <button
+                class="btn btn-icon btn-ghost"
+                aria-label="Mapping options"
+                title="More"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="1" />
+                  <circle cx="19" cy="12" r="1" />
+                  <circle cx="5" cy="12" r="1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="mapping-row">
+            <div>
+              <div class="arrow-row">
+                <span class="url url-source">/legacy/launch-page</span>
+                <span class="arrow" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </span>
+                <span class="url url-target url-emphasis"
+                  >/products/launch-2026</span
+                >
+              </div>
+              <div class="mapping-row-meta">
+                <span class="badge badge-xs">to this page</span>
+                <span class="muted text-xs">301 · permanent</span>
+              </div>
+            </div>
+            <div class="mapping-row-actions">
+              <a
+                href="context-panel-edit-row.html"
+                class="btn btn-icon btn-ghost"
+                aria-label="Edit mapping"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                  />
+                </svg>
+              </a>
+              <button class="btn btn-icon btn-ghost" aria-label="Mapping options">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="1" />
+                  <circle cx="19" cy="12" r="1" />
+                  <circle cx="5" cy="12" r="1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Group 2: Product Renames -->
+        <article class="group-card">
+          <header class="group-card-header">
+            <span class="group-card-name">Product Renames</span>
+            <span class="badge badge-bold-primary">302</span>
+            <div class="group-card-flags">
+              <span class="badge badge-ghost">Vfolder included</span>
+            </div>
+          </header>
+
+          <div class="mapping-row">
+            <div>
+              <div class="arrow-row">
+                <span class="url url-source url-emphasis"
+                  >/products/launch-2026</span
+                >
+                <span class="arrow" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </span>
+                <span class="url url-target">/products/edition-x</span>
+              </div>
+              <div class="mapping-row-meta">
+                <span class="badge badge-xs">from this page</span>
+                <span class="muted text-xs">302 · temporary</span>
+              </div>
+            </div>
+            <div class="mapping-row-actions">
+              <a
+                href="context-panel-edit-row.html"
+                class="btn btn-icon btn-ghost"
+                aria-label="Edit mapping"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                  />
+                </svg>
+              </a>
+              <button class="btn btn-icon btn-ghost" aria-label="Mapping options">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="1" />
+                  <circle cx="19" cy="12" r="1" />
+                  <circle cx="5" cy="12" r="1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Group 3: Internal Reorg -->
+        <article class="group-card">
+          <header class="group-card-header">
+            <span class="group-card-name">Internal Reorg</span>
+            <span class="badge badge-bold-primary">Server&nbsp;Transfer</span>
+            <div class="group-card-flags">
+              <span class="badge badge-ghost">Q-string preserved</span>
+            </div>
+          </header>
+
+          <div class="mapping-row">
+            <div>
+              <div class="arrow-row">
+                <span class="url url-source">/about/2025-launch</span>
+                <span class="arrow" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </span>
+                <span class="url url-target url-emphasis"
+                  >/products/launch-2026</span
+                >
+              </div>
+              <div class="mapping-row-meta">
+                <span class="badge badge-xs">to this page</span>
+              </div>
+            </div>
+            <div class="mapping-row-actions">
+              <a
+                href="context-panel-edit-row.html"
+                class="btn btn-icon btn-ghost"
+                aria-label="Edit mapping"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                  />
+                </svg>
+              </a>
+              <button class="btn btn-icon btn-ghost" aria-label="Mapping options">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="1" />
+                  <circle cx="19" cy="12" r="1" />
+                  <circle cx="5" cy="12" r="1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="mapping-row">
+            <div>
+              <div class="arrow-row">
+                <span class="url url-source url-emphasis"
+                  >/products/launch-2026</span
+                >
+                <span class="arrow" aria-hidden="true">
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.25"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </span>
+                <span class="url url-target">/news/2026-launch-announcement</span>
+              </div>
+              <div class="mapping-row-meta">
+                <span class="badge badge-xs">from this page</span>
+              </div>
+            </div>
+            <div class="mapping-row-actions">
+              <a
+                href="context-panel-edit-row.html"
+                class="btn btn-icon btn-ghost"
+                aria-label="Edit mapping"
+              >
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"
+                  />
+                </svg>
+              </a>
+              <button class="btn btn-icon btn-ghost" aria-label="Mapping options">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="1" />
+                  <circle cx="19" cy="12" r="1" />
+                  <circle cx="5" cy="12" r="1" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Full Page — Import summary · Editor's Studio</title>
+<link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+<nav style="padding: 0.5rem 1rem; border-bottom: 1px solid hsl(var(--border)); display: flex; gap: 1rem; align-items: center; font-size: 0.8125rem;">
+  <a href="index.html" style="color: hsl(var(--muted-foreground)); text-decoration: none;">&larr; All screens</a>
+  <span style="color: hsl(var(--muted-foreground));">·</span>
+  <span class="font-medium">Full Page — Import summary (Step 3 of 3)</span>
+</nav>
+
+<main class="frame frame-fullpage" style="padding: 2rem; min-height: calc(100vh - 40px);">
+
+  <header style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem;">
+    <div style="flex: 1;">
+      <span class="kicker">Import · into Northwind Marketing</span>
+      <h1 style="font-size: 1.5rem; font-weight: 600; letter-spacing: -0.015em; margin: 0.25rem 0 0;">Import complete</h1>
+      <p style="margin: 0.25rem 0 0; font-size: 0.875rem; color: hsl(var(--muted-foreground));">
+        4 of 5 items succeeded · 1 failed · finished in 8.4&#8239;s
+      </p>
+    </div>
+  </header>
+
+  <div class="stepper" style="margin-bottom: 1.25rem;">
+    <span class="step done">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><path d="M20 6 9 17l-5-5"/></svg>
+      Upload
+    </span>
+    <span class="sep">/</span>
+    <span class="step done">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><path d="M20 6 9 17l-5-5"/></svg>
+      Review
+    </span>
+    <span class="sep">/</span>
+    <span class="step active">Apply</span>
+  </div>
+
+  <!-- Progress bar (full) -->
+  <div style="margin-bottom: 1.5rem; max-width: 56rem;">
+    <div class="progress" role="progressbar" aria-valuenow="100" aria-valuemax="100" aria-label="Import progress">
+      <div class="fill" style="width: 100%;"></div>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.75rem; color: hsl(var(--muted-foreground));">
+      <span><span class="tabular">5</span> of <span class="tabular">5</span> processed</span>
+      <span><span style="color: hsl(var(--success));">4 succeeded</span> · <span style="color: hsl(var(--destructive));">1 failed</span></span>
+    </div>
+  </div>
+
+  <div style="max-width: 56rem; display: flex; flex-direction: column; gap: 0.5rem;">
+
+    <!-- Succeeded -->
+    <article class="card" style="padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem;">
+      <span style="color: hsl(var(--success)); display: flex;" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+      </span>
+      <div style="flex: 1;">
+        <p style="margin: 0; font-size: 0.9375rem; font-weight: 500;">Investor Relations Migrations</p>
+        <p style="margin: 0.125rem 0 0; font-size: 0.75rem; color: hsl(var(--muted-foreground));">5 mappings · GUID …A211F</p>
+      </div>
+      <span class="chip chip-success">Created</span>
+    </article>
+
+    <article class="card" style="padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem;">
+      <span style="color: hsl(var(--success)); display: flex;" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+      </span>
+      <div style="flex: 1;">
+        <p style="margin: 0; font-size: 0.9375rem; font-weight: 500;">Legacy Path Cleanup</p>
+        <p style="margin: 0.125rem 0 0; font-size: 0.75rem; color: hsl(var(--muted-foreground));">9 mappings · GUID …836DE</p>
+      </div>
+      <span class="chip chip-success">Overwrote</span>
+    </article>
+
+    <article class="card" style="padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem;">
+      <span style="color: hsl(var(--success)); display: flex;" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+      </span>
+      <div style="flex: 1;">
+        <p style="margin: 0; font-size: 0.9375rem; font-weight: 500;">Quarterly Report URLs</p>
+        <p style="margin: 0.125rem 0 0; font-size: 0.75rem; color: hsl(var(--muted-foreground));">3 mappings · GUID …BC44E</p>
+      </div>
+      <span class="chip chip-success">Created</span>
+    </article>
+
+    <!-- Skipped -->
+    <article class="card" style="padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem;">
+      <span style="color: hsl(var(--muted-foreground)); display: flex;" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+      </span>
+      <div style="flex: 1;">
+        <p style="margin: 0; font-size: 0.9375rem; font-weight: 500; color: hsl(var(--muted-foreground));">Marketing Campaigns 2025</p>
+        <p style="margin: 0.125rem 0 0; font-size: 0.75rem; color: hsl(var(--muted-foreground));">7 mappings · GUID …F18E2</p>
+      </div>
+      <span class="chip">Skipped</span>
+    </article>
+
+    <!-- Failed -->
+    <article class="card" style="padding: 1rem 1.25rem; border-color: hsl(var(--destructive) / 0.3);">
+      <div style="display: flex; align-items: flex-start; gap: 1rem;">
+        <span style="color: hsl(var(--destructive)); display: flex; padding-top: 0.125rem;" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+        </span>
+        <div style="flex: 1;">
+          <p style="margin: 0; font-size: 0.9375rem; font-weight: 500;">Career Page Renames</p>
+          <p style="margin: 0.125rem 0 0; font-size: 0.75rem; color: hsl(var(--muted-foreground));">12 mappings · GUID …0142A</p>
+          <p style="margin: 0.5rem 0 0; font-size: 0.8125rem; color: hsl(var(--destructive));">Couldn't apply — try again, or open the technical details.</p>
+          <button style="margin-top: 0.5rem; background: transparent; border: none; padding: 0; font-size: 0.8125rem; color: hsl(var(--muted-foreground)); cursor: pointer; display: inline-flex; align-items: center; gap: 0.25rem; font-family: inherit;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            Show technical details
+          </button>
+        </div>
+        <span class="chip chip-destructive">Failed</span>
+      </div>
+    </article>
+
+  </div>
+
+  <!-- Footer actions -->
+  <div style="margin-top: 2rem; display: flex; gap: 0.5rem; justify-content: flex-end; max-width: 56rem;">
+    <button class="btn btn-outline">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9"/><path d="M3 4v5h5"/></svg>
+      Retry failed (1)
+    </button>
+    <a href="full-page.html" class="btn btn-primary">Done</a>
+  </div>
+
+  <!-- Success toast (sample) -->
+  <div class="toast" role="status">
+    <span class="icon" aria-hidden="true">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+    </span>
+    <span>Imported 4 redirect maps</span>
+  </div>
+
+</main>
+
+</body>
+</html>

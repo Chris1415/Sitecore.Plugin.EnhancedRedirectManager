@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Import summary — Site Atlas v3</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="poc-bar">
+      <div>
+        <a href="index.html">&larr; Hub</a> · Full Page — Import summary
+        (per-item success / fail)
+      </div>
+      <div class="right">
+        <button
+          class="btn btn-outline btn-sm"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+          type="button"
+        >
+          Toggle theme
+        </button>
+      </div>
+    </header>
+
+    <div class="frame-fullpage" role="main">
+      <div class="fullpage-topbar">
+        <span class="app-name">Redirect Manager</span>
+        <div class="fullpage-actions">
+          <span class="text-xs muted">Imported into <strong style="color: hsl(var(--foreground))">MarketingHub</strong></span>
+        </div>
+      </div>
+
+      <div class="fullpage-main" style="grid-template-columns: 1fr">
+        <section class="fullpage-content" style="padding: 1.5rem 2rem">
+          <h2
+            style="
+              margin: 0 0 0.25rem;
+              font-size: 1.375rem;
+              font-weight: 700;
+              letter-spacing: -0.01em;
+            "
+          >
+            Import finished with errors
+          </h2>
+          <p class="muted text-sm" style="margin: 0 0 1.25rem">
+            6 of 7 incoming items were applied. 1 failed and can be retried in
+            isolation.
+          </p>
+
+          <div
+            class="tile-grid"
+            style="margin-bottom: 1.25rem; max-width: 480px"
+          >
+            <div class="stat-tile" style="grid-column: span 1">
+              <span class="stat-tile-value" style="color: hsl(var(--primary))">
+                6
+              </span>
+              <span class="stat-tile-label">Succeeded</span>
+            </div>
+            <div
+              class="stat-tile"
+              style="
+                grid-column: span 1;
+                background: hsl(var(--destructive) / 0.08);
+                border-color: hsl(var(--destructive) / 0.4);
+              "
+            >
+              <span
+                class="stat-tile-value"
+                style="color: hsl(var(--destructive))"
+              >
+                1
+              </span>
+              <span class="stat-tile-label">Failed</span>
+            </div>
+          </div>
+
+          <div class="section-h">Per-item outcome</div>
+          <div class="card card-flush">
+            <table class="tbl">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>Item</th>
+                  <th>Action</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="width: 1.5rem">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      style="color: hsl(var(--primary))"
+                      aria-label="Succeeded"
+                    >
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  </td>
+                  <td>
+                    <strong>Q1 Promo Campaign</strong>
+                    <div class="text-xs muted">8 mappings · created</div>
+                  </td>
+                  <td><span class="badge">Create</span></td>
+                  <td class="muted text-xs">Created in 1.2s</td>
+                </tr>
+                <tr>
+                  <td>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      style="color: hsl(var(--primary))"
+                    >
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  </td>
+                  <td>
+                    <strong>Black Friday Redirects</strong>
+                    <div class="text-xs muted">14 mappings · created</div>
+                  </td>
+                  <td><span class="badge">Create</span></td>
+                  <td class="muted text-xs">Created in 1.7s</td>
+                </tr>
+                <tr>
+                  <td>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      style="color: hsl(var(--primary))"
+                    >
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  </td>
+                  <td>
+                    <strong>Marketing Campaigns 2026</strong>
+                    <div class="text-xs muted">14 mappings · overwritten</div>
+                  </td>
+                  <td><span class="badge">Overwrite</span></td>
+                  <td class="muted text-xs">Overwritten in 0.9s</td>
+                </tr>
+                <tr>
+                  <td>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      style="color: hsl(var(--muted-foreground))"
+                    >
+                      <path d="M9 12h6" />
+                    </svg>
+                  </td>
+                  <td>
+                    <strong>Product Renames</strong>
+                    <div class="text-xs muted">Skipped on operator request</div>
+                  </td>
+                  <td><span class="badge">Skip</span></td>
+                  <td class="muted text-xs">No change</td>
+                </tr>
+                <tr style="background: hsl(var(--destructive) / 0.06)">
+                  <td>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      style="color: hsl(var(--destructive))"
+                      aria-label="Failed"
+                    >
+                      <path d="M18 6 6 18" />
+                      <path d="m6 6 12 12" />
+                    </svg>
+                  </td>
+                  <td>
+                    <strong>Internal Reorg</strong>
+                    <details style="margin-top: 0.25rem">
+                      <summary class="collapsible-summary">
+                        Show technical details
+                      </summary>
+                      <pre
+                        class="codeblock"
+                        style="margin-top: 0.5rem; max-width: 640px"
+                      >GraphQL error: Field "RedirectType" cannot accept value "ServerTransferLegacy". Expected one of: 301, 302, 307, ServerTransfer.
+  Path: createItem.input.fields[2].value
+  Code: BAD_USER_INPUT</pre>
+                    </details>
+                  </td>
+                  <td><span class="badge">Overwrite</span></td>
+                  <td class="muted text-xs">Sitecore rejected</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div
+            class="row-between"
+            style="
+              margin-top: 1.25rem;
+              padding-top: 1rem;
+              border-top: 1px solid hsl(var(--border));
+            "
+          >
+            <div class="text-sm muted">
+              Failed items can be retried without re-running the whole import.
+            </div>
+            <div class="row" style="gap: 0.5rem">
+              <a href="full-page.html" class="btn btn-ghost">Done</a>
+              <a href="full-page-import-preview.html" class="btn btn-primary">
+                Retry failed items only
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

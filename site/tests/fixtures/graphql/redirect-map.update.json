@@ -1,0 +1,20 @@
+{
+  "_meta": {
+    "source": "real-tenant capture 2026-05-11 (Tranche 6a write-capture session)",
+    "mutation": "updateItem(input: UpdateItemInput!) { item { itemId } }",
+    "single_field_update": "yes — sending only one field in fields[] updates just that field and leaves others intact",
+    "boolean_repr": "string '1' / '0' (canonical write repr). Wire also accepts 'true'/'false' but '1'/'0' is canonical.",
+    "redirect_type_values_accepted": ["ServerTransfer", "Redirect301", "Redirect302"],
+    "redirect_type_NOT_supported_by_head_app": "Redirect307 — schema accepts the string, but the head-app resolver does not honour it. Remove from operator UI.",
+    "rename_via_updateItem_name": "FAILS with EXEC_INVALID_TYPE — name is not a valid UpdateItemInput field. Use renameItem mutation instead."
+  },
+  "data": {
+    "data": {
+      "updateItem": {
+        "item": {
+          "itemId": "f727f496f04f441e8556ae52d7c90477"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Redirect Manager — POC v3 "Site Atlas" — Hub</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <header class="poc-bar">
+      <div>
+        <strong>Redirect Manager — POC v3 "Site Atlas"</strong> — clickdummy hub
+      </div>
+      <div class="right">
+        <span class="muted">Static prototype · placeholder data</span>
+        <button
+          class="btn btn-outline btn-sm"
+          data-theme-toggle
+          aria-label="Switch to dark theme"
+          type="button"
+        >
+          Toggle theme
+        </button>
+      </div>
+    </header>
+
+    <main class="hub">
+      <h1>Site Atlas</h1>
+      <p class="lead">
+        A navigable map of the site's URL surface. Three Cloud Portal extension
+        points; one consistent metaphor — directional arrows for source →
+        target, and a parent-child atlas tree for Redirect Maps. Pick a screen
+        below to evaluate the look, the rhythm, and the responsive behaviour.
+      </p>
+
+      <h2>Context Panel — Pages editor</h2>
+      <div class="hub-grid">
+        <a href="context-panel.html" class="hub-card">
+          <span class="hub-tag">Default</span>
+          <span class="hub-card-title">Context panel — populated</span>
+          <span class="hub-card-desc"
+            >3 maps grouped, source → target arrows, regex banner pinned.</span
+          >
+        </a>
+        <a href="context-panel-empty.html" class="hub-card">
+          <span class="hub-tag">Empty</span>
+          <span class="hub-card-title">No redirects affect this page</span>
+          <span class="hub-card-desc"
+            >Calm illustrative empty state, banner remains.</span
+          >
+        </a>
+        <a href="context-panel-add-modal.html" class="hub-card">
+          <span class="hub-tag">Modal · step 1</span>
+          <span class="hub-card-title">Add redirect — pick a Map</span>
+          <span class="hub-card-desc"
+            >Searchable existing maps + "Create new" first row.</span
+          >
+        </a>
+        <a href="context-panel-add-existing.html" class="hub-card">
+          <span class="hub-tag">Modal · step 2a</span>
+          <span class="hub-card-title">Inline form — existing map</span>
+          <span class="hub-card-desc"
+            >Source pre-filled to current page, target required.</span
+          >
+        </a>
+        <a href="context-panel-create-new-map.html" class="hub-card">
+          <span class="hub-tag">Modal · step 2b</span>
+          <span class="hub-card-title">Inline form — create new map</span>
+          <span class="hub-card-desc"
+            >Type dropdown empty initially, three flag checkboxes.</span
+          >
+        </a>
+        <a href="context-panel-edit-row.html" class="hub-card">
+          <span class="hub-tag">Inline edit</span>
+          <span class="hub-card-title">Edit a single mapping row</span>
+          <span class="hub-card-desc"
+            >Two-field inline form, save / cancel.</span
+          >
+        </a>
+      </div>
+
+      <h2>Dashboard widget</h2>
+      <div class="hub-grid">
+        <a href="dashboard-widget.html" class="hub-card">
+          <span class="hub-tag">Default</span>
+          <span class="hub-card-title">3 stat tiles + mini-graphic</span>
+          <span class="hub-card-desc"
+            >Maps · Mappings · Last updated. Decorative SVG corner accent.</span
+          >
+        </a>
+        <a href="dashboard-widget-empty.html" class="hub-card">
+          <span class="hub-tag">Empty</span>
+          <span class="hub-card-title">No redirects configured</span>
+          <span class="hub-card-desc"
+            >Faint atlas-frame illustration, single CTA.</span
+          >
+        </a>
+      </div>
+
+      <h2>Full Page</h2>
+      <div class="hub-grid">
+        <a href="full-page.html" class="hub-card">
+          <span class="hub-tag">Default</span>
+          <span class="hub-card-title">Site Atlas — picker + tree</span>
+          <span class="hub-card-desc"
+            >Minimap header, expanded Map row with signature
+            border.</span
+          >
+        </a>
+        <a href="full-page-empty-no-selection.html" class="hub-card">
+          <span class="hub-tag">First load</span>
+          <span class="hub-card-title">Pick a collection to begin</span>
+          <span class="hub-card-desc"
+            >Empty content pane, picker waiting for input.</span
+          >
+        </a>
+        <a href="full-page-no-redirects.html" class="hub-card">
+          <span class="hub-tag">Site empty</span>
+          <span class="hub-card-title">Site selected, zero maps</span>
+          <span class="hub-card-desc"
+            >Atlas-frame empty illustration, "+ New Redirect Map" CTA.</span
+          >
+        </a>
+        <a href="full-page-create-redirect-map.html" class="hub-card">
+          <span class="hub-tag">Form · create</span>
+          <span class="hub-card-title">New Redirect Map sheet</span>
+          <span class="hub-card-desc"
+            >Right-anchored sheet, repeater for mappings.</span
+          >
+        </a>
+        <a href="full-page-edit-redirect-map.html" class="hub-card">
+          <span class="hub-tag">Form · edit</span>
+          <span class="hub-card-title">Edit Redirect Map sheet</span>
+          <span class="hub-card-desc"
+            >Pre-filled values, dirty-state ready for confirm-on-cancel.</span
+          >
+        </a>
+        <a href="full-page-import-preview.html" class="hub-card">
+          <span class="hub-tag">Import · preview</span>
+          <span class="hub-card-title">3-action conflict picker</span>
+          <span class="hub-card-desc"
+            >Per-row Create / Overwrite / Skip + collapsible diff.</span
+          >
+        </a>
+        <a href="full-page-import-summary.html" class="hub-card">
+          <span class="hub-tag">Import · summary</span>
+          <span class="hub-card-title">Per-item success / fail</span>
+          <span class="hub-card-desc"
+            >Final state with retry-failed-only affordance.</span
+          >
+        </a>
+        <a href="full-page-error.html" class="hub-card">
+          <span class="hub-tag">Error</span>
+          <span class="hub-card-title">Friendly error banner</span>
+          <span class="hub-card-desc"
+            >Couldn't save · technical details expanded · retry / dismiss.</span
+          >
+        </a>
+      </div>
+
+      <hr class="divider" />
+      <p class="muted text-sm">
+        See <code>click-targets.md</code> for the full enumeration of clickable
+        elements and their post-state files. Open this file via
+        <code>file://</code> directly.
+      </p>
+    </main>
+  </body>
+</html>

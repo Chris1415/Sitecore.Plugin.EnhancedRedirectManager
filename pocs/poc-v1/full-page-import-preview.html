@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Full Page — import preview · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="full-page-empty-no-selection.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <a class="blok-breadcrumb__item" href="full-page.html">MainSite</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Import preview</span>
+        </nav>
+        <div class="fp-topbar__actions">
+          <a class="blok-btn blok-btn--ghost" href="full-page.html">Cancel</a>
+        </div>
+      </header>
+
+      <div class="fp-body">
+        <aside class="fp-rail" aria-label="Redirect maps">
+          <div class="fp-rail__pickers">
+            <div>
+              <label class="blok-label">Collection</label>
+              <select class="blok-select"><option>SneakerCo</option></select>
+            </div>
+            <div>
+              <label class="blok-label">Site</label>
+              <select class="blok-select"><option>MainSite</option></select>
+            </div>
+          </div>
+          <div class="fp-rail__list-hd">
+            <span>Redirect maps</span>
+            <span class="mono">12</span>
+          </div>
+          <div class="fp-rail__list" role="listbox" aria-disabled="true" style="opacity:0.6; pointer-events:none;">
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Marketing campaigns</span>
+                <span class="fp-rail-row__meta">12 mappings · 3 days ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">301</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">Legacy product URLs</span>
+                <span class="fp-rail-row__meta">28 mappings · 2 wk ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">302</span>
+            </div>
+            <div class="fp-rail-row" role="option">
+              <div class="fp-rail-row__main">
+                <span class="fp-rail-row__name">A/B test variants</span>
+                <span class="fp-rail-row__meta">6 mappings · 1 mo ago</span>
+              </div>
+              <span class="blok-badge blok-badge--secondary">Server Transfer</span>
+            </div>
+          </div>
+        </aside>
+
+        <main class="fp-pane" aria-label="Import preview">
+          <div class="fp-pane__inner">
+            <!-- Summary -->
+            <div class="fp-import-summary">
+              <h2>Import redirects</h2>
+              <p>
+                Importing <strong style="color:var(--foreground); font-family:var(--font-mono);">redirects-staging-2026-05-09.json</strong> into MainSite (SneakerCo).
+              </p>
+              <p>
+                <span class="mono">24</span> redirect maps in file ·
+                <span class="mono">8</span> new ·
+                <span class="mono">14</span> conflicting ·
+                <span class="mono">2</span> unchanged
+              </p>
+              <div class="fp-import-counts">
+                <span class="blok-badge blok-badge--success">8 new</span>
+                <span class="blok-badge blok-badge--warning">14 conflicting</span>
+                <span class="blok-badge blok-badge--muted">2 unchanged</span>
+              </div>
+            </div>
+
+            <div class="blok-alert blok-alert--info" role="note">
+              <span class="blok-alert__icon glyph" data-icon="info" data-size="14"></span>
+              <div class="blok-alert__body">
+                <strong>Tip:</strong> export the current site first as a backup before importing — confirm cannot be undone.
+              </div>
+            </div>
+
+            <!-- Bulk action -->
+            <div class="fp-import-bulk">
+              <span>Apply same action to all <strong style="color:var(--foreground);">14 conflicts</strong>:</span>
+              <select class="blok-select" style="width: 12rem;">
+                <option value="" selected>(no bulk action)</option>
+                <option value="create">Create</option>
+                <option value="overwrite">Overwrite</option>
+                <option value="skip">Skip</option>
+              </select>
+            </div>
+
+            <!-- Item list -->
+            <div class="fp-import-list">
+              <!-- New row 1 -->
+              <div class="fp-import-row">
+                <span class="fp-import-row__chevron"><span class="glyph blok-chevron" data-icon="chevron-right" data-size="14"></span></span>
+                <div class="fp-import-row__main">
+                  <span class="fp-import-row__title">
+                    <span class="blok-badge blok-badge--success">New</span>
+                    Spring 2026 launch
+                  </span>
+                  <span class="fp-import-row__guid">…6E5C9F3D88E1</span>
+                </div>
+                <span class="fp-import-row__indicator" aria-hidden="true"></span>
+                <select class="blok-select fp-import-row__action">
+                  <option value="create" selected>Create</option>
+                  <option value="skip">Skip</option>
+                </select>
+              </div>
+
+              <!-- Conflict row — unresolved -->
+              <div class="fp-import-row">
+                <span class="fp-import-row__chevron"><span class="glyph blok-chevron" data-icon="chevron-right" data-size="14"></span></span>
+                <div class="fp-import-row__main">
+                  <span class="fp-import-row__title">
+                    <span class="blok-badge blok-badge--warning">Conflict</span>
+                    Marketing campaigns
+                  </span>
+                  <span class="fp-import-row__guid">…78D48C836DE</span>
+                </div>
+                <span class="fp-import-row__indicator" aria-label="Action required">
+                  <span class="glyph" data-icon="alert-circle" data-size="13"></span>
+                </span>
+                <select class="blok-select fp-import-row__action" required>
+                  <option value="" disabled selected>Pick action…</option>
+                  <option value="create">Create</option>
+                  <option value="overwrite">Overwrite</option>
+                  <option value="skip">Skip</option>
+                </select>
+              </div>
+
+              <!-- Conflict row — expanded with diff -->
+              <div class="fp-import-row" style="grid-template-rows: auto auto;">
+                <span class="fp-import-row__chevron"><span class="glyph blok-chevron" data-icon="chevron-right" data-size="14" data-open="true" style="transform: rotate(90deg);"></span></span>
+                <div class="fp-import-row__main">
+                  <span class="fp-import-row__title">
+                    <span class="blok-badge blok-badge--warning">Conflict</span>
+                    Legacy product URLs
+                  </span>
+                  <span class="fp-import-row__guid">…2E5C9F3D88E1</span>
+                </div>
+                <span class="fp-import-row__indicator"></span>
+                <select class="blok-select fp-import-row__action">
+                  <option value="">Pick action…</option>
+                  <option value="create">Create</option>
+                  <option value="overwrite" selected>Overwrite</option>
+                  <option value="skip">Skip</option>
+                </select>
+
+                <!-- Diff body -->
+                <div class="fp-import-row__diff">
+                  <div class="fp-diff-table">
+                    <span class="fp-diff-table__hd">Field</span>
+                    <span class="fp-diff-table__hd">Current</span>
+                    <span class="fp-diff-table__hd">Incoming</span>
+
+                    <span style="font-weight:500; color:var(--foreground);">Type</span>
+                    <span class="fp-diff-cell--current">301</span>
+                    <span class="fp-diff-cell--incoming">302</span>
+
+                    <span style="font-weight:500; color:var(--foreground);">Pres. Lang</span>
+                    <span class="fp-diff-cell--current">false</span>
+                    <span class="fp-diff-cell--incoming">true</span>
+                  </div>
+
+                  <div style="margin-top:0.625rem;">
+                    <p class="fp-section__lbl" style="margin:0 0 0.25rem;">Mappings (4 changes)</p>
+                    <div class="fp-diff-mapping fp-diff-mapping--added">
+                      <span class="fp-diff-mapping__lbl">+ added</span>
+                      <span class="fp-diff-mapping__src">/old/about-us</span>
+                      <span class="mono">→</span>
+                      <span class="fp-diff-mapping__tgt">/about</span>
+                    </div>
+                    <div class="fp-diff-mapping fp-diff-mapping--added">
+                      <span class="fp-diff-mapping__lbl">+ added</span>
+                      <span class="fp-diff-mapping__src">/old/contact-us</span>
+                      <span class="mono">→</span>
+                      <span class="fp-diff-mapping__tgt">/contact</span>
+                    </div>
+                    <div class="fp-diff-mapping fp-diff-mapping--changed">
+                      <span class="fp-diff-mapping__lbl">~ changed</span>
+                      <span class="mono" style="color:var(--muted-foreground);">/old/products/runners</span>
+                      <span class="mono">→</span>
+                      <span class="fp-diff-mapping__tgt">/products/sneakers</span>
+                    </div>
+                    <div class="fp-diff-mapping fp-diff-mapping--removed">
+                      <span class="fp-diff-mapping__lbl">− removed</span>
+                      <span class="fp-diff-mapping__src">/old/2024-archive</span>
+                      <span class="mono">→</span>
+                      <span class="fp-diff-mapping__tgt">/archive</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- More conflict rows -->
+              <div class="fp-import-row">
+                <span class="fp-import-row__chevron"><span class="glyph blok-chevron" data-icon="chevron-right" data-size="14"></span></span>
+                <div class="fp-import-row__main">
+                  <span class="fp-import-row__title">
+                    <span class="blok-badge blok-badge--warning">Conflict</span>
+                    A/B test variants
+                  </span>
+                  <span class="fp-import-row__guid">…44A2B1882E5C</span>
+                </div>
+                <span class="fp-import-row__indicator">
+                  <span class="glyph" data-icon="alert-circle" data-size="13"></span>
+                </span>
+                <select class="blok-select fp-import-row__action">
+                  <option value="" disabled selected>Pick action…</option>
+                  <option value="create">Create</option>
+                  <option value="overwrite">Overwrite</option>
+                  <option value="skip">Skip</option>
+                </select>
+              </div>
+
+              <!-- Unchanged row -->
+              <div class="fp-import-row">
+                <span class="fp-import-row__chevron"><span class="glyph blok-chevron" data-icon="chevron-right" data-size="14"></span></span>
+                <div class="fp-import-row__main">
+                  <span class="fp-import-row__title">
+                    <span class="blok-badge blok-badge--muted">Unchanged</span>
+                    Geo-IP fallbacks
+                  </span>
+                  <span class="fp-import-row__guid">…C7B41E0928F3</span>
+                </div>
+                <span class="fp-import-row__indicator"></span>
+                <select class="blok-select fp-import-row__action">
+                  <option value="skip" selected>Skip</option>
+                  <option value="overwrite">Overwrite</option>
+                </select>
+              </div>
+
+              <!-- New row -->
+              <div class="fp-import-row">
+                <span class="fp-import-row__chevron"><span class="glyph blok-chevron" data-icon="chevron-right" data-size="14"></span></span>
+                <div class="fp-import-row__main">
+                  <span class="fp-import-row__title">
+                    <span class="blok-badge blok-badge--success">New</span>
+                    Influencer Q2 partners
+                  </span>
+                  <span class="fp-import-row__guid">…1A8E33F921B7</span>
+                </div>
+                <span class="fp-import-row__indicator"></span>
+                <select class="blok-select fp-import-row__action">
+                  <option value="create" selected>Create</option>
+                  <option value="skip">Skip</option>
+                </select>
+              </div>
+
+              <!-- Conflict row — unresolved -->
+              <div class="fp-import-row">
+                <span class="fp-import-row__chevron"><span class="glyph blok-chevron" data-icon="chevron-right" data-size="14"></span></span>
+                <div class="fp-import-row__main">
+                  <span class="fp-import-row__title">
+                    <span class="blok-badge blok-badge--warning">Conflict</span>
+                    404 rescue chain
+                  </span>
+                  <span class="fp-import-row__guid">…99E10F5B7A23</span>
+                </div>
+                <span class="fp-import-row__indicator">
+                  <span class="glyph" data-icon="alert-circle" data-size="13"></span>
+                </span>
+                <select class="blok-select fp-import-row__action">
+                  <option value="" disabled selected>Pick action…</option>
+                  <option value="create">Create</option>
+                  <option value="overwrite">Overwrite</option>
+                  <option value="skip">Skip</option>
+                </select>
+              </div>
+
+              <!-- Unchanged row -->
+              <div class="fp-import-row">
+                <span class="fp-import-row__chevron"><span class="glyph blok-chevron" data-icon="chevron-right" data-size="14"></span></span>
+                <div class="fp-import-row__main">
+                  <span class="fp-import-row__title">
+                    <span class="blok-badge blok-badge--muted">Unchanged</span>
+                    Holiday landing pages 2025
+                  </span>
+                  <span class="fp-import-row__guid">…F5BB12CC8902</span>
+                </div>
+                <span class="fp-import-row__indicator"></span>
+                <select class="blok-select fp-import-row__action">
+                  <option value="skip" selected>Skip</option>
+                  <option value="overwrite">Overwrite</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Bottom actions -->
+            <div class="fp-bottom">
+              <a class="blok-btn blok-btn--ghost" href="full-page.html">Cancel</a>
+              <div class="fp-bottom__actions">
+                <span class="blok-tooltip-wrap">
+                  <button class="blok-btn blok-btn--primary" disabled aria-disabled="true">
+                    Confirm import
+                  </button>
+                  <span class="blok-tooltip">Resolve all 12 conflicts to enable</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <p style="text-align:center; padding:0.75rem 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground); border-top:1px solid var(--border);">
+      <a href="index.html">← Back to all surfaces</a> ·
+      <a href="full-page-import-summary.html">View completed import →</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

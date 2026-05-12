@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Context Panel — edit row · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="cp-frame-shell">
+      <aside class="cp-frame" aria-label="Edit redirect mapping inline">
+        <div class="cp-frame__head">
+          <span>Pages · Context panel</span>
+          <span class="cp-frame__head__chip">/context-panel</span>
+        </div>
+
+        <div class="cp-body">
+          <div class="blok-alert" role="note">
+            <span class="blok-alert__icon glyph" data-icon="info" data-size="14"></span>
+            <div class="blok-alert__body">
+              Direct-string matches only — regex pattern matches are not yet covered.
+            </div>
+          </div>
+
+          <div class="cp-callout">
+            <span class="cp-callout__icon glyph" data-icon="map-pin" data-size="14"></span>
+            <span>On</span>
+            <span class="cp-callout__url">/products/sneakers/air-max-90</span>
+          </div>
+
+          <hr class="blok-separator" />
+
+          <section class="cp-group">
+            <header class="cp-group__hd">
+              <span class="cp-group__name">Marketing campaigns</span>
+              <span class="cp-group__chips">
+                <span class="blok-badge blok-badge--secondary">301</span>
+                <span class="blok-badge blok-badge--outline">Pres. QS</span>
+              </span>
+            </header>
+
+            <!-- The first row is in inline-edit mode -->
+            <div class="cp-edit-form" role="form" aria-label="Edit mapping">
+              <div class="cp-edit-form__row">
+                <label class="blok-label">Source</label>
+                <input class="blok-input blok-input--mono" type="text" value="/products/sneakers/air-max-90" />
+              </div>
+              <div class="cp-edit-form__row">
+                <label class="blok-label">Target</label>
+                <input class="blok-input blok-input--mono" type="text" value="/campaigns/summer-2026/sneakers" autofocus />
+              </div>
+              <div class="cp-edit-form__actions">
+                <a class="blok-btn blok-btn--ghost blok-btn--sm" href="context-panel.html">Cancel</a>
+                <button class="blok-btn blok-btn--primary blok-btn--sm">
+                  <span class="glyph" data-icon="save" data-size="13"></span>
+                  Save
+                </button>
+              </div>
+            </div>
+
+            <div class="cp-row">
+              <div class="cp-row__map">
+                <span class="cp-row__src cp-row__src--unmatched">/legacy/airmax</span>
+                <span class="cp-row__arrow">→</span>
+                <span class="cp-row__tgt cp-row__tgt--matched">/products/sneakers/air-max-90</span>
+              </div>
+              <div class="cp-row__actions">
+                <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Edit">
+                  <span class="glyph" data-icon="pencil" data-size="14"></span>
+                </button>
+                <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete">
+                  <span class="glyph" data-icon="trash" data-size="14"></span>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <hr class="blok-separator" />
+
+          <section class="cp-group">
+            <header class="cp-group__hd">
+              <span class="cp-group__name">Legacy product URLs</span>
+              <span class="cp-group__chips">
+                <span class="blok-badge blok-badge--secondary">302</span>
+                <span class="blok-badge blok-badge--outline">Pres. Lang</span>
+              </span>
+            </header>
+            <div class="cp-row">
+              <div class="cp-row__map">
+                <span class="cp-row__src cp-row__src--matched">/products/sneakers/air-max-90</span>
+                <span class="cp-row__arrow">→</span>
+                <span class="cp-row__tgt cp-row__tgt--unmatched">/shop/footwear/air-max-90</span>
+              </div>
+              <div class="cp-row__actions">
+                <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Edit">
+                  <span class="glyph" data-icon="pencil" data-size="14"></span>
+                </button>
+                <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete">
+                  <span class="glyph" data-icon="trash" data-size="14"></span>
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="cp-add-btn">
+          <hr class="blok-separator" />
+          <a class="blok-btn blok-btn--outline" href="context-panel-add-modal.html" style="width:100%; margin-top:0.5rem;">
+            <span class="glyph" data-icon="plus" data-size="14"></span>
+            Add redirect for this page
+          </a>
+        </div>
+      </aside>
+
+      <!-- Toast (visual cue only — illustrating success state) -->
+    </div>
+
+    <p style="text-align:center; padding:0 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground);">
+      <a href="index.html">← Back to all surfaces</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

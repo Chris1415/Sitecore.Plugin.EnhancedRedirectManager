@@ -1,0 +1,222 @@
+{
+  "id": "5170db07-f754-4823-83f5-eb1cfd2e3e6e",
+  "name": "Dog feeding App",
+  "type": "custom",
+  "url": "http://localhost:3001/context-panel?organizationId=org_Yr0e8LadQ1bxB05s&marketplaceAppTenantId=391dd026-9a1b-476b-3e30-08de9599d900",
+  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+  "state": "active",
+  "installationId": "122c2dc9-b2e5-4870-b455-1e877fe8ad2a",
+  "organizationId": "org_Yr0e8LadQ1bxB05s",
+  "marketplaceAppTenantId": "391dd026-9a1b-476b-3e30-08de9599d900",
+  "resources": [
+      {
+          "resourceId": "xmcloud",
+          "tenantId": "13ff182a-2f8e-4389-1a13-08de290f7478",
+          "tenantName": null,
+          "tenantDisplayName": "CHAH DevEx Journey / PROD",
+          "context": {
+              "preview": "nmamuGfF4W6ASQOkmg8S0",
+              "live": "N0bFMXt5e0eG02Ao2kScA"
+          }
+      }
+  ],
+  "touchpoints": [
+      {
+          "touchpointId": "standalone",
+          "route": "/portal",
+          "meta": [
+              {
+                  "id": "standalone",
+                  "route": "/portal",
+                  "title": "Dog feeding App",
+                  "description": "Full screen in Cloud Portal",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              }
+          ]
+      },
+      {
+          "touchpointId": "xmc:fullscreen",
+          "route": "/full-page",
+          "meta": [
+              {
+                  "id": "xmc:fullscreen",
+                  "route": "/full-page",
+                  "title": "Dog feeding App",
+                  "description": "Full screen in SitecoreAI",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              }
+          ]
+      },
+      {
+          "touchpointId": "xmc:dashboardblocks",
+          "route": null,
+          "meta": [
+              {
+                  "id": "xmc:dashboardblocks1",
+                  "route": "/dashboard-widget",
+                  "title": "Dog feeding App",
+                  "description": "Dashboard widget in SitecoreAI",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              },
+              {
+                  "id": "xmc:dashboardblocks2",
+                  "route": "/sitecoreai-dashboardwidget-2",
+                  "title": "Dashboard widgets 2",
+                  "description": "Dashboard widget in SitecoreAI",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              }
+          ]
+      },
+      {
+          "touchpointId": "xmc:pages:contextpanel",
+          "route": "/context-panel",
+          "meta": [
+              {
+                  "id": "xmc:pages:contextpanel",
+                  "route": "/context-panel",
+                  "title": "Dog feeding App",
+                  "description": "Left-hand panel",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              }
+          ]
+      },
+      {
+          "touchpointId": "xmc:pages:customfield",
+          "route": "/sitecoreai-customfield",
+          "meta": [
+              {
+                  "id": "xmc:pages:customfield1",
+                  "route": "/sitecoreai-customfield",
+                  "display": "popup",
+                  "title": "Dog feeding App",
+                  "description": "Field in right-hand panel or in left-hand page context panel",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              }
+          ]
+      }
+  ],
+  "developer": null,
+  "permissions": {
+      "iframe": {
+          "sandbox": [
+              "allow-popups",
+              "allow-popups-to-escape-sandbox"
+          ],
+          "allow": [
+              "clipboard-write",
+              "clipboard-read"
+          ]
+      }
+  },
+  "resourceAccess": [
+      {
+          "resourceId": "xmcloud",
+          "tenantId": "13ff182a-2f8e-4389-1a13-08de290f7478",
+          "tenantName": null,
+          "tenantDisplayName": "CHAH DevEx Journey / PROD",
+          "context": {
+              "preview": "nmamuGfF4W6ASQOkmg8S0",
+              "live": "N0bFMXt5e0eG02Ao2kScA"
+          }
+      }
+  ],
+  "extensionPoints": [
+      {
+          "route": "/portal",
+          "meta": [
+              {
+                  "id": "standalone",
+                  "route": "/portal",
+                  "title": "Dog feeding App",
+                  "description": "Full screen in Cloud Portal",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              }
+          ],
+          "extensionPointId": "standalone"
+      },
+      {
+          "route": "/full-page",
+          "meta": [
+              {
+                  "id": "xmc:fullscreen",
+                  "route": "/full-page",
+                  "title": "Dog feeding App",
+                  "description": "Full screen in SitecoreAI",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              }
+          ],
+          "extensionPointId": "xmc:fullscreen"
+      },
+      {
+          "route": null,
+          "meta": [
+              {
+                  "id": "xmc:dashboardblocks1",
+                  "route": "/dashboard-widget",
+                  "title": "Dog feeding App",
+                  "description": "Dashboard widget in SitecoreAI",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              },
+              {
+                  "id": "xmc:dashboardblocks2",
+                  "route": "/sitecoreai-dashboardwidget-2",
+                  "title": "Dashboard widgets 2",
+                  "description": "Dashboard widget in SitecoreAI",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              }
+          ],
+          "extensionPointId": "xmc:dashboardblocks"
+      },
+      {
+          "route": "/context-panel",
+          "meta": [
+              {
+                  "id": "xmc:pages:contextpanel",
+                  "route": "/context-panel",
+                  "title": "Dog feeding App",
+                  "description": "Left-hand panel",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              }
+          ],
+          "extensionPointId": "xmc:pages:contextpanel"
+      },
+      {
+          "route": "/sitecoreai-customfield",
+          "meta": [
+              {
+                  "id": "xmc:pages:customfield1",
+                  "route": "/sitecoreai-customfield",
+                  "display": "popup",
+                  "title": "Dog feeding App",
+                  "description": "Field in right-hand panel or in left-hand page context panel",
+                  "iconUrl": "https://media.sitecorecloud.io/api/media/v2/delivery/cf2c1403-5ee3-436e-0fa3-08de06908b4e/053a828e2380474db8db61f6dd9fa316",
+                  "pictureUrl": null,
+                  "developerName": "Sales Engineers 7"
+              }
+          ],
+          "extensionPointId": "xmc:pages:customfield"
+      }
+  ]
+}

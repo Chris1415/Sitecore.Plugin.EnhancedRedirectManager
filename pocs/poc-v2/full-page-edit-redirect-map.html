@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Full Page — Edit map (drawer pre-filled) · Editor's Studio</title>
+<link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+<nav style="padding: 0.5rem 1rem; border-bottom: 1px solid hsl(var(--border)); display: flex; gap: 1rem; align-items: center; font-size: 0.8125rem;">
+  <a href="index.html" style="color: hsl(var(--muted-foreground)); text-decoration: none;">&larr; All screens</a>
+  <span style="color: hsl(var(--muted-foreground));">·</span>
+  <span class="font-medium">Full Page — Edit Redirect Map (drawer)</span>
+</nav>
+
+<div style="position: relative; min-height: calc(100vh - 40px);">
+
+  <main class="frame frame-fullpage" style="padding: 2rem; min-height: calc(100vh - 40px); opacity: 0.4; filter: blur(0.5px); pointer-events: none;">
+    <header style="display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.5rem;">
+      <h1 style="font-size: 1.5rem; font-weight: 600; letter-spacing: -0.015em; margin: 0;">Redirects</h1>
+    </header>
+  </main>
+
+  <div class="drawer-backdrop">
+    <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title-edit">
+
+      <header style="padding: 1rem 1.5rem; border-bottom: 1px solid hsl(var(--border)); display: flex; align-items: center; gap: 0.625rem;">
+        <a href="full-page.html" class="btn btn-ghost btn-icon" aria-label="Close drawer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </a>
+        <div style="flex: 1;">
+          <span class="kicker" style="font-size: 0.6875rem; display: block;">Edit</span>
+          <h2 id="drawer-title-edit" style="font-size: 1.0625rem; font-weight: 600; margin: 0;">Legacy Path Cleanup</h2>
+        </div>
+      </header>
+
+      <div style="overflow-y: auto; flex: 1; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
+
+        <div>
+          <label class="label" for="ed-name">Name</label>
+          <input class="input" id="ed-name" value="Legacy Path Cleanup" />
+        </div>
+
+        <div>
+          <label class="label" for="ed-type">Redirect type</label>
+          <select class="input" id="ed-type" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2216%22 height=%2216%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23667085%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22m6 9 6 6 6-6%22/></svg>'); background-repeat: no-repeat; background-position: right 0.625rem center; padding-right: 2rem;">
+            <option>301 — Permanent</option>
+            <option selected>302 — Temporary</option>
+            <option>307 — Temporary (preserve method)</option>
+            <option>ServerTransfer</option>
+          </select>
+        </div>
+
+        <div>
+          <span class="label" style="display: block; margin-bottom: 0.625rem;">Behavior</span>
+          <div style="display: flex; flex-direction: column; gap: 0.875rem;">
+            <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+              <span class="switch on" role="switch" aria-checked="true" style="margin-top: 0.125rem;"></span>
+              <span>
+                <span style="display: block; font-size: 0.875rem; font-weight: 500;">Preserve query string</span>
+                <span style="display: block; margin-top: 0.125rem; font-size: 0.75rem; color: hsl(var(--muted-foreground));">Append the original querystring to the target.</span>
+              </span>
+            </label>
+            <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+              <span class="switch on" role="switch" aria-checked="true" style="margin-top: 0.125rem;"></span>
+              <span>
+                <span style="display: block; font-size: 0.875rem; font-weight: 500;">Preserve language</span>
+                <span style="display: block; margin-top: 0.125rem; font-size: 0.75rem; color: hsl(var(--muted-foreground));">Keep the requested language on the redirected response.</span>
+              </span>
+            </label>
+            <label style="display: flex; align-items: flex-start; gap: 0.75rem; cursor: pointer;">
+              <span class="switch" role="switch" aria-checked="false" style="margin-top: 0.125rem;"></span>
+              <span>
+                <span style="display: block; font-size: 0.875rem; font-weight: 500;">Include virtual folder</span>
+                <span style="display: block; margin-top: 0.125rem; font-size: 0.75rem; color: hsl(var(--muted-foreground));">Apply this rule to virtual-folder children.</span>
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <hr class="hairline" />
+
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+            <span class="label" style="margin: 0;">Mappings</span>
+            <span class="chip"><span class="font-mono tabular">7</span></span>
+          </div>
+
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem;" aria-label="Mappings">
+            <li style="display: grid; grid-template-columns: 1.5rem 1fr 1.5rem 1fr 2rem; align-items: center; gap: 0.5rem;">
+              <span style="color: hsl(var(--muted-foreground)); cursor: grab; display: flex; justify-content: center;" tabindex="0" role="button" aria-label="Reorder row 1">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+              </span>
+              <input class="input" value="/old/spring" style="font-family: 'Geist Mono', monospace; height: 2rem;" aria-label="Source URL" />
+              <svg style="color: hsl(var(--muted-foreground));" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <input class="input" value="/spring-campaign" style="font-family: 'Geist Mono', monospace; height: 2rem;" aria-label="Target URL" />
+              <button class="btn btn-ghost btn-icon btn-sm" aria-label="Remove mapping" style="min-height: 1.75rem; width: 1.75rem; height: 1.75rem; color: hsl(var(--muted-foreground));"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>
+            </li>
+            <li style="display: grid; grid-template-columns: 1.5rem 1fr 1.5rem 1fr 2rem; align-items: center; gap: 0.5rem;">
+              <span style="color: hsl(var(--muted-foreground)); cursor: grab; display: flex; justify-content: center;" tabindex="0" role="button" aria-label="Reorder row 2">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+              </span>
+              <input class="input" value="/old/summer" style="font-family: 'Geist Mono', monospace; height: 2rem;" aria-label="Source URL" />
+              <svg style="color: hsl(var(--muted-foreground));" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <input class="input" value="/summer-campaign" style="font-family: 'Geist Mono', monospace; height: 2rem;" aria-label="Target URL" />
+              <button class="btn btn-ghost btn-icon btn-sm" aria-label="Remove mapping" style="min-height: 1.75rem; width: 1.75rem; height: 1.75rem; color: hsl(var(--muted-foreground));"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>
+            </li>
+            <li style="display: grid; grid-template-columns: 1.5rem 1fr 1.5rem 1fr 2rem; align-items: center; gap: 0.5rem;">
+              <span style="color: hsl(var(--muted-foreground)); cursor: grab; display: flex; justify-content: center;" tabindex="0" role="button" aria-label="Reorder row 3">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+              </span>
+              <input class="input invalid" value="" style="font-family: 'Geist Mono', monospace; height: 2rem;" aria-label="Source URL" aria-invalid="true" aria-describedby="row-3-err" />
+              <svg style="color: hsl(var(--muted-foreground));" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <input class="input" value="/promo" style="font-family: 'Geist Mono', monospace; height: 2rem;" aria-label="Target URL" />
+              <button class="btn btn-ghost btn-icon btn-sm" aria-label="Remove mapping" style="min-height: 1.75rem; width: 1.75rem; height: 1.75rem; color: hsl(var(--muted-foreground));"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>
+            </li>
+            <li id="row-3-err" style="grid-column: 2 / 5; font-size: 0.75rem; color: hsl(var(--destructive)); padding-left: 2rem; margin-top: -0.25rem;">Source is required.</li>
+
+            <li style="display: grid; grid-template-columns: 1.5rem 1fr 1.5rem 1fr 2rem; align-items: center; gap: 0.5rem;">
+              <span style="color: hsl(var(--muted-foreground)); cursor: grab; display: flex; justify-content: center;" tabindex="0" role="button" aria-label="Reorder row 4">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="5" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+              </span>
+              <input class="input" value="/old/blog/2023" style="font-family: 'Geist Mono', monospace; height: 2rem;" aria-label="Source URL" />
+              <svg style="color: hsl(var(--muted-foreground));" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              <input class="input" value="/blog" style="font-family: 'Geist Mono', monospace; height: 2rem;" aria-label="Target URL" />
+              <button class="btn btn-ghost btn-icon btn-sm" aria-label="Remove mapping" style="min-height: 1.75rem; width: 1.75rem; height: 1.75rem; color: hsl(var(--muted-foreground));"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>
+            </li>
+          </ul>
+
+          <button class="btn btn-ghost btn-sm" style="margin-top: 0.625rem;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+            Add mapping
+          </button>
+        </div>
+
+      </div>
+
+      <footer style="padding: 1rem 1.5rem; border-top: 1px solid hsl(var(--border)); display: flex; justify-content: flex-end; gap: 0.5rem; background-color: hsl(var(--background) / 0.95);">
+        <a href="full-page.html" class="btn btn-outline">Cancel</a>
+        <button class="btn btn-primary" disabled aria-disabled="true" title="Fix the invalid mapping row first.">Save</button>
+      </footer>
+
+    </aside>
+  </div>
+
+</div>
+
+</body>
+</html>

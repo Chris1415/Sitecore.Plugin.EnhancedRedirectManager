@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Context Panel — Add modal · Editor's Studio</title>
+<link rel="stylesheet" href="theme.css" />
+</head>
+<body>
+
+<nav style="padding: 0.5rem 1rem; border-bottom: 1px solid hsl(var(--border)); display: flex; gap: 1rem; align-items: center; font-size: 0.8125rem;">
+  <a href="index.html" style="color: hsl(var(--muted-foreground)); text-decoration: none;">&larr; All screens</a>
+  <span style="color: hsl(var(--muted-foreground));">·</span>
+  <span class="font-medium">Context Panel — Add modal (pick a map)</span>
+</nav>
+
+<div style="background-color: hsl(var(--background)); min-height: calc(100vh - 40px); padding: 2rem 1rem; display: flex; align-items: flex-start; justify-content: center;">
+
+  <!-- Dimmed parent panel behind the modal -->
+  <div class="frame frame-context-panel" style="padding: 1rem; opacity: 0.35; filter: blur(0.5px); pointer-events: none;">
+    <header style="margin-bottom: 1rem;">
+      <h1 style="font-size: 1rem; font-weight: 600; margin: 0;">Redirects on this page</h1>
+      <p class="kicker" style="margin-top: 0.25rem; text-transform: none; letter-spacing: 0; font-weight: 400; font-size: 0.75rem;">
+        <span class="font-mono">/spring-campaign</span> · Northwind Marketing
+      </p>
+    </header>
+    <div class="alert alert-warning" role="note" style="margin-bottom: 1rem;">
+      <span class="icon icon-md"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg></span>
+      <div>
+        <h3 class="alert-title">Heads up</h3>
+        <p class="alert-body">Direct-string matches only.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop" style="position: static; margin-left: -360px; padding: 0; background: transparent; backdrop-filter: none;">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="add-modal-title" style="max-width: 380px;">
+
+      <div class="modal-header">
+        <h2 id="add-modal-title">Add a redirect for <span class="font-mono" style="font-weight: 500;">/spring-campaign</span></h2>
+        <p>Pick a Redirect Map to add this rule to, or create a new one.</p>
+      </div>
+
+      <div class="modal-body" style="padding: 0.75rem;">
+
+        <!-- Search input -->
+        <div style="position: relative; margin-bottom: 0.75rem;">
+          <span style="position: absolute; left: 0.625rem; top: 50%; transform: translateY(-50%); color: hsl(var(--muted-foreground)); display: flex;" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </span>
+          <input class="input" placeholder="Search redirect maps…" style="padding-left: 2rem;" />
+        </div>
+
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.125rem;">
+          <!-- "+ Create new" featured row -->
+          <li>
+            <a href="context-panel-create-new-map.html" style="display: flex; gap: 0.625rem; align-items: center; padding: 0.625rem 0.75rem; border-radius: calc(var(--radius) - 2px); background-color: hsl(var(--accent) / 0.1); border: 1px solid hsl(var(--accent) / 0.3); text-decoration: none; color: hsl(var(--foreground));">
+              <span style="display: flex; width: 1.5rem; height: 1.5rem; align-items: center; justify-content: center; background-color: hsl(var(--accent) / 0.2); border-radius: 9999px; color: hsl(var(--accent));">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
+              </span>
+              <div style="flex: 1;">
+                <div style="font-size: 0.875rem; font-weight: 500;">Create new Redirect Map</div>
+                <div style="font-size: 0.75rem; color: hsl(var(--muted-foreground));">Set type, flags, and the first mapping.</div>
+              </div>
+            </a>
+          </li>
+
+          <li>
+            <a href="context-panel-add-existing.html" style="display: flex; gap: 0.625rem; align-items: center; padding: 0.625rem 0.75rem; border-radius: calc(var(--radius) - 2px); background-color: transparent; text-decoration: none; color: hsl(var(--foreground));" onmouseover="this.style.backgroundColor='hsl(var(--muted) / 0.6)'" onmouseout="this.style.backgroundColor='transparent'">
+              <div style="flex: 1;">
+                <div style="font-size: 0.875rem; font-weight: 500;">Spring Launch Map</div>
+                <div style="font-size: 0.75rem; color: hsl(var(--muted-foreground));">3 mappings · 301</div>
+              </div>
+              <span class="kicker" style="font-size: 0.6875rem;">2h ago</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="context-panel-add-existing.html" style="display: flex; gap: 0.625rem; align-items: center; padding: 0.625rem 0.75rem; border-radius: calc(var(--radius) - 2px); text-decoration: none; color: hsl(var(--foreground));">
+              <div style="flex: 1;">
+                <div style="font-size: 0.875rem; font-weight: 500;">Legacy Path Cleanup</div>
+                <div style="font-size: 0.75rem; color: hsl(var(--muted-foreground));">1 mapping · 302</div>
+              </div>
+              <span class="kicker" style="font-size: 0.6875rem;">5d ago</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="context-panel-add-existing.html" style="display: flex; gap: 0.625rem; align-items: center; padding: 0.625rem 0.75rem; border-radius: calc(var(--radius) - 2px); text-decoration: none; color: hsl(var(--foreground));">
+              <div style="flex: 1;">
+                <div style="font-size: 0.875rem; font-weight: 500;">Marketing Campaigns 2025</div>
+                <div style="font-size: 0.75rem; color: hsl(var(--muted-foreground));">7 mappings · 301</div>
+              </div>
+              <span class="kicker" style="font-size: 0.6875rem;">3w ago</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="context-panel-add-existing.html" style="display: flex; gap: 0.625rem; align-items: center; padding: 0.625rem 0.75rem; border-radius: calc(var(--radius) - 2px); text-decoration: none; color: hsl(var(--foreground));">
+              <div style="flex: 1;">
+                <div style="font-size: 0.875rem; font-weight: 500;">Product Launch Migrations</div>
+                <div style="font-size: 0.75rem; color: hsl(var(--muted-foreground));">5 mappings · ServerTransfer</div>
+              </div>
+              <span class="kicker" style="font-size: 0.6875rem;">1mo ago</span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+
+      <div class="modal-footer">
+        <a href="context-panel.html" class="btn btn-outline">Cancel</a>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

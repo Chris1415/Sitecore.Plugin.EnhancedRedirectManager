@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Context Panel — empty · Operator Console (v1)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="cp-frame-shell">
+      <aside class="cp-frame" aria-label="No redirects affect this page">
+        <div class="cp-frame__head">
+          <span>Pages · Context panel</span>
+          <span class="cp-frame__head__chip">/context-panel</span>
+        </div>
+
+        <div class="cp-body">
+          <div class="blok-alert" role="note">
+            <span class="blok-alert__icon glyph" data-icon="info" data-size="14"></span>
+            <div class="blok-alert__body">
+              Direct-string matches only — regex pattern matches are not yet covered.
+            </div>
+          </div>
+
+          <div class="cp-callout">
+            <span class="cp-callout__icon glyph" data-icon="map-pin" data-size="14"></span>
+            <span>On</span>
+            <span class="cp-callout__url">/blog/2026/spring-collection</span>
+          </div>
+
+          <hr class="blok-separator" />
+
+          <div class="blok-empty">
+            <span class="blok-empty__icon glyph" data-icon="filter" data-size="20"></span>
+            <p class="blok-empty__title">No redirects affect this page</p>
+            <p class="blok-empty__sub">Add the first one with the button below.</p>
+          </div>
+        </div>
+
+        <div class="cp-add-btn">
+          <hr class="blok-separator" />
+          <a class="blok-btn blok-btn--primary" href="context-panel-add-modal.html" style="width:100%; margin-top:0.5rem;">
+            <span class="glyph" data-icon="plus" data-size="14"></span>
+            Add redirect for this page
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <p style="text-align:center; padding:0 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground);">
+      <a href="index.html">← Back to all surfaces</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

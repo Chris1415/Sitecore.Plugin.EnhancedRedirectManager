@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "source": "real-tenant capture 2026-05-11 (Tranche 6a write-capture session)",
+    "tenant": "xmc-sitecoresaa516c-chahdevexjoee24-proda41d.sitecorecloud.io",
+    "mutation": "createItem(input: CreateItemInput!) { item { itemId name path } }",
+    "input_shape": {
+      "name": "string (required)",
+      "templateId": "ID (required)",
+      "parent": "ID (required)",
+      "language": "string",
+      "fields": "[FieldValueInput]",
+      "id": "NOT ACCEPTED — schema rejects with EXEC_INVALID_TYPE (closes OQ-B / ADR-0009: caller-supplied id is impossible)"
+    }
+  },
+  "data": {
+    "data": {
+      "createItem": {
+        "item": {
+          "itemId": "f727f496f04f441e8556ae52d7c90477",
+          "name": "_capture_1778525974480_no_id",
+          "path": "/sitecore/content/solo/solo-website/Settings/Redirects/_capture_1778525974480_no_id"
+        }
+      }
+    }
+  }
+}
