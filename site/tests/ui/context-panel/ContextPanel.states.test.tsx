@@ -176,7 +176,7 @@ describe("ContextPanel — default state / orchestration (T030)", () => {
       {
         id: "map-1",
         name: "Test Map",
-        redirectType: "301",
+        redirectType: "Redirect301",
         preserveQueryString: false,
         preserveLanguage: false,
         includeVirtualFolder: false,

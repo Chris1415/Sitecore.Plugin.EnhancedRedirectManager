@@ -16,6 +16,7 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "sonner";
 import {
   Dialog,
   DialogContent,
@@ -150,17 +151,18 @@ export function AddRedirectModal({
       setError(direction === "from" ? "Target URL is required." : "Source URL is required.");
       return;
     }
+    const { source, target } = resolvedPair();
     setSaving(true);
     setError(null);
     try {
-      // TODO (Tranche 6): write surface assumed-shape — updateRedirectMap must
-      // append the new mapping to selectedMap.mappings then serialize.
-      const { source, target } = resolvedPair();
+      // Parent refetches latest map data and rejects duplicates before writing.
       await onAddToExistingMap(selectedMap.id, source, target, selectedMap);
-      onSuccess();
+      // Only close on success — failures (incl. duplicates) keep the modal open
+      // so the operator can adjust their input.
       handleOpenChange(false);
+      void onSuccess();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Save failed");
+      toast.error(err instanceof Error ? err.message : "Save failed");
     } finally {
       setSaving(false);
     }
@@ -174,7 +176,6 @@ export function AddRedirectModal({
     setSaving(true);
     setError(null);
     try {
-      // TODO (Tranche 6): createRedirectMap assumed-shape — parentId/templateId are placeholders
       await onCreateNewMap({
         name: newMapName.trim(),
         redirectType: newRedirectType as RedirectType,
@@ -184,10 +185,10 @@ export function AddRedirectModal({
         source,
         target,
       });
-      onSuccess();
       handleOpenChange(false);
+      void onSuccess();
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Save failed");
+      toast.error(err instanceof Error ? err.message : "Save failed");
     } finally {
       setSaving(false);
     }

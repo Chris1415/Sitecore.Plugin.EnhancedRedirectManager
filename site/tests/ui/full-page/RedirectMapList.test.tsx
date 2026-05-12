@@ -44,7 +44,7 @@ const SITE_PATH = "/sitecore/content/solo/solo-website/Settings/Redirects";
 const fixtureMap1: RedirectMapItem = {
   id: "e39157f3a81f4692b05d178d48c836de",
   name: "Marketing campaigns",
-  redirectType: "301",
+  redirectType: "Redirect301",
   preserveQueryString: false,
   preserveLanguage: false,
   includeVirtualFolder: false,
@@ -58,7 +58,7 @@ const fixtureMap1: RedirectMapItem = {
 const fixtureMap2: RedirectMapItem = {
   id: "590b53834e394203abe42bd6e575615a",
   name: "Legacy product URLs",
-  redirectType: "302",
+  redirectType: "Redirect302",
   preserveQueryString: false,
   preserveLanguage: false,
   includeVirtualFolder: false,

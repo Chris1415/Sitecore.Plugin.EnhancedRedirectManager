@@ -42,6 +42,16 @@ interface RedirectMapListProps {
   selectedMapId: string | null;
   onSelect: (map: RedirectMapItem) => void;
   onRetry: () => void;
+  /**
+   * Tranche 6b: incrementing this value forces a refetch (used by FullPage to
+   * refresh the list after a successful write — create / update / rename / delete).
+   */
+  refreshKey?: number;
+  /**
+   * Tranche 6b: emits the freshly-loaded list to the parent so it can re-select
+   * a map by id after a write (e.g. after create, parent wants to select the new map).
+   */
+  onLoaded?: (maps: RedirectMapItem[]) => void;
 }
 
 type Status = "loading" | "loaded" | "empty" | "error";
@@ -69,6 +79,8 @@ export function RedirectMapList({
   selectedMapId,
   onSelect,
   onRetry,
+  refreshKey = 0,
+  onLoaded,
 }: RedirectMapListProps) {
   const [maps, setMaps] = useState<RedirectMapItem[]>([]);
   const [status, setStatus] = useState<Status>("loading");
@@ -82,16 +94,18 @@ export function RedirectMapList({
       const result = await listRedirectMaps(client, sitecoreContextId, sitePath);
       setMaps(result);
       setStatus(result.length === 0 ? "empty" : "loaded");
+      onLoaded?.(result);
     } catch (err) {
       setErrorMsg(err instanceof Error ? err.message : String(err));
       setStatus("error");
     }
-  }, [client, sitecoreContextId, sitePath]);
+  }, [client, sitecoreContextId, sitePath, onLoaded]);
 
   useEffect(() => {
     // IIFE pattern per DashboardWidget convention: setState inside callback not effect body.
+    // refreshKey is included as a dep so parent-triggered refreshes refetch the list.
     (async () => { await load(); })();
-  }, [load]);
+  }, [load, refreshKey]);
 
   // Keyboard navigation: arrow keys move through the list; Enter selects
   const handleKeyDown = (e: React.KeyboardEvent, index: number, map: RedirectMapItem) => {
@@ -153,12 +167,15 @@ export function RedirectMapList({
     );
   }
 
-  // Header row
+  // Header row.
+  // NOTE: parent (`flex-1 -mx-3 overflow-hidden` in FullPage.tsx) is `display:block`,
+  // so `flex-1` would be ignored and Virtuoso (height:100%) would collapse to 0px.
+  // Use `h-full` to fill the parent's measured height.
   return (
     <div
       role="listbox"
       aria-label="Redirect maps"
-      className="flex-1 overflow-hidden"
+      className="h-full overflow-hidden"
     >
       <Virtuoso
         ref={virtuosoRef}

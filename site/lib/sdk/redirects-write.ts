@@ -1,28 +1,44 @@
 /**
  * T012 — lib/sdk/redirects-write.ts
  *
- * Typed wrappers for createItem / updateItem / deleteItem Authoring GraphQL mutations.
+ * Typed wrappers for createItem / updateItem / deleteItem / renameItem
+ * Authoring GraphQL mutations.
+ *
  * Verb: client.mutate('xmc.authoring.graphql', ...)
- * Unwrap: SINGLE .data
+ * Envelope: body INSIDE params (verified 2026-05-11)
+ * Unwrap: DOUBLE — result.data.data.<mutation> (verified 2026-05-11)
  *
  * Per ADR-0010: ALL mutations pass language: 'en' (MVP language scope).
- * Per ADR-0009: createItem may accept caller-supplied id for GUID preservation — TBV at T065.
  *
- * Open questions (closed at T065 capture point):
- *   - Exact mutation verb names (createItem vs create_item)
- *   - Whether createItem accepts caller-supplied id (ADR-0009 GUID-preservation consequence)
- *   - Boolean field representation on writes ("0"/"1" vs "true"/"false" vs raw boolean) — OQ-C
- *   - RedirectType enum exact values beyond ServerTransfer (assumed: 301, 302, 307) — OQ-8
+ * VERIFIED 2026-05-11 (Tranche 6a real-tenant capture session — closes all 7 assumed-shape annotations):
  *
- * assumed-shape: tests/fixtures/graphql/redirect-map.create.json
- * assumed-shape: tests/fixtures/graphql/redirect-map.update.json
- * assumed-shape: tests/fixtures/graphql/redirect-map.delete.json
- * Capture point: T065 real-tenant CRUD smoke
+ *   - createItem(input: CreateItemInput!) { item { itemId name path } }
+ *     CreateItemInput accepts: name (required), templateId (required), parent (required), language, fields.
+ *     **`id` field is NOT accepted** — server returns EXEC_INVALID_TYPE.
+ *     This closes OQ-B / ADR-0009: caller-supplied id is impossible; cross-env
+ *     imports always mint a NEW GUID on "create" actions. The import summary
+ *     screen must flag newly minted GUIDs as a fast-follow indicator.
  *
- * Divergence-detection logging: every call logs request + response under
- * [redirect-manager:dev:capture] prefix when NODE_ENV !== 'production'.
+ *   - updateItem(input: UpdateItemInput!) { item { itemId } }
+ *     Single-field semantics: sending only one field in fields[] updates just
+ *     that field and leaves the rest untouched. Boolean write repr: '0' / '1'
+ *     (string). The server also tolerates 'true' / 'false' strings, but '0' /
+ *     '1' is the canonical write repr we ship.
+ *     **`name` field is NOT accepted on UpdateItemInput** — rename has its own
+ *     dedicated mutation (see renameRedirectMap below).
  *
- * Depends on: T009 (requireContextId), T016 (domain types), T017 (serialize — inline stub here)
+ *   - deleteItem(input: DeleteItemInput!) { successful }
+ *
+ *   - renameItem(input: RenameItemInput!) { item { itemId name } }
+ *     RenameItemInput accepts: itemId (required), newName (required).
+ *
+ *   - RedirectType field values (string at GraphQL level — NOT an enum):
+ *     'ServerTransfer', 'Redirect301', 'Redirect302'.
+ *     'Redirect307' is rejected by the head-app resolver (operator confirmation).
+ *
+ * Fixtures: tests/fixtures/graphql/redirect-map.{create,update,delete,rename}.json.
+ *
+ * Depends on: T009 (requireContextId), T016 (domain types), T017 (serialize).
  */
 
 import type { ClientSDK } from '@sitecore-marketplace-sdk/client';
@@ -35,11 +51,6 @@ export interface CreateRedirectMapInput extends RedirectMapAttributes {
   parentId: string;
   /** Sitecore template GUID for the Redirect Map template */
   templateId: string;
-  /**
-   * Optional caller-supplied item ID for GUID preservation on cross-env imports (ADR-0009).
-   * Whether Authoring accepts this is TBV at T065 capture point.
-   */
-  id?: string;
 }
 
 /** Input for updating an existing Redirect Map item */
@@ -48,18 +59,24 @@ export interface UpdateRedirectMapInput extends RedirectMapAttributes {
   itemId: string;
 }
 
+/** Input for renaming a Redirect Map item (separate mutation — not via updateItem.name) */
+export interface RenameRedirectMapInput {
+  /** Sitecore item GUID of the Redirect Map to rename */
+  itemId: string;
+  /** New item name */
+  newName: string;
+}
+
 /** Stable output shape from all write operations */
 export interface WriteResult {
   ok: boolean;
   itemId?: string;
+  name?: string;
 }
-
-// serializeMappings is now the canonical lib/url-mapping/serialize.ts implementation (T018, Tranche 3).
-// Imported above — the inline copy has been removed.
 
 /**
  * Build the fields array for create/update mutations.
- * Boolean fields are represented as "0"/"1" strings (assumed — TBV at T065 capture point / OQ-C).
+ * Boolean fields are represented as '0' / '1' strings (verified 2026-05-11).
  */
 function buildFieldsArray(attrs: RedirectMapAttributes): Array<{ name: string; value: string }> {
   return [
@@ -71,21 +88,15 @@ function buildFieldsArray(attrs: RedirectMapAttributes): Array<{ name: string; v
   ];
 }
 
-function devLog(prefix: string, payload: unknown): void {
-  if (process.env.NODE_ENV !== 'production') {
-    console.log(`[redirect-manager:dev:capture] ${prefix}`, JSON.stringify(payload, null, 2));
-  }
-}
-
 const CREATE_REDIRECT_MAP = `
   mutation CreateRedirectMap($input: CreateItemInput!) {
-    createItem(input: $input) { itemId name }
+    createItem(input: $input) { item { itemId name path } }
   }
 `;
 
 const UPDATE_REDIRECT_MAP = `
   mutation UpdateRedirectMap($input: UpdateItemInput!) {
-    updateItem(input: $input) { itemId }
+    updateItem(input: $input) { item { itemId } }
   }
 `;
 
@@ -95,9 +106,19 @@ const DELETE_REDIRECT_MAP = `
   }
 `;
 
+const RENAME_REDIRECT_MAP = `
+  mutation RenameRedirectMap($input: RenameItemInput!) {
+    renameItem(input: $input) { item { itemId name } }
+  }
+`;
+
 /**
  * Creates a new Redirect Map item under Settings/Redirects.
  * Per ADR-0010: passes language: 'en'.
+ *
+ * Note: caller-supplied id is NOT supported (verified 2026-05-11). The server
+ * always mints a fresh GUID. Import flows that match by GUID must surface this
+ * as a "newly minted ID" indicator on the import summary screen.
  */
 export async function createRedirectMap(
   client: ClientSDK,
@@ -110,18 +131,11 @@ export async function createRedirectMap(
       templateId: input.templateId,
       parent: input.parentId,
       language: 'en',
-      ...(input.id ? { id: input.id } : {}),
       fields: buildFieldsArray(input),
     },
   };
 
-  devLog('createRedirectMap REQUEST', { sitecoreContextId, variables });
 
-  // Envelope contract (verified against real tenant 2026-05-11):
-  // - `body` lives INSIDE `params`, not at the top level — Marketplace SDK / hey-api wrapper.
-  // - Response is DOUBLE-unwrapped: `result.data.data.createItem` is the GraphQL body.
-  // - No `as never` cast needed; the type accepts this shape natively.
-  // See: memory `reference_marketplace_sdk_envelope_authoring_graphql.md`.
   const result = await client.mutate('xmc.authoring.graphql', {
     params: {
       query: { sitecoreContextId },
@@ -129,19 +143,27 @@ export async function createRedirectMap(
     },
   });
 
-  devLog('createRedirectMap RESPONSE', result);
 
-  // DOUBLE `.data.data` unwrap — outer is SDK wrapper, inner is GraphQL body.
-  const data = (result.data?.data as { createItem?: { itemId?: string; name?: string } } | undefined);
+  const data = result.data?.data as
+    | { createItem?: { item?: { itemId?: string; name?: string } } }
+    | undefined;
+  const itemId = data?.createItem?.item?.itemId;
   return {
-    ok: Boolean(data?.createItem?.itemId),
-    itemId: data?.createItem?.itemId,
+    ok: Boolean(itemId),
+    itemId,
+    name: data?.createItem?.item?.name,
   };
 }
 
 /**
  * Updates an existing Redirect Map item's fields.
  * Per ADR-0010: passes language: 'en'.
+ *
+ * Note: this wrapper sends ALL field values on every call. For single-field
+ * updates (the common case from inline edit) the schema also supports partial
+ * fields[] — callers wanting that optimization should compose the variables
+ * directly. The current wrapper preserves the simpler "send everything" shape
+ * because the field count is small and idempotent.
  */
 export async function updateRedirectMap(
   client: ClientSDK,
@@ -156,9 +178,7 @@ export async function updateRedirectMap(
     },
   };
 
-  devLog('updateRedirectMap REQUEST', { sitecoreContextId, variables });
 
-  // Envelope: body inside params + double-unwrap (see createRedirectMap above).
   const result = await client.mutate('xmc.authoring.graphql', {
     params: {
       query: { sitecoreContextId },
@@ -166,12 +186,14 @@ export async function updateRedirectMap(
     },
   });
 
-  devLog('updateRedirectMap RESPONSE', result);
 
-  const data = (result.data?.data as { updateItem?: { itemId?: string } } | undefined);
+  const data = result.data?.data as
+    | { updateItem?: { item?: { itemId?: string } } }
+    | undefined;
+  const itemId = data?.updateItem?.item?.itemId;
   return {
-    ok: Boolean(data?.updateItem?.itemId),
-    itemId: data?.updateItem?.itemId,
+    ok: Boolean(itemId),
+    itemId,
   };
 }
 
@@ -185,9 +207,7 @@ export async function deleteRedirectMap(
 ): Promise<WriteResult> {
   const variables = { input: { itemId } };
 
-  devLog('deleteRedirectMap REQUEST', { sitecoreContextId, variables });
 
-  // Envelope: body inside params + double-unwrap (see createRedirectMap above).
   const result = await client.mutate('xmc.authoring.graphql', {
     params: {
       query: { sitecoreContextId },
@@ -195,10 +215,47 @@ export async function deleteRedirectMap(
     },
   });
 
-  devLog('deleteRedirectMap RESPONSE', result);
 
-  const data = (result.data?.data as { deleteItem?: { successful?: boolean } } | undefined);
+  const data = result.data?.data as
+    | { deleteItem?: { successful?: boolean } }
+    | undefined;
   return {
     ok: Boolean(data?.deleteItem?.successful),
+  };
+}
+
+/**
+ * Renames a Redirect Map item. Uses the dedicated `renameItem` mutation —
+ * the schema does NOT accept a `name` field on UpdateItemInput.
+ */
+export async function renameRedirectMap(
+  client: ClientSDK,
+  sitecoreContextId: string,
+  input: RenameRedirectMapInput,
+): Promise<WriteResult> {
+  const variables = {
+    input: {
+      itemId: input.itemId,
+      newName: input.newName,
+    },
+  };
+
+
+  const result = await client.mutate('xmc.authoring.graphql', {
+    params: {
+      query: { sitecoreContextId },
+      body: { query: RENAME_REDIRECT_MAP, variables },
+    },
+  });
+
+
+  const data = result.data?.data as
+    | { renameItem?: { item?: { itemId?: string; name?: string } } }
+    | undefined;
+  const itemId = data?.renameItem?.item?.itemId;
+  return {
+    ok: Boolean(itemId),
+    itemId,
+    name: data?.renameItem?.item?.name,
   };
 }

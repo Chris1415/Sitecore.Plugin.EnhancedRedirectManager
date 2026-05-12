@@ -34,7 +34,6 @@ export const MarketplaceProvider: React.FC<ClientSDKProviderProps> = ({
       client.query("application.context").then((res) => {
         if (res?.data) {
           setAppContext(res.data);
-          console.log("appContext", res.data);
         }
       });
     }

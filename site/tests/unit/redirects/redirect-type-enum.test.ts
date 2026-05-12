@@ -1,11 +1,9 @@
 /**
- * T021 — lib/redirects/redirect-type-enum.ts RED tests
+ * T021 — lib/redirects/redirect-type-enum.ts tests.
  *
- * Real-tenant confirmed 2026-05-11: '307' is NOT a valid RedirectType on the
- * Redirect Map template (operator removed it from the user-facing list).
- * '301', '302', and 'ServerTransfer' only.
- *
- * '301'/'302' wire-enum names remain assumed pending Tranche 6 write capture (OQ-8).
+ * Verified 2026-05-11 (Tranche 6a real-tenant write-capture):
+ *   wire enum values are 'Redirect301' / 'Redirect302' / 'ServerTransfer'.
+ *   'Redirect307' is rejected by the head-app resolver — removed from the UI.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -24,16 +22,16 @@ describe('REDIRECT_TYPES', () => {
     expect(REDIRECT_TYPES).toContain('ServerTransfer');
   });
 
-  it('contains 301 (assumed wire-enum name, OQ-8)', () => {
-    expect(REDIRECT_TYPES).toContain('301');
+  it('contains Redirect301 (verified real-tenant)', () => {
+    expect(REDIRECT_TYPES).toContain('Redirect301');
   });
 
-  it('contains 302 (assumed wire-enum name, OQ-8)', () => {
-    expect(REDIRECT_TYPES).toContain('302');
+  it('contains Redirect302 (verified real-tenant)', () => {
+    expect(REDIRECT_TYPES).toContain('Redirect302');
   });
 
-  it('does NOT contain 307 (invalid on the Redirect Map template)', () => {
-    expect(REDIRECT_TYPES).not.toContain('307');
+  it('does NOT contain Redirect307 (rejected by head-app resolver)', () => {
+    expect(REDIRECT_TYPES).not.toContain('Redirect307');
   });
 
   it('is array-like', () => {
@@ -46,16 +44,16 @@ describe('isValidRedirectType', () => {
     expect(isValidRedirectType('ServerTransfer')).toBe(true);
   });
 
-  it('returns true for 301', () => {
-    expect(isValidRedirectType('301')).toBe(true);
+  it('returns true for Redirect301', () => {
+    expect(isValidRedirectType('Redirect301')).toBe(true);
   });
 
-  it('returns true for 302', () => {
-    expect(isValidRedirectType('302')).toBe(true);
+  it('returns true for Redirect302', () => {
+    expect(isValidRedirectType('Redirect302')).toBe(true);
   });
 
-  it('returns FALSE for 307 (removed from the valid set)', () => {
-    expect(isValidRedirectType('307')).toBe(false);
+  it('returns FALSE for Redirect307 (removed from the valid set)', () => {
+    expect(isValidRedirectType('Redirect307')).toBe(false);
   });
 
   it('returns false for unknown string', () => {
@@ -77,13 +75,13 @@ describe('redirectTypeDisplayName', () => {
     expect(label).toBe('Server Transfer');
   });
 
-  it('returns operator-friendly label for 301', () => {
-    const label = redirectTypeDisplayName('301');
+  it('returns operator-friendly label for Redirect301', () => {
+    const label = redirectTypeDisplayName('Redirect301');
     expect(label).toBe('301 Permanent');
   });
 
-  it('returns operator-friendly label for 302', () => {
-    const label = redirectTypeDisplayName('302');
+  it('returns operator-friendly label for Redirect302', () => {
+    const label = redirectTypeDisplayName('Redirect302');
     expect(label).toBe('302 Found');
   });
 

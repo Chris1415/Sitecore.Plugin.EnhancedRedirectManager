@@ -15,3 +15,20 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
 if (typeof window !== 'undefined' && !window.HTMLElement.prototype.scrollIntoView) {
   window.HTMLElement.prototype.scrollIntoView = function () {};
 }
+
+// jsdom does not implement matchMedia; next-themes reads prefers-color-scheme
+// via window.matchMedia at provider mount. Polyfill with an inert media-query
+// object that never matches and never emits change events.
+if (typeof window !== 'undefined' && !window.matchMedia) {
+  window.matchMedia = (query: string) =>
+    ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: () => {},
+      removeListener: () => {},
+      addEventListener: () => {},
+      removeEventListener: () => {},
+      dispatchEvent: () => false,
+    }) as MediaQueryList;
+}

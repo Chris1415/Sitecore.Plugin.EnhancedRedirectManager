@@ -1,5 +1,5 @@
 /**
- * Tests for MatchedMapGroup (T023 RED-1 through RED-6)
+ * Tests for MatchedMapGroup (T023 RED-1 through RED-6 + Tranche 4 fix-up #2)
  */
 
 import { describe, it, expect, vi } from "vitest";
@@ -13,7 +13,7 @@ const PAGE_ROUTE = "/products/sneakers/air-max-90";
 const baseMap: RedirectMapItem = {
   id: "map-1",
   name: "Marketing campaigns",
-  redirectType: "301",
+  redirectType: "Redirect301",
   preserveQueryString: true,
   preserveLanguage: false,
   includeVirtualFolder: false,
@@ -35,6 +35,7 @@ describe("MatchedMapGroup", () => {
         pageRoute={PAGE_ROUTE}
         onEditMapping={vi.fn()}
         onDeleteMapping={vi.fn()}
+        onEditMapSettings={vi.fn()}
       />
     );
     expect(screen.getByText("Marketing campaigns")).toBeDefined();
@@ -49,13 +50,11 @@ describe("MatchedMapGroup", () => {
         pageRoute={PAGE_ROUTE}
         onEditMapping={vi.fn()}
         onDeleteMapping={vi.fn()}
+        onEditMapSettings={vi.fn()}
       />
     );
-    // preserveQueryString=true → chip visible
     expect(screen.getByText("Pres. QS")).toBeDefined();
-    // preserveLanguage=false → chip absent
     expect(screen.queryByText("Pres. Lang")).toBeNull();
-    // includeVirtualFolder=false → chip absent
     expect(screen.queryByText("Virt. Folder")).toBeNull();
   });
 
@@ -67,12 +66,11 @@ describe("MatchedMapGroup", () => {
         pageRoute={PAGE_ROUTE}
         onEditMapping={vi.fn()}
         onDeleteMapping={vi.fn()}
+        onEditMapSettings={vi.fn()}
       />
     );
-    // Source matches page route → font-medium
     const srcEl = screen.getByText(PAGE_ROUTE);
     expect(srcEl.className).toContain("font-medium");
-    // Target does not match → muted-foreground
     const tgtEl = screen.getByText("/campaigns/summer-2026");
     expect(tgtEl.className).toContain("muted-foreground");
   });
@@ -85,6 +83,7 @@ describe("MatchedMapGroup", () => {
         pageRoute={PAGE_ROUTE}
         onEditMapping={vi.fn()}
         onDeleteMapping={vi.fn()}
+        onEditMapSettings={vi.fn()}
       />
     );
     const section = screen.getByRole("region", { name: /Marketing campaigns redirect map/i });
@@ -99,11 +98,10 @@ describe("MatchedMapGroup", () => {
         pageRoute={PAGE_ROUTE}
         onEditMapping={vi.fn()}
         onDeleteMapping={vi.fn()}
+        onEditMapSettings={vi.fn()}
       />
     );
-    // Arrow glyph → present
     expect(document.body.textContent).toContain("\u2192");
-    // Ensure no emoji arrows used
     expect(document.body.textContent).not.toContain("\u27A1");
   });
 
@@ -115,6 +113,7 @@ describe("MatchedMapGroup", () => {
         pageRoute={PAGE_ROUTE}
         onEditMapping={vi.fn()}
         onDeleteMapping={vi.fn()}
+        onEditMapSettings={vi.fn()}
       />
     );
     expect(screen.getByRole("button", { name: /edit mapping/i })).toBeDefined();
@@ -130,6 +129,7 @@ describe("MatchedMapGroup", () => {
         pageRoute={PAGE_ROUTE}
         onEditMapping={onEdit}
         onDeleteMapping={vi.fn()}
+        onEditMapSettings={vi.fn()}
       />
     );
     await userEvent.click(screen.getByRole("button", { name: /edit mapping/i }));
@@ -145,9 +145,49 @@ describe("MatchedMapGroup", () => {
         pageRoute={PAGE_ROUTE}
         onEditMapping={vi.fn()}
         onDeleteMapping={onDelete}
+        onEditMapSettings={vi.fn()}
       />
     );
     await userEvent.click(screen.getByRole("button", { name: /delete mapping/i }));
     expect(onDelete).toHaveBeenCalledOnce();
+  });
+
+  // ---- Tranche 4 fix-up #2: accordion + map-settings edit ----
+
+  it("RED-9: 'Edit map' button is rendered and triggers onEditMapSettings with the map", async () => {
+    const onEditMapSettings = vi.fn();
+    render(
+      <MatchedMapGroup
+        map={baseMap}
+        matchedMappings={[{ source: PAGE_ROUTE, target: "/campaigns" }]}
+        pageRoute={PAGE_ROUTE}
+        onEditMapping={vi.fn()}
+        onDeleteMapping={vi.fn()}
+        onEditMapSettings={onEditMapSettings}
+      />
+    );
+    const btn = screen.getByRole("button", { name: /Edit settings for Marketing campaigns/i });
+    await userEvent.click(btn);
+    expect(onEditMapSettings).toHaveBeenCalledWith(baseMap);
+  });
+
+  it("RED-10: header is a Collapsible trigger button and toggles body visibility", async () => {
+    render(
+      <MatchedMapGroup
+        map={baseMap}
+        matchedMappings={[{ source: PAGE_ROUTE, target: "/campaigns" }]}
+        pageRoute={PAGE_ROUTE}
+        onEditMapping={vi.fn()}
+        onDeleteMapping={vi.fn()}
+        onEditMapSettings={vi.fn()}
+      />
+    );
+    const trigger = screen.getByRole("button", { name: /Toggle Marketing campaigns/i });
+    expect(trigger).toBeDefined();
+    // Default open → body present
+    expect(screen.queryByRole("button", { name: /Edit settings for Marketing campaigns/i })).not.toBeNull();
+    await userEvent.click(trigger);
+    // After collapse the body's edit button should no longer be in the accessible tree.
+    expect(screen.queryByRole("button", { name: /Edit settings for Marketing campaigns/i })).toBeNull();
   });
 });

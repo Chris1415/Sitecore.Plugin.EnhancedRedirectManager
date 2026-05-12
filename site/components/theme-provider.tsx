@@ -3,6 +3,8 @@
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
 
+import { isThemeSwitcherEnabled } from "@/lib/env-flags"
+
 function ThemeProvider({
   children,
   ...props
@@ -15,7 +17,7 @@ function ThemeProvider({
       disableTransitionOnChange
       {...props}
     >
-      <ThemeHotkey />
+      {isThemeSwitcherEnabled() ? <ThemeHotkey /> : null}
       {children}
     </NextThemesProvider>
   )

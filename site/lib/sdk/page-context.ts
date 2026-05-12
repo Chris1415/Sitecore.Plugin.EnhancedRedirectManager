@@ -32,14 +32,6 @@ export type { PagesContext };
 /** Function to stop the subscription */
 export type UnsubscribeFn = () => void;
 
-function devLog(prefix: string, payload: unknown): void {
-  if (process.env.NODE_ENV !== 'production') {
-    console.log(`[redirect-manager:dev:capture] ${prefix}`, payload);
-  }
-}
-
-let _firstMessage = true;
-
 /**
  * Subscribes to the Pages editor context (selected page + site info).
  *
@@ -54,19 +46,9 @@ export async function subscribePageContext(
   client: ClientSDK,
   callback: (ctx: PagesContext) => void,
 ): Promise<UnsubscribeFn> {
-  _firstMessage = true;
-
   const result = await client.query('pages.context', {
     subscribe: true,
     onSuccess: (ctx: PagesContext) => {
-      if (_firstMessage) {
-        // Log both fields for OQ-A closure — operator inspects these at T065 smoke
-        devLog('pages.context first message — pageInfo.url:', ctx.pageInfo?.url);
-        devLog('pages.context first message — pageInfo.route:', ctx.pageInfo?.route);
-        devLog('pages.context first message — pageInfo.path:', ctx.pageInfo?.path);
-        devLog('pages.context first message — siteInfo.name:', ctx.siteInfo?.name);
-        _firstMessage = false;
-      }
       callback(ctx);
     },
   });

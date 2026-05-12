@@ -4,19 +4,14 @@
  * Dashboard Widget extension point (xmc:dashboardblocks).
  * Route: /dashboard-widget
  *
- * Tranche 4 (T031–T034): Real Operator Console (v1) UI.
- * Replaces the Tranche 2 capture-helper that was here previously.
+ * Tranche 9 update — tenant-wide aggregation.
  *
- * Site resolution (OQ-7): Dashboard Widget runs in the per-site dashboard context.
- * The SDK exposes the site via application.context, but the full Sitecore path
- * to Settings/Redirects requires knowing the collection name.
- *
- * Current implementation:
- * - Uses `resources[0].tenantId` for the tenant (ADR-0007)
- * - Builds a best-effort sitePath from application.context app name:
- *   /sitecore/content/solo/<appName>/Settings/Redirects
- *   TODO (OQ-7): derive collection name dynamically at Tranche 6 smoke capture.
- *   For now hardcoded against the captured solo-website site (collection: solo).
+ * Previous implementation hardcoded the collection name to "solo" and assumed
+ * the Cloud Portal app name matched a Sitecore site name. That broke for every
+ * tenant that wasn't the original capture target. Now the widget enumerates
+ * every site in the tenant via xmc.sites.listSites, resolves each site's
+ * collection name via xmc.sites.listCollections, fetches its Redirect Maps
+ * in parallel, and shows the totals across the entire tenant.
  *
  * iframe constraints per § 4c-4: 300–800 px × 200–400 px. Single widget.
  */
@@ -30,26 +25,9 @@ export default function DashboardWidgetPage() {
   const appCtx = useAppContext();
   const sitecoreContextId = requireContextId(appCtx);
 
-  // TODO (OQ-7): derive site name and collection dynamically.
-  // For now, use the app name from appCtx which maps to the site name on the tenant
-  // that performed capture point #1 (solo-website, collection: solo).
-  // Operator must override these with real values after Tranche 6 smoke.
-  const appName = appCtx?.name ?? "solo-website";
-  const siteName = appName;
-
-  // TODO (OQ-7): collection name is hardcoded as 'solo' — derived from capture.
-  // Real tenants may have different collection names. Tranche 6 will capture this.
-  const collectionName = "solo";
-  const sitePath = `/sitecore/content/${collectionName}/${siteName}/Settings/Redirects`;
-
   return (
     <main className="p-3">
-      <DashboardWidget
-        client={client}
-        sitecoreContextId={sitecoreContextId}
-        siteName={siteName}
-        sitePath={sitePath}
-      />
+      <DashboardWidget client={client} sitecoreContextId={sitecoreContextId} />
     </main>
   );
 }

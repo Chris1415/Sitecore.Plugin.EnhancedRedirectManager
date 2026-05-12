@@ -28,18 +28,20 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 import { RegexBanner } from "@/components/context-panel/RegexBanner";
 import { MatchedMapGroup } from "@/components/context-panel/MatchedMapGroup";
 import { AddRedirectModal } from "@/components/context-panel/AddRedirectModal";
+import { EditMapSettingsModal } from "@/components/context-panel/EditMapSettingsModal";
 import { InlineEditForm } from "@/components/context-panel/InlineEditForm";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { subscribePageContext, type PagesContext } from "@/lib/sdk/page-context";
 import { listRedirectMaps } from "@/lib/sdk/redirects-read";
 import { updateRedirectMap, createRedirectMap } from "@/lib/sdk/redirects-write";
+import {
+  resolveItemIdByPath,
+  discoverRedirectMapTemplateId,
+} from "@/lib/sdk/redirects-discover";
 import { reloadPagesCanvas } from "@/lib/sdk/canvas-reload";
 import { matchPageRedirects } from "@/lib/match/context-panel-matcher";
 import type { ClientSDK } from "@/lib/sdk/types";
 import type { Mapping, RedirectMapItem, RedirectType } from "@/lib/domain/types";
-
-// PLACEHOLDER — real GUIDs captured at T065
-const PLACEHOLDER_TEMPLATE_ID = "{REDIRECT_MAP_TEMPLATE_GUID}";
-const PLACEHOLDER_PARENT_ID = "{SETTINGS_REDIRECTS_FOLDER_GUID}";
 
 interface EditState {
   mapId: string;
@@ -68,6 +70,7 @@ export function ContextPanel({ client, sitecoreContextId }: ContextPanelProps) {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editState, setEditState] = useState<EditState | null>(null);
   const [deleteState, setDeleteState] = useState<DeleteConfirmState | null>(null);
+  const [editingMapSettings, setEditingMapSettings] = useState<RedirectMapItem | null>(null);
   const [errorExpanded, setErrorExpanded] = useState(false);
   const retryRef = useRef<HTMLButtonElement>(null);
 
@@ -151,8 +154,7 @@ export function ContextPanel({ client, sitecoreContextId }: ContextPanelProps) {
     const map = maps.find((m) => m.id === mapId);
     if (!map) return;
 
-    // TODO (Tranche 6): updateRedirectMap assumed-shape — verb/boolean repr unverified
-    await updateRedirectMap(client, sitecoreContextId, {
+    const result = await updateRedirectMap(client, sitecoreContextId, {
       itemId: mapId,
       name: map.name,
       redirectType: map.redirectType,
@@ -161,6 +163,10 @@ export function ContextPanel({ client, sitecoreContextId }: ContextPanelProps) {
       includeVirtualFolder: map.includeVirtualFolder,
       mappings: newMappings,
     });
+    if (!result.ok) {
+      toast.error("Update failed");
+      return;
+    }
 
     setEditState(null);
     toast.success("\u2713 Mapping updated");
@@ -177,8 +183,7 @@ export function ContextPanel({ client, sitecoreContextId }: ContextPanelProps) {
     if (!map) return;
 
     // Per US-3 AC: if parent map ends up with zero mappings, it remains intact.
-    // TODO (Tranche 6): updateRedirectMap assumed-shape — verb/boolean repr unverified
-    await updateRedirectMap(client, sitecoreContextId, {
+    const result = await updateRedirectMap(client, sitecoreContextId, {
       itemId: mapId,
       name: map.name,
       redirectType: map.redirectType,
@@ -187,6 +192,10 @@ export function ContextPanel({ client, sitecoreContextId }: ContextPanelProps) {
       includeVirtualFolder: map.includeVirtualFolder,
       mappings: newMappings,
     });
+    if (!result.ok) {
+      toast.error("Delete failed");
+      return;
+    }
 
     setDeleteState(null);
     toast.success("\u2713 Mapping deleted");
@@ -194,27 +203,74 @@ export function ContextPanel({ client, sitecoreContextId }: ContextPanelProps) {
   }
 
   // ---- Add to existing map ----
+  //
+  // Server-side note: the UrlMapping field is a URL-encoded
+  // `source=target&source=target` string. Sitecore's URL-decode silently
+  // collapses duplicate keys, so writing a duplicate `source` returns
+  // result.ok=true but the row is dropped. We refetch the live map state
+  // and reject the duplicate BEFORE the write to avoid the false-success
+  // toast.
   async function handleAddToExistingMap(
     mapId: string,
     source: string,
     target: string,
-    existingMap: RedirectMapItem
+    _existingMap: RedirectMapItem,
   ) {
-    const newMappings = [...existingMap.mappings, { source, target }];
-    // TODO (Tranche 6): updateRedirectMap assumed-shape — verb/boolean repr unverified
-    await updateRedirectMap(client, sitecoreContextId, {
+    // _existingMap is intentionally unused — we refetch fresh map data below.
+    void _existingMap;
+    if (!pageCtx) throw new Error("Page context not loaded yet.");
+    const sitePath = buildSitePath(pageCtx);
+    const freshMaps = await listRedirectMaps(client, sitecoreContextId, sitePath);
+    const freshMap = freshMaps.find((m) => m.id === mapId);
+    if (!freshMap) {
+      throw new Error("This map no longer exists. Refresh and try again.");
+    }
+    if (freshMap.mappings.some((m) => m.source === source)) {
+      throw new Error(`A redirect with source "${source}" already exists in this map.`);
+    }
+    const newMappings = [...freshMap.mappings, { source, target }];
+    const result = await updateRedirectMap(client, sitecoreContextId, {
       itemId: mapId,
-      name: existingMap.name,
-      redirectType: existingMap.redirectType,
-      preserveQueryString: existingMap.preserveQueryString,
-      preserveLanguage: existingMap.preserveLanguage,
-      includeVirtualFolder: existingMap.includeVirtualFolder,
+      name: freshMap.name,
+      redirectType: freshMap.redirectType,
+      preserveQueryString: freshMap.preserveQueryString,
+      preserveLanguage: freshMap.preserveLanguage,
+      includeVirtualFolder: freshMap.includeVirtualFolder,
       mappings: newMappings,
     });
+    if (!result.ok) throw new Error("Server rejected the update.");
     toast.success("\u2713 Redirect added");
   }
 
+  // ---- Edit map-level settings (name, RedirectType, flags) ----
+  async function handleSaveMapSettings(attrs: {
+    name: string;
+    redirectType: RedirectType;
+    preserveQueryString: boolean;
+    preserveLanguage: boolean;
+    includeVirtualFolder: boolean;
+  }) {
+    if (!editingMapSettings) return;
+    // Preserve mappings untouched — only map-level attributes change.
+    // TODO (Tranche 6): updateRedirectMap assumed-shape — verb/boolean repr unverified
+    await updateRedirectMap(client, sitecoreContextId, {
+      itemId: editingMapSettings.id,
+      name: attrs.name,
+      redirectType: attrs.redirectType,
+      preserveQueryString: attrs.preserveQueryString,
+      preserveLanguage: attrs.preserveLanguage,
+      includeVirtualFolder: attrs.includeVirtualFolder,
+      mappings: editingMapSettings.mappings,
+    });
+    setEditingMapSettings(null);
+    toast.success("\u2713 Map settings updated");
+    await refreshAfterWrite();
+  }
+
   // ---- Create new map ----
+  // Uses runtime discovery (resolveItemIdByPath + discoverRedirectMapTemplateId)
+  // to find the Settings/Redirects folder GUID and Redirect Map template GUID
+  // for the current site — same approach as Full Page's NewRedirectMapModal.
   async function handleCreateNewMap(attrs: {
     name: string;
     redirectType: RedirectType;
@@ -224,17 +280,33 @@ export function ContextPanel({ client, sitecoreContextId }: ContextPanelProps) {
     source: string;
     target: string;
   }) {
-    // TODO (Tranche 6): createRedirectMap assumed-shape — parentId/templateId are placeholders
-    await createRedirectMap(client, sitecoreContextId, {
+    if (!pageCtx) throw new Error("Page context not loaded yet.");
+    const sitePath = buildSitePath(pageCtx);
+    const parentId = await resolveItemIdByPath(client, sitecoreContextId, sitePath);
+    if (!parentId) {
+      throw new Error(`Settings/Redirects folder not found at ${sitePath}.`);
+    }
+    const templateId = await discoverRedirectMapTemplateId(
+      client,
+      sitecoreContextId,
+      parentId,
+    );
+    if (!templateId) {
+      throw new Error(
+        "No existing Redirect Map under the site — create the first one manually in Sitecore CMS so the template GUID becomes discoverable.",
+      );
+    }
+    const result = await createRedirectMap(client, sitecoreContextId, {
       name: attrs.name,
       redirectType: attrs.redirectType,
       preserveQueryString: attrs.preserveQueryString,
       preserveLanguage: attrs.preserveLanguage,
       includeVirtualFolder: attrs.includeVirtualFolder,
       mappings: [{ source: attrs.source, target: attrs.target }],
-      parentId: PLACEHOLDER_PARENT_ID,
-      templateId: PLACEHOLDER_TEMPLATE_ID,
+      parentId,
+      templateId,
     });
+    if (!result.ok) throw new Error("Server rejected the create.");
     toast.success("\u2713 Redirect map created");
   }
 
@@ -251,6 +323,11 @@ export function ContextPanel({ client, sitecoreContextId }: ContextPanelProps) {
         className="sr-only"
       >
         {status === "loading" ? "Loading redirects" : ""}
+      </div>
+
+      {/* View preferences toolbar — renders nothing when env-flag is off */}
+      <div className="flex justify-end -mb-1">
+        <ThemeSwitcher />
       </div>
 
       {/* Persistent regex banner — always visible */}
@@ -291,6 +368,7 @@ export function ContextPanel({ client, sitecoreContextId }: ContextPanelProps) {
                 map={group.map}
                 matchedMappings={group.matchedMappings}
                 pageRoute={pageRoute}
+                onEditMapSettings={(m) => setEditingMapSettings(m)}
                 onEditMapping={(mapping, idx) => {
                   // Find the true index in the full mappings array
                   const fullIdx = group.map.mappings.findIndex(
@@ -371,6 +449,16 @@ export function ContextPanel({ client, sitecoreContextId }: ContextPanelProps) {
           </Button>
         </div>
       )}
+
+      {/* Edit map settings modal */}
+      <EditMapSettingsModal
+        open={editingMapSettings !== null}
+        onOpenChange={(o) => {
+          if (!o) setEditingMapSettings(null);
+        }}
+        map={editingMapSettings}
+        onSave={handleSaveMapSettings}
+      />
 
       {/* Add redirect modal */}
       <AddRedirectModal

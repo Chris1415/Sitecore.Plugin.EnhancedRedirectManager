@@ -1,4 +1,8 @@
 {
+  "_meta": {
+    "source": "real-tenant capture 2026-05-11 (Tranche 6a write-capture session)",
+    "mutation": "deleteItem(input: DeleteItemInput!) { successful }"
+  },
   "data": {
     "data": {
       "deleteItem": {

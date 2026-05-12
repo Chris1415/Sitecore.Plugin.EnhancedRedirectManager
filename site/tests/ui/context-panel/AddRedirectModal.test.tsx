@@ -14,7 +14,7 @@ const existingMaps: RedirectMapItem[] = [
   {
     id: "map-1",
     name: "Marketing campaigns",
-    redirectType: "301",
+    redirectType: "Redirect301",
     preserveQueryString: false,
     preserveLanguage: false,
     includeVirtualFolder: false,
@@ -24,7 +24,7 @@ const existingMaps: RedirectMapItem[] = [
   {
     id: "map-2",
     name: "Legacy URLs",
-    redirectType: "302",
+    redirectType: "Redirect302",
     preserveQueryString: false,
     preserveLanguage: false,
     includeVirtualFolder: false,

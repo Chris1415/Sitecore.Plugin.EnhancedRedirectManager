@@ -3,21 +3,17 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 /**
- * Structural guards — T062 (Tranche 2 upgrade: SDK boundary lock activated).
+ * Structural guards — T062 (full set active as of Tranche 8).
  *
- * The SDK boundary lock is a real test as of Tranche 2 (Step 5 of the implementation brief).
- * The other 4 guards remain it.todo — they land in Tranche 8 (T062 final).
- *
- * Guards enforced:
- * - SDK boundary lock (ADR-0011, § 4c-1): only lib/sdk/* and
- *   components/providers/marketplace.tsx may import @sitecore-marketplace-sdk/*
- *
- * Guards pending (Tranche 8):
- * - Route coverage: all three extension routes registered + root returns notFound()
- * - Theme contract: app/globals.css carries the dark-mode --primary-foreground
- *   override in BOTH .dark blocks
- * - Security: no raw-HTML React injection on user data (NFR-Sec3)
- * - Accessibility: no outline: none without a replacement focus style
+ * All five guards are real tests:
+ *  1. SDK boundary lock (ADR-0011, § 4c-1): only lib/sdk/* and
+ *     components/providers/marketplace.tsx may import @sitecore-marketplace-sdk/*
+ *  2. Route coverage: all three extension routes registered + root returns notFound()
+ *  3. Theme contract: app/globals.css carries the dark-mode --primary-foreground
+ *     override in BOTH .dark blocks (ADR-0004 / blok-theming)
+ *  4. Security (NFR-Sec3): no raw HTML injection on user-controlled data.
+ *  5. Accessibility (WCAG 2.4.7): no `outline-none` / `outline:none` without a
+ *     paired `focus-visible:` replacement.
  */
 
 const SITE_ROOT = path.resolve(__dirname, '../../');
@@ -132,6 +128,73 @@ describe('structural guards', () => {
       'globals.css must carry --primary-foreground: var(--color-blackAlpha-900) in BOTH dark blocks (.dark + @media prefers-color-scheme: dark)',
     ).toBeGreaterThanOrEqual(2);
   });
-  it.todo('no raw-HTML React injection on user data');
-  it.todo('no outline: none without a replacement focus style');
+  it('no raw HTML injection on user-controlled data (NFR-Sec3)', () => {
+    // The escape-hatch React prop (looked up via its dangerous-named attribute)
+    // is forbidden in our code. Some Blok primitives (alert / select / etc.)
+    // use it for trusted static icon strings — those files live under
+    // components/ui/ and are whitelisted because the content is bundled, not
+    // user input.
+    const UNSAFE_PROP = 'dangerously' + 'SetInnerHTML';
+    const WHITELIST = [path.join(SITE_ROOT, 'components', 'ui')];
+
+    const files = collectSourceFiles(SITE_ROOT);
+    const violations: string[] = [];
+    for (const file of files) {
+      if (WHITELIST.some((w) => file.startsWith(w))) continue;
+      const content = fs.readFileSync(file, 'utf-8');
+      if (content.includes(UNSAFE_PROP)) {
+        violations.push(path.relative(SITE_ROOT, file));
+      }
+    }
+
+    expect(
+      violations,
+      `NFR-Sec3 violation: raw HTML injection found in non-whitelisted files. Files:\n${violations.join('\n')}`,
+    ).toHaveLength(0);
+  });
+
+  it('no `outline-none` / `outline:none` without a paired focus-visible replacement (WCAG 2.4.7)', () => {
+    // Tailwind / shadcn pattern: every `outline-none` (or its CSS equivalent)
+    // on an interactive element must be accompanied by a `focus-visible:` ring
+    // or equivalent visible focus indicator. We allow it when the same source
+    // line OR a sibling line within ~3 lines also references `focus-visible:`.
+    //
+    // Blok primitives under components/ui/* are whitelisted because they ship
+    // with their own Radix-driven focus management; we don't own that code.
+    // The guard's purpose is to catch issues in OUR feature components.
+    const OUTLINE_REGEXES = [
+      /\boutline-none\b/, // Tailwind shorthand
+      /outline\s*:\s*none/, // raw CSS
+      /\boutline-0\b/, // Tailwind alt
+    ];
+    const FOCUS_VISIBLE_REGEX = /focus-visible:/;
+    const WHITELIST = [path.join(SITE_ROOT, 'components', 'ui')];
+
+    const files = collectSourceFiles(SITE_ROOT);
+    const violations: string[] = [];
+
+    for (const file of files) {
+      if (WHITELIST.some((w) => file.startsWith(w))) continue;
+      const content = fs.readFileSync(file, 'utf-8');
+      const lines = content.split('\n');
+      for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        if (!OUTLINE_REGEXES.some((re) => re.test(line))) continue;
+
+        // Look in a 3-line window around the match for a paired focus-visible:.
+        const start = Math.max(0, i - 3);
+        const end = Math.min(lines.length, i + 4);
+        const window = lines.slice(start, end).join('\n');
+        if (FOCUS_VISIBLE_REGEX.test(window)) continue;
+
+        const rel = path.relative(SITE_ROOT, file);
+        violations.push(`${rel}:${i + 1}: ${line.trim()}`);
+      }
+    }
+
+    expect(
+      violations,
+      `WCAG 2.4.7 violation: outline removal found without a focus-visible replacement. Each interactive element that removes the default outline must provide a visible focus indicator within 3 lines.\n${violations.join('\n')}`,
+    ).toHaveLength(0);
+  });
 });

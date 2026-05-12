@@ -221,9 +221,8 @@ export async function listRedirectMaps(
     },
   })
 
-  console.error("HERE")
-
-  // SINGLE .data unwrap (mutate — see sitecore:marketplace-sdk-client § 8b)
+  // DOUBLE .data.data unwrap (mutate against xmc.* module keys — see
+  // reference_marketplace_sdk_envelope_authoring_graphql.md).
   const root = result.data?.data as WireChildrenResponse
   const items = root?.item?.children?.nodes ?? []
 
@@ -232,116 +231,7 @@ export async function listRedirectMaps(
     const item = decodeWireItem(wire as WireItem)
     if (item) decoded.push(item)
   }
+
   return decoded
 }
 
-/**
- * Raw-wire variant — returns the full Authoring GraphQL response WITHOUT decoding.
- *
- * Tranche 2 capture helper uses this so the operator can paste the verbatim wire
- * envelope into tests/fixtures/graphql/redirect-map-list.json. Production code
- * should use `listRedirectMaps` (decoded) — this raw export exists only for the
- * capture-helper UI on /full-page. The Tranche 4+ rewrite removes the call site.
- */
-export async function fetchRedirectMapsRaw(
-  client: ClientSDK,
-  sitecoreContextId: string,
-  sitePath: string
-): Promise<unknown> {
-  if (process.env.NODE_ENV !== "production") {
-    console.log("[redirect-manager:dev:capture] fetchRedirectMapsRaw REQUEST", {
-      sitecoreContextId,
-      sitePath,
-      query: GET_REDIRECTS_FOR_SITE.trim(),
-      variables: { sitePath },
-    })
-  }
-  try {
-    const result = await client.mutate("xmc.authoring.graphql", {
-      params: {
-        query: { sitecoreContextId },
-        body: {
-          query: GET_REDIRECTS_FOR_SITE,
-          variables: { sitePath },
-        },
-      },
-    })
-
-    // The SDK returns an envelope { data?, error?, request?, response? }.
-    // The Fetch Response body is already consumed by the SDK before return —
-    // cloning it errors. Instead, surface the SDK's own parsed `error` plus
-    // the response status / headers / request URL so the GraphQL error is
-    // visible without trying to re-read the stream.
-    if (process.env.NODE_ENV !== "production") {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const r = result as any
-      const httpResponse: Response | undefined = r?.response
-      const httpRequest: Request | undefined = r?.request
-      // Collect headers into a plain object (Headers are not enumerable via Object.entries).
-      const responseHeaders: Record<string, string> = {}
-      if (
-        httpResponse?.headers &&
-        typeof httpResponse.headers.forEach === "function"
-      ) {
-        httpResponse.headers.forEach((value, key) => {
-          responseHeaders[key] = value
-        })
-      }
-      console.log("[redirect-manager:dev:capture] fetchRedirectMapsRaw HTTP", {
-        status: httpResponse?.status,
-        statusText: httpResponse?.statusText,
-        requestUrl: httpRequest?.url,
-        requestMethod: httpRequest?.method,
-        responseHeaders,
-        // The SDK puts the parsed error body here when !response.ok
-        sdkError: r?.error,
-        // The SDK puts the parsed data body here when response.ok
-        sdkData: r?.data,
-        // Inspect ALL enumerable keys on the envelope to spot anything we missed
-        envelopeKeys: Object.keys(r ?? {}),
-        // Try various conventional places hey-api / openapi-fetch use for error info
-        alternateErrorFields: {
-          "error.message": r?.error?.message,
-          "error.errors": r?.error?.errors,
-          "error.body": r?.error?.body,
-          message: r?.message,
-        },
-      })
-    }
-
-    if (process.env.NODE_ENV !== "production") {
-      console.log(
-        "[redirect-manager:dev:capture] fetchRedirectMapsRaw RESPONSE OK",
-        result
-      )
-    }
-    return result
-  } catch (err) {
-    if (process.env.NODE_ENV !== "production") {
-      // The SDK wraps fetch errors in an envelope where `error`/`request`/`response`
-      // are non-enumerable, so JSON.stringify renders them as `{}`. Reach through
-      // explicitly so the GraphQL error body actually appears in the console.
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const e = err as any
-      console.error(
-        "[redirect-manager:dev:capture] fetchRedirectMapsRaw FAILED",
-        {
-          message: e?.message ?? String(err),
-          responseStatus: e?.response?.status,
-          responseStatusText: e?.response?.statusText,
-          responseBody: e?.response?.data ?? e?.response?.body ?? e?.body,
-          errorCode: e?.code,
-          rawError: e,
-        }
-      )
-    }
-    // Re-shape so the helper UI's CaptureDiagnostics can render the GraphQL errors.
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const e = err as any
-    const errBody = e?.response?.data ?? e?.response?.body
-    if (errBody && typeof errBody === "object") {
-      return errBody
-    }
-    throw err
-  }
-}

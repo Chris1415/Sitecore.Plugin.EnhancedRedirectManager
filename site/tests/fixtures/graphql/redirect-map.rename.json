@@ -1,0 +1,21 @@
+{
+  "_meta": {
+    "source": "real-tenant capture 2026-05-11 (Tranche 6a write-capture session)",
+    "mutation": "renameItem(input: RenameItemInput!) { item { itemId name } }",
+    "input_shape": {
+      "itemId": "ID (required)",
+      "newName": "string (required)"
+    },
+    "alternative_attempted": "updateItem with input.name — FAILS with EXEC_INVALID_TYPE; renameItem is the only path"
+  },
+  "data": {
+    "data": {
+      "renameItem": {
+        "item": {
+          "itemId": "f727f496f04f441e8556ae52d7c90477",
+          "name": "_renamed_1778526184394"
+        }
+      }
+    }
+  }
+}

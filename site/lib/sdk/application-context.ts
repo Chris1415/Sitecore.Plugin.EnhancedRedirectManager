@@ -25,20 +25,12 @@
 import type { ApplicationContext } from '@sitecore-marketplace-sdk/client';
 import { requireContextId } from '@/lib/sdk/require-context-id';
 
-function devLog(prefix: string, payload: unknown): void {
-  if (process.env.NODE_ENV !== 'production') {
-    console.log(`[redirect-manager:dev:capture] ${prefix}`, payload);
-  }
-}
-
 /**
  * Extracts the tenant ID from the application context (ADR-0007).
  * Returns undefined if resourceAccess is empty or missing.
  */
 export function selectTenantId(appCtx: ApplicationContext): string | undefined {
-  const tenantId = appCtx?.resourceAccess?.[0]?.tenantId;
-  devLog('selectTenantId:', tenantId);
-  return tenantId;
+  return appCtx?.resourceAccess?.[0]?.tenantId;
 }
 
 /**
@@ -49,7 +41,5 @@ export function selectTenantId(appCtx: ApplicationContext): string | undefined {
  * Throws if preview context is unavailable (same error as requireContextId).
  */
 export function selectContextId(appCtx: ApplicationContext): string {
-  const contextId = requireContextId(appCtx);
-  devLog('selectContextId (preview):', contextId);
-  return contextId;
+  return requireContextId(appCtx);
 }

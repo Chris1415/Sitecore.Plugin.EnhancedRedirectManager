@@ -77,11 +77,12 @@ describe('createRedirectMap', () => {
     expect(callArg.body, 'body must be INSIDE params, not at top level').toBeUndefined();
   });
 
-  it('RED-2: double .data.data unwrap — wrapper returns { ok, itemId } from envelope', async () => {
+  it('RED-2: double .data.data unwrap — wrapper returns { ok, itemId } from { item } envelope', async () => {
     const client = makeStubClient(createFixture);
     const result = await createRedirectMap(client, CTX_ID, { parentId: PARENT_ID, templateId: TEMPLATE_ID, ...attrs });
     expect(result.ok).toBe(true);
-    expect(result.itemId).toBe('{NEWITEM-A81F-4692-B05D-178D48C836DE}');
+    // Verified real-tenant capture 2026-05-11 (Tranche 6a): createItem returns { item { itemId } }.
+    expect(result.itemId).toBe('f727f496f04f441e8556ae52d7c90477');
   });
 
   it('RED-5a: passes language:en (ADR-0010)', async () => {
@@ -92,12 +93,15 @@ describe('createRedirectMap', () => {
     expect(body.variables.input.language).toBe('en');
   });
 
-  it('RED-6: divergence-detection — create fixture wraps response in double .data.data envelope', () => {
-    expect(createFixture, 'createItem fixture must use the double-wrapped envelope').toMatchObject({
+  it('RED-6: divergence-detection — create fixture wraps response under data.data.createItem.item', () => {
+    // Verified real-tenant capture 2026-05-11 (Tranche 6a): createItem returns { item { itemId, name, path } }.
+    expect(createFixture, 'createItem fixture must use the data.data.createItem.item envelope').toMatchObject({
       data: {
         data: expect.objectContaining({
           createItem: expect.objectContaining({
-            itemId: expect.any(String),
+            item: expect.objectContaining({
+              itemId: expect.any(String),
+            }),
           }),
         }),
       },
@@ -139,12 +143,15 @@ describe('updateRedirectMap', () => {
     expect(body.variables.input.language).toBe('en');
   });
 
-  it('RED-7: divergence-detection — update fixture wraps response in double .data.data envelope', () => {
-    expect(updateFixture, 'updateItem fixture must use the double-wrapped envelope').toMatchObject({
+  it('RED-7: divergence-detection — update fixture wraps response under data.data.updateItem.item', () => {
+    // Verified real-tenant capture 2026-05-11 (Tranche 6a): updateItem returns { item { itemId } }.
+    expect(updateFixture, 'updateItem fixture must use the data.data.updateItem.item envelope').toMatchObject({
       data: {
         data: expect.objectContaining({
           updateItem: expect.objectContaining({
-            itemId: expect.any(String),
+            item: expect.objectContaining({
+              itemId: expect.any(String),
+            }),
           }),
         }),
       },

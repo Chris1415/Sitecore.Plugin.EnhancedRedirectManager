@@ -14,7 +14,7 @@
  * Note: logs pageInfo.url + .route + .path for forensics, matcher consumes .route.
  */
 
-import { describe, it, expect, vi, type Mock, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, type Mock } from 'vitest';
 import type { ClientSDK } from '@sitecore-marketplace-sdk/client';
 import { subscribePageContext } from '@/lib/sdk/page-context';
 import pageContextFixture from '@/tests/fixtures/graphql/page-context.json';
@@ -32,16 +32,6 @@ function makeStubClient() {
 }
 
 describe('subscribePageContext', () => {
-  let consoleSpy: ReturnType<typeof vi.spyOn>;
-
-  beforeEach(() => {
-    consoleSpy = vi.spyOn(console, 'log').mockImplementation(() => {});
-  });
-
-  afterEach(() => {
-    consoleSpy.mockRestore();
-  });
-
   it('RED-1: subscribe call uses correct verb (client.query) and subscribe:true', async () => {
     const { client } = makeStubClient();
     const callback = vi.fn();
@@ -88,20 +78,7 @@ describe('subscribePageContext', () => {
     expect(callbackArg.pageInfo.route).not.toBe(callbackArg.pageInfo.url);
   });
 
-  it('RED-4: logs all three pageInfo path candidates on first message (forensics for OQ-A)', async () => {
-    const { client, triggerOnSuccess } = makeStubClient();
-    const callback = vi.fn();
-    await subscribePageContext(client, callback);
-    triggerOnSuccess(pageContextFixture);
-
-    const logCalls = consoleSpy.mock.calls.flat().join(' ');
-    expect(logCalls).toContain('[redirect-manager:dev:capture]');
-    expect(logCalls).toContain('/');                       // route value
-    expect(logCalls).toContain('/?sc_site=solo-website');  // url value (logged for divergence visibility)
-    expect(logCalls).toContain('/sitecore/content/solo/solo-website/Home'); // path value
-  });
-
-  it('RED-5: divergence-detection — captured page-context fixture shape', () => {
+  it('divergence-detection — captured page-context fixture shape', () => {
     // If a re-capture replaces this fixture and the shape drifts, this assertion
     // fails with a named delta. Update the wrapper, not the assertion.
     expect(pageContextFixture, 'page-context: siteInfo + pageInfo with three path candidates').toMatchObject({

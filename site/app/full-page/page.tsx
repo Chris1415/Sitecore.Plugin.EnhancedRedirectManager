@@ -4,13 +4,10 @@
  * Full Page extension point (xmc:fullscreen).
  * Route: /full-page
  *
- * Tranche 5 — Real Operator Console (v1) UI.
- * Replaces the Tranche 2 capture helper (CaptureHelper was removed).
- *
- * Renders: <FullPage> with collection→site picker, virtualized redirect-map list,
- * and read-only detail view.
- *
- * CRUD forms (create/edit/delete) arrive in Tranche 6.
+ * Tranche 5 — Real Operator Console (v1) UI: collection→site picker, virtualized
+ * redirect-map list, and read-only detail view.
+ * Tranche 6 — CRUD write surface (create / update / rename / delete) wired through
+ * the verified Authoring GraphQL envelopes.
  * Import/Export wizard arrives in Tranche 7.
  */
 

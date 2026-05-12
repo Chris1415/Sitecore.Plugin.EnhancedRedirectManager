@@ -14,7 +14,7 @@ function makeMap(id: string, updatedAt: string, mappingCount: number): RedirectM
   return {
     id,
     name: `Map ${id}`,
-    redirectType: "301",
+    redirectType: "Redirect301",
     preserveQueryString: false,
     preserveLanguage: false,
     includeVirtualFolder: false,
