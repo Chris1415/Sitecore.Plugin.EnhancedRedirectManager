@@ -1,4 +1,6 @@
-# Redirect Manager
+# <img src="https://hachweb.wordpress.com/wp-content/uploads/2025/08/2022-05-03-09_10_13-receipt-stickerapp-removebg-preview.png" alt="Hahn-Solo logo" height="40" align="center" /> Redirect Manager
+
+**Author:** [Christian Hahn](https://www.linkedin.com/in/christian-hahn-solo/) — _Technical Product Manager DevEx & SDKs @ Sitecore_
 
 A Sitecore Marketplace client-side app that gives content authors, site managers, and Sitecore implementers a purpose-built UI for redirect operations across a SitecoreAI tenant. It replaces the awkward Content-Editor workflow for managing items under `/sitecore/content/{COLLECTION}/{SITE}/Settings/Redirects/*` and surfaces redirects where editors already work — inside the Pages editor, on the site dashboard, and on a dedicated full-page workshop.
 

@@ -72,8 +72,13 @@ describe('structural guards', () => {
     ).toHaveLength(0);
   });
 
-  it('three extension routes registered + root returns notFound()', () => {
-    // Verify the three extension point route directories exist
+  it('three extension routes registered + root renders intro page', () => {
+    // Verify the three extension point route directories exist, each with
+    // its own page.tsx AND its own layout.tsx that wraps content in the
+    // MarketplaceProvider. The provider has been pushed down from the root
+    // layout into these per-extension-point layouts so the root IntroPage
+    // can render without being gated by the SDK handshake (supersedes
+    // ADR-0011's "root returns notFound()" rule).
     const routes = ['context-panel', 'dashboard-widget', 'full-page'];
     for (const route of routes) {
       const routeDir = path.join(SITE_ROOT, 'app', route);
@@ -86,16 +91,30 @@ describe('structural guards', () => {
         fs.existsSync(pageFile),
         `Expected page.tsx to exist in app/${route}/`,
       ).toBe(true);
+      const layoutFile = path.join(routeDir, 'layout.tsx');
+      expect(
+        fs.existsSync(layoutFile),
+        `Expected layout.tsx to exist in app/${route}/ (provider scope guard)`,
+      ).toBe(true);
+      const layoutContent = fs.readFileSync(layoutFile, 'utf-8');
+      expect(
+        layoutContent,
+        `app/${route}/layout.tsx must wrap children in MarketplaceProvider`,
+      ).toContain('MarketplaceProvider');
     }
 
-    // Verify root page calls notFound() (ADR-0011)
+    // Root page now ships the IntroPage instead of notFound()
     const rootPage = path.join(SITE_ROOT, 'app', 'page.tsx');
     expect(fs.existsSync(rootPage), 'Expected app/page.tsx to exist').toBe(true);
     const rootContent = fs.readFileSync(rootPage, 'utf-8');
     expect(
       rootContent,
-      'Root page must call notFound() to prevent hanging MarketplaceProvider init',
-    ).toContain('notFound()');
+      'Root page must NOT call notFound() — it now ships the IntroPage',
+    ).not.toContain('notFound()');
+    expect(
+      rootContent,
+      'Root IntroPage must mention the product name',
+    ).toContain('Redirect Manager');
   });
 
   it('app/globals.css carries the dark-mode --primary-foreground override in both .dark blocks', () => {

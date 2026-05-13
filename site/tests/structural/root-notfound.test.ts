@@ -3,13 +3,17 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 /**
- * Structural test: app/page.tsx must export a default function that calls notFound().
- * This is a source-file regex check (not a runtime test) to enforce ADR-0011:
- * Root "/" returns notFound() — provider-trap mitigation.
+ * Structural test: app/page.tsx exists and renders the IntroPage (NOT
+ * notFound()). The earlier ADR-0011 rule "Root / returns notFound() —
+ * provider-trap mitigation" has been superseded by the IntroPage home page,
+ * which sits OUTSIDE the MarketplaceProvider (now scoped to each
+ * extension-point route via per-route layouts).
  *
- * The actual runtime 404 behaviour is verified during operator smoke (T065).
+ * The provider-trap concern is still mitigated, but by a different mechanism:
+ * the SDK handshake only runs inside `context-panel/`, `dashboard-widget/`,
+ * and `full-page/` route subtrees.
  */
-describe('root route structural guard (ADR-0011)', () => {
+describe('root route structural guard (post ADR-0011 supersession)', () => {
   const pagePath = path.resolve(
     process.cwd(),
     'app',
@@ -20,16 +24,16 @@ describe('root route structural guard (ADR-0011)', () => {
     expect(fs.existsSync(pagePath)).toBe(true);
   });
 
-  it('app/page.tsx imports notFound from next/navigation', () => {
+  it('app/page.tsx does NOT import notFound (intro page, not 404)', () => {
     const source = fs.readFileSync(pagePath, 'utf-8');
-    expect(source).toMatch(/from ['"]next\/navigation['"]/);
-    expect(source).toMatch(/notFound/);
+    expect(source).not.toMatch(/notFound\s*\(/);
   });
 
-  it('app/page.tsx calls notFound() in the default export', () => {
+  it('app/page.tsx renders the Redirect Manager intro (title + 3 surfaces)', () => {
     const source = fs.readFileSync(pagePath, 'utf-8');
-    // Must export a default function and call notFound()
-    expect(source).toMatch(/export default function/);
-    expect(source).toMatch(/notFound\(\)/);
+    expect(source).toMatch(/Redirect Manager/);
+    expect(source).toMatch(/Full Page/);
+    expect(source).toMatch(/Pages Context Panel/);
+    expect(source).toMatch(/Dashboard Widget/);
   });
 });
