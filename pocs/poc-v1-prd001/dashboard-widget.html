@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard widget — EN scope · Operator Console v1 (PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <link rel="stylesheet" href="multilingual.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="dw-frame-shell">
+      <section class="dw-frame" aria-label="Redirects summary for MainSite, English">
+        <header class="dw-head">
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <h2 class="dw-head__title">Redirects</h2>
+            <span class="lp-readonly" aria-label="Currently scoped to English. Read-only on Dashboard.">
+              <span class="lp-readonly__chip">EN</span>
+              <span>English</span>
+            </span>
+          </div>
+          <span class="dw-head__site">MainSite · SneakerCo</span>
+        </header>
+
+        <div class="dw-tiles dw-tiles--4">
+          <article class="dw-tile" aria-label="12 redirect maps in English">
+            <span class="dw-tile__num">12</span>
+            <span class="dw-tile__lbl">Maps in EN</span>
+          </article>
+          <hr class="blok-separator blok-separator--vertical" />
+          <article class="dw-tile" aria-label="84 total mappings in English">
+            <span class="dw-tile__num">84</span>
+            <span class="dw-tile__lbl">Mappings in EN</span>
+          </article>
+          <hr class="blok-separator blok-separator--vertical" />
+          <article class="dw-tile" aria-label="Last updated 3 days ago">
+            <span class="dw-tile__txt">3 d ago</span>
+            <span class="dw-tile__lbl">Last updated</span>
+          </article>
+          <hr class="blok-separator blok-separator--vertical" />
+          <article class="dw-tile" aria-label="Languages with content: en, de, fr">
+            <span class="dw-tile__lang-list" aria-hidden="true">
+              <span class="dw-tile__lang-chip">EN</span>
+              <span class="dw-tile__lang-chip">DE</span>
+              <span class="dw-tile__lang-chip">FR</span>
+            </span>
+            <span class="dw-tile__lbl">Languages with content</span>
+          </article>
+        </div>
+
+        <p class="dw-foot">
+          Counts scoped to <strong>EN</strong>. Switch language in the Full Page surface —
+          this widget reflects the picker automatically.
+        </p>
+      </section>
+    </div>
+
+    <p style="text-align:center; padding:0 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground);">
+      <a href="index.html">← Back to Full Page</a> ·
+      <a href="click-targets.md">click-targets.md</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

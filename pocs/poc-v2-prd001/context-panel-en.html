@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Context Panel — en page · Coverage Atlas v2</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="cp-frame-shell">
+      <aside class="cp-frame" aria-label="Redirect Manager Context Panel">
+        <header class="cp-frame__head">
+          <span>Redirect Manager</span>
+          <span class="cp-frame__head__chip">Context Panel</span>
+        </header>
+
+        <div class="cp-body">
+          <!--
+            V2: Pages-aware banner with strong-info treatment (border 2px).
+            Copy variant for en (or language unavailable) — AC-13.2.
+          -->
+          <div class="cp-banner-aware" role="status">
+            <span class="cp-banner-aware__icon">
+              <span class="glyph" data-icon="info" data-size="14"></span>
+            </span>
+            <div class="cp-banner-aware__body">
+              <span class="cp-banner-aware__title">Exact-match, en-only</span>
+              <span>
+                Regex and multilingual matching ship in follow-ons.
+                Only literal-string redirects are shown.
+              </span>
+            </div>
+          </div>
+
+          <div class="cp-group__hd">
+            <span>Current page</span>
+            <span class="mono" style="font-size:var(--text-2xs);text-transform:none;">en</span>
+          </div>
+
+          <span class="cp-url">/products/sneakers/air-max-90</span>
+
+          <div class="cp-group__hd">
+            <span>Matching redirects (en)</span>
+            <span class="mono" style="font-size:var(--text-2xs);text-transform:none;">2 results</span>
+          </div>
+
+          <div class="cp-row">
+            <span class="cp-row__src">/legacy/airmax</span>
+            <span class="cp-row__arrow">&rarr;</span>
+            <span class="cp-row__tgt">/products/sneakers/air-max-90</span>
+            <span class="blok-badge blok-badge--secondary blok-badge--mono">301</span>
+          </div>
+          <div class="cp-row">
+            <span class="cp-row__src">/blog/tags/airmax-90</span>
+            <span class="cp-row__arrow">&rarr;</span>
+            <span class="cp-row__tgt">/products/sneakers/air-max-90</span>
+            <span class="blok-badge blok-badge--secondary blok-badge--mono">301</span>
+          </div>
+
+          <hr class="blok-separator" />
+
+          <a class="blok-btn blok-btn--ghost blok-btn--sm" href="index.html" style="justify-content:flex-start;">
+            <span class="glyph" data-icon="external" data-size="14"></span>
+            Open in Full Page
+          </a>
+        </div>
+      </aside>
+    </div>
+
+    <p class="back-link">
+      <a href="context-panel-de.html">View de-page variant</a>
+      &nbsp;·&nbsp;
+      <a href="index.html">&larr; Full Page</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

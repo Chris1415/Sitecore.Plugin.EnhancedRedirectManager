@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Full Page — DE (post-switch) · Operator Console v1 (PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <link rel="stylesheet" href="multilingual.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <span class="blok-breadcrumb__item">SneakerCo</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">MainSite</span>
+        </nav>
+
+        <div class="fp-topbar__centre">
+          <div class="lp-picker">
+            <button class="lp-trigger" role="combobox" aria-haspopup="listbox" aria-expanded="true" aria-label="Language. Currently Deutsch.">
+              <span class="lp-trigger__chip">DE</span>
+              <span class="lp-trigger__name">Deutsch</span>
+              <span class="lp-trigger__caret glyph" data-icon="chevron-down" data-size="14"></span>
+            </button>
+            <!-- Open popover, showing the post-switch state — picker just landed on DE -->
+            <div class="lp-pop" role="listbox" aria-label="Language list">
+              <div class="lp-pop__search">
+                <span class="glyph" data-icon="search" data-size="14"></span>
+                <input type="text" placeholder="Filter languages" />
+              </div>
+              <div class="lp-pop__group-hd">Site languages</div>
+              <div class="lp-pop__list">
+                <a class="lp-pop__item" href="index.html" role="option">
+                  <span class="lp-pop__item__chip">EN</span>
+                  <span class="lp-pop__item__name">English</span>
+                  <span></span>
+                </a>
+                <a class="lp-pop__item lp-pop__item--current" href="full-page-de.html" role="option" aria-selected="true">
+                  <span class="lp-pop__item__chip">DE</span>
+                  <span class="lp-pop__item__name">Deutsch</span>
+                  <span class="lp-pop__item__current">
+                    <span class="glyph" data-icon="check" data-size="12"></span>
+                    current
+                  </span>
+                </a>
+                <a class="lp-pop__item" href="#" role="option">
+                  <span class="lp-pop__item__chip">FR</span>
+                  <span class="lp-pop__item__name">Français</span>
+                  <span></span>
+                </a>
+                <a class="lp-pop__item" href="#" role="option">
+                  <span class="lp-pop__item__chip">IT</span>
+                  <span class="lp-pop__item__name">Italiano</span>
+                  <span></span>
+                </a>
+              </div>
+              <div class="lp-pop__group-hd" style="border-top:1px solid var(--border);">All tenant languages</div>
+              <div class="lp-pop__group-sub">verify the head-app honors these at runtime</div>
+              <div class="lp-pop__list" style="max-height: 6rem;">
+                <a class="lp-pop__item" href="#" role="option">
+                  <span class="lp-pop__item__chip">JA</span>
+                  <span class="lp-pop__item__name">日本語</span>
+                  <span></span>
+                </a>
+                <a class="lp-pop__item" href="#" role="option">
+                  <span class="lp-pop__item__chip">PT</span>
+                  <span class="lp-pop__item__name">Português</span>
+                  <span></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fp-topbar__actions">
+          <a class="blok-btn blok-btn--outline" href="import-wizard-preview.html">
+            <span class="glyph" data-icon="upload" data-size="14"></span>
+            Import
+          </a>
+          <button class="blok-btn blok-btn--outline">
+            <span class="glyph" data-icon="download" data-size="14"></span>
+            Export
+          </button>
+          <button class="blok-btn blok-btn--primary">
+            <span class="glyph" data-icon="plus" data-size="14"></span>
+            New map
+          </button>
+        </div>
+      </header>
+
+      <div class="fp-body">
+        <!-- Left rail — dots now reflect DE coverage -->
+        <aside class="fp-rail" aria-label="Redirect maps">
+          <div class="fp-rail__list-hd">
+            <span>Redirect maps</span>
+            <span class="mono">8</span>
+          </div>
+          <div class="fp-rail__list" role="listbox">
+            <a class="lr-row lr-row--has" role="option" aria-selected="true" href="map-detail.html"
+               aria-label="Marketing campaigns, has version in Deutsch">
+              <span class="lr-row__dot" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" /></svg>
+              </span>
+              <div class="lr-row__main">
+                <span class="lr-row__name">Marketing campaigns</span>
+                <span class="lr-row__meta">9 mappings · DE · 5 d ago</span>
+              </div>
+              <span class="glyph" data-icon="chevron-right" data-size="14" style="color: var(--muted-foreground);"></span>
+            </a>
+
+            <a class="lr-row lr-row--missing" role="option" href="map-detail-no-version.html"
+               aria-label="Legacy product URLs, no version in Deutsch">
+              <span class="lr-row__dot" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+              </span>
+              <div class="lr-row__main">
+                <span class="lr-row__name">Legacy product URLs</span>
+                <span class="lr-row__meta">— · 2 wk ago</span>
+              </div>
+              <span class="glyph" data-icon="chevron-right" data-size="14"></span>
+            </a>
+
+            <a class="lr-row lr-row--missing" role="option" href="map-detail-no-version.html"
+               aria-label="Press release pages, no version in Deutsch">
+              <span class="lr-row__dot" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+              </span>
+              <div class="lr-row__main">
+                <span class="lr-row__name">Press release pages</span>
+                <span class="lr-row__meta">— · 1 mo ago</span>
+              </div>
+              <span class="glyph" data-icon="chevron-right" data-size="14"></span>
+            </a>
+
+            <a class="lr-row lr-row--has" role="option" href="map-detail.html"
+               aria-label="Product routes, has version in Deutsch">
+              <span class="lr-row__dot" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" /></svg>
+              </span>
+              <div class="lr-row__main">
+                <span class="lr-row__name">Product routes</span>
+                <span class="lr-row__meta">37 mappings · DE · 1 mo ago</span>
+              </div>
+              <span class="glyph" data-icon="chevron-right" data-size="14" style="color: var(--muted-foreground);"></span>
+            </a>
+
+            <a class="lr-row lr-row--missing" role="option" href="map-detail-no-version.html"
+               aria-label="A B test variants, no version in Deutsch">
+              <span class="lr-row__dot" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+              </span>
+              <div class="lr-row__main">
+                <span class="lr-row__name">A/B test variants</span>
+                <span class="lr-row__meta">— · 4 d ago</span>
+              </div>
+              <span class="glyph" data-icon="chevron-right" data-size="14"></span>
+            </a>
+
+            <a class="lr-row lr-row--missing" role="option" href="map-detail-no-version.html"
+               aria-label="Geo IP fallbacks, no version in Deutsch">
+              <span class="lr-row__dot" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+              </span>
+              <div class="lr-row__main">
+                <span class="lr-row__name">Geo-IP fallbacks</span>
+                <span class="lr-row__meta">— · 2 mo ago</span>
+              </div>
+              <span class="glyph" data-icon="chevron-right" data-size="14"></span>
+            </a>
+
+            <a class="lr-row lr-row--has" role="option" href="map-detail.html"
+               aria-label="404 rescue chain, has version in Deutsch">
+              <span class="lr-row__dot" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" /></svg>
+              </span>
+              <div class="lr-row__main">
+                <span class="lr-row__name">404 rescue chain</span>
+                <span class="lr-row__meta">6 mappings · DE · 3 mo ago</span>
+              </div>
+              <span class="glyph" data-icon="chevron-right" data-size="14" style="color: var(--muted-foreground);"></span>
+            </a>
+
+            <a class="lr-row lr-row--missing" role="option" href="map-detail-no-version.html"
+               aria-label="Influencer partner links, no version in Deutsch">
+              <span class="lr-row__dot" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+              </span>
+              <div class="lr-row__main">
+                <span class="lr-row__name">Influencer partner links</span>
+                <span class="lr-row__meta">— · 6 mo ago</span>
+              </div>
+              <span class="glyph" data-icon="chevron-right" data-size="14"></span>
+            </a>
+          </div>
+          <div class="lr-legend">
+            <span class="lr-legend__row">
+              <span class="lr-legend__dot lr-legend__dot--has">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" /></svg>
+              </span>
+              Has a version in <strong>DE</strong>
+            </span>
+            <span class="lr-legend__row">
+              <span class="lr-legend__dot lr-legend__dot--missing">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+              </span>
+              No version in DE — opens with create options
+            </span>
+          </div>
+        </aside>
+
+        <!-- Right pane — Marketing campaigns, DE -->
+        <main class="fp-pane" aria-label="Redirect map detail">
+          <div class="fp-pane__inner">
+            <section class="fp-section">
+              <div class="mv-detail-hd">
+                <span class="mv-detail-hd__lang-chip">DE</span>
+                <h2 class="mv-detail-hd__title">Marketing-Kampagnen</h2>
+                <button class="mv-detail-hd__pencil" aria-label="Edit display name for Deutsch">
+                  <span class="glyph" data-icon="pencil" data-size="14"></span>
+                </button>
+                <span class="mv-detail-hd__meta">
+                  <span class="guid-badge" title="Click to copy GUID">
+                    <span class="glyph" data-icon="copy" data-size="11"></span>
+                    78D48C836DE
+                  </span>
+                </span>
+              </div>
+
+              <header class="fp-section__hd" style="margin-top:0.5rem;">
+                <span class="fp-section__lbl">Map attributes</span>
+                <span class="fp-section__sub">3 language versions: en, de, fr</span>
+              </header>
+
+              <div class="fp-form-grid">
+                <div class="fp-field">
+                  <label class="blok-label blok-label--required">Type</label>
+                  <select class="blok-select">
+                    <option selected>301 — Permanent</option>
+                    <option>302 — Found</option>
+                    <option>307 — Temporary</option>
+                    <option>Server Transfer</option>
+                  </select>
+                </div>
+                <div class="fp-field">
+                  <label class="blok-label" style="margin-bottom:0.5rem;">Flags (shared across languages)</label>
+                  <div class="fp-flags">
+                    <label class="blok-checkbox"><input type="checkbox" checked /> Preserve query string</label>
+                    <label class="blok-checkbox"><input type="checkbox" /> Preserve language</label>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <hr class="blok-separator" />
+
+            <section class="fp-section">
+              <header class="fp-section__hd">
+                <span class="fp-section__lbl">Mappings — DE</span>
+                <span class="fp-section__sub">9 rows · drag to reorder</span>
+              </header>
+
+              <div class="fp-mappings">
+                <div class="fp-mappings__hd">
+                  <span></span><span>Source</span><span></span><span>Target</span><span style="text-align:right;">Actions</span>
+                </div>
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono" type="text" value="/produkte" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" value="/produkte-archiv" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono" type="text" value="/produkte/sneaker/air-max-90" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" value="/kampagnen/sommer-2026/sneaker" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono" type="text" value="/alte/airmax" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" value="/produkte/sneaker/air-max-90" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono" type="text" value="/sale/black-friday-2025" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" value="/kampagnen/black-friday-2025-archiv" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="fp-mappings__add">
+                  <button class="blok-btn blok-btn--ghost" style="width:100%; justify-content:flex-start;">
+                    <span class="glyph" data-icon="plus" data-size="14"></span>
+                    Add mapping
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            <div class="fp-bottom">
+              <a class="blok-btn blok-btn--destructive-outline" href="delete-modal-multi.html">
+                <span class="glyph" data-icon="trash" data-size="14"></span>
+                Delete map
+              </a>
+              <div class="fp-bottom__actions">
+                <button class="blok-btn blok-btn--ghost">Cancel</button>
+                <button class="blok-btn blok-btn--primary">
+                  <span class="glyph" data-icon="save" data-size="14"></span>
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+
+      <!-- Toast — saved-to-language confirmation (visual cue) -->
+      <div class="toast-shelf">
+        <div class="blok-toast blok-toast--success" role="status" aria-live="polite">
+          <span class="blok-toast__icon" aria-hidden="true">&#x2713;</span>
+          Switched to DE — list refreshed
+        </div>
+      </div>
+    </div>
+
+    <p style="text-align:center; padding:0.75rem 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground); border-top:1px solid var(--border);">
+      <a href="index.html">← back to EN home</a> ·
+      <a href="map-detail-no-version.html">no-version state</a> ·
+      <a href="click-targets.md">click-targets.md</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

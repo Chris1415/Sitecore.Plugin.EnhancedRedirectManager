@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Import preview (one row expanded) · Coverage Atlas v2</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell">
+      <header class="fp-topbar">
+        <div class="fp-topbar__left">
+          <nav class="blok-breadcrumb" aria-label="breadcrumb">
+            <a class="blok-breadcrumb__item" href="index.html">SneakerCo</a>
+            <span class="blok-breadcrumb__sep">/</span>
+            <a class="blok-breadcrumb__item" href="index.html">MainSite</a>
+            <span class="blok-breadcrumb__sep">/</span>
+            <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Import preview</span>
+          </nav>
+          <div class="fp-topbar__picker"><span class="fp-topbar__picker__lbl">Lang</span><select class="fp-topbar__picker__sel"><option selected>en — English</option></select></div>
+        </div>
+        <div class="fp-topbar__actions">
+          <a class="blok-btn blok-btn--ghost" href="index.html">Cancel</a>
+        </div>
+      </header>
+
+      <div style="display:block;">
+        <div class="fp-pane__inner" style="max-width:80rem;">
+          <section class="imp-summary">
+            <header class="imp-summary__hd">
+              <h2 class="imp-summary__title">Import preview — redirect-manager/v2 bundle</h2>
+              <span class="imp-summary__meta">redirect-bundle-2026-05-13.json · 3 maps · MainSite</span>
+            </header>
+            <div class="imp-summary__counts">
+              <span class="blok-badge blok-badge--success">2 create</span>
+              <span class="blok-badge blok-badge--warning">1 overwrite</span>
+              <span class="blok-badge blok-badge--muted">0 skip</span>
+              <span class="blok-badge blok-badge--info">4 new language versions</span>
+            </div>
+          </section>
+
+          <div class="imp-bulk">
+            <span class="imp-bulk__lbl">Apply same action to all:</span>
+            <select class="blok-select imp-bulk__sel">
+              <option>—</option>
+              <option>Create</option>
+              <option>Overwrite</option>
+              <option>Skip</option>
+            </select>
+            <span style="margin-left:auto;">
+              <a class="blok-btn blok-btn--ghost blok-btn--sm" href="import-wizard-preview.html">Collapse all</a>
+            </span>
+          </div>
+
+          <div class="imp-list">
+            <div class="imp-list__hd">
+              <span></span>
+              <span>Map</span>
+              <span>Tenant</span>
+              <span>Bundle</span>
+              <span>Action</span>
+            </div>
+
+            <!-- EXPANDED row — shows per-language diff using chip vocabulary. -->
+            <div class="imp-row" data-row-id="marketing-campaigns" data-expanded="true">
+              <a href="import-wizard-preview.html" class="imp-row__head" style="text-decoration:none;color:inherit;background:var(--muted);">
+                <span class="imp-row__chevron"><span class="glyph" data-icon="chevron-down" data-size="14"></span></span>
+                <span class="imp-row__name">Marketing campaigns</span>
+                <div class="imp-row__strip-cell">
+                  <div class="cov-strip" role="group" aria-label="Tenant coverage">
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">en</span><span class="cov-chip__glyph">&#9679;</span></span>
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">de</span><span class="cov-chip__glyph">&#9679;</span></span>
+                    <span class="cov-chip cov-chip--missing"><span class="cov-chip__code">fr</span><span class="cov-chip__glyph">&#8211;</span></span>
+                  </div>
+                </div>
+                <div class="imp-row__strip-cell">
+                  <div class="cov-strip" role="group" aria-label="Bundle coverage">
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">en</span><span class="cov-chip__glyph">&#9679;</span></span>
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">de</span><span class="cov-chip__glyph">&#9679;</span></span>
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">fr</span><span class="cov-chip__glyph">&#9679;</span></span>
+                  </div>
+                </div>
+                <div class="imp-row__action" role="radiogroup" aria-label="Action for Marketing campaigns" onclick="event.preventDefault();">
+                  <label class="imp-row__action__opt"><input type="radio" name="act-mc" class="blok-radio" /> Create</label>
+                  <label class="imp-row__action__opt"><input type="radio" name="act-mc" class="blok-radio" checked /> Overwrite</label>
+                  <label class="imp-row__action__opt"><input type="radio" name="act-mc" class="blok-radio" /> Skip</label>
+                </div>
+              </a>
+
+              <div class="imp-row__body" id="row-mc-detail">
+                <div class="imp-diff" role="table" aria-label="Per-language diff">
+                  <div class="imp-diff__hd" role="columnheader">Language</div>
+                  <div class="imp-diff__hd" role="columnheader">Tenant</div>
+                  <div class="imp-diff__hd" role="columnheader">Bundle</div>
+                  <div class="imp-diff__hd" role="columnheader">Verdict</div>
+
+                  <div class="imp-diff__lang" role="rowheader">en</div>
+                  <div class="imp-diff__cell">12 mappings · filled</div>
+                  <div class="imp-diff__cell">12 mappings · filled</div>
+                  <div class="imp-diff__verdict imp-diff__verdict--overwrite">overwrite</div>
+
+                  <div class="imp-diff__lang" role="rowheader">de</div>
+                  <div class="imp-diff__cell">12 mappings · filled</div>
+                  <div class="imp-diff__cell">12 mappings · filled</div>
+                  <div class="imp-diff__verdict imp-diff__verdict--overwrite">overwrite</div>
+
+                  <div class="imp-diff__lang" role="rowheader">fr</div>
+                  <div class="imp-diff__cell">— missing —</div>
+                  <div class="imp-diff__cell">12 mappings · filled</div>
+                  <div class="imp-diff__verdict imp-diff__verdict--create">create</div>
+
+                  <div class="imp-diff__lang" role="rowheader">es</div>
+                  <div class="imp-diff__cell">— missing —</div>
+                  <div class="imp-diff__cell">— not in bundle —</div>
+                  <div class="imp-diff__verdict imp-diff__verdict--nochange">untouched</div>
+                </div>
+
+                <p class="imp-note">
+                  "Overwrite" replaces only the languages present in the bundle (en, de, fr).
+                  Tenant-side <code>es</code> would be left untouched (per FR-16 semantics).
+                </p>
+              </div>
+            </div>
+
+            <!-- Other rows remain collapsed; clicking expands them. -->
+            <div class="imp-row" data-row-id="legacy-product">
+              <a href="import-wizard-preview.html#legacy" class="imp-row__head" style="text-decoration:none;color:inherit;">
+                <span class="imp-row__chevron"><span class="glyph" data-icon="chevron-right" data-size="14"></span></span>
+                <span class="imp-row__name">Legacy product URLs</span>
+                <div class="imp-row__strip-cell">
+                  <div class="cov-strip" role="group" aria-label="Tenant coverage">
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">en</span><span class="cov-chip__glyph">&#9679;</span></span>
+                    <span class="cov-chip cov-chip--empty"><span class="cov-chip__code">de</span><span class="cov-chip__glyph">&#9676;</span></span>
+                    <span class="cov-chip cov-chip--missing"><span class="cov-chip__code">fr</span><span class="cov-chip__glyph">&#8211;</span></span>
+                  </div>
+                </div>
+                <div class="imp-row__strip-cell">
+                  <div class="cov-strip" role="group" aria-label="Bundle coverage">
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">en</span><span class="cov-chip__glyph">&#9679;</span></span>
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">de</span><span class="cov-chip__glyph">&#9679;</span></span>
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">fr</span><span class="cov-chip__glyph">&#9679;</span></span>
+                  </div>
+                </div>
+                <div class="imp-row__action" role="radiogroup" aria-label="Action for Legacy product URLs" onclick="event.preventDefault();">
+                  <label class="imp-row__action__opt"><input type="radio" name="act-lp" class="blok-radio" /> Create</label>
+                  <label class="imp-row__action__opt"><input type="radio" name="act-lp" class="blok-radio" checked /> Overwrite</label>
+                  <label class="imp-row__action__opt"><input type="radio" name="act-lp" class="blok-radio" /> Skip</label>
+                </div>
+              </a>
+            </div>
+
+            <div class="imp-row" data-row-id="ab-test-variants">
+              <a href="import-wizard-preview.html#ab" class="imp-row__head" style="text-decoration:none;color:inherit;">
+                <span class="imp-row__chevron"><span class="glyph" data-icon="chevron-right" data-size="14"></span></span>
+                <span class="imp-row__name">A/B test variants</span>
+                <div class="imp-row__strip-cell imp-row__strip-cell--missing">
+                  not in tenant
+                </div>
+                <div class="imp-row__strip-cell">
+                  <div class="cov-strip" role="group" aria-label="Bundle coverage">
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">en</span><span class="cov-chip__glyph">&#9679;</span></span>
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">de</span><span class="cov-chip__glyph">&#9679;</span></span>
+                  </div>
+                </div>
+                <div class="imp-row__action" role="radiogroup" aria-label="Action for A/B test variants" onclick="event.preventDefault();">
+                  <label class="imp-row__action__opt"><input type="radio" name="act-ab" class="blok-radio" checked /> Create</label>
+                  <label class="imp-row__action__opt"><input type="radio" name="act-ab" class="blok-radio" /> Overwrite</label>
+                  <label class="imp-row__action__opt"><input type="radio" name="act-ab" class="blok-radio" /> Skip</label>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <div class="fp-bottom">
+            <a class="blok-btn blok-btn--ghost" href="index.html">Cancel</a>
+            <div class="fp-bottom__actions">
+              <button class="blok-btn blok-btn--primary">
+                <span class="glyph" data-icon="check" data-size="14"></span>
+                Apply changes
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="back-link">
+      <a href="import-wizard-preview.html">&larr; Collapse all rows</a>
+      &nbsp;·&nbsp;
+      <a href="index.html">Full Page</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

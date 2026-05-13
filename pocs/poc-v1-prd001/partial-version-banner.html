@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Partial-version-detected warning · Operator Console v1 (PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <link rel="stylesheet" href="multilingual.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <span class="blok-breadcrumb__item">SneakerCo</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">MainSite</span>
+        </nav>
+
+        <div class="fp-topbar__centre">
+          <div class="lp-picker">
+            <a class="lp-trigger" href="full-page-de.html" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-label="Language. Currently Deutsch.">
+              <span class="lp-trigger__chip">DE</span>
+              <span class="lp-trigger__name">Deutsch</span>
+              <span class="lp-trigger__caret glyph" data-icon="chevron-down" data-size="14"></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="fp-topbar__actions">
+          <a class="blok-btn blok-btn--outline" href="import-wizard-preview.html">Import</a>
+          <button class="blok-btn blok-btn--outline">Export</button>
+          <button class="blok-btn blok-btn--primary">
+            <span class="glyph" data-icon="plus" data-size="14"></span>
+            New map
+          </button>
+        </div>
+      </header>
+
+      <!-- Persistent warning banner (ADR-0021 — partial-version-detected) -->
+      <div class="pv-banner" role="alert" aria-live="assertive">
+        <span class="pv-banner__icon glyph" data-icon="alert-triangle" data-size="18"></span>
+        <div class="pv-banner__body">
+          <span class="pv-banner__title">Partial Deutsch version detected on "Press release pages"</span>
+          <span class="pv-banner__desc">
+            We created a new Deutsch version and tried to copy mappings from English,
+            but the populate step failed and the rollback (deleteItemVersion) also
+            failed. An empty DE version now exists alongside the EN and FR versions.
+            Choose how to clean this up — the picker still works in the meantime.
+          </span>
+          <div class="pv-banner__ctas">
+            <a class="blok-btn blok-btn--destructive-outline" href="delete-modal-multi.html">
+              <span class="glyph" data-icon="trash" data-size="14"></span>
+              Delete Deutsch version
+            </a>
+            <a class="blok-btn blok-btn--outline" href="map-detail-empty-version.html">
+              <span class="glyph" data-icon="plus" data-size="14"></span>
+              Add mappings manually
+            </a>
+            <button class="blok-btn blok-btn--ghost">
+              View technical details
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="fp-body">
+        <aside class="fp-rail" aria-label="Redirect maps">
+          <div class="fp-rail__list-hd">
+            <span>Redirect maps</span>
+            <span class="mono">8</span>
+          </div>
+          <div class="fp-rail__list" role="listbox">
+            <a class="lr-row lr-row--has" role="option" aria-selected="true" href="partial-version-banner.html">
+              <span class="lr-row__dot" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" /></svg>
+              </span>
+              <div class="lr-row__main">
+                <span class="lr-row__name">Press release pages</span>
+                <span class="lr-row__meta">0 mappings · DE · partial</span>
+              </div>
+              <span class="glyph" data-icon="alert-triangle" data-size="14" style="color: var(--warning);"></span>
+            </a>
+            <a class="lr-row lr-row--has" role="option" href="map-detail.html">
+              <span class="lr-row__dot" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="4" fill="currentColor" /></svg>
+              </span>
+              <div class="lr-row__main">
+                <span class="lr-row__name">Marketing campaigns</span>
+                <span class="lr-row__meta">9 mappings · DE · 5 d ago</span>
+              </div>
+              <span class="glyph" data-icon="chevron-right" data-size="14" style="color: var(--muted-foreground);"></span>
+            </a>
+            <a class="lr-row lr-row--missing" role="option" href="map-detail-no-version.html">
+              <span class="lr-row__dot" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><circle cx="5" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+              </span>
+              <div class="lr-row__main">
+                <span class="lr-row__name">Geo-IP fallbacks</span>
+                <span class="lr-row__meta">— · 2 mo ago</span>
+              </div>
+              <span class="glyph" data-icon="chevron-right" data-size="14"></span>
+            </a>
+          </div>
+        </aside>
+
+        <main class="fp-pane">
+          <div class="fp-pane__inner">
+            <section class="fp-section">
+              <div class="mv-detail-hd">
+                <span class="mv-detail-hd__lang-chip">DE</span>
+                <h2 class="mv-detail-hd__title">Press release pages</h2>
+                <span class="blok-badge blok-badge--warning" style="margin-left:0.5rem;">
+                  <span class="glyph" data-icon="alert-triangle" data-size="11"></span>
+                  partial version
+                </span>
+              </div>
+              <p style="font-size:var(--text-xs); color:var(--muted-foreground); margin:0.5rem 0 0;">
+                The DE version exists on the item but has no mappings. The intended
+                copy-from-EN populate failed mid-flight.
+              </p>
+            </section>
+
+            <hr class="blok-separator" />
+
+            <section class="fp-section">
+              <header class="fp-section__hd">
+                <span class="fp-section__lbl">Mappings — DE</span>
+                <span class="fp-section__sub">0 rows · empty due to failed copy</span>
+              </header>
+              <div class="blok-empty">
+                <span class="blok-empty__icon glyph" data-icon="route-off" data-size="20"></span>
+                <span class="blok-empty__title">No mappings recovered</span>
+                <span class="blok-empty__sub">
+                  Use the CTAs in the banner above to either delete this partial
+                  version or start adding mappings manually.
+                </span>
+              </div>
+            </section>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <p style="text-align:center; padding:0.75rem 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground); border-top:1px solid var(--border);">
+      <a href="full-page-de.html">← back to DE list</a> ·
+      <a href="click-targets.md">click-targets.md</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

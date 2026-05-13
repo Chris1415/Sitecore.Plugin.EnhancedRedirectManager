@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create version — Step 2/3 Source (Copy from) · Coverage Atlas v2</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell" style="position:relative;">
+      <header class="fp-topbar">
+        <div class="fp-topbar__left">
+          <nav class="blok-breadcrumb" aria-label="breadcrumb">
+            <a class="blok-breadcrumb__item" href="full-page-de.html">SneakerCo</a>
+            <span class="blok-breadcrumb__sep">/</span>
+            <a class="blok-breadcrumb__item" href="full-page-de.html">MainSite</a>
+            <span class="blok-breadcrumb__sep">/</span>
+            <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Marketing campaigns</span>
+          </nav>
+          <div class="fp-topbar__picker"><span class="fp-topbar__picker__lbl">Lang</span><select class="fp-topbar__picker__sel"><option selected>de — Deutsch</option></select></div>
+        </div>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" disabled>Import</button>
+        </div>
+      </header>
+      <div class="fp-body" style="filter:blur(0.5px); opacity:0.45; pointer-events:none;">
+        <aside class="fp-rail" style="background:var(--muted);">
+          <div class="fp-rail__list-hd"><span>Redirect maps</span><span class="mono">8</span></div>
+        </aside>
+        <main class="fp-pane"></main>
+      </div>
+    </div>
+
+    <div class="blok-overlay" role="dialog" aria-modal="true" aria-labelledby="step-title">
+      <div class="blok-dialog">
+        <header class="blok-dialog__header">
+          <div>
+            <h2 id="step-title" class="blok-dialog__title">Create <code style="font-family:var(--font-mono);">es</code> version of "Marketing campaigns"</h2>
+            <p class="blok-dialog__sub">Pick a source language. Only languages with content are listed.</p>
+          </div>
+          <a class="blok-dialog__close" href="map-detail.html" aria-label="Close">&times;</a>
+        </header>
+
+        <!-- Stepper: 3 dots, step 2 active. -->
+        <div class="stepper">
+          <div class="stepper__head">
+            <span class="stepper__title">Step 2 of 3 — Choose source language</span>
+            <span>Source</span>
+          </div>
+          <div class="stepper__progress">
+            <div class="stepper__progress__bar" style="width:66%;"></div>
+          </div>
+          <div class="stepper__dots stepper__dots--3" aria-hidden="true">
+            <span class="stepper__dot stepper__dot--done">
+              <span class="stepper__dot__num">1</span>
+              <span class="stepper__dot__lbl">Path</span>
+            </span>
+            <span class="stepper__rail stepper__rail--done"></span>
+            <span class="stepper__dot stepper__dot--active">
+              <span class="stepper__dot__num">2</span>
+              <span class="stepper__dot__lbl">Source</span>
+            </span>
+            <span class="stepper__rail"></span>
+            <span class="stepper__dot">
+              <span class="stepper__dot__num">3</span>
+              <span class="stepper__dot__lbl">Confirm</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="blok-dialog__body">
+          <div class="step-body">
+            <div class="step-body__hd">
+              <h3 class="step-body__hd__title">Pick a language to copy from</h3>
+              <p class="step-body__hd__sub">
+                Languages with empty versions are filtered out — only non-empty versions appear.
+              </p>
+            </div>
+
+            <!-- Filtered combobox: only non-empty source languages. -->
+            <div class="src-combo">
+              <label class="blok-label" for="src-input">Source language</label>
+              <div class="src-combo__field">
+                <span class="glyph" data-icon="search" data-size="14" style="color:var(--muted-foreground);"></span>
+                <input id="src-input" class="src-combo__field__input" type="search" placeholder="Search languages with content..." />
+              </div>
+
+              <div class="src-combo__list" role="listbox">
+                <div class="src-combo__opt src-combo__opt--active" role="option" aria-selected="true">
+                  <span class="src-combo__opt__name">
+                    <span>en — English</span>
+                    <span class="src-combo__opt__hint">12 mappings · 3 days ago</span>
+                  </span>
+                  <div class="cov-strip" aria-hidden="true">
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">en</span><span class="cov-chip__glyph">&#9679;</span></span>
+                    <span style="color:var(--muted-foreground); font-family:var(--font-mono); font-size:var(--text-2xs);">&rarr;</span>
+                    <span class="cov-chip cov-chip--missing"><span class="cov-chip__code">es</span><span class="cov-chip__glyph">&#8211;</span></span>
+                  </div>
+                </div>
+
+                <div class="src-combo__opt" role="option">
+                  <span class="src-combo__opt__name">
+                    <span>de — Deutsch</span>
+                    <span class="src-combo__opt__hint">12 mappings · 3 days ago</span>
+                  </span>
+                  <div class="cov-strip" aria-hidden="true">
+                    <span class="cov-chip cov-chip--filled"><span class="cov-chip__code">de</span><span class="cov-chip__glyph">&#9679;</span></span>
+                    <span style="color:var(--muted-foreground); font-family:var(--font-mono); font-size:var(--text-2xs);">&rarr;</span>
+                    <span class="cov-chip cov-chip--missing"><span class="cov-chip__code">es</span><span class="cov-chip__glyph">&#8211;</span></span>
+                  </div>
+                </div>
+
+                <!-- Disabled-style option: fr has an empty version, filtered out -->
+                <div class="src-combo__opt src-combo__opt--disabled" role="option" aria-disabled="true" title="Empty version — cannot be used as source">
+                  <span class="src-combo__opt__name">
+                    <span>fr — Français</span>
+                    <span class="src-combo__opt__hint">empty version — not selectable</span>
+                  </span>
+                  <div class="cov-strip" aria-hidden="true">
+                    <span class="cov-chip cov-chip--empty"><span class="cov-chip__code">fr</span><span class="cov-chip__glyph">&#9676;</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="blok-alert blok-alert--info">
+              <span class="blok-alert__icon" aria-hidden="true">i</span>
+              <span class="blok-alert__body">
+                Mappings will be copied from the chosen language. Flags and redirect type
+                are shared across all languages and apply automatically.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="blok-dialog__footer">
+          <div style="display:inline-flex; gap:0.5rem;">
+            <a class="blok-btn blok-btn--outline" href="create-version-stepper-step1.html">
+              <span class="glyph" data-icon="chevron-right" data-size="12" style="transform:rotate(180deg);"></span>
+              Back
+            </a>
+            <a class="blok-btn blok-btn--ghost" href="map-detail.html">Cancel</a>
+          </div>
+          <a class="blok-btn blok-btn--primary" href="map-detail.html">
+            Next
+            <span class="glyph" data-icon="arrow-right" data-size="14"></span>
+          </a>
+        </footer>
+      </div>
+    </div>
+
+    <p class="back-link">
+      <a href="create-version-stepper-step1.html">&larr; Step 1 (Path)</a>
+      &nbsp;·&nbsp;
+      <a href="create-version-stepper-step2-empty.html">View Step 2/2 (Empty path)</a>
+      &nbsp;·&nbsp;
+      <a href="partial-version-banner.html">View partial-failure recovery state</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

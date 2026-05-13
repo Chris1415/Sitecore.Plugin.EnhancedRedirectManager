@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create version — entry · Operator Console v1 (PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <link rel="stylesheet" href="multilingual.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <!-- Backdrop: dimmed Full Page -->
+    <div class="fp-shell" style="filter: blur(1.5px); pointer-events:none; user-select:none; opacity: 0.7;">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <span class="blok-breadcrumb__item">SneakerCo</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item">MainSite</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Press release pages</span>
+        </nav>
+        <div class="fp-topbar__centre">
+          <div class="lp-picker">
+            <button class="lp-trigger" disabled aria-disabled="true">
+              <span class="lp-trigger__chip">DE</span>
+              <span class="lp-trigger__name">Deutsch</span>
+              <span class="lp-trigger__caret glyph" data-icon="chevron-down" data-size="14"></span>
+            </button>
+          </div>
+        </div>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" disabled>Import</button>
+          <button class="blok-btn blok-btn--outline" disabled>Export</button>
+        </div>
+      </header>
+      <main class="fp-pane">
+        <div class="fp-pane__inner">
+          <div class="mv-empty-card" style="opacity:0.4;">
+            <span class="mv-empty-card__icon glyph" data-icon="globe" data-size="20"></span>
+            <h3 class="mv-empty-card__title">No Deutsch version yet</h3>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal overlay -->
+    <div class="blok-overlay" role="presentation">
+      <div class="blok-dialog" role="dialog" aria-modal="true" aria-labelledby="create-version-title" style="max-width: 40rem;">
+        <div class="blok-dialog__header">
+          <h2 class="blok-dialog__title" id="create-version-title">Create Deutsch version of <span style="font-weight:500;">"Press release pages"</span></h2>
+          <p class="blok-dialog__sub">This map has no version in DE yet. Choose how to create it.</p>
+        </div>
+        <div class="blok-dialog__body">
+          <div class="mv-cta-grid">
+            <a class="mv-cta" href="map-detail-empty-version.html" aria-label="Create empty Deutsch version">
+              <span class="mv-cta__icon glyph" data-icon="plus" data-size="18"></span>
+              <span class="mv-cta__title">Create empty</span>
+              <span class="mv-cta__desc">
+                Start with an empty Deutsch version. Add mappings manually after creation.
+                Fast and forgiving when content is unique to DE.
+              </span>
+            </a>
+            <a class="mv-cta" href="create-version-copy-from-source.html" aria-label="Copy mappings from another language">
+              <span class="mv-cta__icon glyph" data-icon="copy" data-size="18"></span>
+              <span class="mv-cta__title">Copy from language</span>
+              <span class="mv-cta__desc">
+                Pre-fill the Deutsch version with mappings from EN or FR.
+                You'll pick the source in the next step.
+              </span>
+            </a>
+          </div>
+
+          <div class="blok-alert blok-alert--info" role="note" style="margin-top:1rem;">
+            <span class="blok-alert__icon glyph" data-icon="info" data-size="14"></span>
+            <div class="blok-alert__body">
+              <strong class="blok-alert__title">Map type and flags are shared.</strong>
+              Type (301 — Permanent) and flags (Preserve query string) belong to the map
+              itself and apply to every language version automatically. Only the
+              <em>mappings</em> are language-scoped.
+            </div>
+          </div>
+        </div>
+        <div class="blok-dialog__footer">
+          <a class="blok-btn blok-btn--ghost" href="map-detail-no-version.html">Cancel</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

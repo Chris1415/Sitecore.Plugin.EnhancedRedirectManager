@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Map detail · en — Workspace Frame (v3 · PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="ws-shell">
+      <header class="ws-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="index.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <a class="blok-breadcrumb__item" href="index.html">MainSite</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Marketing campaigns</span>
+        </nav>
+        <div class="ws-topbar__actions">
+          <a class="blok-btn blok-btn--outline" href="import-wizard-preview.html">
+            <span class="glyph" data-icon="upload" data-size="14"></span>
+            Import
+          </a>
+          <button class="blok-btn blok-btn--outline">
+            <span class="glyph" data-icon="download" data-size="14"></span>
+            Export
+          </button>
+        </div>
+      </header>
+
+      <div class="ws-body">
+        <nav class="lang-sidebar" aria-label="Languages">
+          <div class="lang-sidebar__hd">
+            <span>Languages · 5</span>
+            <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Collapse sidebar" title="Collapse">
+              <span class="glyph" data-icon="panel-left" data-size="14"></span>
+            </button>
+          </div>
+          <div class="lang-sidebar__list" role="list">
+            <a class="lang-nav-item" aria-current="page" data-lang="en" href="map-detail.html">
+              <span class="lang-nav-item__name">English</span>
+              <span class="lang-nav-item__iso">en</span>
+              <span class="lang-nav-item__count">12</span>
+            </a>
+            <a class="lang-nav-item" data-lang="de" href="map-detail-de.html">
+              <span class="lang-nav-item__name">Deutsch</span>
+              <span class="lang-nav-item__iso">de</span>
+              <span class="lang-nav-item__count">9</span>
+            </a>
+            <a class="lang-nav-item" data-lang="fr" href="map-detail-no-version-tab.html">
+              <span class="lang-nav-item__name">Français</span>
+              <span class="lang-nav-item__iso">fr</span>
+              <span class="lang-nav-item__count">5</span>
+            </a>
+            <a class="lang-nav-item" data-lang="it" href="map-detail-no-version-tab.html">
+              <span class="lang-nav-item__name">Italiano</span>
+              <span class="lang-nav-item__iso">it</span>
+              <span class="lang-nav-item__count">3</span>
+            </a>
+            <a class="lang-nav-item" data-lang="ja" href="map-detail.html">
+              <span class="lang-nav-item__name">日本語</span>
+              <span class="lang-nav-item__iso">ja</span>
+              <span class="lang-nav-item__count">7</span>
+            </a>
+          </div>
+          <div class="lang-sidebar__ft">
+            <button class="blok-btn blok-btn--ghost blok-btn--sm" aria-disabled="true" disabled
+              title="Add a new site language via Sitecore Authoring.">
+              <span class="glyph" data-icon="plus" data-size="12"></span>
+              Add language
+            </button>
+          </div>
+        </nav>
+
+        <section class="ws-area" aria-label="Map detail">
+          <main class="detail" aria-label="Redirect map detail">
+            <header class="detail__hd">
+              <div class="detail__title-wrap">
+                <a href="index.html" class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Back to list">
+                  <span class="glyph" data-icon="chevron-right" data-size="14" style="transform: rotate(180deg);"></span>
+                </a>
+                <h1 class="detail__title" tabindex="0" title="Click to edit display name">
+                  Marketing campaigns
+                </h1>
+              </div>
+              <div class="detail__topbar-actions">
+                <a class="blok-btn blok-btn--destructive-outline" href="delete-consequence-preview.html">
+                  <span class="glyph" data-icon="trash" data-size="14"></span>
+                  Delete
+                </a>
+                <button class="blok-btn blok-btn--ghost">Discard</button>
+                <button class="blok-btn blok-btn--primary">
+                  <span class="glyph" data-icon="save" data-size="14"></span>
+                  Save changes
+                </button>
+              </div>
+            </header>
+
+            <!-- Tabs -->
+            <div class="detail__tabs-wrap">
+              <div class="lang-tabs" role="tablist" aria-label="Language versions">
+                <button class="lang-tab" data-state="active" role="tab" aria-selected="true"
+                  aria-controls="panel-en" id="tab-en">
+                  English <span class="lang-tab__iso">en</span>
+                </button>
+                <a class="lang-tab" data-state="inactive" role="tab" aria-selected="false"
+                  href="map-detail-de.html" id="tab-de">
+                  Deutsch <span class="lang-tab__iso">de</span>
+                  <span class="lang-tab__dirty" aria-label="unsaved changes">*</span>
+                </a>
+                <a class="lang-tab" data-state="missing" role="tab" aria-selected="false"
+                  href="map-detail-no-version-tab.html" id="tab-fr"
+                  aria-label="Create Français version">
+                  Français <span class="lang-tab__iso">fr</span>
+                  <span class="lang-tab__hint">(create)</span>
+                </a>
+                <a class="lang-tab" data-state="missing" role="tab" aria-selected="false"
+                  href="map-detail-no-version-tab.html" id="tab-it"
+                  aria-label="Create Italiano version">
+                  Italiano <span class="lang-tab__iso">it</span>
+                  <span class="lang-tab__hint">(create)</span>
+                </a>
+                <button class="lang-tab" data-state="inactive" role="tab" aria-selected="false"
+                  aria-controls="panel-ja" id="tab-ja">
+                  日本語 <span class="lang-tab__iso">ja</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="detail__body" id="panel-en" role="tabpanel" aria-labelledby="tab-en">
+
+              <!-- Mappings card (versioned content) -->
+              <section class="detail-card">
+                <header class="detail-card__hd">
+                  <h2 class="detail-card__title">Mappings</h2>
+                  <span class="detail-card__scope">versioned · 12 mappings in <code>en</code></span>
+                </header>
+                <div class="detail-card__body" style="padding:0;">
+                  <div class="mappings">
+                    <div class="mappings__hd">
+                      <span>Source</span>
+                      <span></span>
+                      <span>Target</span>
+                      <span style="text-align:right;">Actions</span>
+                    </div>
+                    <div class="mappings__row">
+                      <input class="blok-input blok-input--mono" type="text" value="/old/winter-sale" />
+                      <span class="mappings__arrow">→</span>
+                      <input class="blok-input blok-input--mono" type="text" value="/promotions/winter" />
+                      <div class="mappings__actions">
+                        <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                          <span class="glyph" data-icon="trash" data-size="14"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="mappings__row">
+                      <input class="blok-input blok-input--mono" type="text" value="/old/spring-sale" />
+                      <span class="mappings__arrow">→</span>
+                      <input class="blok-input blok-input--mono" type="text" value="/promotions/spring" />
+                      <div class="mappings__actions">
+                        <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                          <span class="glyph" data-icon="trash" data-size="14"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="mappings__row">
+                      <input class="blok-input blok-input--mono" type="text" value="/promo/airmax-launch" />
+                      <span class="mappings__arrow">→</span>
+                      <input class="blok-input blok-input--mono" type="text" value="/campaigns/summer-2026/sneakers" />
+                      <div class="mappings__actions">
+                        <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                          <span class="glyph" data-icon="trash" data-size="14"></span>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="mappings__row">
+                      <input class="blok-input blok-input--mono" type="text" value="/sale/black-friday-2025" />
+                      <span class="mappings__arrow">→</span>
+                      <input class="blok-input blok-input--mono" type="text" value="/campaigns/black-friday-2025-archive" />
+                      <div class="mappings__actions">
+                        <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                          <span class="glyph" data-icon="trash" data-size="14"></span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mappings__add">
+                    <button class="blok-btn blok-btn--ghost">
+                      <span class="glyph" data-icon="plus" data-size="14"></span>
+                      Add mapping
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <!-- Shared settings card -->
+              <section class="detail-card">
+                <header class="detail-card__hd">
+                  <h2 class="detail-card__title">Settings</h2>
+                  <span class="detail-card__scope">shared across all languages</span>
+                </header>
+                <div class="detail-card__body">
+                  <div style="display:grid; grid-template-columns: 14rem 1fr; gap: 0.75rem; align-items:center;">
+                    <label class="blok-label" for="redirect-type">Redirect type</label>
+                    <select id="redirect-type" class="blok-select" style="max-width: 14rem;">
+                      <option value="301" selected>301 — Permanent</option>
+                      <option value="302">302 — Found</option>
+                      <option value="307">307 — Temporary</option>
+                      <option value="ServerTransfer">Server Transfer</option>
+                    </select>
+                    <label class="blok-label">Flags</label>
+                    <div style="display:flex; flex-wrap:wrap; gap:0.75rem;">
+                      <label class="blok-checkbox"><input type="checkbox" checked /> Preserve query string</label>
+                      <label class="blok-checkbox"><input type="checkbox" /> Include virtual folder</label>
+                      <label class="blok-checkbox"><input type="checkbox" /> Preserve language</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="blok-alert blok-alert--info detail-card__alert" role="note">
+                  <span class="blok-alert__icon glyph" data-icon="info" data-size="14"></span>
+                  <div class="blok-alert__body">
+                    These settings apply to every language version of this map.
+                  </div>
+                </div>
+              </section>
+
+            </div>
+          </main>
+        </section>
+      </div>
+
+      <!-- Visual toast cue (Sonner pattern) -->
+      <div class="toast-shelf">
+        <div class="blok-toast blok-toast--success" role="status" aria-live="polite">
+          <span class="blok-toast__icon" aria-hidden="true">&#x2713;</span>
+          Saved to en version
+        </div>
+      </div>
+    </div>
+
+    <p class="poc-foot">
+      <a href="poc-index.html">← All V3 screens</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

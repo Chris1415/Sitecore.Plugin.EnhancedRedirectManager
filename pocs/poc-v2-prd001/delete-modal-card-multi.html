@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Delete map (multi-version) — card pattern · Coverage Atlas v2</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell" style="position:relative;">
+      <header class="fp-topbar">
+        <div class="fp-topbar__left">
+          <nav class="blok-breadcrumb" aria-label="breadcrumb">
+            <a class="blok-breadcrumb__item" href="full-page-de.html">SneakerCo</a>
+            <span class="blok-breadcrumb__sep">/</span>
+            <a class="blok-breadcrumb__item" href="full-page-de.html">MainSite</a>
+            <span class="blok-breadcrumb__sep">/</span>
+            <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Marketing campaigns</span>
+          </nav>
+          <div class="fp-topbar__picker"><span class="fp-topbar__picker__lbl">Lang</span><select class="fp-topbar__picker__sel"><option selected>de — Deutsch</option></select></div>
+        </div>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" disabled>Import</button>
+          <button class="blok-btn blok-btn--outline" disabled>Export</button>
+        </div>
+      </header>
+      <div class="fp-body" style="filter:blur(0.5px); opacity:0.45; pointer-events:none;">
+        <aside class="fp-rail" style="background:var(--muted);">
+          <div class="fp-rail__list-hd"><span>Redirect maps</span><span class="mono">8</span></div>
+        </aside>
+        <main class="fp-pane"></main>
+      </div>
+    </div>
+
+    <!-- Delete card-pattern modal. -->
+    <div class="blok-overlay" role="dialog" aria-modal="true" aria-labelledby="del-title" aria-describedby="del-sub">
+      <div class="blok-dialog blok-dialog--wide">
+        <header class="blok-dialog__header">
+          <div>
+            <h2 id="del-title" class="blok-dialog__title">Delete "Marketing campaigns"?</h2>
+            <p id="del-sub" class="blok-dialog__sub">
+              This map has <strong>3 language versions</strong>: en, de, fr. Choose what to delete.
+            </p>
+          </div>
+          <a class="blok-dialog__close" href="map-detail.html" aria-label="Close">&times;</a>
+        </header>
+
+        <div class="blok-dialog__body">
+          <!--
+            V2 MOST DISTINCTIVE ELEMENT: two Blok cards, click-to-select, with
+            post-deletion chip strip INSIDE each card. Operator literally sees
+            what survives — no two-line radio label reading required.
+            Strict no-default: both cards start unselected (ADR-0018).
+          -->
+          <div class="delete-cards" role="radiogroup" aria-label="Delete scope">
+            <label class="delete-card" aria-label="Delete de version only — en and fr survive">
+              <div class="delete-card__hd">
+                <input type="radio" name="del-scope" value="version-only" class="blok-radio" aria-describedby="card-a-cons" />
+                <h3 class="delete-card__title">Delete <code style="font-family:var(--font-mono);">de</code> version only</h3>
+              </div>
+              <hr class="delete-card__divider" />
+              <span class="delete-card__strip-lbl">After deletion</span>
+              <div class="delete-card__strip" role="group" aria-label="Coverage after deletion">
+                <span class="cov-chip cov-chip--filled" aria-label="English has content"><span class="cov-chip__code">en</span><span class="cov-chip__glyph" aria-hidden="true">&#9679;</span></span>
+                <span class="cov-chip cov-chip--deleted" aria-label="German removed"><span class="cov-chip__code">de</span><span class="cov-chip__glyph" aria-hidden="true">&#10005;</span></span>
+                <span class="cov-chip cov-chip--filled" aria-label="French has content"><span class="cov-chip__code">fr</span><span class="cov-chip__glyph" aria-hidden="true">&#9679;</span></span>
+              </div>
+              <p id="card-a-cons" class="delete-card__consequence">
+                <strong>en</strong> and <strong>fr</strong> survive with their existing mappings.
+                The German version and its mappings are removed.
+              </p>
+            </label>
+
+            <label class="delete-card" aria-label="Delete entire map — all language versions removed">
+              <div class="delete-card__hd">
+                <input type="radio" name="del-scope" value="entire" class="blok-radio" aria-describedby="card-b-cons" />
+                <h3 class="delete-card__title">Delete entire map</h3>
+              </div>
+              <hr class="delete-card__divider" />
+              <span class="delete-card__strip-lbl">After deletion</span>
+              <div class="delete-card__strip" role="group" aria-label="Coverage after deletion">
+                <span class="cov-chip cov-chip--deleted" aria-label="English removed"><span class="cov-chip__code">en</span><span class="cov-chip__glyph" aria-hidden="true">&#10005;</span></span>
+                <span class="cov-chip cov-chip--deleted" aria-label="German removed"><span class="cov-chip__code">de</span><span class="cov-chip__glyph" aria-hidden="true">&#10005;</span></span>
+                <span class="cov-chip cov-chip--deleted" aria-label="French removed"><span class="cov-chip__code">fr</span><span class="cov-chip__glyph" aria-hidden="true">&#10005;</span></span>
+              </div>
+              <p id="card-b-cons" class="delete-card__consequence delete-card__consequence--destructive">
+                <strong>All languages</strong> are removed. The redirect map item is deleted.
+                This cannot be undone.
+              </p>
+            </label>
+          </div>
+
+          <div class="blok-helper" style="margin-top:0.75rem;">
+            Strict no-default: pick a card to enable "Delete". Both options take effect immediately on confirm.
+          </div>
+        </div>
+
+        <footer class="blok-dialog__footer blok-dialog__footer--end">
+          <a class="blok-btn blok-btn--ghost" href="map-detail.html">Cancel</a>
+          <button class="blok-btn blok-btn--destructive" disabled aria-disabled="true" aria-describedby="del-disabled-hint">
+            <span class="glyph" data-icon="trash" data-size="14"></span>
+            Delete
+          </button>
+        </footer>
+        <span id="del-disabled-hint" style="position:absolute; left:-9999px;">Choose a card to enable.</span>
+      </div>
+    </div>
+
+    <p class="back-link">
+      <a href="map-detail.html">&larr; Back to map detail (cancel)</a>
+      &nbsp;·&nbsp;
+      <a href="delete-modal-card-single.html">View single-version-edge case</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

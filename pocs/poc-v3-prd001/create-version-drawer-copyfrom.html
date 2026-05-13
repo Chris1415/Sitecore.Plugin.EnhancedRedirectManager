@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create version drawer — copy from — Workspace Frame (v3 · PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <!-- Background workspace (dimmed) -->
+    <div class="ws-shell" aria-hidden="true">
+      <header class="ws-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="index.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <a class="blok-breadcrumb__item" href="index.html">MainSite</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Marketing campaigns</span>
+        </nav>
+      </header>
+      <div class="ws-body">
+        <nav class="lang-sidebar" aria-label="Languages">
+          <div class="lang-sidebar__hd"><span>Languages · 5</span><span></span></div>
+          <div class="lang-sidebar__list" role="list">
+            <div class="lang-nav-item" data-lang="en"><span class="lang-nav-item__name">English</span><span class="lang-nav-item__iso">en</span><span class="lang-nav-item__count">12</span></div>
+            <div class="lang-nav-item" data-lang="de"><span class="lang-nav-item__name">Deutsch</span><span class="lang-nav-item__iso">de</span><span class="lang-nav-item__count">9</span></div>
+            <div class="lang-nav-item" aria-current="page" data-lang="fr"><span class="lang-nav-item__name">Français</span><span class="lang-nav-item__iso">fr</span><span class="lang-nav-item__count">5</span></div>
+            <div class="lang-nav-item" data-lang="it"><span class="lang-nav-item__name">Italiano</span><span class="lang-nav-item__iso">it</span><span class="lang-nav-item__count">3</span></div>
+            <div class="lang-nav-item" data-lang="ja"><span class="lang-nav-item__name">日本語</span><span class="lang-nav-item__iso">ja</span><span class="lang-nav-item__count">7</span></div>
+          </div>
+        </nav>
+        <section class="ws-area">
+          <main class="detail">
+            <header class="detail__hd">
+              <div class="detail__title-wrap"><h1 class="detail__title">Marketing campaigns</h1></div>
+            </header>
+            <div class="detail__tabs-wrap">
+              <div class="lang-tabs" role="tablist">
+                <div class="lang-tab" data-state="inactive">English <span class="lang-tab__iso">en</span></div>
+                <div class="lang-tab" data-state="inactive">Deutsch <span class="lang-tab__iso">de</span></div>
+                <div class="lang-tab" data-state="active">Français <span class="lang-tab__iso">fr</span> <span class="lang-tab__hint">(create)</span></div>
+                <div class="lang-tab" data-state="missing">Italiano <span class="lang-tab__iso">it</span> <span class="lang-tab__hint">(create)</span></div>
+                <div class="lang-tab" data-state="inactive">日本語 <span class="lang-tab__iso">ja</span></div>
+              </div>
+            </div>
+            <div class="detail__body">
+              <div class="detail-empty">
+                <span class="detail-empty__icon"><span class="glyph" data-icon="globe" data-size="22"></span></span>
+                <h2 class="detail-empty__title">No Français version yet</h2>
+              </div>
+            </div>
+          </main>
+        </section>
+      </div>
+    </div>
+
+    <!-- Drawer with copy-from picker revealed -->
+    <div class="drawer-overlay" role="presentation">
+      <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+        <header class="drawer__hd">
+          <div>
+            <h2 id="drawer-title" class="drawer__title">Create version</h2>
+            <p class="drawer__sub">
+              Map: <strong>Marketing campaigns</strong>
+              · Target language: <span class="drawer__sub-lang">Français (fr)</span>
+            </p>
+          </div>
+          <a class="blok-btn blok-btn--ghost blok-btn--icon" href="map-detail-no-version-tab.html" aria-label="Close drawer">
+            <span class="glyph" data-icon="x" data-size="14"></span>
+          </a>
+        </header>
+
+        <div class="drawer__body">
+          <div class="drawer__cta-row" role="radiogroup" aria-label="Version seed mode">
+            <a class="drawer__cta" role="radio" aria-checked="false" data-mode="empty"
+              href="create-version-drawer.html">
+              <span class="drawer__cta-radio">Empty start</span>
+              <span class="drawer__cta-sub">
+                Start with no mappings — author each redirect manually for <code>fr</code>.
+              </span>
+            </a>
+
+            <button class="drawer__cta" role="radio" aria-checked="true" data-mode="copy">
+              <span class="drawer__cta-radio">Copy from another language</span>
+              <span class="drawer__cta-sub">
+                Duplicate an existing version&rsquo;s mappings into <code>fr</code> to start.
+              </span>
+            </button>
+          </div>
+
+          <!-- Source-language picker (revealed inline when "Copy from" is chosen) -->
+          <div class="drawer__source" role="region" aria-label="Source language">
+            <div class="drawer__source-row">
+              <label class="blok-label blok-label--required" for="source-lang">Source language</label>
+              <select id="source-lang" class="blok-select">
+                <option value="de" selected>Deutsch (de) — 6 mappings</option>
+                <option value="en">English (en) — 12 mappings</option>
+                <option value="ja">日本語 (ja) — 4 mappings</option>
+              </select>
+            </div>
+            <p class="drawer__source-hint">
+              Mappings will copy verbatim from <code>de</code>. You can edit any mapping after the version is created.
+            </p>
+          </div>
+
+          <div class="blok-alert blok-alert--info" role="note">
+            <span class="blok-alert__icon glyph" data-icon="info" data-size="14"></span>
+            <div class="blok-alert__body">
+              Shared settings (redirect type, flags) already apply to every language version of this map — only mappings are duplicated.
+            </div>
+          </div>
+        </div>
+
+        <footer class="drawer__ft">
+          <a class="blok-btn blok-btn--ghost" href="map-detail-no-version-tab.html">Cancel</a>
+          <a class="blok-btn blok-btn--primary" href="map-detail.html">
+            <span class="glyph" data-icon="plus" data-size="14"></span>
+            Create from de
+          </a>
+        </footer>
+      </aside>
+    </div>
+
+    <p class="poc-foot" style="position:fixed; bottom:0; left:0; right:0; background:var(--background);">
+      <a href="poc-index.html">← All V3 screens</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

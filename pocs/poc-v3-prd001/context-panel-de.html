@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Context Panel · de page — Workspace Frame (v3 · PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="cp-shell">
+      <aside class="cp-frame" aria-label="Redirects affecting this page">
+        <div class="cp-frame__head">
+          <span>Pages · Context panel</span>
+          <span class="cp-frame__chip">/context-panel</span>
+        </div>
+
+        <!-- Pages-language-aware banner: this is a de page -->
+        <div class="cp-banner" role="note">
+          <span class="cp-banner__glyph glyph" data-icon="info" data-size="14" aria-hidden="true"></span>
+          <div>
+            Viewing a <span class="cp-banner__lang">de</span> page — matches shown are <code>en</code>-only.
+            Multilingual matching ships in PRD-002.
+          </div>
+        </div>
+
+        <div class="cp-body">
+          <div class="cp-callout">
+            <span class="glyph" data-icon="map-pin" data-size="14" aria-hidden="true"></span>
+            <span>On</span>
+            <span class="cp-callout__url">/de/produkte/sneakers/air-max-90</span>
+          </div>
+
+          <hr class="blok-separator" />
+
+          <section class="cp-group" aria-label="Marketing campaigns redirect map">
+            <header class="cp-group__hd">
+              <span class="cp-group__name">Marketing campaigns</span>
+              <span class="blok-badge blok-badge--secondary">301</span>
+            </header>
+            <div class="cp-row">
+              <span class="cp-row__src cp-row__src--unmatched">/products/sneakers/air-max-90</span>
+              <span class="cp-row__arrow">→</span>
+              <span class="cp-row__tgt cp-row__tgt--unmatched">/campaigns/summer-2026/sneakers</span>
+            </div>
+          </section>
+
+          <hr class="blok-separator" />
+
+          <div class="blok-empty" style="padding: 1rem 0.5rem;">
+            <span class="blok-empty__icon">
+              <span class="glyph" data-icon="route-off" data-size="18"></span>
+            </span>
+            <div class="blok-empty__title">No <code>en</code> matches for this <code>de</code> path</div>
+            <div class="blok-empty__sub">
+              This page&rsquo;s URL doesn&rsquo;t match any English redirect source. Multilingual matching (PRD-002) will surface <code>de</code> redirects directly.
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <p class="poc-foot">
+      <a href="poc-index.html">← All V3 screens</a> · <a href="context-panel-en.html">View on /en page →</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

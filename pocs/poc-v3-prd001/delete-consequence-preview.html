@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Delete · radios unselected — Workspace Frame (v3 · PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <!-- Dimmed background workspace -->
+    <div class="ws-shell" aria-hidden="true">
+      <header class="ws-topbar">
+        <nav class="blok-breadcrumb"><a class="blok-breadcrumb__item" href="index.html">SneakerCo</a><span class="blok-breadcrumb__sep">/</span><a class="blok-breadcrumb__item" href="index.html">MainSite</a><span class="blok-breadcrumb__sep">/</span><span class="blok-breadcrumb__item blok-breadcrumb__item--current">Marketing-Kampagnen</span></nav>
+      </header>
+      <div class="ws-body">
+        <nav class="lang-sidebar"><div class="lang-sidebar__hd"><span>Languages · 5</span><span></span></div>
+          <div class="lang-sidebar__list">
+            <div class="lang-nav-item" data-lang="en"><span class="lang-nav-item__name">English</span><span class="lang-nav-item__iso">en</span><span class="lang-nav-item__count">12</span></div>
+            <div class="lang-nav-item" aria-current="page" data-lang="de"><span class="lang-nav-item__name">Deutsch</span><span class="lang-nav-item__iso">de</span><span class="lang-nav-item__count">9</span></div>
+            <div class="lang-nav-item" data-lang="fr"><span class="lang-nav-item__name">Français</span><span class="lang-nav-item__iso">fr</span><span class="lang-nav-item__count">5</span></div>
+            <div class="lang-nav-item" data-lang="it"><span class="lang-nav-item__name">Italiano</span><span class="lang-nav-item__iso">it</span><span class="lang-nav-item__count">3</span></div>
+            <div class="lang-nav-item" data-lang="ja"><span class="lang-nav-item__name">日本語</span><span class="lang-nav-item__iso">ja</span><span class="lang-nav-item__count">7</span></div>
+          </div>
+        </nav>
+        <section class="ws-area">
+          <main class="detail">
+            <header class="detail__hd"><div class="detail__title-wrap"><h1 class="detail__title">Marketing-Kampagnen</h1></div></header>
+          </main>
+        </section>
+      </div>
+    </div>
+
+    <!-- Consequence-preview dialog -->
+    <div class="dialog-overlay" role="presentation">
+      <div class="dialog" role="alertdialog" aria-modal="true"
+        aria-labelledby="del-title" aria-describedby="del-radios">
+        <header class="dialog__hd">
+          <h2 id="del-title" class="dialog__title">Delete redirect map</h2>
+          <p class="dialog__sub">Marketing-Kampagnen · current view: <code>de</code></p>
+        </header>
+        <div class="dialog__body">
+          <p style="font-size: var(--text-xs); color: var(--muted-foreground); margin: 0;">
+            Choose what to delete. Neither option is pre-selected — make your choice
+            explicitly to see what will be removed.
+          </p>
+
+          <div class="radio-group" id="del-radios" role="radiogroup" aria-label="Delete scope">
+            <a class="radio-option" role="radio" aria-checked="false"
+              href="delete-consequence-preview-version-only.html">
+              <span class="radio-option__indicator" aria-hidden="true"></span>
+              <span class="radio-option__label">
+                <span class="radio-option__title">Delete current language version only</span>
+                <span class="radio-option__sub">Removes <code>de</code> version; keeps <code>en</code>, <code>fr</code>, <code>it</code>, <code>ja</code>.</span>
+              </span>
+            </a>
+            <a class="radio-option" role="radio" aria-checked="false"
+              href="delete-consequence-preview-entire-item.html">
+              <span class="radio-option__indicator" aria-hidden="true"></span>
+              <span class="radio-option__label">
+                <span class="radio-option__title">Delete entire map and all language versions</span>
+                <span class="radio-option__sub">Removes <code>en</code>, <code>de</code>, <code>fr</code>, <code>it</code>, <code>ja</code> versions and the map itself.</span>
+              </span>
+            </a>
+          </div>
+
+          <!-- Consequence panel — empty placeholder until a radio is chosen -->
+          <div class="consequence" aria-live="polite">
+            <div class="consequence__placeholder">
+              Choose an option above to see what will be removed.
+            </div>
+          </div>
+        </div>
+        <footer class="dialog__ft">
+          <a class="blok-btn blok-btn--ghost" href="map-detail-de.html">Cancel</a>
+          <button class="blok-btn blok-btn--destructive" disabled aria-disabled="true">
+            <span class="glyph" data-icon="trash" data-size="14"></span>
+            Delete
+          </button>
+        </footer>
+      </div>
+    </div>
+
+    <p class="poc-foot" style="position:fixed; bottom:0; left:0; right:0; background:var(--background);">
+      <a href="poc-index.html">← All V3 screens</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

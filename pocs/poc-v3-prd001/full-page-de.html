@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Full Page · de — Workspace Frame (v3 · PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="ws-shell">
+      <header class="ws-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="index.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">MainSite</span>
+        </nav>
+        <div class="ws-topbar__actions">
+          <span class="ws-mobile-langselect">
+            <label for="m-lang" class="blok-label" style="margin:0;">Lang</label>
+            <select id="m-lang" class="blok-select" aria-label="Language">
+              <option value="en">English (en)</option>
+              <option value="de" selected>Deutsch (de)</option>
+              <option value="fr">Français (fr)</option>
+              <option value="it">Italiano (it)</option>
+              <option value="ja">日本語 (ja)</option>
+            </select>
+          </span>
+          <a class="blok-btn blok-btn--outline" href="import-wizard-preview.html">
+            <span class="glyph" data-icon="upload" data-size="14"></span>
+            Import
+          </a>
+          <button class="blok-btn blok-btn--outline">
+            <span class="glyph" data-icon="download" data-size="14"></span>
+            Export
+          </button>
+          <a class="blok-btn blok-btn--primary" href="map-detail-de.html">
+            <span class="glyph" data-icon="plus" data-size="14"></span>
+            New map
+          </a>
+        </div>
+      </header>
+
+      <div class="ws-body">
+        <nav class="lang-sidebar" aria-label="Languages">
+          <div class="lang-sidebar__hd">
+            <span>Languages · 5</span>
+            <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Collapse sidebar" title="Collapse">
+              <span class="glyph" data-icon="panel-left" data-size="14"></span>
+            </button>
+          </div>
+          <div class="lang-sidebar__list" role="list">
+            <a class="lang-nav-item" data-lang="en" href="index.html">
+              <span class="lang-nav-item__name">English</span>
+              <span class="lang-nav-item__iso">en</span>
+              <span class="lang-nav-item__count">12</span>
+            </a>
+            <a class="lang-nav-item" aria-current="page" data-lang="de" href="full-page-de.html">
+              <span class="lang-nav-item__name">Deutsch</span>
+              <span class="lang-nav-item__iso">de</span>
+              <span class="lang-nav-item__count">9</span>
+            </a>
+            <a class="lang-nav-item" data-lang="fr" href="full-page-de.html#fr">
+              <span class="lang-nav-item__name">Français</span>
+              <span class="lang-nav-item__iso">fr</span>
+              <span class="lang-nav-item__count">5</span>
+            </a>
+            <a class="lang-nav-item" data-lang="it" href="full-page-de.html#it">
+              <span class="lang-nav-item__name">Italiano</span>
+              <span class="lang-nav-item__iso">it</span>
+              <span class="lang-nav-item__count">3</span>
+            </a>
+            <a class="lang-nav-item" data-lang="ja" href="full-page-de.html#ja">
+              <span class="lang-nav-item__name">日本語</span>
+              <span class="lang-nav-item__iso">ja</span>
+              <span class="lang-nav-item__count">7</span>
+            </a>
+          </div>
+          <div class="lang-sidebar__ft">
+            <button class="blok-btn blok-btn--ghost blok-btn--sm" aria-disabled="true" disabled
+              title="Add a new site language via Sitecore Authoring.">
+              <span class="glyph" data-icon="plus" data-size="12"></span>
+              Add language
+            </button>
+          </div>
+        </nav>
+
+        <section class="ws-area" aria-label="Redirect maps">
+          <!-- Partial-version detected banner (ADR-0021 recovery affordance) -->
+          <div class="partial-banner" role="status">
+            <span class="partial-banner__glyph" aria-hidden="true">!</span>
+            <div class="partial-banner__body">
+              <p class="partial-banner__title">Partial version detected — &ldquo;Marketing campaigns&rdquo; in <code>de</code></p>
+              <span>The empty Deutsch version was created but mappings did not copy from <code>en</code>. Recover by retrying the copy, or accept the empty version.</span>
+              <span class="partial-banner__actions">
+                <a class="blok-btn blok-btn--outline blok-btn--sm" href="create-version-drawer-copyfrom.html">Retry copy</a>
+                <button class="blok-btn blok-btn--ghost blok-btn--sm">Accept empty</button>
+              </span>
+            </div>
+          </div>
+
+          <div class="ws-area__hd">
+            <div>
+              <h1 class="ws-area__title">Redirect maps · MainSite</h1>
+              <div class="ws-area__sub">12 maps · current language <strong>Deutsch (de)</strong></div>
+            </div>
+            <span class="ws-search" role="search">
+              <span class="glyph" data-icon="search" data-size="13" aria-hidden="true"></span>
+              <input type="search" placeholder="Filter maps…" aria-label="Filter maps" />
+            </span>
+          </div>
+
+          <div class="ws-content">
+            <div class="map-list map-list--no-detail" role="region" aria-label="Redirect maps list">
+              <div class="map-list__hd" role="row">
+                <span>Name</span>
+                <span>Coverage</span>
+                <span>Type</span>
+                <span>Updated</span>
+                <span>Count (de)</span>
+              </div>
+
+              <a class="map-row" href="map-detail-de.html" aria-selected="false">
+                <span class="map-row__name">Marketing campaigns</span>
+                <span class="coverage" aria-label="Coverage across languages">
+                  <button class="coverage__cell" data-state="filled" data-lang="en"
+                    data-tip="English: has content · 12 mappings" aria-label="English: has content"></button>
+                  <button class="coverage__cell" data-state="empty" data-lang="de" data-current="true"
+                    data-tip="Deutsch: version exists, empty mappings (partial)" aria-label="Deutsch: empty version"></button>
+                  <button class="coverage__cell" data-state="missing" data-lang="fr"
+                    data-tip="Français: no version — click to create" aria-label="Français: no version"></button>
+                  <button class="coverage__cell" data-state="missing" data-lang="it"
+                    data-tip="Italiano: no version — click to create" aria-label="Italiano: no version"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="ja"
+                    data-tip="日本語: has content · 4 mappings" aria-label="日本語: has content"></button>
+                </span>
+                <span class="blok-badge blok-badge--secondary">301</span>
+                <span class="map-row__meta">3d ago</span>
+                <span class="map-row__count">0</span>
+              </a>
+
+              <a class="map-row" href="map-detail-de.html" aria-selected="false">
+                <span class="map-row__name">Legacy product URLs</span>
+                <span class="coverage" aria-label="Coverage across languages">
+                  <button class="coverage__cell" data-state="filled" data-lang="en"
+                    data-tip="English: has content · 28 mappings" aria-label="English: has content"></button>
+                  <button class="coverage__cell" data-state="empty" data-lang="de" data-current="true"
+                    data-tip="Deutsch: version exists, empty mappings" aria-label="Deutsch: empty version"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="fr"
+                    data-tip="Français: has content · 9 mappings" aria-label="Français: has content"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="it"
+                    data-tip="Italiano: has content · 6 mappings" aria-label="Italiano: has content"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="ja"
+                    data-tip="日本語: has content · 5 mappings" aria-label="日本語: has content"></button>
+                </span>
+                <span class="blok-badge blok-badge--secondary">302</span>
+                <span class="map-row__meta">2w ago</span>
+                <span class="map-row__count">0</span>
+              </a>
+
+              <a class="map-row" href="map-detail-de.html" aria-selected="false">
+                <span class="map-row__name">A/B test variants</span>
+                <span class="coverage" aria-label="Coverage across languages">
+                  <button class="coverage__cell" data-state="filled" data-lang="en"
+                    data-tip="English: has content · 4 mappings" aria-label="English: has content"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="de" data-current="true"
+                    data-tip="Deutsch: has content · 4 mappings" aria-label="Deutsch: has content"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="fr"
+                    data-tip="Français: has content · 3 mappings" aria-label="Français: has content"></button>
+                  <button class="coverage__cell" data-state="missing" data-lang="it"
+                    data-tip="Italiano: no version — click to create" aria-label="Italiano: no version"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="ja"
+                    data-tip="日本語: has content · 2 mappings" aria-label="日本語: has content"></button>
+                </span>
+                <span class="blok-badge blok-badge--secondary">Server Transfer</span>
+                <span class="map-row__meta">1d ago</span>
+                <span class="map-row__count">4</span>
+              </a>
+
+              <a class="map-row" href="map-detail-de.html" aria-selected="false">
+                <span class="map-row__name">Geo-IP fallbacks</span>
+                <span class="coverage" aria-label="Coverage across languages">
+                  <button class="coverage__cell" data-state="filled" data-lang="en"
+                    data-tip="English: has content · 4 mappings" aria-label="English: has content"></button>
+                  <button class="coverage__cell" data-state="missing" data-lang="de" data-current="true"
+                    data-tip="Deutsch: no version — click to create" aria-label="Deutsch: no version"></button>
+                  <button class="coverage__cell" data-state="missing" data-lang="fr"
+                    data-tip="Français: no version — click to create" aria-label="Français: no version"></button>
+                  <button class="coverage__cell" data-state="missing" data-lang="it"
+                    data-tip="Italiano: no version — click to create" aria-label="Italiano: no version"></button>
+                  <button class="coverage__cell" data-state="missing" data-lang="ja"
+                    data-tip="日本語: no version — click to create" aria-label="日本語: no version"></button>
+                </span>
+                <span class="blok-badge blok-badge--secondary">307</span>
+                <span class="map-row__meta">1mo ago</span>
+                <span class="map-row__count">—</span>
+              </a>
+
+              <a class="map-row" href="map-detail-de.html" aria-selected="false">
+                <span class="map-row__name">404 rescue chain</span>
+                <span class="coverage" aria-label="Coverage across languages">
+                  <button class="coverage__cell" data-state="filled" data-lang="en"
+                    data-tip="English: has content · 9 mappings" aria-label="English: has content"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="de" data-current="true"
+                    data-tip="Deutsch: has content · 7 mappings" aria-label="Deutsch: has content"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="fr"
+                    data-tip="Français: has content · 5 mappings" aria-label="Français: has content"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="it"
+                    data-tip="Italiano: has content · 5 mappings" aria-label="Italiano: has content"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="ja"
+                    data-tip="日本語: has content · 6 mappings" aria-label="日本語: has content"></button>
+                </span>
+                <span class="blok-badge blok-badge--secondary">301</span>
+                <span class="map-row__meta">3mo ago</span>
+                <span class="map-row__count">7</span>
+              </a>
+
+              <a class="map-row" href="map-detail-de.html" aria-selected="false">
+                <span class="map-row__name">Holiday landing pages 2025</span>
+                <span class="coverage" aria-label="Coverage across languages">
+                  <button class="coverage__cell" data-state="filled" data-lang="en"
+                    data-tip="English: has content · 7 mappings" aria-label="English: has content"></button>
+                  <button class="coverage__cell" data-state="filled" data-lang="de" data-current="true"
+                    data-tip="Deutsch: has content · 7 mappings" aria-label="Deutsch: has content"></button>
+                  <button class="coverage__cell" data-state="empty" data-lang="fr"
+                    data-tip="Français: version exists, empty mappings" aria-label="Français: empty version"></button>
+                  <button class="coverage__cell" data-state="missing" data-lang="it"
+                    data-tip="Italiano: no version — click to create" aria-label="Italiano: no version"></button>
+                  <button class="coverage__cell" data-state="missing" data-lang="ja"
+                    data-tip="日本語: no version — click to create" aria-label="日本語: no version"></button>
+                </span>
+                <span class="blok-badge blok-badge--secondary">302</span>
+                <span class="map-row__meta">5mo ago</span>
+                <span class="map-row__count">7</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <p class="poc-foot">
+      <a href="poc-index.html">← All V3 screens</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

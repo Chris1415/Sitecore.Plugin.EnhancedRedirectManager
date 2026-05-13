@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create version — Step 2/2 Confirm (Empty path) · Coverage Atlas v2</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell" style="position:relative;">
+      <header class="fp-topbar">
+        <div class="fp-topbar__left">
+          <nav class="blok-breadcrumb" aria-label="breadcrumb">
+            <a class="blok-breadcrumb__item" href="full-page-de.html">SneakerCo</a>
+            <span class="blok-breadcrumb__sep">/</span>
+            <a class="blok-breadcrumb__item" href="full-page-de.html">MainSite</a>
+            <span class="blok-breadcrumb__sep">/</span>
+            <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Marketing campaigns</span>
+          </nav>
+          <div class="fp-topbar__picker"><span class="fp-topbar__picker__lbl">Lang</span><select class="fp-topbar__picker__sel"><option selected>de — Deutsch</option></select></div>
+        </div>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" disabled>Import</button>
+        </div>
+      </header>
+      <div class="fp-body" style="filter:blur(0.5px); opacity:0.45; pointer-events:none;">
+        <aside class="fp-rail" style="background:var(--muted);">
+          <div class="fp-rail__list-hd"><span>Redirect maps</span><span class="mono">8</span></div>
+        </aside>
+        <main class="fp-pane"></main>
+      </div>
+    </div>
+
+    <div class="blok-overlay" role="dialog" aria-modal="true" aria-labelledby="step-title">
+      <div class="blok-dialog">
+        <header class="blok-dialog__header">
+          <div>
+            <h2 id="step-title" class="blok-dialog__title">Create <code style="font-family:var(--font-mono);">es</code> version of "Marketing campaigns"</h2>
+            <p class="blok-dialog__sub">Confirm and create. You can edit mappings after creation.</p>
+          </div>
+          <a class="blok-dialog__close" href="map-detail.html" aria-label="Close">&times;</a>
+        </header>
+
+        <!--
+          Stepper indicator (2-dot, step 2 active) — the "Empty" path collapses
+          the indicator from 3 dots to 2 dots, making the path's length visible.
+        -->
+        <div class="stepper">
+          <div class="stepper__head">
+            <span class="stepper__title">Step 2 of 2 — Confirm</span>
+            <span>Empty version</span>
+          </div>
+          <div class="stepper__progress">
+            <div class="stepper__progress__bar" style="width:100%;"></div>
+          </div>
+          <div class="stepper__dots stepper__dots--2" aria-hidden="true">
+            <span class="stepper__dot stepper__dot--done">
+              <span class="stepper__dot__num">1</span>
+              <span class="stepper__dot__lbl">Path</span>
+            </span>
+            <span class="stepper__rail stepper__rail--done"></span>
+            <span class="stepper__dot stepper__dot--active">
+              <span class="stepper__dot__num">2</span>
+              <span class="stepper__dot__lbl">Confirm</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="blok-dialog__body">
+          <div class="step-body">
+            <div class="step-body__hd">
+              <h3 class="step-body__hd__title">You're about to create an empty version</h3>
+              <p class="step-body__hd__sub">Plain-language summary before commit.</p>
+            </div>
+
+            <div class="step-summary">
+              <div class="step-summary__row">
+                <span class="step-summary__lbl">Map</span>
+                <span><strong>Marketing campaigns</strong></span>
+              </div>
+              <div class="step-summary__row">
+                <span class="step-summary__lbl">Language</span>
+                <span><code style="font-family:var(--font-mono);">es</code> — Español</span>
+              </div>
+              <div class="step-summary__row">
+                <span class="step-summary__lbl">Path</span>
+                <span>Empty — no mappings copied</span>
+              </div>
+              <div class="step-summary__row">
+                <span class="step-summary__lbl">Preview</span>
+                <span>
+                  <div class="cov-strip" style="margin-top:0.25rem;">
+                    <span class="cov-chip cov-chip--filled" aria-label="English has content"><span class="cov-chip__code">en</span><span class="cov-chip__glyph" aria-hidden="true">&#9679;</span></span>
+                    <span class="cov-chip cov-chip--filled" aria-label="German has content"><span class="cov-chip__code">de</span><span class="cov-chip__glyph" aria-hidden="true">&#9679;</span></span>
+                    <span class="cov-chip cov-chip--empty" aria-label="French empty"><span class="cov-chip__code">fr</span><span class="cov-chip__glyph" aria-hidden="true">&#9676;</span></span>
+                    <span class="cov-chip cov-chip--empty" aria-label="Spanish will be empty after creation"><span class="cov-chip__code">es</span><span class="cov-chip__glyph" aria-hidden="true">&#9676;</span></span>
+                  </div>
+                </span>
+              </div>
+            </div>
+
+            <div class="blok-alert blok-alert--info">
+              <span class="blok-alert__icon" aria-hidden="true">i</span>
+              <span class="blok-alert__body">
+                After creation, the map detail will open in the new <code style="font-family:var(--font-mono);">es</code>
+                version with a "No mappings yet" affordance.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="blok-dialog__footer">
+          <div style="display:inline-flex; gap:0.5rem;">
+            <a class="blok-btn blok-btn--outline" href="create-version-stepper-step1.html">
+              <span class="glyph" data-icon="chevron-right" data-size="12" style="transform:rotate(180deg);"></span>
+              Back
+            </a>
+            <a class="blok-btn blok-btn--ghost" href="map-detail.html">Cancel</a>
+          </div>
+          <a class="blok-btn blok-btn--primary" href="map-detail-empty-version.html">
+            <span class="glyph" data-icon="plus" data-size="14"></span>
+            Create empty version
+          </a>
+        </footer>
+      </div>
+    </div>
+
+    <p class="back-link">
+      <a href="create-version-stepper-step1.html">&larr; Step 1 (Path)</a>
+      &nbsp;·&nbsp;
+      <a href="create-version-stepper-step3-copy.html">View Step 3 (Copy-from path)</a>
+      &nbsp;·&nbsp;
+      <a href="map-detail.html">Cancel</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

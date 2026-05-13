@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirect Manager — Workspace Frame (v3 · PRD-001) POC</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="portal-shell">
+      <div class="portal-shell__hd">
+        <div>
+          <h1>Redirect Manager · PRD-001 multilingual — Workspace Frame (v3) POC</h1>
+          <p>Variant 3 of 3 · moderate-divergence outer edge. Sticky left language sidebar + map-detail tabs + right-edge drawer + consequence-preview delete. Click any tile or state link to open the matching frame.</p>
+        </div>
+        <span class="blok-badge blok-badge--info">V3 · Workspace Frame</span>
+      </div>
+
+      <div class="poc-banner">
+        <span class="glyph" data-icon="info" data-size="14" aria-hidden="true"></span>
+        <span>Static HTML clickdummy — no backend, placeholder data only. Built with Blok semantic tokens (theme.css) inherited verbatim from PRD-000 winner POC. Geist Sans + Geist Mono. Honors light/dark via prefers-color-scheme + theme-toggle button (top-right).</span>
+      </div>
+
+      <div class="surface-grid">
+        <a class="surface-tile" href="index.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Full Page · en</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            Sidebar (English active) + coverage-matrix map list. Each row has a horizontal strip of 5 cells, one per language. Hover any cell for status; click a missing cell to open the create drawer.
+          </p>
+          <div class="surface-tile__states">
+            <span>sidebar=en</span>
+            <span>matrix list</span>
+            <span>5 langs</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="full-page-de.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Full Page · de</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            Same Full Page with sidebar &ldquo;Deutsch&rdquo; active. Matrix re-renders with <code>de</code> as the active-language column highlight. Partial-version warning at top (ADR-0021 recovery).
+          </p>
+          <div class="surface-tile__states">
+            <span>sidebar=de</span>
+            <span>partial warning</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="map-detail.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Map detail · en tab</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            Click-to-edit title (&ldquo;Marketing campaigns&rdquo;). Tab strip <code>en | de* | fr (create) | it (create) | ja</code>. <code>de*</code> shows dirty-edit asterisk. Below: mappings card + shared-settings card.
+          </p>
+          <div class="surface-tile__states">
+            <span>tabs</span>
+            <span>en active</span>
+            <span>dirty de</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="map-detail-de.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Map detail · de tab</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            Same detail with <code>de</code> tab active — German display name &ldquo;Marketing-Kampagnen&rdquo;, German mapping copy, tab strip re-ordered with <code>de</code> leftmost.
+          </p>
+          <div class="surface-tile__states">
+            <span>tabs</span>
+            <span>de active</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="map-detail-no-version-tab.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Map detail · fr (create)</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            <code>fr</code> tab is in the missing state — italic dashed underline + &ldquo;(create)&rdquo; affordance. Detail pane shows empty state with primary CTA to open the create drawer.
+          </p>
+          <div class="surface-tile__states">
+            <span>tabs</span>
+            <span>missing tab</span>
+            <span>empty detail</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="create-version-drawer.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Create-version drawer</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            Right-edge drawer (40% width). Two CTAs side-by-side — &ldquo;Empty start&rdquo; and &ldquo;Copy from another language.&rdquo; Strict no-default: Create disabled until one is chosen.
+          </p>
+          <div class="surface-tile__states">
+            <span>drawer</span>
+            <span>both unchosen</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="create-version-drawer-copyfrom.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Drawer · copy-from</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            Operator clicked &ldquo;Copy from another language.&rdquo; Inline source-language picker reveals below the CTAs. Create button enabled — labeled &ldquo;Create from de&rdquo;.
+          </p>
+          <div class="surface-tile__states">
+            <span>drawer</span>
+            <span>copy-from</span>
+            <span>source picker</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="delete-consequence-preview.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Delete · radios unselected</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            Consequence-preview dialog. Both radios unchosen — consequence panel renders as placeholder &ldquo;Choose an option to see what will be removed.&rdquo; Delete disabled.
+          </p>
+          <div class="surface-tile__states">
+            <span>dialog</span>
+            <span>strict no-default</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="delete-consequence-preview-version-only.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Delete · version only</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            &ldquo;Version only&rdquo; radio chosen. Consequence panel populates: removes 6 <code>de</code> mappings + display name; keeps <code>en</code> (12) + <code>ja</code> (4) + shared settings.
+          </p>
+          <div class="surface-tile__states">
+            <span>dialog</span>
+            <span>version chosen</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="delete-consequence-preview-entire-item.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Delete · entire map</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            &ldquo;Entire map&rdquo; radio chosen. Consequence panel: removes 22 mappings across 3 languages + display names + shared settings; keeps the other 11 maps in the site.
+          </p>
+          <div class="surface-tile__states">
+            <span>dialog</span>
+            <span>entire chosen</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="delete-consequence-preview-single-lang.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Delete · single-lang edge</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            Edge case: map has only one language version. Informational note at top; both radios still unselected (strict no-default holds). Placeholder consequence panel.
+          </p>
+          <div class="surface-tile__states">
+            <span>dialog</span>
+            <span>single-lang</span>
+            <span>info note</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="import-wizard-preview.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Import preview · all open</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            Grouped-by-language accordion (en, de, fr). All groups expanded. Per-map action picker (create / overwrite / skip) bound to map GUID — reflects across language groups.
+          </p>
+          <div class="surface-tile__states">
+            <span>accordion</span>
+            <span>all open</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="import-wizard-preview-collapsed.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Import · en + fr collapsed</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            Operator collapsed <code>en</code> + <code>fr</code> groups; focused on <code>de</code> review. Each collapsed header keeps the one-line summary (count of create / overwrite).
+          </p>
+          <div class="surface-tile__states">
+            <span>accordion</span>
+            <span>partial collapse</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="dashboard-widget.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Dashboard · current lang</h2>
+            <span class="surface-tile__route">/dashboard-widget</span>
+          </div>
+          <p class="surface-tile__desc">
+            Inline scope toggle per tile — Maps 9 (of 12 with <code>de</code> version), Mappings 62 in <code>de</code>. Last-updated tile shows current lang context.
+          </p>
+          <div class="surface-tile__states">
+            <span>toggle</span>
+            <span>per-tile</span>
+            <span>current=de</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="dashboard-widget-all-langs.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Dashboard · all langs</h2>
+            <span class="surface-tile__route">/dashboard-widget</span>
+          </div>
+          <p class="surface-tile__desc">
+            Same widget; toggle flipped to &ldquo;All langs.&rdquo; Maps 12 total. Mappings 248 (union of all 5 versions). Last-updated tile spans languages.
+          </p>
+          <div class="surface-tile__states">
+            <span>toggle</span>
+            <span>all langs</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="context-panel-en.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Context Panel · en page</h2>
+            <span class="surface-tile__route">/context-panel</span>
+          </div>
+          <p class="surface-tile__desc">
+            Pages editor sidebar. Workspace-style banner names <code>en</code> page; matcher still <code>en</code>-only (PRD-002 superseded). Banner has left accent bar matching sidebar treatment in Full Page.
+          </p>
+          <div class="surface-tile__states">
+            <span>banner</span>
+            <span>en page</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="context-panel-de.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Context Panel · de page</h2>
+            <span class="surface-tile__route">/context-panel</span>
+          </div>
+          <p class="surface-tile__desc">
+            Same Context Panel viewed on a <code>/de</code> URL. Banner copy adapts: &ldquo;Viewing a <code>de</code> page — matches shown are <code>en</code>-only.&rdquo; No matches found for the German URL.
+          </p>
+          <div class="surface-tile__states">
+            <span>banner</span>
+            <span>de page</span>
+          </div>
+        </a>
+
+        <a class="surface-tile" href="partial-version-banner.html">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Partial-version recovery</h2>
+            <span class="surface-tile__route">/full-page</span>
+          </div>
+          <p class="surface-tile__desc">
+            ADR-0021 recovery surface: prominent banner names the failed copy with three CTAs — Retry / Keep empty / Rollback. Tab carries warning glyph; mappings card shows expected vs actual count.
+          </p>
+          <div class="surface-tile__states">
+            <span>banner</span>
+            <span>partial</span>
+            <span>recovery</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="surface-grid" style="grid-template-columns: 1fr; max-width: 80rem;">
+        <div class="surface-tile" style="cursor:default;">
+          <div class="surface-tile__hd">
+            <h2 class="surface-tile__title">Reading guide</h2>
+            <span class="surface-tile__route">click-targets.md</span>
+          </div>
+          <p class="surface-tile__desc">
+            All click targets across all 18 frames are enumerated in
+            <a href="click-targets.md" style="color: var(--primary);">click-targets.md</a> (open as text).
+            Each link in this POC navigates to a static HTML file representing one post-state — interactions are faithful per-frame, not actually wired (no JS state machine).
+          </p>
+          <div class="surface-tile__states">
+            <a href="click-targets.md">click-targets.md</a>
+            <a href="../../project-planning/ui-design/ui-design-20260513T092023Z-v3.md">v3 spec</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

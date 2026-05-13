@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Map detail · fr no version — Workspace Frame (v3 · PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="ws-shell">
+      <header class="ws-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="index.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <a class="blok-breadcrumb__item" href="index.html">MainSite</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Marketing campaigns</span>
+        </nav>
+        <div class="ws-topbar__actions">
+          <a class="blok-btn blok-btn--outline" href="import-wizard-preview.html">
+            <span class="glyph" data-icon="upload" data-size="14"></span>
+            Import
+          </a>
+          <button class="blok-btn blok-btn--outline">
+            <span class="glyph" data-icon="download" data-size="14"></span>
+            Export
+          </button>
+        </div>
+      </header>
+
+      <div class="ws-body">
+        <nav class="lang-sidebar" aria-label="Languages">
+          <div class="lang-sidebar__hd">
+            <span>Languages · 5</span>
+            <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Collapse sidebar" title="Collapse">
+              <span class="glyph" data-icon="panel-left" data-size="14"></span>
+            </button>
+          </div>
+          <div class="lang-sidebar__list" role="list">
+            <a class="lang-nav-item" data-lang="en" href="map-detail.html">
+              <span class="lang-nav-item__name">English</span>
+              <span class="lang-nav-item__iso">en</span>
+              <span class="lang-nav-item__count">12</span>
+            </a>
+            <a class="lang-nav-item" data-lang="de" href="map-detail-de.html">
+              <span class="lang-nav-item__name">Deutsch</span>
+              <span class="lang-nav-item__iso">de</span>
+              <span class="lang-nav-item__count">9</span>
+            </a>
+            <a class="lang-nav-item" aria-current="page" data-lang="fr" href="map-detail-no-version-tab.html">
+              <span class="lang-nav-item__name">Français</span>
+              <span class="lang-nav-item__iso">fr</span>
+              <span class="lang-nav-item__count">5</span>
+            </a>
+            <a class="lang-nav-item" data-lang="it" href="map-detail-no-version-tab.html">
+              <span class="lang-nav-item__name">Italiano</span>
+              <span class="lang-nav-item__iso">it</span>
+              <span class="lang-nav-item__count">3</span>
+            </a>
+            <a class="lang-nav-item" data-lang="ja" href="map-detail.html">
+              <span class="lang-nav-item__name">日本語</span>
+              <span class="lang-nav-item__iso">ja</span>
+              <span class="lang-nav-item__count">7</span>
+            </a>
+          </div>
+          <div class="lang-sidebar__ft">
+            <button class="blok-btn blok-btn--ghost blok-btn--sm" aria-disabled="true" disabled
+              title="Add a new site language via Sitecore Authoring.">
+              <span class="glyph" data-icon="plus" data-size="12"></span>
+              Add language
+            </button>
+          </div>
+        </nav>
+
+        <section class="ws-area" aria-label="Map detail">
+          <main class="detail" aria-label="Redirect map detail">
+            <header class="detail__hd">
+              <div class="detail__title-wrap">
+                <a href="index.html" class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Back to list">
+                  <span class="glyph" data-icon="chevron-right" data-size="14" style="transform: rotate(180deg);"></span>
+                </a>
+                <h1 class="detail__title detail__title--placeholder" tabindex="0"
+                  aria-label="No display name set for Français — click to add one"
+                  title="Click to edit display name">
+                  (no display name for fr — add one)
+                </h1>
+              </div>
+              <div class="detail__topbar-actions">
+                <button class="blok-btn blok-btn--destructive-outline" disabled>
+                  <span class="glyph" data-icon="trash" data-size="14"></span>
+                  Delete
+                </button>
+              </div>
+            </header>
+
+            <div class="detail__tabs-wrap">
+              <div class="lang-tabs" role="tablist" aria-label="Language versions">
+                <a class="lang-tab" data-state="inactive" role="tab" aria-selected="false"
+                  href="map-detail.html" id="tab-en">
+                  English <span class="lang-tab__iso">en</span>
+                </a>
+                <a class="lang-tab" data-state="inactive" role="tab" aria-selected="false"
+                  href="map-detail-de.html" id="tab-de">
+                  Deutsch <span class="lang-tab__iso">de</span>
+                </a>
+                <a class="lang-tab" data-state="active" role="tab" aria-selected="true"
+                  href="create-version-drawer.html" id="tab-fr"
+                  aria-label="Create Français version">
+                  Français <span class="lang-tab__iso">fr</span>
+                  <span class="lang-tab__hint">(create)</span>
+                </a>
+                <a class="lang-tab" data-state="missing" role="tab" aria-selected="false"
+                  href="create-version-drawer.html" id="tab-it"
+                  aria-label="Create Italiano version">
+                  Italiano <span class="lang-tab__iso">it</span>
+                  <span class="lang-tab__hint">(create)</span>
+                </a>
+                <a class="lang-tab" data-state="inactive" role="tab" aria-selected="false"
+                  href="map-detail.html" id="tab-ja">
+                  日本語 <span class="lang-tab__iso">ja</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="detail__body">
+              <div class="detail-empty" role="status">
+                <span class="detail-empty__icon">
+                  <span class="glyph" data-icon="globe" data-size="22"></span>
+                </span>
+                <h2 class="detail-empty__title">No Français version yet</h2>
+                <p class="detail-empty__sub">
+                  &ldquo;Marketing campaigns&rdquo; has no <code>fr</code> version. Create one to start
+                  authoring French redirects — choose between an empty start or copying mappings
+                  from an existing language.
+                </p>
+                <div class="detail-empty__actions">
+                  <a class="blok-btn blok-btn--primary" href="create-version-drawer.html">
+                    <span class="glyph" data-icon="plus" data-size="14"></span>
+                    Create fr version
+                  </a>
+                  <a class="blok-btn blok-btn--outline" href="map-detail.html">
+                    View English version instead
+                  </a>
+                </div>
+              </div>
+            </div>
+          </main>
+        </section>
+      </div>
+    </div>
+
+    <p class="poc-foot">
+      <a href="poc-index.html">← All V3 screens</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

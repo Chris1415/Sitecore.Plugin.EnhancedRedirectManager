@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Context Panel · en page — Workspace Frame (v3 · PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="cp-shell">
+      <aside class="cp-frame" aria-label="Redirects affecting this page">
+        <div class="cp-frame__head">
+          <span>Pages · Context panel</span>
+          <span class="cp-frame__chip">/context-panel</span>
+        </div>
+
+        <!-- Workspace-style topbar banner — Pages-language-aware -->
+        <div class="cp-banner" role="note">
+          <span class="cp-banner__glyph glyph" data-icon="info" data-size="14" aria-hidden="true"></span>
+          <div>
+            Viewing an <span class="cp-banner__lang">en</span> page — matches shown are <code>en</code>-only.
+            Multilingual matching ships in PRD-002.
+          </div>
+        </div>
+
+        <div class="cp-body">
+          <div class="cp-callout">
+            <span class="glyph" data-icon="map-pin" data-size="14" aria-hidden="true"></span>
+            <span>On</span>
+            <span class="cp-callout__url">/products/sneakers/air-max-90</span>
+          </div>
+
+          <hr class="blok-separator" />
+
+          <section class="cp-group" aria-label="Marketing campaigns redirect map">
+            <header class="cp-group__hd">
+              <span class="cp-group__name">Marketing campaigns</span>
+              <span class="blok-badge blok-badge--secondary">301</span>
+            </header>
+            <div class="cp-row">
+              <span class="cp-row__src cp-row__src--matched">/products/sneakers/air-max-90</span>
+              <span class="cp-row__arrow">→</span>
+              <span class="cp-row__tgt cp-row__tgt--unmatched">/campaigns/summer-2026/sneakers</span>
+            </div>
+            <div class="cp-row">
+              <span class="cp-row__src cp-row__src--unmatched">/legacy/airmax</span>
+              <span class="cp-row__arrow">→</span>
+              <span class="cp-row__tgt cp-row__tgt--matched">/products/sneakers/air-max-90</span>
+            </div>
+          </section>
+
+          <hr class="blok-separator" />
+
+          <section class="cp-group" aria-label="Legacy product URLs redirect map">
+            <header class="cp-group__hd">
+              <span class="cp-group__name">Legacy product URLs</span>
+              <span class="blok-badge blok-badge--secondary">302</span>
+            </header>
+            <div class="cp-row">
+              <span class="cp-row__src cp-row__src--matched">/products/sneakers/air-max-90</span>
+              <span class="cp-row__arrow">→</span>
+              <span class="cp-row__tgt cp-row__tgt--unmatched">/shop/footwear/air-max-90</span>
+            </div>
+          </section>
+        </div>
+      </aside>
+    </div>
+
+    <p class="poc-foot">
+      <a href="poc-index.html">← All V3 screens</a> · <a href="context-panel-de.html">View on /de page →</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

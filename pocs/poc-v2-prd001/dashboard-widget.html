@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard Widget — twin tiles · Coverage Atlas v2</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="dw-frame-shell">
+      <!--
+        V2 HALLMARK: twin tiles per stat (current-language + tenant-wide) plus
+        a "Languages with content" tile zooming the row chip pattern to site
+        scope. The widget reads picker state from localStorage (ADR-0017) so
+        the current-language labels update reactively.
+      -->
+      <section class="dw-frame" aria-label="Redirects summary for MainSite">
+        <header class="dw-head">
+          <h2 class="dw-head__title">Redirects</h2>
+          <span class="dw-head__site">MainSite · SneakerCo · current lang <strong>de</strong></span>
+        </header>
+
+        <div class="dw-twin">
+          <article class="dw-tile" aria-label="Maps in de — 8">
+            <span class="dw-tile__lbl">Maps in <code style="font-family:var(--font-mono);">de</code></span>
+            <span class="dw-tile__num">8</span>
+            <span class="dw-tile__sub">4 maps missing de version</span>
+          </article>
+          <article class="dw-tile dw-tile--inverse" aria-label="Maps total — 12">
+            <span class="dw-tile__lbl">Maps total</span>
+            <span class="dw-tile__num">12</span>
+            <span class="dw-tile__sub">across 4 languages</span>
+          </article>
+        </div>
+
+        <div class="dw-twin">
+          <article class="dw-tile" aria-label="Mappings in de — 67">
+            <span class="dw-tile__lbl">Mappings in <code style="font-family:var(--font-mono);">de</code></span>
+            <span class="dw-tile__num">67</span>
+            <span class="dw-tile__sub">redirects authored in this language</span>
+          </article>
+          <article class="dw-tile dw-tile--inverse" aria-label="Mappings total — 312">
+            <span class="dw-tile__lbl">Mappings total</span>
+            <span class="dw-tile__num">312</span>
+            <span class="dw-tile__sub">aggregated all languages</span>
+          </article>
+        </div>
+
+        <article class="dw-lang-tile" aria-label="Languages with content">
+          <span class="dw-lang-tile__lbl">Languages with content (12 maps total)</span>
+          <div class="dw-lang-tile__strip" role="group" aria-label="Per-language aggregate coverage">
+            <a href="index.html" class="cov-chip cov-chip--filled cov-chip--aggregate" aria-label="English — 12 of 12 maps filled">
+              <span class="cov-chip__code">en</span>
+              <span class="cov-chip__glyph" aria-hidden="true">&#9679;</span>
+              <span class="cov-chip__fraction">12/12</span>
+            </a>
+            <a href="full-page-de.html" class="cov-chip cov-chip--filled cov-chip--aggregate" aria-label="German — 8 of 12 maps filled">
+              <span class="cov-chip__code">de</span>
+              <span class="cov-chip__glyph" aria-hidden="true">&#9679;</span>
+              <span class="cov-chip__fraction">8/12</span>
+            </a>
+            <a href="full-page-de.html" class="cov-chip cov-chip--empty cov-chip--aggregate" aria-label="French — 3 of 12 maps have content; some empty">
+              <span class="cov-chip__code">fr</span>
+              <span class="cov-chip__glyph" aria-hidden="true">&#9676;</span>
+              <span class="cov-chip__fraction">3/12</span>
+            </a>
+            <a href="full-page-de.html" class="cov-chip cov-chip--missing cov-chip--aggregate" aria-label="Spanish — 0 of 12 maps have content">
+              <span class="cov-chip__code">es</span>
+              <span class="cov-chip__glyph" aria-hidden="true">&#8211;</span>
+              <span class="cov-chip__fraction">0/12</span>
+            </a>
+          </div>
+          <span class="dw-lang-tile__hint">
+            Click a chip to filter the Full Page list to that language.
+          </span>
+        </article>
+
+        <p class="dw-foot">
+          Redirect counts only — usage analytics ship in a follow-on release (PRD-003).
+        </p>
+      </section>
+    </div>
+
+    <p class="back-link">
+      <a href="index.html">&larr; Full Page (en)</a>
+      &nbsp;·&nbsp;
+      <a href="full-page-de.html">Full Page (de)</a>
+      &nbsp;·&nbsp;
+      <a href="context-panel-en.html">Context Panel</a>
+      &nbsp;·&nbsp;
+      <a href="click-targets.md">click-targets.md</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

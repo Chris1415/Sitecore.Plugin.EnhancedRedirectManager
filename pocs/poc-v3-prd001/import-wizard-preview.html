@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Import preview · all groups open — Workspace Frame (v3 · PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="ws-shell">
+      <header class="ws-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="index.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <a class="blok-breadcrumb__item" href="index.html">MainSite</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Import preview</span>
+        </nav>
+        <div class="ws-topbar__actions">
+          <a class="blok-btn blok-btn--ghost" href="index.html">
+            <span class="glyph" data-icon="x" data-size="14"></span>
+            Cancel
+          </a>
+        </div>
+      </header>
+
+      <div class="ws-body">
+        <nav class="lang-sidebar" aria-label="Languages">
+          <div class="lang-sidebar__hd">
+            <span>Languages · 5</span>
+            <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Collapse sidebar" title="Collapse">
+              <span class="glyph" data-icon="panel-left" data-size="14"></span>
+            </button>
+          </div>
+          <div class="lang-sidebar__list" role="list">
+            <a class="lang-nav-item" aria-current="page" data-lang="en" href="index.html"><span class="lang-nav-item__name">English</span><span class="lang-nav-item__iso">en</span><span class="lang-nav-item__count">12</span></a>
+            <a class="lang-nav-item" data-lang="de" href="full-page-de.html"><span class="lang-nav-item__name">Deutsch</span><span class="lang-nav-item__iso">de</span><span class="lang-nav-item__count">9</span></a>
+            <a class="lang-nav-item" data-lang="fr"><span class="lang-nav-item__name">Français</span><span class="lang-nav-item__iso">fr</span><span class="lang-nav-item__count">5</span></a>
+            <a class="lang-nav-item" data-lang="it"><span class="lang-nav-item__name">Italiano</span><span class="lang-nav-item__iso">it</span><span class="lang-nav-item__count">3</span></a>
+            <a class="lang-nav-item" data-lang="ja"><span class="lang-nav-item__name">日本語</span><span class="lang-nav-item__iso">ja</span><span class="lang-nav-item__count">7</span></a>
+          </div>
+        </nav>
+
+        <section class="ws-area">
+          <div class="import-wizard">
+            <header class="import-wizard__hd">
+              <h1 class="import-wizard__title">Import preview</h1>
+              <p class="import-wizard__sub">multilingual-bundle.json · 12 maps × 3 languages (en, de, fr) · 27 total actions</p>
+            </header>
+
+            <div class="blok-alert blok-alert--info" role="note">
+              <span class="blok-alert__icon glyph" data-icon="info" data-size="14"></span>
+              <div class="blok-alert__body">
+                Action picker applies at <strong>map</strong> level — choose once per map and the action applies to every language version of that map in the bundle.
+              </div>
+            </div>
+
+            <!-- English group (open by default) -->
+            <section class="import-group" data-open="true" aria-label="English changes">
+              <button class="import-group__trigger" aria-expanded="true">
+                <span class="import-group__chev" aria-hidden="true">
+                  <span class="glyph" data-icon="chevron-right" data-size="14"></span>
+                </span>
+                <span class="import-group__name">English <span class="import-group__iso">en</span></span>
+                <span class="import-group__summary">
+                  12 maps · <strong>8 create</strong> · 3 overwrite · 1 skip
+                </span>
+              </button>
+              <div class="import-group__body">
+                <div class="import-row">
+                  <span class="import-row__name">Marketing campaigns</span>
+                  <span class="import-row__count">12 mappings</span>
+                  <span class="blok-badge blok-badge--success">NEW</span>
+                  <select class="blok-select import-row__action" aria-label="Action for Marketing campaigns">
+                    <option value="create" selected>Create</option>
+                    <option value="overwrite">Overwrite</option>
+                    <option value="skip">Skip</option>
+                  </select>
+                </div>
+                <div class="import-row">
+                  <span class="import-row__name">Legacy product URLs</span>
+                  <span class="import-row__count">28 mappings · 2 changes</span>
+                  <span class="blok-badge blok-badge--warning">DIFFERS</span>
+                  <select class="blok-select import-row__action" aria-label="Action for Legacy product URLs">
+                    <option value="create">Create</option>
+                    <option value="overwrite" selected>Overwrite</option>
+                    <option value="skip">Skip</option>
+                  </select>
+                </div>
+                <div class="import-row">
+                  <span class="import-row__name">A/B test variants</span>
+                  <span class="import-row__count">4 mappings · identical</span>
+                  <span class="blok-badge blok-badge--muted">IDENTICAL</span>
+                  <select class="blok-select import-row__action" aria-label="Action for A/B test variants">
+                    <option value="create">Create</option>
+                    <option value="overwrite">Overwrite</option>
+                    <option value="skip" selected>Skip</option>
+                  </select>
+                </div>
+                <div class="import-row">
+                  <span class="import-row__name">Holiday landing pages 2025</span>
+                  <span class="import-row__count">7 mappings</span>
+                  <span class="blok-badge blok-badge--success">NEW</span>
+                  <select class="blok-select import-row__action" aria-label="Action for Holiday landing pages 2025">
+                    <option value="create" selected>Create</option>
+                    <option value="overwrite">Overwrite</option>
+                    <option value="skip">Skip</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- Deutsch group (open) -->
+            <section class="import-group" data-open="true" aria-label="Deutsch changes">
+              <button class="import-group__trigger" aria-expanded="true">
+                <span class="import-group__chev" aria-hidden="true">
+                  <span class="glyph" data-icon="chevron-right" data-size="14"></span>
+                </span>
+                <span class="import-group__name">Deutsch <span class="import-group__iso">de</span></span>
+                <span class="import-group__summary">
+                  10 maps · <strong>6 create</strong> · 4 overwrite
+                </span>
+              </button>
+              <div class="import-group__body">
+                <div class="import-row">
+                  <span class="import-row__name">Marketing-Kampagnen</span>
+                  <span class="import-row__count">8 mappings</span>
+                  <span class="blok-badge blok-badge--success">NEW</span>
+                  <select class="blok-select import-row__action" aria-label="Action for Marketing-Kampagnen">
+                    <option value="create" selected>Create</option>
+                    <option value="overwrite">Overwrite</option>
+                    <option value="skip">Skip</option>
+                  </select>
+                </div>
+                <div class="import-row">
+                  <span class="import-row__name">Alte Produkt-URLs</span>
+                  <span class="import-row__count">15 mappings · 4 changes</span>
+                  <span class="blok-badge blok-badge--warning">DIFFERS</span>
+                  <select class="blok-select import-row__action" aria-label="Action for Alte Produkt-URLs">
+                    <option value="create">Create</option>
+                    <option value="overwrite" selected>Overwrite</option>
+                    <option value="skip">Skip</option>
+                  </select>
+                </div>
+                <div class="import-row">
+                  <span class="import-row__name">A/B-Test-Varianten</span>
+                  <span class="import-row__count">3 mappings</span>
+                  <span class="blok-badge blok-badge--success">NEW</span>
+                  <select class="blok-select import-row__action" aria-label="Action for A/B-Test-Varianten">
+                    <option value="create" selected>Create</option>
+                    <option value="overwrite">Overwrite</option>
+                    <option value="skip">Skip</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <!-- Français group (open) -->
+            <section class="import-group" data-open="true" aria-label="Français changes">
+              <button class="import-group__trigger" aria-expanded="true">
+                <span class="import-group__chev" aria-hidden="true">
+                  <span class="glyph" data-icon="chevron-right" data-size="14"></span>
+                </span>
+                <span class="import-group__name">Français <span class="import-group__iso">fr</span></span>
+                <span class="import-group__summary">
+                  5 maps · <strong>5 create</strong>
+                </span>
+              </button>
+              <div class="import-group__body">
+                <div class="import-row">
+                  <span class="import-row__name">Campagnes marketing</span>
+                  <span class="import-row__count">6 mappings</span>
+                  <span class="blok-badge blok-badge--success">NEW</span>
+                  <select class="blok-select import-row__action" aria-label="Action for Campagnes marketing">
+                    <option value="create" selected>Create</option>
+                    <option value="overwrite">Overwrite</option>
+                    <option value="skip">Skip</option>
+                  </select>
+                </div>
+                <div class="import-row">
+                  <span class="import-row__name">URLs produits hérités</span>
+                  <span class="import-row__count">9 mappings</span>
+                  <span class="blok-badge blok-badge--success">NEW</span>
+                  <select class="blok-select import-row__action" aria-label="Action for URLs produits hérités">
+                    <option value="create" selected>Create</option>
+                    <option value="overwrite">Overwrite</option>
+                    <option value="skip">Skip</option>
+                  </select>
+                </div>
+              </div>
+            </section>
+
+            <div style="display:flex; justify-content:space-between; gap:0.5rem; padding-top: 0.5rem;">
+              <a class="blok-btn blok-btn--outline" href="import-wizard-preview-collapsed.html">
+                Collapse all but Deutsch
+              </a>
+              <div style="display:inline-flex; gap:0.5rem;">
+                <a class="blok-btn blok-btn--ghost" href="index.html">Back</a>
+                <a class="blok-btn blok-btn--primary" href="full-page-de.html">
+                  <span class="glyph" data-icon="check" data-size="14"></span>
+                  Apply 27 changes
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <p class="poc-foot">
+      <a href="poc-index.html">← All V3 screens</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

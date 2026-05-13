@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Delete map — multilingual case · Operator Console v1 (PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <link rel="stylesheet" href="multilingual.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <!-- Dim backdrop -->
+    <div class="fp-shell" style="filter: blur(1.5px); pointer-events:none; user-select:none; opacity:0.7;">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <span class="blok-breadcrumb__item">SneakerCo</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">MainSite</span>
+        </nav>
+        <div class="fp-topbar__centre">
+          <div class="lp-picker">
+            <button class="lp-trigger" disabled aria-disabled="true">
+              <span class="lp-trigger__chip">DE</span>
+              <span class="lp-trigger__name">Deutsch</span>
+              <span class="lp-trigger__caret glyph" data-icon="chevron-down" data-size="14"></span>
+            </button>
+          </div>
+        </div>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" disabled>Import</button>
+        </div>
+      </header>
+    </div>
+
+    <div class="blok-overlay" role="presentation">
+      <div class="blok-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-title" style="max-width: 36rem;">
+        <div class="blok-dialog__header">
+          <h2 class="blok-dialog__title" id="delete-title">
+            Delete "Marketing campaigns"?
+          </h2>
+        </div>
+        <div class="blok-dialog__body">
+          <div class="mv-scope-versions">
+            <span>This map has</span>
+            <span class="mv-scope-versions__chip">3 language versions</span>
+            <span>—</span>
+            <span class="mv-scope-versions__chip">EN</span>
+            <span class="mv-scope-versions__chip">DE</span>
+            <span class="mv-scope-versions__chip">FR</span>
+          </div>
+
+          <div class="mv-scope-stack" role="radiogroup" aria-labelledby="delete-title">
+            <button class="mv-scope-card" role="radio" aria-checked="false">
+              <span class="mv-scope-card__radio" aria-hidden="true"></span>
+              <span class="mv-scope-card__body">
+                <span class="mv-scope-card__title">Delete <strong>Deutsch</strong> version only</span>
+                <span class="mv-scope-card__desc">
+                  The English and Français versions of this map remain intact.
+                  Operators in those languages are not affected.
+                </span>
+              </span>
+            </button>
+            <button class="mv-scope-card" role="radio" aria-checked="false">
+              <span class="mv-scope-card__radio" aria-hidden="true"></span>
+              <span class="mv-scope-card__body">
+                <span class="mv-scope-card__title">Delete <strong>entire map</strong> and all language versions</span>
+                <span class="mv-scope-card__desc">
+                  All 3 language versions (EN, DE, FR) will be permanently removed.
+                  This affects every site visitor reaching the redirect map.
+                </span>
+              </span>
+            </button>
+          </div>
+        </div>
+        <div class="blok-dialog__footer">
+          <a class="blok-btn blok-btn--ghost" href="full-page-de.html">Cancel</a>
+          <button class="blok-btn blok-btn--destructive" disabled aria-disabled="true" aria-describedby="delete-help">
+            <span class="glyph" data-icon="trash" data-size="14"></span>
+            Delete
+          </button>
+        </div>
+        <span id="delete-help" style="display:block; padding:0 1rem 0.75rem; font-size:var(--text-2xs); color:var(--muted-foreground); text-align:right;">
+          Choose an option above to enable Delete.
+        </span>
+      </div>
+    </div>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

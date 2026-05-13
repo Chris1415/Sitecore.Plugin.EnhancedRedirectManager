@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Import wizard — preview · Operator Console v1 (PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <link rel="stylesheet" href="multilingual.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell" style="filter: blur(1.5px); pointer-events:none; user-select:none; opacity:0.6;">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <span class="blok-breadcrumb__item">SneakerCo</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">MainSite</span>
+        </nav>
+      </header>
+    </div>
+
+    <div class="blok-overlay" role="presentation" style="align-items:center;">
+      <div class="blok-dialog" role="dialog" aria-modal="true" aria-labelledby="import-title" style="max-width: 68rem; width: calc(100% - 2rem);">
+        <div class="blok-dialog__header">
+          <div style="display:flex; align-items:center; gap:0.5rem; justify-content:space-between;">
+            <h2 class="blok-dialog__title" id="import-title">Import redirect maps — preview</h2>
+            <div style="display:inline-flex; gap:0.25rem; font-size:var(--text-2xs); color:var(--muted-foreground);">
+              <span class="blok-badge blok-badge--muted">1 · Upload</span>
+              <span class="blok-badge blok-badge--muted">2 · Validate</span>
+              <span class="blok-badge blok-badge--info">3 · Preview</span>
+              <span class="blok-badge blok-badge--muted">4 · Apply</span>
+            </div>
+          </div>
+          <p class="blok-dialog__sub">
+            Bundle: <code style="font-family:var(--font-mono);">sneakerco-mainsite-redirects.v2.json</code>
+            · schema <code style="font-family:var(--font-mono);">redirect-manager/v2</code>
+            · 4 maps · 4 languages (en, de, fr, it)
+          </p>
+        </div>
+        <div class="blok-dialog__body">
+          <div class="iv-shell">
+            <div class="iv-scroll">
+              <table class="iv-table">
+                <thead>
+                  <tr>
+                    <th class="iv-th-map" scope="col">Map / per-map action</th>
+                    <th class="iv-th-lang" scope="col"><span class="iv-lang-chip">EN</span> English</th>
+                    <th class="iv-th-lang" scope="col"><span class="iv-lang-chip">DE</span> Deutsch</th>
+                    <th class="iv-th-lang" scope="col"><span class="iv-lang-chip">FR</span> Français</th>
+                    <th class="iv-th-lang" scope="col"><span class="iv-lang-chip">IT</span> Italiano</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="iv-td-map">
+                      <div class="iv-map-cell">
+                        <span class="iv-map-cell__name">Marketing campaigns</span>
+                        <span class="iv-map-cell__guid">78D48C836DE</span>
+                        <select class="blok-select iv-action-select" aria-label="Action for Marketing campaigns">
+                          <option selected>↻ Overwrite</option>
+                          <option>＋ Create</option>
+                          <option>· Skip</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td><span class="iv-cell-badge iv-cell-badge--over">Overwrite</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--over">Overwrite</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--over">Overwrite</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--unch">Unchanged</span></td>
+                  </tr>
+                  <tr>
+                    <td class="iv-td-map">
+                      <div class="iv-map-cell">
+                        <span class="iv-map-cell__name">Legacy product URLs</span>
+                        <span class="iv-map-cell__guid">A19C7F2B834</span>
+                        <select class="blok-select iv-action-select" aria-label="Action for Legacy product URLs">
+                          <option>↻ Overwrite</option>
+                          <option selected>＋ Create</option>
+                          <option>· Skip</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td><span class="iv-cell-badge iv-cell-badge--create">Create</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--create">Create</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--skip">—</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--skip">—</span></td>
+                  </tr>
+                  <tr>
+                    <td class="iv-td-map">
+                      <div class="iv-map-cell">
+                        <span class="iv-map-cell__name">Press release pages</span>
+                        <span class="iv-map-cell__guid">4A2C9E1A03F</span>
+                        <select class="blok-select iv-action-select" aria-label="Action for Press release pages">
+                          <option selected>↻ Overwrite</option>
+                          <option>＋ Create</option>
+                          <option>· Skip</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td><span class="iv-cell-badge iv-cell-badge--over">Overwrite</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--create">Create</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--conflict">Conflict</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--skip">—</span></td>
+                  </tr>
+                  <tr>
+                    <td class="iv-td-map">
+                      <div class="iv-map-cell">
+                        <span class="iv-map-cell__name">A/B test variants</span>
+                        <span class="iv-map-cell__guid">B2E3F507811</span>
+                        <select class="blok-select iv-action-select" aria-label="Action for A/B test variants">
+                          <option>↻ Overwrite</option>
+                          <option>＋ Create</option>
+                          <option selected>· Skip</option>
+                        </select>
+                      </div>
+                    </td>
+                    <td><span class="iv-cell-badge iv-cell-badge--skip">—</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--skip">—</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--skip">—</span></td>
+                    <td><span class="iv-cell-badge iv-cell-badge--skip">—</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="iv-counts">
+            <span class="iv-counts__chip"><span style="color:var(--success);">＋</span> 3 creates</span>
+            <span class="iv-counts__chip"><span style="color:var(--warning);">↻</span> 5 overwrites</span>
+            <span class="iv-counts__chip"><span style="color:var(--destructive);">!</span> 1 conflict</span>
+            <span class="iv-counts__chip"><span>·</span> 6 skips</span>
+            <span class="iv-counts__chip"><span>·</span> 1 unchanged</span>
+          </div>
+
+          <div class="blok-alert blok-alert--destructive" role="alert" style="margin-top:0.875rem;">
+            <span class="blok-alert__icon glyph" data-icon="alert-triangle" data-size="14"></span>
+            <div class="blok-alert__body">
+              <strong class="blok-alert__title">1 conflict needs resolution.</strong>
+              <em>Press release pages — FR</em>: the bundle would create a new version,
+              but a FR version already exists. Change the map's action to
+              <strong>Overwrite</strong> or <strong>Skip</strong> before applying.
+            </div>
+          </div>
+        </div>
+        <div class="blok-dialog__footer">
+          <a class="blok-btn blok-btn--ghost" href="index.html">Cancel</a>
+          <button class="blok-btn blok-btn--outline">Back</button>
+          <button class="blok-btn blok-btn--primary" disabled aria-disabled="true">
+            <span class="glyph" data-icon="upload" data-size="14"></span>
+            Apply
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

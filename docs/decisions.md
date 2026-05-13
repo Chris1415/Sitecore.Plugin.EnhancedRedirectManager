@@ -63,3 +63,34 @@ These are not ADRs (they're SDK-shape findings discovered during real-tenant cap
 - **The Marketplace SDK `ApplicationContext` is tenant-scoped, not site-scoped.** Embedding the Dashboard Widget on different site dashboards yields identical `ApplicationContext` snapshots — there is no per-site signal from the SDK. The widget falls back to a site picker.
 
 These findings are stable as of 2026-05-12 and will be revisited if SDK behavior changes.
+
+## PRD-001 Tranche 1 captures (real-tenant probes, 2026-05-13)
+
+PRD-001 (app-internal multilingual CRUD) was cancelled at the Tranche 1 capture pass — see [ADR-0023](../project-planning/ADR/adr-0023-cancel-prd-001-multilingual-template-shared.md). These findings survive the cancellation; they are durable SDK-level knowledge about the Authoring GraphQL surface and the stock Sitecore Redirect Map template.
+
+- **`addItemVersion` mutation exists** in the Authoring schema and accepts `{ itemId: ID!, language: String! }` as input. Response shape: `{ addItemVersion: { item: { itemId, language: { name }, version } } }`. **Note: `item.language` is an object `{ name }`, not a string.** Version returned as a number. Verified against `CHAH DevEx Journey / PROD` on 2026-05-13.
+- **`deleteItemVersion` mutation exists**. Payload type is `DeleteItemVersionPayload`; the field `successful` does NOT exist on it (an earlier guess was wrong). Minimal probe shape: `{ deleteItemVersion(input: { itemId, language }) { __typename } }`. Introspection via `__type(name: "DeleteItemVersionPayload")` reveals the real payload subfields. Verb confirmed; full payload shape capture deferred (PRD-001 cancelled before re-run).
+- **`__Display name` field write accepts the literal name `"__Display name"`** in `updateItem(input: { ..., fields: [{ name: "__Display name", value: ... }] })`. No need to fall back to the templateFieldId GUID for writes. Response field uses the alias `Display_Name` when the read query aliases `field(name: "__Display name")`.
+- **`Item.versions(allLanguages: true)` returns all language versions in a single round trip** — ~410ms against PROD for an item with 2 language versions. Well under the 2s threshold that would have triggered designing a lighter summary query.
+- **Field-versioning matrix on the stock Redirect Map template (PROD).** The killer finding — drove PRD-001 cancellation:
+
+  | Field | `versioning` |
+  |---|---|
+  | `UrlMapping` (the redirect rules) | `SHARED` |
+  | `RedirectType` | `SHARED` |
+  | `IncludeVirtualFolder` | `SHARED` |
+  | `PreserveQueryString` | `SHARED` |
+  | `PreserveLanguage` | `SHARED` |
+  | `__Display name` | `UNVERSIONED` |
+
+  **`UrlMapping` SHARED means redirect rules are stored once per item with no language axis.** Creating a `de-DE` language version is mechanically possible (`addItemVersion` works), but every language version of the item returns the same `UrlMapping` content. Empirically confirmed by `Item.versions(allLanguages: true)` returning byte-identical `UrlMapping` values across `en` and `de-DE` versions of `My Redirect Map 2`.
+
+  Sitecore versioning semantics for reference:
+  - `SHARED` — one value for the entire item, no language or version axis.
+  - `UNVERSIONED` — per-language, but shared across numbered versions within a language.
+  - `VERSIONED` — per-language AND per-version.
+
+- **`__Display name` is UNVERSIONED** — different per language but shared across versions within a language. Real per-language axis exists for the display label only.
+- **Sitecore versioning conventions on standard fields** (captured incidentally during A4): most `__*`-prefixed standard fields are `SHARED`. Notable exceptions: `__Source` (VERSIONED), `__Final Renderings` (VERSIONED), `__Hide version` (VERSIONED), `__Valid from` / `__Valid to` (VERSIONED), `__Display name` / `__Long description` / `__Short description` (UNVERSIONED). Useful reference for future PRDs that interact with these fields.
+
+**Implication for any future multilingual work:** the stock Redirect Map template cannot support per-language redirect rules without a template-level change. A real multilingual story for Redirect Manager would need to bundle a Sitecore template modification (`UrlMapping` → VERSIONED, or a new versioned field) with a head-app resolver change to honor per-language `UrlMapping` content at runtime, plus the app-side UI. No clean phase split is possible; all three changes must ship together. See ADR-0023 for the full rationale.

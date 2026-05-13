@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Partial version recovery — Workspace Frame (v3 · PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="ws-shell">
+      <header class="ws-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="index.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <a class="blok-breadcrumb__item" href="full-page-de.html">MainSite</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Marketing campaigns · partial</span>
+        </nav>
+        <div class="ws-topbar__actions">
+          <a class="blok-btn blok-btn--outline" href="import-wizard-preview.html">
+            <span class="glyph" data-icon="upload" data-size="14"></span>
+            Import
+          </a>
+          <button class="blok-btn blok-btn--outline">
+            <span class="glyph" data-icon="download" data-size="14"></span>
+            Export
+          </button>
+        </div>
+      </header>
+
+      <div class="ws-body">
+        <nav class="lang-sidebar" aria-label="Languages">
+          <div class="lang-sidebar__hd">
+            <span>Languages · 5</span>
+            <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Collapse sidebar" title="Collapse">
+              <span class="glyph" data-icon="panel-left" data-size="14"></span>
+            </button>
+          </div>
+          <div class="lang-sidebar__list" role="list">
+            <a class="lang-nav-item" data-lang="en" href="index.html"><span class="lang-nav-item__name">English</span><span class="lang-nav-item__iso">en</span><span class="lang-nav-item__count">12</span></a>
+            <a class="lang-nav-item" data-lang="de" href="full-page-de.html"><span class="lang-nav-item__name">Deutsch</span><span class="lang-nav-item__iso">de</span><span class="lang-nav-item__count">9</span></a>
+            <a class="lang-nav-item" aria-current="page" data-lang="fr" href="partial-version-banner.html"><span class="lang-nav-item__name">Français</span><span class="lang-nav-item__iso">fr</span><span class="lang-nav-item__count">5</span></a>
+            <a class="lang-nav-item" data-lang="it"><span class="lang-nav-item__name">Italiano</span><span class="lang-nav-item__iso">it</span><span class="lang-nav-item__count">3</span></a>
+            <a class="lang-nav-item" data-lang="ja"><span class="lang-nav-item__name">日本語</span><span class="lang-nav-item__iso">ja</span><span class="lang-nav-item__count">7</span></a>
+          </div>
+          <div class="lang-sidebar__ft">
+            <button class="blok-btn blok-btn--ghost blok-btn--sm" aria-disabled="true" disabled
+              title="Add a new site language via Sitecore Authoring.">
+              <span class="glyph" data-icon="plus" data-size="12"></span>
+              Add language
+            </button>
+          </div>
+        </nav>
+
+        <section class="ws-area" aria-label="Map detail">
+          <!-- Prominent partial-version banner (recovery affordance) -->
+          <div class="partial-banner" role="alert">
+            <span class="partial-banner__glyph" aria-hidden="true">!</span>
+            <div class="partial-banner__body">
+              <p class="partial-banner__title">Partial version detected · &ldquo;Marketing campaigns&rdquo; in <code>fr</code></p>
+              <span>
+                The empty <code>fr</code> version was created at 09:14 UTC but the copy-from operation did not complete — 0 of 12 mappings were transferred from <code>de</code>. This usually happens when the GraphQL write is interrupted (network drop, tenant timeout) per <a href="https://example.invalid/adr-0021" style="color:var(--warning); text-decoration:underline;">ADR-0021</a>.
+              </span>
+              <span class="partial-banner__actions">
+                <a class="blok-btn blok-btn--outline blok-btn--sm" href="create-version-drawer-copyfrom.html">
+                  <span class="glyph" data-icon="refresh" data-size="12"></span>
+                  Retry copy from de
+                </a>
+                <button class="blok-btn blok-btn--ghost blok-btn--sm">Keep empty version</button>
+                <a class="blok-btn blok-btn--destructive-outline blok-btn--sm" href="delete-consequence-preview-version-only.html">
+                  <span class="glyph" data-icon="trash" data-size="12"></span>
+                  Rollback (delete <code>fr</code>)
+                </a>
+              </span>
+            </div>
+          </div>
+
+          <main class="detail" aria-label="Redirect map detail">
+            <header class="detail__hd">
+              <div class="detail__title-wrap">
+                <a href="index.html" class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Back to list">
+                  <span class="glyph" data-icon="chevron-right" data-size="14" style="transform: rotate(180deg);"></span>
+                </a>
+                <h1 class="detail__title detail__title--placeholder" tabindex="0"
+                  aria-label="No display name set for Français — click to add one">
+                  (no display name for fr — add one)
+                </h1>
+              </div>
+              <div class="detail__topbar-actions">
+                <a class="blok-btn blok-btn--destructive-outline" href="delete-consequence-preview-version-only.html">
+                  <span class="glyph" data-icon="trash" data-size="14"></span>
+                  Delete
+                </a>
+                <button class="blok-btn blok-btn--primary" disabled>
+                  <span class="glyph" data-icon="save" data-size="14"></span>
+                  Save changes
+                </button>
+              </div>
+            </header>
+
+            <div class="detail__tabs-wrap">
+              <div class="lang-tabs" role="tablist" aria-label="Language versions">
+                <a class="lang-tab" data-state="inactive" role="tab" aria-selected="false" href="map-detail.html">
+                  English <span class="lang-tab__iso">en</span>
+                </a>
+                <a class="lang-tab" data-state="inactive" role="tab" aria-selected="false" href="map-detail-de.html">
+                  Deutsch <span class="lang-tab__iso">de</span>
+                </a>
+                <button class="lang-tab" data-state="active" role="tab" aria-selected="true">
+                  Français <span class="lang-tab__iso">fr</span>
+                  <span class="lang-tab__dirty" aria-label="partial version" title="partial / 0 mappings">!</span>
+                </button>
+                <a class="lang-tab" data-state="missing" role="tab" aria-selected="false">
+                  Italiano <span class="lang-tab__iso">it</span>
+                  <span class="lang-tab__hint">(create)</span>
+                </a>
+                <a class="lang-tab" data-state="inactive" role="tab" aria-selected="false">
+                  日本語 <span class="lang-tab__iso">ja</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="detail__body">
+              <section class="detail-card">
+                <header class="detail-card__hd">
+                  <h2 class="detail-card__title">Mappings</h2>
+                  <span class="detail-card__scope">versioned · <strong style="color:var(--warning-foreground);">0 mappings</strong> in <code>fr</code> (expected 12)</span>
+                </header>
+                <div class="detail-card__body">
+                  <div class="blok-empty">
+                    <span class="blok-empty__icon">
+                      <span class="glyph" data-icon="inbox" data-size="20"></span>
+                    </span>
+                    <div class="blok-empty__title">No mappings in this version</div>
+                    <div class="blok-empty__sub">
+                      Use one of the recovery actions in the banner above, or add mappings manually below.
+                    </div>
+                  </div>
+                  <div class="mappings__add" style="border-top: 1px solid var(--border);">
+                    <button class="blok-btn blok-btn--ghost">
+                      <span class="glyph" data-icon="plus" data-size="14"></span>
+                      Add mapping manually
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </main>
+        </section>
+      </div>
+    </div>
+
+    <p class="poc-foot">
+      <a href="poc-index.html">← All V3 screens</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

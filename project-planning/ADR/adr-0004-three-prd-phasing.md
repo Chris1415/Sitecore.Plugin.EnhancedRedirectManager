@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted
+Superseded by ADR-0014 (four-PRD phasing — multilingual split from analytics + head-app contract; 2026-05-13)
 
 ## Context
 

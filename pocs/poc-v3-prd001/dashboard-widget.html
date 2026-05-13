@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard Widget · current lang — Workspace Frame (v3 · PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workspace.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="dw-shell">
+      <section class="dw-frame" aria-label="Redirects summary for MainSite">
+        <header class="dw-head">
+          <h2 class="dw-head__title">Redirects</h2>
+          <span class="dw-head__site">MainSite · SneakerCo</span>
+        </header>
+
+        <div class="dw-tiles">
+          <article class="dw-tile" aria-label="Maps tile">
+            <div class="dw-tile__hd">
+              <span class="dw-tile__lbl">Maps</span>
+              <div class="dw-toggle" role="group" aria-label="Scope for Maps tile">
+                <button class="dw-toggle__opt" aria-pressed="true">Current (de)</button>
+                <a class="dw-toggle__opt" aria-pressed="false" href="dashboard-widget-all-langs.html">All langs</a>
+              </div>
+            </div>
+            <span class="dw-tile__num">9</span>
+            <span class="dw-tile__scope">9 of 12 maps have a <code>de</code> version</span>
+          </article>
+
+          <article class="dw-tile" aria-label="Mappings tile">
+            <div class="dw-tile__hd">
+              <span class="dw-tile__lbl">Mappings</span>
+              <div class="dw-toggle" role="group" aria-label="Scope for Mappings tile">
+                <button class="dw-toggle__opt" aria-pressed="true">Current (de)</button>
+                <a class="dw-toggle__opt" aria-pressed="false" href="dashboard-widget-all-langs.html">All langs</a>
+              </div>
+            </div>
+            <span class="dw-tile__num">62</span>
+            <span class="dw-tile__scope">62 mappings in <code>de</code> across all maps</span>
+          </article>
+
+          <article class="dw-tile" aria-label="Last updated tile" style="grid-column: span 2;">
+            <div class="dw-tile__hd">
+              <span class="dw-tile__lbl">Last updated</span>
+              <span class="dw-tile__scope">picker: Deutsch (de)</span>
+            </div>
+            <span class="dw-tile__txt">3 days ago</span>
+            <span class="dw-tile__scope">&ldquo;Marketing-Kampagnen&rdquo; in <code>de</code></span>
+          </article>
+        </div>
+
+        <p class="dw-foot">
+          Inline scope toggle persists per-tile in <code>localStorage</code>. Switch the active language on Full Page.
+          Redirect counts only — usage analytics ship in a follow-on release (PRD-003).
+        </p>
+      </section>
+    </div>
+
+    <p class="poc-foot">
+      <a href="poc-index.html">← All V3 screens</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

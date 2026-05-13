@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Delete map — single-version edge case · Operator Console v1 (PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <link rel="stylesheet" href="multilingual.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell" style="filter: blur(1.5px); pointer-events:none; user-select:none; opacity:0.7;">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <span class="blok-breadcrumb__item">SneakerCo</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">MainSite</span>
+        </nav>
+        <div class="fp-topbar__centre">
+          <div class="lp-picker">
+            <button class="lp-trigger" disabled aria-disabled="true">
+              <span class="lp-trigger__chip">EN</span>
+              <span class="lp-trigger__name">English</span>
+              <span class="lp-trigger__caret glyph" data-icon="chevron-down" data-size="14"></span>
+            </button>
+          </div>
+        </div>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" disabled>Import</button>
+        </div>
+      </header>
+    </div>
+
+    <div class="blok-overlay" role="presentation">
+      <div class="blok-dialog" role="dialog" aria-modal="true" aria-labelledby="delete-title-single" style="max-width: 36rem;">
+        <div class="blok-dialog__header">
+          <h2 class="blok-dialog__title" id="delete-title-single">
+            Delete "Geo-IP fallbacks"?
+          </h2>
+        </div>
+        <div class="blok-dialog__body">
+          <div class="mv-scope-versions">
+            <span>This map has</span>
+            <span class="mv-scope-versions__chip">1 language version</span>
+            <span>—</span>
+            <span class="mv-scope-versions__chip">EN</span>
+          </div>
+
+          <div class="mv-scope-stack" role="radiogroup" aria-labelledby="delete-title-single">
+            <button class="mv-scope-card mv-scope-card--selected" role="radio" aria-checked="true">
+              <span class="mv-scope-card__radio" aria-hidden="true"></span>
+              <span class="mv-scope-card__body">
+                <span class="mv-scope-card__title">Delete <strong>English</strong> version only</span>
+                <span class="mv-scope-card__desc">
+                  Removes the EN version. Because this is the only language version,
+                  removing it also leaves the map item empty.
+                </span>
+              </span>
+            </button>
+            <button class="mv-scope-card" role="radio" aria-checked="false">
+              <span class="mv-scope-card__radio" aria-hidden="true"></span>
+              <span class="mv-scope-card__body">
+                <span class="mv-scope-card__title">Delete <strong>entire map</strong> and all language versions</span>
+                <span class="mv-scope-card__desc">
+                  Permanently removes the map item plus every language version
+                  (EN only, in this case).
+                </span>
+              </span>
+            </button>
+          </div>
+
+          <div class="blok-alert blok-alert--info" role="note" style="margin-top:0.875rem;">
+            <span class="blok-alert__icon glyph" data-icon="alert-circle" data-size="14"></span>
+            <div class="blok-alert__body">
+              <strong class="blok-alert__title">Only one language version exists.</strong>
+              Both options remove all redirect data for this map. Choose explicitly to
+              confirm intent — there is no shortcut here.
+            </div>
+          </div>
+        </div>
+        <div class="blok-dialog__footer">
+          <a class="blok-btn blok-btn--ghost" href="index.html">Cancel</a>
+          <button class="blok-btn blok-btn--destructive">
+            <span class="glyph" data-icon="trash" data-size="14"></span>
+            Delete English version
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

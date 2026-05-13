@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create version — copy from language · Operator Console v1 (PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <link rel="stylesheet" href="multilingual.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <!-- Dimmed backdrop -->
+    <div class="fp-shell" style="filter: blur(1.5px); pointer-events:none; user-select:none; opacity: 0.7;">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <span class="blok-breadcrumb__item">SneakerCo</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item">MainSite</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Press release pages</span>
+        </nav>
+        <div class="fp-topbar__centre">
+          <div class="lp-picker">
+            <button class="lp-trigger" disabled aria-disabled="true">
+              <span class="lp-trigger__chip">DE</span>
+              <span class="lp-trigger__name">Deutsch</span>
+              <span class="lp-trigger__caret glyph" data-icon="chevron-down" data-size="14"></span>
+            </button>
+          </div>
+        </div>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" disabled>Import</button>
+          <button class="blok-btn blok-btn--outline" disabled>Export</button>
+        </div>
+      </header>
+      <main class="fp-pane">
+        <div class="fp-pane__inner">
+          <div class="mv-empty-card" style="opacity:0.4;">
+            <span class="mv-empty-card__icon glyph" data-icon="globe" data-size="20"></span>
+            <h3 class="mv-empty-card__title">No Deutsch version yet</h3>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Modal -->
+    <div class="blok-overlay" role="presentation">
+      <div class="blok-dialog" role="dialog" aria-modal="true" aria-labelledby="copy-from-title" style="max-width: 40rem;">
+        <div class="blok-dialog__header">
+          <h2 class="blok-dialog__title" id="copy-from-title">
+            <a href="create-version-modal.html" class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Back" style="margin-right:0.25rem;">
+              <span class="glyph" data-icon="chevron-right" data-size="14" style="transform:rotate(180deg);"></span>
+            </a>
+            Copy mappings from another language
+          </h2>
+          <p class="blok-dialog__sub">Pick the source language. The Deutsch version will be created with the same mappings.</p>
+        </div>
+        <div class="blok-dialog__body">
+          <label class="blok-label" style="margin-bottom:0.5rem;">Source language</label>
+          <div class="mv-src-list" role="radiogroup" aria-label="Source language">
+            <button class="mv-src-row mv-src-row--selected" role="radio" aria-checked="true">
+              <span class="mv-src-row__radio" aria-hidden="true"></span>
+              <span class="mv-src-row__chip">EN</span>
+              <span class="mv-src-row__name">English</span>
+              <span class="mv-src-row__count">47 mappings</span>
+            </button>
+            <button class="mv-src-row" role="radio" aria-checked="false">
+              <span class="mv-src-row__radio" aria-hidden="true"></span>
+              <span class="mv-src-row__chip">FR</span>
+              <span class="mv-src-row__name">Français</span>
+              <span class="mv-src-row__count">32 mappings</span>
+            </button>
+            <button class="mv-src-row" role="radio" aria-checked="false">
+              <span class="mv-src-row__radio" aria-hidden="true"></span>
+              <span class="mv-src-row__chip">IT</span>
+              <span class="mv-src-row__name">Italiano</span>
+              <span class="mv-src-row__count">18 mappings</span>
+            </button>
+          </div>
+
+          <div class="blok-alert blok-alert--info" role="note" style="margin-top:0.875rem;">
+            <span class="blok-alert__icon glyph" data-icon="info" data-size="14"></span>
+            <div class="blok-alert__body">
+              Mappings will be copied from <strong>English</strong>. Flags and redirect
+              type are shared across all languages and apply automatically. Languages
+              with empty versions are not shown here.
+            </div>
+          </div>
+        </div>
+        <div class="blok-dialog__footer">
+          <a class="blok-btn blok-btn--ghost" href="create-version-modal.html">Back</a>
+          <a class="blok-btn blok-btn--primary" href="map-detail.html">
+            <span class="glyph" data-icon="copy" data-size="14"></span>
+            Create version from EN
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

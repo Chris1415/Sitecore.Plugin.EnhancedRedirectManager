@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Create version — Step 1 (Path) · Coverage Atlas v2</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <!-- Render the modal over a backdrop. The stale Full Page sits underneath. -->
+    <div class="fp-shell" style="position:relative;">
+      <header class="fp-topbar">
+        <div class="fp-topbar__left">
+          <nav class="blok-breadcrumb" aria-label="breadcrumb">
+            <a class="blok-breadcrumb__item" href="full-page-de.html">SneakerCo</a>
+            <span class="blok-breadcrumb__sep">/</span>
+            <a class="blok-breadcrumb__item" href="full-page-de.html">MainSite</a>
+            <span class="blok-breadcrumb__sep">/</span>
+            <span class="blok-breadcrumb__item blok-breadcrumb__item--current">Marketing campaigns</span>
+          </nav>
+          <div class="fp-topbar__picker" role="group" aria-label="Language">
+            <span class="fp-topbar__picker__lbl">Lang</span>
+            <select class="fp-topbar__picker__sel" aria-label="Language">
+              <option selected>de — Deutsch</option>
+            </select>
+          </div>
+        </div>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" disabled>Import</button>
+          <button class="blok-btn blok-btn--outline" disabled>Export</button>
+        </div>
+      </header>
+      <div class="fp-body" style="filter:blur(0.5px); opacity:0.45; pointer-events:none;">
+        <aside class="fp-rail" style="background:var(--muted);">
+          <div class="fp-rail__list-hd"><span>Redirect maps</span><span class="mono">8</span></div>
+        </aside>
+        <main class="fp-pane"></main>
+      </div>
+    </div>
+
+    <!-- Stepper modal overlay. -->
+    <div class="blok-overlay" role="dialog" aria-modal="true" aria-labelledby="step-title">
+      <div class="blok-dialog">
+        <header class="blok-dialog__header">
+          <div>
+            <h2 id="step-title" class="blok-dialog__title">Create <code style="font-family:var(--font-mono);">es</code> version of "Marketing campaigns"</h2>
+            <p class="blok-dialog__sub">Choose how to start. You can change your mind on the next step.</p>
+          </div>
+          <a class="blok-dialog__close" href="map-detail.html" aria-label="Close">&times;</a>
+        </header>
+
+        <!-- Stepper indicator (3-dot, step 1 active). -->
+        <div class="stepper">
+          <div class="stepper__head">
+            <span class="stepper__title">Step 1 of 3 — Choose how to start</span>
+            <span>Path</span>
+          </div>
+          <div class="stepper__progress">
+            <div class="stepper__progress__bar" style="width:33%;"></div>
+          </div>
+          <div class="stepper__dots stepper__dots--3" aria-hidden="true">
+            <span class="stepper__dot stepper__dot--active">
+              <span class="stepper__dot__num">1</span>
+              <span class="stepper__dot__lbl">Path</span>
+            </span>
+            <span class="stepper__rail"></span>
+            <span class="stepper__dot">
+              <span class="stepper__dot__num">2</span>
+              <span class="stepper__dot__lbl">Source</span>
+            </span>
+            <span class="stepper__rail"></span>
+            <span class="stepper__dot">
+              <span class="stepper__dot__num">3</span>
+              <span class="stepper__dot__lbl">Confirm</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="blok-dialog__body">
+          <div class="step-body">
+            <div class="step-body__hd">
+              <h3 class="step-body__hd__title">How should the new version start?</h3>
+              <p class="step-body__hd__sub">Pick a path. No default — explicit choice avoids accidental overwrites.</p>
+            </div>
+
+            <!-- Strict no-default radios; clicking the card selects. -->
+            <div class="step-body__choices" role="radiogroup" aria-label="Path">
+              <label class="step-choice">
+                <input type="radio" name="path" class="blok-radio" value="empty" aria-describedby="path-empty-desc" />
+                <span class="step-choice__body">
+                  <span class="step-choice__title">Empty version</span>
+                  <span class="step-choice__desc" id="path-empty-desc">
+                    Start with no mappings. Add them yourself after creation. Goes to step 2 of 2 (Confirm).
+                  </span>
+                </span>
+              </label>
+
+              <label class="step-choice step-choice--active">
+                <input type="radio" name="path" class="blok-radio" value="copy" checked aria-describedby="path-copy-desc" />
+                <span class="step-choice__body">
+                  <span class="step-choice__title">Copy from another language</span>
+                  <span class="step-choice__desc" id="path-copy-desc">
+                    Pre-fill mappings from an existing language version. Goes to step 2 of 3 (Source).
+                  </span>
+                </span>
+              </label>
+            </div>
+
+            <div class="blok-alert blok-alert--info">
+              <span class="blok-alert__icon" aria-hidden="true">i</span>
+              <span class="blok-alert__body">
+                Flags (preserve query string, redirect type) are shared across all languages
+                and apply automatically.
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="blok-dialog__footer">
+          <a class="blok-btn blok-btn--ghost" href="map-detail.html">Cancel</a>
+          <div style="display:inline-flex; gap:0.5rem;">
+            <a class="blok-btn blok-btn--primary" href="create-version-stepper-step3-copy.html">
+              Next
+              <span class="glyph" data-icon="arrow-right" data-size="14"></span>
+            </a>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <p class="back-link">
+      <a href="create-version-stepper-step2-empty.html">View "Empty" path → Step 2/2 Confirm</a>
+      &nbsp;·&nbsp;
+      <a href="create-version-stepper-step3-copy.html">View "Copy from" path → Step 3/3</a>
+      &nbsp;·&nbsp;
+      <a href="map-detail.html">&larr; Back to map detail</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>

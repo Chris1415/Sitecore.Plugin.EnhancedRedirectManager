@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Map detail — empty version in EN · Operator Console v1 (PRD-001)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <link rel="stylesheet" href="multilingual.css" />
+    <script src="theme-toggle.js" defer></script>
+  </head>
+  <body>
+    <div class="fp-shell">
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="index.html">SneakerCo</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <a class="blok-breadcrumb__item" href="index.html">MainSite</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">A/B test variants</span>
+        </nav>
+
+        <div class="fp-topbar__centre">
+          <div class="lp-picker">
+            <a class="lp-trigger" href="full-page-de.html" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-label="Language. Currently English.">
+              <span class="lp-trigger__chip">EN</span>
+              <span class="lp-trigger__name">English</span>
+              <span class="lp-trigger__caret glyph" data-icon="chevron-down" data-size="14"></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="fp-topbar__actions">
+          <a class="blok-btn blok-btn--ghost" href="index.html">
+            <span class="glyph" data-icon="chevron-right" data-size="14" style="transform:rotate(180deg);"></span>
+            Back to list
+          </a>
+        </div>
+      </header>
+
+      <main class="fp-pane" aria-label="Redirect map detail">
+        <div class="fp-pane__inner">
+          <section class="fp-section">
+            <div class="mv-detail-hd">
+              <span class="mv-detail-hd__lang-chip">EN</span>
+              <h2 class="mv-detail-hd__title">A/B test variants</h2>
+              <button class="mv-detail-hd__pencil mv-detail-hd__pencil--always" aria-label="Edit display name for English">
+                <span class="glyph" data-icon="pencil" data-size="14"></span>
+              </button>
+              <span class="mv-detail-hd__meta">
+                <span class="guid-badge" title="Click to copy GUID">
+                  <span class="glyph" data-icon="copy" data-size="11"></span>
+                  4A2C9E1A03F
+                </span>
+              </span>
+            </div>
+
+            <header class="fp-section__hd" style="margin-top:0.5rem;">
+              <span class="fp-section__lbl">Map attributes</span>
+              <span class="fp-section__sub">2 language versions: en, de</span>
+            </header>
+
+            <div class="fp-form-grid">
+              <div class="fp-field">
+                <label class="blok-label blok-label--required">Type</label>
+                <select class="blok-select">
+                  <option>301 — Permanent</option>
+                  <option>302 — Found</option>
+                  <option selected>Server Transfer</option>
+                </select>
+              </div>
+              <div class="fp-field">
+                <label class="blok-label" style="margin-bottom:0.5rem;">Flags (shared across languages)</label>
+                <div class="fp-flags">
+                  <label class="blok-checkbox"><input type="checkbox" /> Preserve query string</label>
+                  <label class="blok-checkbox"><input type="checkbox" checked /> Preserve language</label>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <hr class="blok-separator" />
+
+          <section class="fp-section">
+            <header class="fp-section__hd">
+              <span class="fp-section__lbl">Mappings — EN</span>
+              <span class="fp-section__sub">0 rows</span>
+            </header>
+
+            <div class="mv-first-mapping">
+              <div class="mv-first-mapping__head">
+                <span class="glyph" data-icon="inbox" data-size="16" style="color: var(--muted-foreground); margin-right:0.5rem;"></span>
+                The EN version exists but has no mappings yet.
+              </div>
+              <p class="mv-first-mapping__sub">
+                Add the first mapping below. Saving creates the redirect immediately —
+                no separate publish step.
+              </p>
+              <div class="fp-mappings" style="margin-top:0.25rem;">
+                <div class="fp-mappings__hd">
+                  <span></span><span>Source</span><span></span><span>Target</span><span style="text-align:right;">Actions</span>
+                </div>
+                <div class="fp-mapping-row">
+                  <span class="fp-mapping-row__handle"><span class="glyph" data-icon="grip-vertical" data-size="14"></span></span>
+                  <input class="blok-input blok-input--mono" type="text" placeholder="/old-path-to-redirect" />
+                  <span class="fp-mapping-row__arrow">→</span>
+                  <input class="blok-input blok-input--mono" type="text" placeholder="/new/target/path" />
+                  <div class="fp-mapping-row__actions">
+                    <button class="blok-btn blok-btn--ghost blok-btn--icon" aria-label="Delete row">
+                      <span class="glyph" data-icon="trash" data-size="14"></span>
+                    </button>
+                  </div>
+                </div>
+                <div class="fp-mappings__add">
+                  <button class="blok-btn blok-btn--ghost" style="width:100%; justify-content:flex-start;">
+                    <span class="glyph" data-icon="plus" data-size="14"></span>
+                    Add mapping
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="fp-bottom">
+            <a class="blok-btn blok-btn--destructive-outline" href="delete-modal-multi.html">
+              <span class="glyph" data-icon="trash" data-size="14"></span>
+              Delete map
+            </a>
+            <div class="fp-bottom__actions">
+              <button class="blok-btn blok-btn--ghost">Cancel</button>
+              <button class="blok-btn blok-btn--primary">
+                <span class="glyph" data-icon="save" data-size="14"></span>
+                Save first mapping
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <p style="text-align:center; padding:0.75rem 1rem 1.5rem; font-size:var(--text-xs); color:var(--muted-foreground); border-top:1px solid var(--border);">
+      <a href="index.html">← Back to list</a> · <a href="click-targets.md">click-targets.md</a>
+    </p>
+
+    <script src="icons.js"></script>
+  </body>
+</html>
