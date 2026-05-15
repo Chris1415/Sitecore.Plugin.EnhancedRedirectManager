@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirect Manager — The redirects layer for Sitecore</title>
+    <meta name="description" content="Manage URL redirects across every site, every language, with confidence. A Sitecore Marketplace app built on Blok." />
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="elevated-backdrop" aria-hidden="true"></div>
+
+    <!-- Theme toggle (light / dark / auto) -->
+    <div class="tone-toggle" data-theme-toggle role="group" aria-label="Theme">
+      <button class="tone-toggle__btn" data-theme="light" aria-pressed="false">Light</button>
+      <button class="tone-toggle__btn" data-theme="dark" aria-pressed="false">Dark</button>
+      <button class="tone-toggle__btn" data-theme="auto" aria-pressed="true">Auto</button>
+    </div>
+
+    <!-- Topnav -->
+    <nav class="topnav" aria-label="Primary">
+      <div class="topnav-inner">
+        <a href="index.html" class="brand" aria-label="Redirect Manager — home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Redirect Manager</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link active">Overview</a>
+          <a href="full-page.html" class="nav-link">Full Page</a>
+          <a href="context-panel.html" class="nav-link">Context Panel</a>
+          <a href="dashboard-widget.html" class="nav-link">Widget</a>
+        </div>
+        <a href="full-page.html" class="blok-btn blok-btn--primary btn-elevated topnav-cta" data-ripple>
+          Open app
+          <span class="glyph" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero shell">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow">
+            <span class="dot" aria-hidden="true"></span>
+            Sitecore Marketplace · v1.0
+          </span>
+
+          <h1 class="hero-headline">
+            <span data-reveal data-reveal-i="1">Manage URL</span>
+            <br />
+            <span data-reveal data-reveal-i="2">redirects with</span>
+            <br />
+            <span data-reveal data-reveal-i="3" class="gradient-text">confidence.</span>
+          </h1>
+
+          <p class="hero-sub">
+            Redirect Manager brings every 301, 302, and one-off rewrite under one roof —
+            visible from the editor, the dashboard, and a roomy workspace. Built on the
+            Blok design system, native to Sitecore.
+          </p>
+
+          <div class="hero-actions">
+            <a href="full-page.html" class="blok-btn blok-btn--primary btn-elevated">
+              Get started
+              <span class="glyph" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+              </span>
+            </a>
+            <a href="#surfaces" class="blok-btn blok-btn--outline btn-elevated">
+              See the three surfaces
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero product preview -->
+        <div class="hero-preview" aria-hidden="true">
+          <div class="hero-preview-shadowcard"></div>
+          <div class="hero-preview-card">
+            <div class="preview-toolbar">
+              <div class="preview-dots"><span></span><span></span><span></span></div>
+              <span class="preview-url">app.sitecorecloud.io / redirect-manager / sneakerco · main</span>
+            </div>
+            <div class="preview-body">
+              <div class="preview-sidebar">
+                <div class="preview-sidebar-item active">
+                  <span class="glyph">
+                    <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+                  </span>
+                  Redirect maps
+                </div>
+                <div class="preview-sidebar-item">
+                  <span class="glyph"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+                  Languages
+                </div>
+                <div class="preview-sidebar-item">
+                  <span class="glyph"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+                  Activity
+                </div>
+                <div class="preview-sidebar-item">
+                  <span class="glyph"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33"/></svg></span>
+                  Settings
+                </div>
+              </div>
+              <div class="preview-rows">
+                <div class="preview-row">
+                  <span class="status-pill status-pill--active"><span class="dot"></span>Active</span>
+                  <span class="preview-row__name">Black Friday 2025</span>
+                  <span class="http-code http-code--301">301</span>
+                </div>
+                <div class="preview-row">
+                  <span class="status-pill status-pill--active"><span class="dot"></span>Active</span>
+                  <span class="preview-row__name">EU Compliance Migration</span>
+                  <span class="http-code http-code--301">301</span>
+                </div>
+                <div class="preview-row">
+                  <span class="status-pill status-pill--draft"><span class="dot"></span>Draft</span>
+                  <span class="preview-row__name">Q1 Product Launches</span>
+                  <span class="http-code http-code--302">302</span>
+                </div>
+                <div class="preview-row">
+                  <span class="status-pill status-pill--active"><span class="dot"></span>Active</span>
+                  <span class="preview-row__name">Legacy WP Imports</span>
+                  <span class="http-code http-code--301">301</span>
+                </div>
+                <div class="preview-row">
+                  <span class="status-pill status-pill--active"><span class="dot"></span>Active</span>
+                  <span class="preview-row__name">Holiday Microsites 2025</span>
+                  <span class="http-code http-code--301">301</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <section class="marquee" aria-label="In good company">
+      <div class="marquee-label">Lives natively inside Sitecore Cloud Portal</div>
+      <div class="marquee-row">
+        <div class="marquee-cell">
+          <span class="glyph"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span>
+          XM Cloud
+        </div>
+        <div class="marquee-cell">
+          <span class="glyph"><svg viewBox="0 0 24 24"><path d="M4 7l8-4 8 4-8 4-8-4z"/><path d="M4 12l8 4 8-4"/><path d="M4 17l8 4 8-4"/></svg></span>
+          Content SDK
+        </div>
+        <div class="marquee-cell">
+          <span class="glyph"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18"/></svg></span>
+          Pages
+        </div>
+        <div class="marquee-cell">
+          <span class="glyph"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></span>
+          Dashboard
+        </div>
+      </div>
+    </section>
+
+    <!-- Features / surfaces -->
+    <section class="features shell" id="surfaces">
+      <div class="features-header">
+        <span class="eyebrow">Three surfaces, one source of truth</span>
+        <h2 class="features-title">Show up wherever the work happens.</h2>
+        <p class="features-sub">
+          Authors meet redirects in the editor. SEO leads work them in a roomy console.
+          Everyone glances at the tile on the home dashboard. One source of truth, three points of view.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <a href="full-page.html" class="feature-card" aria-label="Open the Full Page surface">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 4v16"/></svg>
+          </div>
+          <div class="feature-tag">Extension point 01 · Full Page</div>
+          <h3 class="feature-title">A roomy workspace.</h3>
+          <p class="feature-desc">
+            Every map, every language, every URL pair — visible, searchable, editable.
+            Status pills, HTTP codes, language affordances. Built for the SEO lead with thirty things on their list.
+          </p>
+          <span class="feature-link">
+            Open Full Page
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <a href="context-panel.html" class="feature-card" aria-label="Open the Context Panel surface">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2.5"/><path d="M15 3v18"/></svg>
+          </div>
+          <div class="feature-tag">Extension point 02 · Context Panel</div>
+          <h3 class="feature-title">In-editor focus.</h3>
+          <p class="feature-desc">
+            See and create redirects for the page you're editing — without leaving Pages.
+            The smallest surface, the sharpest focus, and the one authors will use twenty times a day.
+          </p>
+          <span class="feature-link">
+            Step into the panel
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+        <a href="dashboard-widget.html" class="feature-card" aria-label="Open the Dashboard Widget surface">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
+          </div>
+          <div class="feature-tag">Extension point 03 · Dashboard Widget</div>
+          <h3 class="feature-title">At-a-glance health.</h3>
+          <p class="feature-desc">
+            A tile on the Cloud Portal home — total active redirects, top destinations, what shipped today.
+            Glance from anywhere, jump straight into the work.
+          </p>
+          <span class="feature-link">
+            See the live tile
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Trust band with count-ups -->
+    <section class="trust shell">
+      <div class="trust-card">
+        <div class="trust-stat">
+          <span class="trust-stat-value"><span data-count="12428">0</span></span>
+          <span class="trust-stat-label">Active redirects</span>
+          <span class="trust-stat-sub">+412 this week</span>
+        </div>
+        <div class="trust-stat">
+          <span class="trust-stat-value"><span data-count="94">0</span>%</span>
+          <span class="trust-stat-label">301 vs. 302</span>
+          <span class="trust-stat-sub">healthy ratio</span>
+        </div>
+        <div class="trust-stat">
+          <span class="trust-stat-value"><span data-count="7">0</span></span>
+          <span class="trust-stat-label">Languages</span>
+          <span class="trust-stat-sub">EN · DE · FR · ES · IT · NL · DA</span>
+        </div>
+        <div class="trust-stat">
+          <span class="trust-stat-value">&lt;<span data-count="80">0</span>ms</span>
+          <span class="trust-stat-label">Lookup latency</span>
+          <span class="trust-stat-sub">edge resolution</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <span class="footer-meta">
+          Redirect Manager · A Sitecore Marketplace app · Built on
+          <a class="footer-link" href="https://blok.sitecore.com" style="text-decoration: underline;">Blok</a>
+        </span>
+        <span class="footer-meta">
+          <a class="footer-link" href="full-page.html">Open app</a>
+          &nbsp;·&nbsp;
+          <a class="footer-link" href="#surfaces">Surfaces</a>
+        </span>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

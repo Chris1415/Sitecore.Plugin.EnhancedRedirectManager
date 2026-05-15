@@ -264,7 +264,7 @@ export function ImportRedirectMapModal({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="max-w-2xl">
+      <DialogContent className="max-w-2xl elev-glass-surface elev-modal-content">
         <DialogHeader>
           <DialogTitle>
             {step === "upload" && "Import redirect maps"}

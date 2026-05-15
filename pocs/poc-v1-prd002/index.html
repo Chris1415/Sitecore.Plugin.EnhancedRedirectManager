@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PRD-002 V4 Refined POC · Redirect Manager</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="elevated.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+  </head>
+  <body class="idx-page">
+    <!-- Theme toggle -->
+    <div class="tone-toggle" data-theme-toggle role="group" aria-label="Theme">
+      <button class="tone-toggle__btn" data-theme="light" aria-pressed="false">Light</button>
+      <button class="tone-toggle__btn" data-theme="dark" aria-pressed="false">Dark</button>
+      <button class="tone-toggle__btn" data-theme="auto" aria-pressed="true">Auto</button>
+    </div>
+
+    <main class="idx-shell">
+      <header class="idx-head">
+        <span class="elev-eyebrow"><span class="dot"></span>PRD-002 · Refined V4 POC</span>
+        <h1>Redirect Manager · Blok Elevated</h1>
+        <p>
+          Three Sitecore Marketplace extension-point surfaces, V4-aligned redesign with reality reconciliations applied. Visual source of truth for implementation. Pick a surface below to open its frame.
+        </p>
+      </header>
+
+      <section aria-label="POC frames">
+        <div class="idx-grid">
+          <a class="idx-card" href="full-page.html">
+            <span class="idx-card__tag">Surface 1 · Full screen extension</span>
+            <h2 class="idx-card__title">Full Page workspace</h2>
+            <p class="idx-card__desc">
+              1280px operator workspace. Drifting plume backdrop. Workspace hero zone with kinetic letter reveal and gradient-clip headline. 4-tile stat strip with count-up animation. Left rail map list + map detail with mappings table. Two decorative hero CTAs (View activity, Publish all) wired to Sonner-style toast per ADR-0030.
+            </p>
+          </a>
+
+          <a class="idx-card" href="context-panel.html">
+            <span class="idx-card__tag">Surface 2 · Page context panel — single match</span>
+            <h2 class="idx-card__title">Context Panel · default (single match)</h2>
+            <p class="idx-card__desc">
+              360px panel. Hero count header. Hero summary tile. Always-visible inline QuickRedirectForm (matchedGroups.length === 1; RedirectType select disabled with "uses existing map's redirect type" hint per ADR-0029). One matched redirect row. No drifting plumes; quieter motion budget per ADR-0027.
+            </p>
+          </a>
+
+          <a class="idx-card" href="context-panel-multi-match.html">
+            <span class="idx-card__tag">Surface 2 · Page context panel — multi-match</span>
+            <h2 class="idx-card__title">Context Panel · multi-match</h2>
+            <p class="idx-card__desc">
+              360px panel. Same chrome as default. matchedGroups.length === 3 — dropdown "Adding to:" affordance lets the operator switch active parent map. RedirectType select re-binds when dropdown changes (read-only display). Three matched redirect rows.
+            </p>
+          </a>
+
+          <a class="idx-card" href="context-panel-no-match.html">
+            <span class="idx-card__tag">Surface 2 · Page context panel — no match</span>
+            <h2 class="idx-card__title">Context Panel · no match (create new)</h2>
+            <p class="idx-card__desc">
+              360px panel. matchedGroups.length === 0. Hero count header reads "0 redirects point here." with subline guidance. Form RedirectType select is enabled (default 301). Auto-name preview ("New map: sneaker-cloud-runner-redirects") appears beneath source input.
+            </p>
+          </a>
+
+          <a class="idx-card" href="dashboard-widget.html">
+            <span class="idx-card__tag">Surface 3 · Dashboard widget</span>
+            <h2 class="idx-card__title">Dashboard Widget</h2>
+            <p class="idx-card__desc">
+              480px compact tile. Preview Data banner. Hero stat 12,428 (count-up). Gradient sparkline. 3 real tiles (Maps / Mappings / Last-updated) + 4th mock tile (Recently shipped). Top destinations (5 rows, en-only paths). Recently shipped mini-widget (3 rows). Footer "Last publish 14 m ago by Anna" + monochrome "all healthy" badge.
+            </p>
+          </a>
+        </div>
+      </section>
+
+      <footer class="idx-meta">
+        <p>
+          Reconciliations applied per architecture &sect; 11.2 · Active/Draft pills dropped · 7-languages copy removed · /de/* paths rewritten to en-only · RedirectType enum 3 values · AddRedirectModal removed (Option A locked per ADR-0028) · Status column removed from Full Page table · Preview Data banner on Full Page + Dashboard Widget · Mixed motion budget per ADR-0027.
+        </p>
+      </footer>
+    </main>
+
+    <!-- HahnSoloFooter — fixed bottom-right (textual placeholder for the real logo) -->
+    <div class="hahn-solo-footer" aria-hidden="true">hahn-solo</div>
+
+    <script src="theme-toggle.js"></script>
+    <script src="icons.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

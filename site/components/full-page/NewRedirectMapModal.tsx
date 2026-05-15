@@ -169,7 +169,7 @@ export function NewRedirectMapModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="elev-glass-surface elev-modal-content">
         <DialogHeader>
           <DialogTitle>New redirect map</DialogTitle>
           <DialogDescription>

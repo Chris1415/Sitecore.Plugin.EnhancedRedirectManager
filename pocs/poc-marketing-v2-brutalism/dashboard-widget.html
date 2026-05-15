@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DASHBOARD WIDGET // REDIRECT MANAGER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="square"></span>
+      REDIRECT MANAGER
+    </div>
+    <nav>
+      <a href="index.html">HOME</a>
+      <a href="full-page.html">FULL PAGE</a>
+      <a href="context-panel.html">PANEL</a>
+      <a href="dashboard-widget.html" class="active">WIDGET</a>
+    </nav>
+  </header>
+
+  <div class="frame-switch">
+    <span class="label">FRAME:</span>
+    <a href="index.html">INDEX</a>
+    <a href="full-page.html">FULL PAGE</a>
+    <a href="context-panel.html">CONTEXT PANEL</a>
+    <a href="dashboard-widget.html" class="current">DASHBOARD WIDGET</a>
+  </div>
+
+  <!-- Simulated dashboard context -->
+  <div style="background:#ddd6c4;padding:20px;border-bottom:var(--border-2);">
+    <div class="wrap-compact" style="text-align:center;font-family:var(--mono);font-size:12px;color:#444;">
+      // SIMULATED SITECORE CLOUD PORTAL DASHBOARD
+    </div>
+  </div>
+
+  <!-- Primary widget tile -->
+  <div class="widget-shell">
+    <div class="widget-head">
+      <div class="widget-title">
+        REDIRECT MANAGER &nbsp;<span style="color:var(--lemon);">//</span>&nbsp; AT A GLANCE
+      </div>
+      <span class="widget-live">LIVE</span>
+    </div>
+
+    <div class="widget-metrics">
+      <div class="widget-metric tile-lemon">
+        <span class="big-num js-tick" data-target="247">247</span>
+        <span class="metric-label">TOTAL</span>
+        <span class="metric-delta">+18 this week</span>
+      </div>
+      <div class="widget-metric tile-paper">
+        <span class="big-num js-tick" data-target="241">241</span>
+        <span class="metric-label">ACTIVE</span>
+        <span class="metric-delta">// 98% healthy</span>
+      </div>
+      <div class="widget-metric tile-red">
+        <span class="big-num js-tick" data-target="3">3</span>
+        <span class="metric-label">BROKEN</span>
+        <span class="metric-delta">in WP-MIGRATION</span>
+      </div>
+    </div>
+
+    <div class="widget-recent">
+      <div class="widget-recent-title">// RECENT ACTIVITY</div>
+
+      <div class="widget-recent-row">
+        <span class="what">
+          <span class="stamp stamp-active" style="font-size:10px;padding:1px 5px;">ADDED</span>
+          /black-friday-2024/deals &rarr; /black-friday-2025/deals
+        </span>
+        <span class="when">2h ago</span>
+      </div>
+
+      <div class="widget-recent-row">
+        <span class="what">
+          <span class="stamp stamp-broken" style="font-size:10px;padding:1px 5px;">BROKEN</span>
+          /blog/2023/holiday-guide hits a 404
+        </span>
+        <span class="when">3h ago</span>
+      </div>
+
+      <div class="widget-recent-row">
+        <span class="what">
+          <span class="stamp stamp-301" style="font-size:10px;padding:1px 5px;">EDIT</span>
+          /cart-checkout-v1 type 302 &rarr; 301
+        </span>
+        <span class="when">yesterday</span>
+      </div>
+
+      <div class="widget-recent-row">
+        <span class="what">
+          <span class="stamp stamp-draft" style="font-size:10px;padding:1px 5px;">DRAFT</span>
+          SUMMER SALE map created (3 redirects, unpublished)
+        </span>
+        <span class="when">20m ago</span>
+      </div>
+    </div>
+
+    <div class="widget-foot">
+      <span class="foot-line">// last sync: 2h ago &nbsp; // 4 maps &nbsp; // CDN: vercel-edge</span>
+      <div style="display:flex;gap:8px;">
+        <a href="full-page.html" class="btn btn-sm">SEE ALL</a>
+        <a href="full-page.html" class="btn btn-sm btn-rebel">FIX 3</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Secondary: mini-tiles, brutalist style -->
+  <div class="wrap-compact" style="max-width:1024px;">
+    <span class="slab">BIG NUMBERS</span>
+    <div class="dashboard-grid">
+      <div class="mini-tile tile-lemon">
+        <span class="mini-num js-tick" data-target="47">47</span>
+        <span class="mini-label">ACTIVE TODAY</span>
+        <span class="mini-sub">redirects that fired in the last 24h</span>
+      </div>
+
+      <div class="mini-tile tile-pink">
+        <span class="mini-num js-tick" data-target="9">9</span>
+        <span class="mini-label">HIT THIS PAGE</span>
+        <span class="mini-sub">when you opened the editor. just FYI.</span>
+      </div>
+
+      <div class="mini-tile tile-blue">
+        <span class="mini-num js-tick" data-target="62">62</span>
+        <span class="mini-label">Q1 LAUNCHES</span>
+        <span class="mini-sub">all live. nothing broken. don't touch.</span>
+      </div>
+
+      <div class="mini-tile tile-ink">
+        <span class="mini-num js-tick" data-target="3">3</span>
+        <span class="mini-label">ISSUES DETECTED</span>
+        <span class="mini-sub" style="color:var(--lemon);">that thing you didn't fix yet? still broken.</span>
+      </div>
+    </div>
+
+    <div class="footnote">
+      <strong>NOTE</strong> &nbsp; this widget loads in &lt;180ms inside the
+      sitecore cloud portal dashboard surface. uses only the marketplace
+      sdk client for handshake. no auth0 ceremony. no full-stack ssr.
+      just numbers, big and angry.
+    </div>
+
+    <div style="margin-top:32px;text-align:center;">
+      <a href="index.html" class="btn">&larr; BACK TO INDEX</a>
+      &nbsp;
+      <a href="full-page.html" class="btn btn-primary">OPEN FULL PAGE &rarr;</a>
+    </div>
+
+    <div style="height:48px;"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

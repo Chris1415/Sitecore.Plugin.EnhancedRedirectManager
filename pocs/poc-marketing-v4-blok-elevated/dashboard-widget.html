@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard Widget · Redirect Manager (Blok Elevated)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        background:
+          radial-gradient(circle at 50% 0%, color-mix(in oklch, var(--primary) 10%, transparent), transparent 50%),
+          var(--background);
+        min-height: 100vh;
+        padding: 2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tone-toggle" data-theme-toggle role="group" aria-label="Theme">
+      <button class="tone-toggle__btn" data-theme="light" aria-pressed="false">Light</button>
+      <button class="tone-toggle__btn" data-theme="dark" aria-pressed="false">Dark</button>
+      <button class="tone-toggle__btn" data-theme="auto" aria-pressed="true">Auto</button>
+    </div>
+
+    <div style="text-align:center; max-width: 480px;">
+      <span class="eyebrow"><span class="dot"></span>Cloud Portal home · Dashboard tile</span>
+      <p style="color: var(--muted-foreground); font-size: var(--text-sm); margin: 0.75rem 0 0; line-height: 1.55;">
+        ~480px wide. Lives among other tiles in the operator's at-a-glance row. One number leads — everything else is calm context.
+      </p>
+    </div>
+
+    <!-- The widget -->
+    <div class="dw-shell">
+      <div class="dw-content">
+        <header class="dw-hd">
+          <div>
+            <h2>Redirect Manager</h2>
+            <p>SneakerCo · MainSite · EN</p>
+          </div>
+          <a href="full-page.html" class="blok-btn blok-btn--ghost blok-btn--sm">
+            Open
+            <span class="glyph"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+          </a>
+        </header>
+
+        <!-- Hero number — the marketing moment -->
+        <div class="dw-hero">
+          <div class="dw-hero__big">
+            <span data-count="12428" data-duration="1400">0</span>
+          </div>
+          <div class="dw-hero__sub">
+            <small>Active redirects</small>
+            <strong>+412 this week</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sparkline -->
+      <div class="dw-spark" aria-hidden="true">
+        <svg viewBox="0 0 480 60" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="dw-spark-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="currentColor" stop-opacity="0.30" />
+              <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <g style="color: var(--primary);">
+            <path class="fill" d="M0,42 L24,38 L48,40 L72,32 L96,34 L120,28 L144,30 L168,22 L192,26 L216,18 L240,24 L264,14 L288,18 L312,10 L336,16 L360,8 L384,12 L408,6 L432,10 L456,4 L480,8 L480,60 L0,60 Z" />
+            <path class="stroke" d="M0,42 L24,38 L48,40 L72,32 L96,34 L120,28 L144,30 L168,22 L192,26 L216,18 L240,24 L264,14 L288,18 L312,10 L336,16 L360,8 L384,12 L408,6 L432,10 L456,4 L480,8" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="dw-content" style="padding-top:0;">
+        <!-- Top destinations rows -->
+        <div class="dw-rows">
+          <div class="dw-row">
+            <span class="dw-row__name"><span class="swatch"></span>/products</span>
+            <span style="display:inline-flex; align-items:center; gap: 0.5rem;">
+              <span class="dw-row__bar"><span class="dw-row__bar-fill" data-bar-fill="88"></span></span>
+              <span class="dw-row__count">3,184</span>
+            </span>
+          </div>
+          <div class="dw-row">
+            <span class="dw-row__name"><span class="swatch" style="background: color-mix(in oklch, var(--primary) 50%, var(--info));"></span>/black-friday</span>
+            <span style="display:inline-flex; align-items:center; gap: 0.5rem;">
+              <span class="dw-row__bar"><span class="dw-row__bar-fill" data-bar-fill="62"></span></span>
+              <span class="dw-row__count">2,247</span>
+            </span>
+          </div>
+          <div class="dw-row">
+            <span class="dw-row__name"><span class="swatch" style="background: color-mix(in oklch, var(--primary) 30%, var(--info));"></span>/campaigns/promo</span>
+            <span style="display:inline-flex; align-items:center; gap: 0.5rem;">
+              <span class="dw-row__bar"><span class="dw-row__bar-fill" data-bar-fill="44"></span></span>
+              <span class="dw-row__count">1,602</span>
+            </span>
+          </div>
+          <div class="dw-row">
+            <span class="dw-row__name"><span class="swatch" style="background: var(--info);"></span>/sale</span>
+            <span style="display:inline-flex; align-items:center; gap: 0.5rem;">
+              <span class="dw-row__bar"><span class="dw-row__bar-fill" data-bar-fill="28"></span></span>
+              <span class="dw-row__count">1,011</span>
+            </span>
+          </div>
+          <div class="dw-row">
+            <span class="dw-row__name"><span class="swatch" style="background: color-mix(in oklch, var(--info) 60%, var(--success));"></span>/early-access</span>
+            <span style="display:inline-flex; align-items:center; gap: 0.5rem;">
+              <span class="dw-row__bar"><span class="dw-row__bar-fill" data-bar-fill="18"></span></span>
+              <span class="dw-row__count">638</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <footer class="dw-foot">
+        <span>Last publish 14m ago by Anna</span>
+        <span class="blok-badge blok-badge--success">
+          <span class="glyph"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></span>
+          all healthy
+        </span>
+      </footer>
+    </div>
+
+    <!-- Secondary mini-widget for compositional context -->
+    <div class="dw-shell" style="background: var(--card); box-shadow: var(--shadow-sm); ">
+      <div class="dw-content">
+        <header class="dw-hd" style="margin-bottom:0; border-bottom: 0; padding-bottom:0;">
+          <div>
+            <h2>Recently shipped</h2>
+            <p>Last 24 hours</p>
+          </div>
+          <span class="blok-badge blok-badge--info blok-badge--mono">+4</span>
+        </header>
+
+        <div style="display:flex; flex-direction: column; gap: 0.5rem; padding-top: 1rem;">
+          <div style="display:flex; align-items:center; gap: 0.625rem; padding: 0.5rem 0.625rem; border-radius: var(--radius-md); background: color-mix(in oklch, var(--card) 60%, transparent); border: 1px solid var(--border);">
+            <span class="status-pill status-pill--active"><span class="dot"></span>Active</span>
+            <span style="flex:1; font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--foreground); overflow:hidden; text-overflow:ellipsis; white-space: nowrap;">/old/products → /products</span>
+            <span class="http-code http-code--301">301</span>
+          </div>
+          <div style="display:flex; align-items:center; gap: 0.625rem; padding: 0.5rem 0.625rem; border-radius: var(--radius-md); background: color-mix(in oklch, var(--card) 60%, transparent); border: 1px solid var(--border);">
+            <span class="status-pill status-pill--active"><span class="dot"></span>Active</span>
+            <span style="flex:1; font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--foreground); overflow:hidden; text-overflow:ellipsis; white-space: nowrap;">/promo-legacy → /campaigns/promo</span>
+            <span class="http-code http-code--301">301</span>
+          </div>
+          <div style="display:flex; align-items:center; gap: 0.625rem; padding: 0.5rem 0.625rem; border-radius: var(--radius-md); background: color-mix(in oklch, var(--card) 60%, transparent); border: 1px solid var(--border);">
+            <span class="status-pill status-pill--active"><span class="dot"></span>Active</span>
+            <span style="flex:1; font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--foreground); overflow:hidden; text-overflow:ellipsis; white-space: nowrap;">/black-friday-2024 → /black-friday</span>
+            <span class="http-code http-code--301">301</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav style="display:flex; gap: 0.75rem; margin-top: 0.5rem; flex-wrap: wrap; justify-content: center;">
+      <a class="blok-btn blok-btn--ghost blok-btn--sm" href="index.html">← Overview</a>
+      <a class="blok-btn blok-btn--ghost blok-btn--sm" href="full-page.html">Full Page</a>
+      <a class="blok-btn blok-btn--ghost blok-btn--sm" href="context-panel.html">Context Panel</a>
+    </nav>
+
+    <script src="script.js"></script>
+  </body>
+</html>

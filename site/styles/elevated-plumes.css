@@ -1,0 +1,118 @@
+/* ============================================================================
+ * elevated-plumes.css — Full Page only motion utilities (PRD-002)
+ *
+ * Imported ONLY by Full Page route files (site/app/full-page/ or
+ * site/components/full-page/) per ADR-0027 + structural guard T044.
+ *
+ * Contains: drifting --primary / --info plume backdrop + kinetic letter-reveal
+ * @keyframes. ALL @keyframes blocks are paired with @media
+ * (prefers-reduced-motion: reduce) rules (structural guard T041 enforces).
+ *
+ * Zero #hex literals. No plume-unrelated utilities.
+ * ============================================================================ */
+
+/* ----------------------------------------------------------------------------
+ * Drifting plume backdrop — fixed; z-index: -1; below all content.
+ * Two large blurred radial-gradient discs translate slowly via @keyframes.
+ * Motion budget: 28s loop, ADR-0027 Full Page only.
+ * -------------------------------------------------------------------------- */
+
+.fp-plume-backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  overflow: hidden;
+}
+.fp-plume-backdrop::before,
+.fp-plume-backdrop::after {
+  content: "";
+  position: absolute;
+  width: 720px;
+  height: 720px;
+  border-radius: 50%;
+  filter: blur(var(--v4-plume-blur, 120px));
+  opacity: 0.55;
+  animation: fp-backdrop-drift var(--v4-plume-duration, 28s) var(--v4-plume-easing, cubic-bezier(0.4, 0, 0.2, 1)) infinite alternate;
+}
+.fp-plume-backdrop::before {
+  top: -180px;
+  left: -120px;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--primary) 18%, transparent) 0%,
+    transparent 70%
+  );
+}
+.fp-plume-backdrop::after {
+  bottom: -240px;
+  right: -180px;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklch, var(--info) 14%, transparent) 0%,
+    transparent 70%
+  );
+  animation-delay: -14s;
+}
+
+@keyframes fp-backdrop-drift {
+  0%   { transform: translate3d(0, 0, 0)        scale(1); }
+  100% { transform: translate3d(40px, -30px, 0) scale(1.08); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fp-plume-backdrop::before,
+  .fp-plume-backdrop::after {
+    animation: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Kinetic letter reveal — applied to Full Page workspace hero headline.
+ * Per-character stagger driven by useLetterReveal() React hook (span-split).
+ * The JS hook early-returns flat text under prefers-reduced-motion — so this
+ * @keyframes only fires when the browser allows motion.
+ * -------------------------------------------------------------------------- */
+
+@keyframes fp-letter-reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  /* The JS hook (useLetterReveal) early-returns flat text under reduced-motion
+   * so the staggered spans are never rendered. This block is a belt-and-
+   * suspenders safeguard in case the CSS fires without the JS gate. */
+  [data-letter-reveal] .letter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Hover-glow for the workspace hero zone.
+ * Full Page is the only surface that uses this deep glow effect
+ * (per ADR-0027 mixed motion budget).
+ * -------------------------------------------------------------------------- */
+
+.fp-hero-glow {
+  position: relative;
+}
+.fp-hero-glow::before {
+  content: "";
+  position: absolute;
+  inset: -2rem;
+  background: radial-gradient(
+    circle at 60% 40%,
+    color-mix(in oklch, var(--primary) 12%, transparent) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.7;
+}

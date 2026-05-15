@@ -29,6 +29,13 @@ This directory holds ADRs for this product workspace.
 | ADR-0021 | Copy-from create-version partial-failure rollback state machine | Superseded by ADR-0023 |
 | ADR-0022 | Picker-state `localStorage` key shape — v1 contract + future-migration namespace policy | Superseded by ADR-0023 |
 | ADR-0023 | Cancel PRD-001 multilingual — stock Redirect Map template `UrlMapping` is SHARED | Accepted |
+| ADR-0024 | V4 "Blok Elevated" as PRD-002 visual base; relaxed redesign rule (V4-aligned with reality validation) | Accepted |
+| ADR-0025 | Mock-data architecture — PREVIEW_DATA constants + PREVIEW_DATA_ACTIVE flags + per-surface "Preview data" banner | Accepted |
+| ADR-0026 | Context Panel inline quick-add replaces `AddRedirectModal` flow (US-2 → US-R5 interaction-pattern evolution) | Accepted |
+| ADR-0027 | Mixed motion budget — full V4 motion on Full Page; quieter on Context Panel and Dashboard Widget | Accepted |
+| ADR-0028 | Context Panel inline quick-add Option A locked — `AddRedirectModal` removed entirely | Accepted (amends ADR-0026) |
+| ADR-0029 | Context Panel `QuickRedirectForm` map-selection + RedirectType semantics | Accepted |
+| ADR-0030 | Full Page hero CTAs ("View activity" / "Publish all") are decorative in PRD-002 | Accepted |
 
 ## Next number
 

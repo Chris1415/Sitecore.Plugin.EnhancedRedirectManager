@@ -121,7 +121,10 @@ export function RedirectMapList({
     }
   };
 
-  if (status === "loading") {
+  // Show the skeleton ONLY on the first load (no maps yet). Subsequent refreshes
+  // keep the previous list visible — avoids the white-bar flash the operator
+  // flagged when clicking the Refresh button.
+  if (status === "loading" && maps.length === 0) {
     return (
       <div className="flex flex-col gap-2 p-2" aria-live="polite" aria-label="Loading redirect maps">
         {Array.from({ length: 5 }).map((_, i) => (
@@ -189,8 +192,8 @@ export function RedirectMapList({
               aria-selected={isSelected}
               tabIndex={0}
               className={[
-                "flex items-center justify-between gap-2 px-3 py-2.5 cursor-pointer",
-                "hover:bg-muted/50 focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+                "lr-row elev-card flex items-center justify-between gap-2 px-3 py-2.5 cursor-pointer",
+                "focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
                 "border-l-2 transition-colors",
                 isSelected
                   ? "border-l-primary bg-muted/40"
@@ -199,9 +202,11 @@ export function RedirectMapList({
               onClick={() => onSelect(map)}
               onKeyDown={(e) => handleKeyDown(e, index, map)}
             >
-              <div className="flex flex-col min-w-0">
-                <span className="text-sm font-medium truncate">{map.name}</span>
-                <span className="text-xs text-muted-foreground font-mono">
+              {/* Left-rail dot — single static --primary color (no --draft variant per ADR-0024) */}
+              <span className="lr-row__dot" aria-hidden="true" />
+              <div className="lr-row__main flex flex-col min-w-0 flex-1">
+                <span className="lr-row__name text-sm font-medium truncate">{map.name}</span>
+                <span className="lr-row__meta text-xs text-muted-foreground font-mono">
                   {map.mappings.length} {map.mappings.length === 1 ? "mapping" : "mappings"}{" "}
                   &middot; {formatUpdatedAt(map.updatedAt)}
                 </span>

@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Part I. The Full Page — Redirect Manager</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="full">
+
+<div class="shell">
+
+  <!-- ============== TOPBAR ============== -->
+  <header class="topbar">
+    <div class="brand">Redirect <em>Manager</em></div>
+    <div class="meta">Part I &nbsp;&middot;&nbsp; The Full Page &nbsp;&middot;&nbsp; <span style="color:var(--accent)">pages 4–17</span></div>
+    <nav class="nav">
+      <a href="index.html" data-transition>Index</a>
+      <a href="context-panel.html" data-transition>Panel</a>
+      <a href="dashboard-widget.html" data-transition>Widget</a>
+    </nav>
+  </header>
+
+  <!-- ============== PAGE HEAD ============== -->
+  <section class="page-head">
+    <div class="h-no">
+      <p class="label label-accent" style="margin-bottom: 8px;">Part one</p>
+      <p>— pages 4–17 —</p>
+    </div>
+    <h1 class="h-title kinetic kinetic-onload">The <em>archive,</em> in entries.</h1>
+  </section>
+
+  <!-- ============== INTRO SPREAD ============== -->
+  <section class="spread">
+    <aside class="side-cap">
+      <p class="label label-accent">A note on the work</p>
+      <p style="margin-top: 14px;">
+        Each entry below is a redirect map — a small piece of editorial
+        work performed against the web of an XM Cloud tenant. They are
+        arranged chronologically, most recent first, and may be opened,
+        amended, retired.
+      </p>
+    </aside>
+    <div class="body">
+      <p class="body-prose dropcap">
+        <span style="font-style: normal;">T</span>here is a particular
+        kind of patience required to maintain a redirect map. The pages
+        move; the URLs do not; or rather, they must be persuaded to
+        follow. What you read here is the record of that persuasion —
+        each map a small letter from one URL to the next, asking the
+        reader to come along.
+      </p>
+
+      <div style="margin-top: 48px; display:flex; gap: 24px;">
+        <a href="#" class="btn">New map</a>
+        <a href="#" class="btn btn-ghost">Import from CSV</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== PULL STAT ============== -->
+  <section style="padding: 96px 0; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; gap: 0 24px;">
+    <div style="grid-column: 1 / 5;" class="reveal">
+      <p class="label label-accent">By the numbers</p>
+      <p style="font-family: var(--serif); font-style: italic; font-weight: 300; font-size: 22px; line-height: 1.4; color: var(--ink-soft); margin-top: 16px;">
+        In the last quarter the team composed twelve hundred and
+        forty-seven redirects — the equivalent, by careful estimate,
+        of a small novel.
+      </p>
+    </div>
+    <div style="grid-column: 6 / -1;">
+      <div class="stat-pull reveal">1,247</div>
+      <div class="stat-pull-cap">— Twelve hundred and forty-seven redirects, in three months</div>
+    </div>
+  </section>
+
+  <!-- ============== ENTRIES ============== -->
+  <section class="spread">
+    <aside class="side-cap">
+      <p class="label label-accent">The entries</p>
+      <p style="margin-top: 14px;">
+        <em>Twelve maps presently in rotation.</em> Newest first.
+        Click an entry to open the editor. Strike out to retire.
+      </p>
+    </aside>
+    <div class="body">
+      <div class="entries">
+
+        <article class="entry reveal">
+          <div class="e-folio">1.</div>
+          <div>
+            <h3 class="e-title">On migrating <em>legacy press</em>.</h3>
+            <p class="caption" style="margin-top: 6px;">— the 14th, this month</p>
+          </div>
+          <div class="e-meta">
+            <span class="where">Press &amp; Newsroom</span>
+            218 mappings &nbsp;·&nbsp; 301
+            <span class="urls">/press/2019/* → /newsroom/archive/2019/*</span>
+          </div>
+          <div class="e-status"><span class="dot"></span>Active</div>
+        </article>
+
+        <article class="entry reveal">
+          <div class="e-folio">2.</div>
+          <div>
+            <h3 class="e-title">The <em>Q1 shuffle</em>.</h3>
+            <p class="caption" style="margin-top: 6px;">— early in March</p>
+          </div>
+          <div class="e-meta">
+            <span class="where">Marketing — Solutions</span>
+            64 mappings &nbsp;·&nbsp; 301
+            <span class="urls">/solutions/old/* → /solutions/2026/*</span>
+          </div>
+          <div class="e-status"><span class="dot"></span>Active</div>
+        </article>
+
+        <article class="entry reveal">
+          <div class="e-folio">3.</div>
+          <div>
+            <h3 class="e-title">After the <em>Black Friday surge</em>.</h3>
+            <p class="caption" style="margin-top: 6px;">— last November</p>
+          </div>
+          <div class="e-meta">
+            <span class="where">Commerce — Promotions</span>
+            38 mappings &nbsp;·&nbsp; 302, then 301
+            <span class="urls">/bf24/* → /promotions/black-friday</span>
+          </div>
+          <div class="e-status" style="color: var(--ink-soft);"><span class="dot" style="background: #aaa;"></span>Retired</div>
+        </article>
+
+        <article class="entry reveal">
+          <div class="e-folio">4.</div>
+          <div>
+            <h3 class="e-title">The <em>careful renaming</em> of products.</h3>
+            <p class="caption" style="margin-top: 6px;">— summer 2024</p>
+          </div>
+          <div class="e-meta">
+            <span class="where">Product Catalog</span>
+            412 mappings &nbsp;·&nbsp; 301
+            <span class="urls">/products/cms-* → /products/content/*</span>
+          </div>
+          <div class="e-status"><span class="dot"></span>Active</div>
+        </article>
+
+        <article class="entry reveal">
+          <div class="e-folio">5.</div>
+          <div>
+            <h3 class="e-title">For the <em>European launch</em>.</h3>
+            <p class="caption" style="margin-top: 6px;">— last Tuesday</p>
+          </div>
+          <div class="e-meta">
+            <span class="where">EU Site Collection</span>
+            96 mappings &nbsp;·&nbsp; 301
+            <span class="urls">/eu/* → /en-eu/* (and 5 locales)</span>
+          </div>
+          <div class="e-status"><span class="dot"></span>Active</div>
+        </article>
+
+        <article class="entry reveal">
+          <div class="e-folio">6.</div>
+          <div>
+            <h3 class="e-title">On <em>folding the blog</em> into the journal.</h3>
+            <p class="caption" style="margin-top: 6px;">— the 2nd, this month</p>
+          </div>
+          <div class="e-meta">
+            <span class="where">Editorial — Blog</span>
+            287 mappings &nbsp;·&nbsp; 301
+            <span class="urls">/blog/* → /journal/* (preserved slugs)</span>
+          </div>
+          <div class="e-status"><span class="dot"></span>Active</div>
+        </article>
+
+        <article class="entry reveal">
+          <div class="e-folio">7.</div>
+          <div>
+            <h3 class="e-title">A <em>letter to the support center</em>.</h3>
+            <p class="caption" style="margin-top: 6px;">— a fortnight ago</p>
+          </div>
+          <div class="e-meta">
+            <span class="where">Help &amp; Support</span>
+            132 mappings &nbsp;·&nbsp; 301
+            <span class="urls">/support/kb/* → /help/articles/*</span>
+          </div>
+          <div class="e-status"><span class="dot"></span>Active</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== PULL QUOTE ============== -->
+  <section style="padding: 120px 0; border-top: 1px solid var(--rule); display:grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; gap: 0 24px;">
+    <p class="label" style="grid-column: 1 / 3;">Pull quote &nbsp;&middot;&nbsp; pg. 11</p>
+    <blockquote class="pullquote" style="grid-column: 4 / 12;">
+      A redirect is the <span class="accent">quiet handshake</span>
+      a website performs with its own past.
+    </blockquote>
+  </section>
+
+  <!-- ============== A SHORT ESSAY ============== -->
+  <section class="spread">
+    <aside class="side-cap">
+      <p class="label label-accent">On 301 versus 302</p>
+      <p style="margin-top: 14px;">
+        The difference is small, in characters; large, in meaning.
+        One says <em>here, forever</em>. The other says <em>here, for now</em>.
+      </p>
+    </aside>
+    <div class="body">
+      <p class="body-prose dropcap">
+        We have, in this office, a strong preference for the 301.
+        It speaks plainly. It tells the browser to update its records
+        and not return; it tells the search engine to transfer its
+        accumulated favor; it tells the visitor nothing at all, which
+        is exactly the point. The 302 is for hesitation — for the
+        promotion you will end, the page you will revive, the season
+        that will pass.
+      </p>
+      <p class="body-prose">
+        Choose your verb tense, then, with care. Most of what looks
+        like indecision in the redirect manager turns out, on
+        inspection, to be indecision in the editorial mind that
+        commissioned it. The redirect is merely the receipt.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============== NEXT PART CTA ============== -->
+  <section style="padding: 96px 0; border-top: 1px solid var(--rule); text-align: center;">
+    <p class="label">— end of part one —</p>
+    <h2 style="font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(36px, 4vw, 56px); line-height: 1.15; max-width: 22ch; margin: 32px auto 40px; color: var(--ink);">
+      To the panel, where the work continues quietly.
+    </h2>
+    <a href="context-panel.html" class="btn" data-transition>Continue to part two</a>
+  </section>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="footer">
+    <div class="colophon">
+      Part I &nbsp;&middot;&nbsp; <em>The Full Page</em> — composed in
+      Fraunces &amp; Inter, set wide for the editorial reader.
+    </div>
+    <div>
+      <h5>This part</h5>
+      <ul>
+        <li>The archive</li>
+        <li>By the numbers</li>
+        <li>On 301 vs 302</li>
+      </ul>
+    </div>
+    <div>
+      <h5>Next</h5>
+      <ul>
+        <li><a href="context-panel.html" data-transition>II. The Panel</a></li>
+        <li><a href="dashboard-widget.html" data-transition>III. The Widget</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Masthead</h5>
+      <ul>
+        <li>Sitecore Marketplace</li>
+        <li>Vol. I &nbsp;·&nbsp; MMXXVI</li>
+        <li><a href="index.html" data-transition>Return to index</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -71,7 +71,7 @@ export function DeleteMapConfirmModal({
 
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent>
+      <AlertDialogContent className="elev-glass-surface elev-modal-content">
         <AlertDialogHeader>
           <AlertDialogTitle>Delete this redirect map?</AlertDialogTitle>
           <AlertDialogDescription>

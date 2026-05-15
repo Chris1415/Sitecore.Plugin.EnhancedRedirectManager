@@ -49,6 +49,7 @@ interface WireItem {
   PreserveLanguage?: WireFieldValue
   UrlMapping?: WireFieldValue
   __Updated?: WireFieldValue
+  __UpdatedBy?: WireFieldValue
 }
 
 /** Wire shape for the full Authoring GraphQL children response.
@@ -145,6 +146,7 @@ function decodeWireItem(wire: WireItem): RedirectMapItem | null {
   const redirectType = (wire.RedirectType?.value ??
     "ServerTransfer") as RedirectType
   const updatedAt = wire.__Updated?.value ?? ""
+  const updatedBy = wire.__UpdatedBy?.value ?? ""
 
   return {
     id: wire.itemId,
@@ -154,6 +156,7 @@ function decodeWireItem(wire: WireItem): RedirectMapItem | null {
     preserveLanguage: parseBoolField(wire.PreserveLanguage),
     includeVirtualFolder: parseBoolField(wire.IncludeVirtualFolder),
     updatedAt,
+    updatedBy,
     mappings,
   }
 }
@@ -193,6 +196,7 @@ export const GET_REDIRECTS_FOR_SITE = `
           PreserveLanguage:     field(name: "PreserveLanguage")     { value }
           UrlMapping:           field(name: "UrlMapping")           { value }
           __Updated:            field(name: "__Updated")            { value }
+          __UpdatedBy:          field(name: "__Updated by")         { value }
         }
       }
     }

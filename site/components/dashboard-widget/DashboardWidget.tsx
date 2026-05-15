@@ -1,5 +1,25 @@
 /**
- * DashboardWidget — per-site stats with picker fallback.
+ * DashboardWidget — V4 redesign (T036).
+ *
+ * V4 composition order:
+ *   1. <PreviewDataBanner surface="dashboardWidget" /> — at top (AC-R3.7)
+ *   2. Widget header: utility-voice h2 + site meta + Open ghost button
+ *   3. <DashboardHero /> — marketing subhead + hero count-up + delta (MOCK)
+ *   4. <Sparkline /> — gradient SVG sparkline (MOCK)
+ *   5. 3 real stat tiles (Maps / Mappings / Last-updated) + 4th mock tile from
+ *      <RecentlyShippedTile /> — in a 2×2 .dw-tiles grid
+ *   6. <TopDestinations /> — 5 mock rows
+ *   7. <RecentlyShipped /> — 3 mock rows mini-widget
+ *   8. Footer attribution: "Last publish N ago by Author" + <HealthBadge /> (MOCK)
+ *
+ * Deleted: FootnoteSeparated "Redirect counts only..." line (AC-R3.7 / ADR-0025 —
+ *   consolidated into the PreviewDataBanner; T036 explicitly removes it).
+ *
+ * Real tiles (Maps / Mappings / Last-updated): carry V4 chrome via StatTile
+ *   (which now uses .dw-tile). They do NOT carry data-preview-mock.
+ *
+ * Existing site-selection logic (discoverSites, fetchForSite, handleSiteChange,
+ *   detectSiteFromHostContext, localStorage, aggregateStats) all carry unchanged.
  *
  * Cloud Portal embeds the widget on a site dashboard page, but the iframe
  * URL and the @sitecore-marketplace-sdk ApplicationContext do NOT expose
@@ -10,19 +30,6 @@
  *   - If only one site exists in the tenant → auto-selected.
  *   - If the operator has picked before → restore from localStorage.
  *   - Otherwise → small dropdown in the header so they can switch any time.
- *
- * Stats (for the selected site):
- *   - Maps        = count of Redirect Map items
- *   - Mappings    = sum of .mappings.length across maps
- *   - Last updated = max __Updated across maps, formatted relative/absolute
- *
- * States: loading / default / empty / error / no-site-picked.
- *
- * Footnote (verbatim per PRD US-4 AC):
- *   "Redirect counts only — usage analytics ship in a follow-on release."
- *
- * Accessibility (T034): section aria-label, per-tile article aria-label,
- * aria-live regions for state announcements.
  */
 
 "use client";
@@ -35,7 +42,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { Badge } from "@/components/ui/badge";
 import {
   Select,
   SelectContent,
@@ -44,11 +50,27 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { StatTile } from "@/components/dashboard-widget/StatTile";
+import { DashboardHero } from "@/components/dashboard-widget/DashboardHero";
+import { Sparkline } from "@/components/dashboard-widget/Sparkline";
+import { TopDestinations } from "@/components/dashboard-widget/TopDestinations";
+import { RecentlyShipped } from "@/components/dashboard-widget/RecentlyShipped";
+import { HealthBadge } from "@/components/dashboard-widget/HealthBadge";
+import { CollisionsBadge } from "@/components/dashboard-widget/CollisionsBadge";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { listRedirectMaps } from "@/lib/sdk/redirects-read";
 import { listSites, listCollections } from "@/lib/sdk/sites";
 import { parseSitecoreCompactDate } from "@/lib/domain/sitecore-date";
-import { ArrowLeftRight, Clock, Map as MapIcon } from "lucide-react";
+import {
+  ArrowLeftRight,
+  BarChart3,
+  Clock,
+  Crown,
+  Lock,
+  Map as MapIcon,
+  RefreshCw,
+  Server,
+  Timer,
+} from "lucide-react";
 import type { ClientSDK } from "@/lib/sdk/types";
 import type { RedirectMapItem } from "@/lib/domain/types";
 
@@ -170,14 +192,65 @@ function formatLastUpdated(date: Date): string {
   }).format(date);
 }
 
+/** A condensed row used by the RecentlyShipped section (real data, top N most recent). */
+export interface RecentMap {
+  id: string;
+  name: string;
+  redirectType: RedirectMapItem["redirectType"];
+  updatedAt: string;
+  mappingCount: number;
+}
+
 /** Aggregate stats from a set of maps. */
 export function aggregateStats(maps: RedirectMapItem[]): {
   totalMaps: number;
   totalMappings: number;
   lastUpdated: string;
+  count301: number;
+  count302: number;
+  countServerTransfer: number;
+  avgMappingsPerMap: number;
+  largestMapMappings: number;
+  collisionCount: number;
+  recentMaps: RecentMap[];
 } {
   const totalMaps = maps.length;
   const totalMappings = maps.reduce((sum, m) => sum + m.mappings.length, 0);
+
+  // Mappings counted by their parent map's redirectType. Each map has ONE type
+  // that applies to all its mappings (PRD-000 + ADR-0003).
+  let count301 = 0;
+  let count302 = 0;
+  let countServerTransfer = 0;
+  let largestMapMappings = 0;
+  for (const map of maps) {
+    const n = map.mappings.length;
+    if (map.redirectType === "Redirect301") count301 += n;
+    else if (map.redirectType === "Redirect302") count302 += n;
+    else if (map.redirectType === "ServerTransfer") countServerTransfer += n;
+    if (n > largestMapMappings) largestMapMappings = n;
+  }
+
+  // Average mappings per map — rounded to one decimal place. Zero when no maps.
+  const avgMappingsPerMap =
+    totalMaps > 0 ? Math.round((totalMappings / totalMaps) * 10) / 10 : 0;
+
+  // Collision count — a collision is two mappings (in any map) that share the
+  // SAME source URL. We count the EXTRA copies past the first occurrence so a
+  // source repeated 3 times reports as 2 collisions. Empty-string sources are
+  // ignored to avoid noise from in-progress edits in the wild.
+  const sourceCounts = new Map<string, number>();
+  for (const map of maps) {
+    for (const mapping of map.mappings) {
+      const src = (mapping.source ?? "").trim().toLowerCase();
+      if (!src) continue;
+      sourceCounts.set(src, (sourceCounts.get(src) ?? 0) + 1);
+    }
+  }
+  let collisionCount = 0;
+  for (const n of sourceCounts.values()) {
+    if (n > 1) collisionCount += n - 1;
+  }
 
   let latestDate: Date | null = null;
   for (const map of maps) {
@@ -188,7 +261,38 @@ export function aggregateStats(maps: RedirectMapItem[]): {
     }
   }
   const lastUpdated = latestDate ? formatLastUpdated(latestDate) : "—";
-  return { totalMaps, totalMappings, lastUpdated };
+
+  // Top 4 maps by most recent updatedAt (descending). Maps without a parseable
+  // updatedAt sink to the end. We can only show map-level recency — there is no
+  // per-mapping updatedAt on the stock Sitecore template.
+  const recentMaps: RecentMap[] = [...maps]
+    .filter((m) => m.id && m.name && m.updatedAt)
+    .sort((a, b) => {
+      const da = parseSitecoreCompactDate(a.updatedAt)?.getTime() ?? 0;
+      const db = parseSitecoreCompactDate(b.updatedAt)?.getTime() ?? 0;
+      return db - da;
+    })
+    .slice(0, 4)
+    .map((m) => ({
+      id: m.id,
+      name: m.name,
+      redirectType: m.redirectType,
+      updatedAt: m.updatedAt,
+      mappingCount: m.mappings.length,
+    }));
+
+  return {
+    totalMaps,
+    totalMappings,
+    lastUpdated,
+    count301,
+    count302,
+    countServerTransfer,
+    avgMappingsPerMap,
+    largestMapMappings,
+    collisionCount,
+    recentMaps,
+  };
 }
 
 export function DashboardWidget({
@@ -204,6 +308,13 @@ export function DashboardWidget({
     totalMaps: number;
     totalMappings: number;
     lastUpdated: string;
+    count301: number;
+    count302: number;
+    countServerTransfer: number;
+    avgMappingsPerMap: number;
+    largestMapMappings: number;
+    collisionCount: number;
+    recentMaps: RecentMap[];
   } | null>(null);
 
   // Step 1: discover sites + collections, derive site options, auto-select if 1 site
@@ -310,6 +421,19 @@ export function DashboardWidget({
     setSelectedSiteId(nextId);
   }
 
+  // Refresh: incrementing this key remounts the entire .dw-wide-zone subtree,
+  // restarting count-ups, sparkline reveal, bar-fill animations, and the
+  // recently-shipped relative-time labels — alongside refetching real data.
+  const [refreshKey, setRefreshKey] = useState(0);
+  function handleRefresh() {
+    setRefreshKey((k) => k + 1);
+    if (selectedSite) {
+      void fetchForSite();
+    } else {
+      void discoverSites();
+    }
+  }
+
   const showPicker = siteOptions.length > 1;
 
   return (
@@ -319,7 +443,7 @@ export function DashboardWidget({
           ? `Redirects summary for ${selectedSite.name}`
           : "Redirects summary"
       }
-      className="flex flex-col gap-3 rounded-md border bg-card p-3 shadow-sm"
+      className="dw-shell"
     >
       {/* Loading announcement */}
       <div role="status" aria-live="polite" aria-atomic="true" className="sr-only">
@@ -329,128 +453,189 @@ export function DashboardWidget({
         {status === "empty" ? "No redirects configured." : ""}
       </div>
 
-      {/* Header */}
-      <header className="flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2 min-w-0">
-          <h2 className="text-base font-semibold shrink-0">Redirects</h2>
-          {selectedSite && !showPicker && (
-            <Badge colorScheme="neutral" size="sm" className="font-normal truncate">
-              {selectedSite.name}
-            </Badge>
-          )}
-        </div>
-        <div className="flex items-center gap-2 shrink-0">
-          {showPicker && (
-            <Select
-              value={selectedSiteId ?? ""}
-              onValueChange={handleSiteChange}
-            >
-              <SelectTrigger
-                className="h-7 text-xs w-[160px]"
-                aria-label="Pick a site"
+      {/* Header (utility voice) — HealthBadge moved here from the dropped
+          .dw-foot footer (operator polish 2026-05-15). The previous footer
+          duplicated 'Last updated' which now lives in the tiles grid. */}
+      <div className="dw-content" style={{ paddingBottom: 0 }}>
+        <header className="dw-hd">
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap" }}>
+            <h2>Redirect Manager</h2>
+            {/* Badge cluster keyed on refreshKey: remounts on every refresh so
+                both badges replay their CSS entrance animation alongside the
+                wide-zone re-animation below. */}
+            <div key={`badges-${refreshKey}`} className="dw-badge-cluster" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+              <HealthBadge />
+              <CollisionsBadge collisionCount={stats?.collisionCount ?? 0} />
+            </div>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            {selectedSite && (
+              <p style={{ fontSize: "var(--text-2xs)", color: "var(--muted-foreground)", margin: 0, fontFamily: "var(--font-mono)" }}>
+                {selectedSite.name}
+              </p>
+            )}
+            {showPicker && (
+              <Select
+                value={selectedSiteId ?? ""}
+                onValueChange={handleSiteChange}
               >
-                <SelectValue placeholder="Pick a site" />
-              </SelectTrigger>
-              <SelectContent align="end">
-                {siteOptions.map((o) => (
-                  <SelectItem key={o.id} value={o.id} className="text-xs">
-                    {o.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          )}
-          <ThemeSwitcher />
+                <SelectTrigger
+                  className="h-7 text-xs w-[160px]"
+                  aria-label="Pick a site"
+                >
+                  <SelectValue placeholder="Pick a site" />
+                </SelectTrigger>
+                <SelectContent align="end">
+                  {siteOptions.map((o) => (
+                    <SelectItem key={o.id} value={o.id} className="text-xs">
+                      {o.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-7 w-7"
+              onClick={handleRefresh}
+              disabled={status === "loading" || status === "discovering"}
+              aria-label="Refresh redirect counts"
+              title="Refresh"
+            >
+              <RefreshCw
+                className={`h-3.5 w-3.5 ${
+                  status === "loading" || status === "discovering" ? "animate-spin" : ""
+                }`}
+              />
+            </Button>
+            <ThemeSwitcher />
+          </div>
+        </header>
+      </div>
+
+      {/* Wide-zone: 3 columns at ≥960px (hero | tiles | lists); stacked below.
+          Keyed on refreshKey: clicking the header refresh button remounts this
+          subtree so every animation (count-ups, sparkline reveal, bar fills,
+          relative-time labels) restarts together with the data fetch. */}
+      <div key={refreshKey} className="dw-wide-zone">
+        {/* Column 1 — overall numbers: marketing hero (D5 zone b) + sparkline */}
+        <div className="dw-wide-zone__col dw-wide-zone__col--hero">
+          <DashboardHero />
+          <Sparkline />
         </div>
-      </header>
 
-      {/* Discovering — initial sites lookup */}
-      {status === "discovering" && <LoadingTiles />}
+        {/* Column 2 — 4 stat tiles (or loading / empty / error in their place).
+            LoadingTiles only shows during the FIRST load (stats is null). On
+            subsequent refreshes the existing tiles stay visible and re-animate
+            via the keyed remount of the wide-zone, so the operator doesn't see
+            a skeleton flash that reads as "white bars". */}
+        <div className="dw-wide-zone__col dw-wide-zone__col--tiles">
+          {(status === "discovering" || status === "loading") && !stats && <LoadingTiles />}
 
-      {/* No site picked yet (multi-site tenant) */}
-      {status === "no-site-picked" && (
-        <>
-          <div className="py-4 text-center">
-            <p className="text-sm text-muted-foreground">
-              Pick a site from the top-right dropdown to see its redirects.
-            </p>
-          </div>
-          <FootnoteSeparated />
-        </>
-      )}
+          {status === "no-site-picked" && (
+            <div className="py-4 text-center">
+              <p className="text-sm text-muted-foreground">
+                Pick a site from the top-right dropdown to see its redirects.
+              </p>
+            </div>
+          )}
 
-      {/* Per-site data loading */}
-      {status === "loading" && <LoadingTiles />}
-
-      {/* Error */}
-      {status === "error" && (
-        <>
-          <ErrorDisplay
-            error={error ?? "Unknown error"}
-            expanded={errorExpanded}
-            onToggleExpanded={() => setErrorExpanded((v) => !v)}
-            onRetry={selectedSite ? fetchForSite : discoverSites}
-          />
-          <FootnoteSeparated />
-        </>
-      )}
-
-      {/* Empty: site found but no redirect maps, OR no sites at all */}
-      {status === "empty" && (
-        <>
-          <div className="py-4 text-center">
-            <p className="text-sm text-muted-foreground">
-              {siteOptions.length === 0
-                ? "No sites found in this tenant."
-                : `No redirects configured for ${selectedSite?.name ?? "this site"}.`}
-            </p>
-          </div>
-          <FootnoteSeparated />
-        </>
-      )}
-
-      {/* Default: tiles */}
-      {status === "default" && stats && (
-        <>
-          <div className="flex items-stretch divide-x divide-border rounded-md border border-border bg-background/40">
-            <StatTile
-              label="Maps"
-              value={stats.totalMaps}
-              icon={MapIcon}
-              ariaLabel={`${stats.totalMaps} redirect maps`}
+          {status === "error" && (
+            <ErrorDisplay
+              error={error ?? "Unknown error"}
+              expanded={errorExpanded}
+              onToggleExpanded={() => setErrorExpanded((v) => !v)}
+              onRetry={selectedSite ? fetchForSite : discoverSites}
             />
-            <StatTile
-              label="Mappings"
-              value={stats.totalMappings}
-              icon={ArrowLeftRight}
-              ariaLabel={`${stats.totalMappings} total mappings`}
-            />
-            <StatTile
-              label="Last updated"
-              value={stats.lastUpdated}
-              icon={Clock}
-              ariaLabel={`Last updated ${stats.lastUpdated}`}
-            />
-          </div>
-          <FootnoteSeparated />
-        </>
-      )}
+          )}
+
+          {status === "empty" && (
+            <div className="py-4 text-center">
+              <p className="text-sm text-muted-foreground">
+                {siteOptions.length === 0
+                  ? "No sites found in this tenant."
+                  : `No redirects configured for ${selectedSite?.name ?? "this site"}.`}
+              </p>
+            </div>
+          )}
+
+          {status === "default" && stats && (
+            <div className="dw-tiles">
+              <StatTile
+                label="Maps"
+                value={stats.totalMaps}
+                icon={MapIcon}
+                ariaLabel={`${stats.totalMaps} redirect maps`}
+              />
+              <StatTile
+                label="Mappings"
+                value={stats.totalMappings}
+                icon={ArrowLeftRight}
+                ariaLabel={`${stats.totalMappings} total mappings`}
+              />
+              <StatTile
+                label="301 Permanent"
+                value={stats.count301}
+                icon={Lock}
+                ariaLabel={`${stats.count301} permanent (301) redirects`}
+              />
+              <StatTile
+                label="302 Temporary"
+                value={stats.count302}
+                icon={Timer}
+                ariaLabel={`${stats.count302} temporary (302) redirects`}
+              />
+              <StatTile
+                label="Server Transfer"
+                value={stats.countServerTransfer}
+                icon={Server}
+                ariaLabel={`${stats.countServerTransfer} server transfer redirects`}
+              />
+              <StatTile
+                label="Avg / map"
+                value={stats.avgMappingsPerMap}
+                icon={BarChart3}
+                ariaLabel={`Average ${stats.avgMappingsPerMap} mappings per map`}
+              />
+              <StatTile
+                label="Largest map"
+                value={stats.largestMapMappings}
+                icon={Crown}
+                ariaLabel={`Largest map has ${stats.largestMapMappings} mappings`}
+              />
+              <StatTile
+                label="Last updated"
+                value={stats.lastUpdated}
+                icon={Clock}
+                ariaLabel={`Last updated ${stats.lastUpdated}`}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Column 3 — Top destinations (MOCK) + Recently shipped maps (REAL).
+            RecentlyShipped uses real stats.recentMaps when available; otherwise
+            renders nothing (it self-handles the empty/undefined state). */}
+        <div className="dw-wide-zone__col dw-wide-zone__col--lists">
+          <TopDestinations />
+          <RecentlyShipped recentMaps={stats?.recentMaps ?? []} />
+        </div>
+      </div>
+
     </section>
   );
 }
 
 function LoadingTiles() {
+  // 8 skeletons: Maps, Mappings, 301, 302, Server Transfer, Avg/map,
+  // Largest map, Last updated
   return (
-    <div className="flex items-stretch rounded-md border border-border bg-background/40">
-      {[0, 1, 2].map((i) => (
-        <div
-          key={i}
-          className={`flex flex-1 flex-col items-center justify-center gap-2 py-3 ${
-            i < 2 ? "border-r border-border" : ""
-          }`}
-        >
+    <div className="dw-tiles">
+      {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+        <div key={i} className="dw-tile">
           <Skeleton className="h-7 w-12" />
-          <Skeleton className="h-3 w-14" />
+          <Skeleton className="h-3 w-14 mt-1" />
         </div>
       ))}
     </div>
@@ -496,13 +681,5 @@ function ErrorDisplay({
         </div>
       </div>
     </div>
-  );
-}
-
-function FootnoteSeparated() {
-  return (
-    <p className="text-[11px] text-muted-foreground pt-2 mt-1 border-t border-border">
-      Redirect counts only — usage analytics ship in a follow-on release.
-    </p>
   );
 }

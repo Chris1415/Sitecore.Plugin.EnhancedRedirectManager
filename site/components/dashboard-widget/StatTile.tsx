@@ -1,14 +1,22 @@
 /**
- * StatTile — dashboard widget stat tile.
+ * StatTile — dashboard widget stat tile with V4 chrome (T037).
  *
- * Equal-width, centred, non-interactive (per § 4c-4).
- * Numeric values render large in font-mono; text values (e.g. "1 hour ago"
- * or a formatted date) render at a smaller size so they don't wrap.
+ * Applied V4 chrome: .dw-tile class from surfaces.css for hover-lift + border.
+ * Tabular-num typography via .dw-tile__value class.
+ * Count-up on numeric values via useCountUp hook from T011.
+ * String values (e.g. "1 hour ago") degrade gracefully — no count-up.
+ *
+ * Real-data tiles (Maps / Mappings / Last-updated) from aggregateStats:
+ *   - do NOT carry data-preview-mock
+ *   - props unchanged from PRD-000
  *
  * Each tile is <article> with aria-label per T034 a11y spec.
  */
 
+"use client";
+
 import type { LucideIcon } from "lucide-react";
+import { useCountUp } from "@/hooks/use-count-up";
 
 interface StatTileProps {
   label: string;
@@ -19,25 +27,36 @@ interface StatTileProps {
   ariaLabel: string;
 }
 
+function NumericValue({ value }: { value: number }) {
+  const animated = useCountUp(value, { duration: 900 });
+  return (
+    <span className="dw-tile__value" title={String(value)}>
+      {animated}
+    </span>
+  );
+}
+
 export function StatTile({ label, value, icon: Icon, ariaLabel }: StatTileProps) {
   const isNumeric = typeof value === "number";
+
   return (
     <article
       aria-label={ariaLabel}
-      className="flex flex-1 flex-col items-center justify-center gap-1 py-3 px-2 text-center min-w-0"
+      className="dw-tile"
     >
-      <span
-        className={
-          isNumeric
-            ? "font-mono text-3xl font-semibold tabular-nums leading-none text-foreground"
-            : "text-base font-semibold leading-tight text-foreground whitespace-nowrap"
-        }
-        title={String(value)}
-      >
-        {value}
-      </span>
-      <span className="flex items-center gap-1 text-[11px] uppercase tracking-wide text-muted-foreground">
-        {Icon ? <Icon className="h-3 w-3" aria-hidden="true" /> : null}
+      {isNumeric ? (
+        <NumericValue value={value as number} />
+      ) : (
+        <span
+          className="dw-tile__value"
+          style={{ fontSize: "1rem", lineHeight: "1.4" }}
+          title={String(value)}
+        >
+          {value}
+        </span>
+      )}
+      <span className="dw-tile__label">
+        {Icon ? <Icon className="h-3 w-3 inline mr-1" aria-hidden="true" /> : null}
         {label}
       </span>
     </article>

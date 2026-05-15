@@ -1,18 +1,13 @@
 /**
- * EditMapSettingsModal — Tranche 4 fix-up #2
+ * EditMapSettingsModal — Tranche 4 fix-up #2 + T030 V4 re-skin (Epic E, T4)
  *
  * Operator-facing modal for editing the MAP-LEVEL attributes of an existing
  * Redirect Map (name, RedirectType, 3 boolean flags). Mappings themselves are
- * not touched here — they are edited inline via the accordion body in
- * MatchedMapGroup. The save handler preserves the existing mappings array
- * untouched.
+ * not touched here — they are edited inline via MatchedMapGroup rows.
  *
- * Design parity with AddRedirectModal's CreateNewStep — same field controls and
- * Blok components, minus the direction tabs and "first mapping" inputs.
- *
- * WRITE NOTE: depends on updateRedirectMap (lib/sdk/redirects-write.ts). The
- * boolean field encoding ("1"/"0") and RedirectType wire-enum names remain
- * assumed pending the Tranche 6 capture.
+ * V4 update (T030): .elev-glass-surface applied to dialog shell.
+ * Title remains utility voice per ADR-0029 D5.
+ * Form logic + validation + updateRedirectMap call site unchanged.
  */
 
 "use client";
@@ -124,7 +119,7 @@ export function EditMapSettingsModal({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent size="sm" className="max-w-sm">
+      <DialogContent size="sm" className="max-w-sm elev-glass-surface elev-modal-content">
         <DialogHeader>
           <DialogTitle>Edit map settings</DialogTitle>
         </DialogHeader>

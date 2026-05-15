@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirect Manager — Redirects, beautifully</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Aurora gradient mesh -->
+    <div class="mesh" aria-hidden="true">
+      <span class="blob-c"></span>
+      <span class="blob-d"></span>
+    </div>
+    <div class="mesh-grain" aria-hidden="true"></div>
+
+    <!-- Top nav -->
+    <nav class="topnav">
+      <div class="topnav-inner">
+        <a href="index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Redirect Manager</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link active">Overview</a>
+          <a href="full-page.html" class="nav-link">Full Page</a>
+          <a href="context-panel.html" class="nav-link">Context Panel</a>
+          <a href="dashboard-widget.html" class="nav-link">Widget</a>
+        </div>
+        <a href="full-page.html" class="btn btn-primary" data-ripple>
+          Open app
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            width="14"
+            height="14"
+          >
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero shell">
+      <span class="eyebrow hero-eyebrow">Sitecore Marketplace · Internal Tool</span>
+      <h1 class="hero-headline">
+        <span data-reveal>Redirects,</span>
+        <br />
+        <span class="gradient-text" data-reveal>beautifully.</span>
+      </h1>
+      <p class="hero-sub">
+        A premium home for every 301, 302, and one-off URL rewrite across your content tree.
+        Built for content authors, beloved by SEO leads.
+      </p>
+      <div class="hero-actions">
+        <a href="full-page.html" class="btn btn-primary btn-large" data-ripple>
+          Get started
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            width="16"
+            height="16"
+          >
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a href="#features" class="btn btn-ghost btn-large">See how it fits</a>
+      </div>
+
+      <!-- Hero "screenshot" mock -->
+      <div class="hero-screenshot">
+        <div class="hero-screenshot-inner">
+          <div class="screenshot-toolbar">
+            <div class="screenshot-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="screenshot-url">app.sitecorecloud.io  ›  redirect-manager  ›  overview</div>
+          </div>
+          <div class="screenshot-body">
+            <div class="screenshot-sidebar">
+              <div class="screenshot-sidebar-item active">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+                </svg>
+                Redirect Maps
+              </div>
+              <div class="screenshot-sidebar-item">Languages</div>
+              <div class="screenshot-sidebar-item">Activity</div>
+              <div class="screenshot-sidebar-item">Settings</div>
+            </div>
+            <div class="screenshot-rows">
+              <div class="screenshot-row">
+                <span class="status status-active">Active</span>
+                <span style="flex:1">Black Friday 2025</span>
+                <span class="pill-301">301</span>
+              </div>
+              <div class="screenshot-row">
+                <span class="status status-active">Active</span>
+                <span style="flex:1">EU Compliance Migration</span>
+                <span class="pill-301">301</span>
+              </div>
+              <div class="screenshot-row">
+                <span class="status status-draft">Draft</span>
+                <span style="flex:1">Q1 Product Launches</span>
+                <span class="pill-302">302</span>
+              </div>
+              <div class="screenshot-row">
+                <span class="status status-active">Active</span>
+                <span style="flex:1">Legacy WP Imports</span>
+                <span class="pill-301">301</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features shell" id="features">
+      <div class="features-header">
+        <span class="eyebrow" style="justify-content:center; display:inline-flex">Three surfaces, one source of truth</span>
+        <h2 class="features-title">Meet your authors where they work.</h2>
+        <p class="features-sub">
+          Redirect Manager shows up wherever the work happens — the dashboard, the page editor, and a roomy workspace
+          when you want the full picture.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <a href="full-page.html" class="feature-card" aria-label="Open the Full Page surface">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="16" rx="2.5" />
+              <path d="M3 9h18M8 4v16" />
+            </svg>
+          </div>
+          <div class="feature-tag">Extension Point 01</div>
+          <h3 class="feature-title">Full Page</h3>
+          <p class="feature-desc">
+            A roomy workspace to manage every redirect map across every site and language. Search, filter, edit,
+            publish — like a sprint board, but for URLs.
+          </p>
+          <span class="feature-link">
+            Explore the workspace
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </span>
+        </a>
+
+        <a href="context-panel.html" class="feature-card" aria-label="Open the Context Panel surface">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2.5" />
+              <path d="M15 3v18" />
+            </svg>
+          </div>
+          <div class="feature-tag">Extension Point 02</div>
+          <h3 class="feature-title">Context Panel</h3>
+          <p class="feature-desc">
+            See and create redirects for the page you're editing — without leaving the editor. The smallest surface,
+            sharpest focus.
+          </p>
+          <span class="feature-link">
+            Step into the panel
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </span>
+        </a>
+
+        <a href="dashboard-widget.html" class="feature-card" aria-label="Open the Dashboard Widget surface">
+          <div class="feature-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="7" height="9" rx="1.5" />
+              <rect x="14" y="3" width="7" height="5" rx="1.5" />
+              <rect x="14" y="12" width="7" height="9" rx="1.5" />
+              <rect x="3" y="16" width="7" height="5" rx="1.5" />
+            </svg>
+          </div>
+          <div class="feature-tag">Extension Point 03</div>
+          <h3 class="feature-title">Dashboard Widget</h3>
+          <p class="feature-desc">
+            A tile on the Cloud Portal home that shows traffic, hot redirects, and what shipped today — at a glance,
+            from anywhere.
+          </p>
+          <span class="feature-link">
+            See the live tile
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Trust band -->
+    <section class="trust shell">
+      <div class="trust-label">Built for content teams that ship constantly</div>
+      <div class="trust-stats">
+        <div class="trust-stat">
+          <span class="trust-stat-value mono"><span data-count="12428">0</span></span>
+          <span class="trust-stat-label">Active redirects</span>
+        </div>
+        <div class="trust-stat">
+          <span class="trust-stat-value mono"><span data-count="94">0</span>%</span>
+          <span class="trust-stat-label">301 vs. 302</span>
+        </div>
+        <div class="trust-stat">
+          <span class="trust-stat-value mono"><span data-count="7">0</span></span>
+          <span class="trust-stat-label">Languages supported</span>
+        </div>
+        <div class="trust-stat">
+          <span class="trust-stat-value mono">&lt;<span data-count="80">0</span>ms</span>
+          <span class="trust-stat-label">Lookup latency</span>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>

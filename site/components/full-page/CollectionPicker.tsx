@@ -16,6 +16,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { listCollections } from "@/lib/sdk/sites";
 import type { ClientSDK, Sites } from "@/lib/sdk/types";
 
@@ -56,8 +63,7 @@ export function CollectionPicker({
     (async () => { await load(); })();
   }, [load]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const id = e.target.value;
+  const handleChange = (id: string) => {
     setSelectedId(id);
     if (!id) {
       onSelect(null);
@@ -70,7 +76,7 @@ export function CollectionPicker({
   const labelId = "collection-picker-label";
 
   return (
-    <div className="space-y-1">
+    <div className="space-y-1 elev-glass-surface p-2 rounded-lg">
       <Label htmlFor="collection-picker" id={labelId} className="text-xs font-medium">
         Collection
       </Label>
@@ -100,20 +106,25 @@ export function CollectionPicker({
       )}
 
       {status === "loaded" && (
-        <select
-          id="collection-picker"
-          aria-labelledby={labelId}
-          className="flex h-9 w-full items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-          value={selectedId}
-          onChange={handleChange}
-        >
-          <option value="">Pick a collection</option>
-          {collections.map((c) => (
-            <option key={c.id ?? c.name} value={c.id ?? ""}>
-              {c.displayName || c.name}
-            </option>
-          ))}
-        </select>
+        /* Radix Select — owned popover renders in the React tree so it picks
+           up the dark theme. Native <select> opens an OS-controlled list that
+           ignores CSS and renders white on dark. */
+        <Select value={selectedId} onValueChange={handleChange}>
+          <SelectTrigger
+            id="collection-picker"
+            aria-labelledby={labelId}
+            className="h-9 w-full text-sm"
+          >
+            <SelectValue placeholder="Pick a collection" />
+          </SelectTrigger>
+          <SelectContent>
+            {collections.map((c) => (
+              <SelectItem key={c.id ?? c.name} value={c.id ?? ""}>
+                {c.displayName || c.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       )}
     </div>
   );

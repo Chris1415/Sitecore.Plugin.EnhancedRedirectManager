@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Context Panel · No match (create new) · Redirect Manager (PRD-002 V4 Refined)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="elevated.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <style>
+      body {
+        background:
+          radial-gradient(circle at 100% 0%, color-mix(in oklch, var(--primary) 8%, transparent), transparent 60%),
+          var(--background);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Theme toggle -->
+    <div class="tone-toggle" data-theme-toggle role="group" aria-label="Theme">
+      <button class="tone-toggle__btn" data-theme="light" aria-pressed="false">Light</button>
+      <button class="tone-toggle__btn" data-theme="dark" aria-pressed="false">Dark</button>
+      <button class="tone-toggle__btn" data-theme="auto" aria-pressed="true">Auto</button>
+    </div>
+
+    <div class="cp-shell">
+      <!-- Hero count header — 0 matches -->
+      <header class="cp-header">
+        <span class="cp-header__eyebrow">Redirects for this page</span>
+        <h1>
+          <span class="gradient-text">0 redirects</span><br />
+          point here.
+        </h1>
+        <p class="cp-header__sub">
+          Add the first redirect to start a map for this page.
+        </p>
+        <div class="cp-header__meta">
+          <span class="mono">/products/sneaker-cloud-runner</span>
+        </div>
+      </header>
+
+      <div class="cp-body">
+        <!-- Inline QuickRedirectForm — no-match (create-new) state — RedirectType ENABLED per ADR-0029 -->
+        <form
+          class="cp-quick-form"
+          data-quick-form
+          data-toast-copy="Created sneaker-cloud-runner-redirects with one redirect."
+          aria-label="Quick-add redirect for this page">
+          <label class="cp-quick-form__label" for="cp-quick-source">Quick redirect</label>
+          <input
+            id="cp-quick-source"
+            class="blok-input blok-input--mono"
+            type="text"
+            placeholder="/old-source-url"
+            value="/cloud-runner-legacy"
+            aria-label="Source URL" />
+          <div class="cp-quick-form__row">
+            <!-- RedirectType select — ENABLED in create-new state per ADR-0029 -->
+            <select
+              class="blok-select blok-input--mono cp-quick-form__type"
+              aria-label="Redirect type">
+              <option value="Redirect301" selected>301</option>
+              <option value="Redirect302">302</option>
+              <option value="ServerTransfer">Server Transfer</option>
+            </select>
+            <span class="cp-quick-form__arrow" aria-hidden="true">&rarr; this page</span>
+            <button class="blok-btn blok-btn--primary blok-btn--sm cp-quick-form__add" type="submit">
+              Add
+            </button>
+          </div>
+          <p class="cp-quick-form__auto-name">
+            New map: <strong>sneaker-cloud-runner-redirects</strong>
+          </p>
+        </form>
+
+        <!-- Empty-state guidance -->
+        <div class="cp-empty-guidance">
+          No existing maps redirect to this page yet. Adding a redirect above creates a new map with the source you enter and this page as the target. Default flags are used (no query-string preserve, no language preserve, no virtual-folder). For full flag control, open the full workspace.
+        </div>
+
+        <!-- Pages-aware en-only matching banner -->
+        <div class="blok-alert blok-alert--info" role="status">
+          <span class="blok-alert__icon" aria-hidden="true">i</span>
+          <div class="blok-alert__body">
+            <p class="blok-alert__title" style="margin:0;">Exact match only</p>
+            <p style="margin:0; font-size: var(--text-2xs);">
+              This panel matches the page route exactly &mdash; without query string or hash. Regex and language variants are not supported in the current release.
+            </p>
+          </div>
+        </div>
+
+        <!-- CTA to full workspace -->
+        <a href="full-page.html" class="cp-cta">
+          <span class="cp-cta__left">
+            <span class="glyph" data-icon="grid"></span>
+            Open full workspace
+          </span>
+          <span class="glyph" data-icon="arrowRight"></span>
+        </a>
+
+        <!-- POC navigation -->
+        <nav style="display:flex; gap: 0.375rem; padding-top: 0.5rem; flex-wrap: wrap;">
+          <a class="blok-btn blok-btn--ghost blok-btn--sm" href="index.html">&larr; Overview</a>
+          <a class="blok-btn blok-btn--ghost blok-btn--sm" href="context-panel.html">Single match</a>
+          <a class="blok-btn blok-btn--ghost blok-btn--sm" href="context-panel-multi-match.html">Multi-match</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="hahn-solo-footer" aria-hidden="true">hahn-solo</div>
+
+    <script src="theme-toggle.js"></script>
+    <script src="icons.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

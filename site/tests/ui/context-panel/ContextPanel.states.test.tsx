@@ -94,17 +94,20 @@ describe("ContextPanel — empty state (T028)", () => {
     (listRedirectMaps as Mock).mockResolvedValue([]);
   });
 
-  it("RED-1: empty state copy visible", async () => {
+  it("RED-1: V4 empty state — ContextPanelHero shows '0 redirects' guidance (no old EmptyState copy)", async () => {
     render(<ContextPanel client={mockClient} sitecoreContextId={CTX_ID} />);
     await waitFor(() => {
-      expect(screen.getByText(/No redirects affect this page/i)).toBeDefined();
+      // V4: empty state guidance is via ContextPanelHero subline at count=0
+      expect(screen.getByText(/add the first redirect/i)).toBeDefined();
     });
   });
 
-  it("RED-2: Add redirect button present in empty state", async () => {
+  it("RED-2: V4 empty state — QuickRedirectForm visible (replaces Add redirect button per ADR-0028)", async () => {
     render(<ContextPanel client={mockClient} sitecoreContextId={CTX_ID} />);
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: /add redirect for this page/i })).toBeDefined();
+      // V4: QuickRedirectForm is always visible in empty + default states; old Add button gone
+      const form = document.querySelector("form[aria-label='Quick-add redirect for this page']");
+      expect(form).not.toBeNull();
     });
   });
 });
@@ -189,21 +192,25 @@ describe("ContextPanel — default state / orchestration (T030)", () => {
   it("RED-1: renders matched map group after loading", async () => {
     render(<ContextPanel client={mockClient} sitecoreContextId={CTX_ID} />);
     await waitFor(() => {
-      expect(screen.getByText("Test Map")).toBeDefined();
+      // V4: map name appears in cp-item__meta + QuickRedirectForm hint; use getAllByText
+      expect(screen.getAllByText("Test Map").length).toBeGreaterThan(0);
     });
   });
 
-  it("RED-2: regex banner always present", async () => {
+  it("RED-2: regex banner always present (V4 re-skin: Alert anatomy — 'Exact match only')", async () => {
     render(<ContextPanel client={mockClient} sitecoreContextId={CTX_ID} />);
-    // Banner is always rendered, even while loading
-    expect(screen.getByRole("note")).toBeDefined();
-    expect(screen.getByRole("note").textContent).toContain("Direct-string matches only");
+    // Banner is always rendered; V4 re-skin uses Alert with new copy
+    const banner = screen.getByRole("note");
+    expect(banner).toBeDefined();
+    expect(banner.textContent).toMatch(/exact match only/i);
   });
 
-  it("RED-4: Add redirect button present in default state", async () => {
+  it("RED-4: V4 — QuickRedirectForm visible in default state (replaces Add redirect button per ADR-0028)", async () => {
     render(<ContextPanel client={mockClient} sitecoreContextId={CTX_ID} />);
     await waitFor(() => {
-      expect(screen.getByRole("button", { name: /add redirect for this page/i })).toBeDefined();
+      // V4: old Add redirect button gone; inline QuickRedirectForm always present
+      const form = document.querySelector("form[aria-label='Quick-add redirect for this page']");
+      expect(form).not.toBeNull();
     });
   });
 });
