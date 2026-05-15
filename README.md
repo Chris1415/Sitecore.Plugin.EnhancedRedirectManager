@@ -24,7 +24,7 @@ Redirect Manager exposes three Cloud Portal extension points, all backed by a si
 - **Dashboard Widget** on a site dashboard. Three at-a-glance count tiles — Redirect Map items, individual mappings, last-updated timestamp. Site picker at the top right (the SDK does not surface "current site" today; pick once and the widget remembers it via `localStorage`).
 - **Full Page** workshop. Site-collection + site picker, virtualized Redirect Map list, full item and mapping CRUD with drag-reorder, JSON import / export keyed by Sitecore item GUID with a per-conflict three-action picker (create / overwrite / skip).
 
-MVP operates in the default content language `en` only. Multilingual CRUD, usage analytics (hit counters, broken-vs-healthy), template sync-back, regex matching, and concurrent-edit detection are all deferred to follow-on PRDs.
+Redirects are shared across all language versions of a site by design — the stock Sitecore Redirect Map template stores `UrlMapping` as a SHARED field (no language axis), so a rule authored on a Redirect Map applies to every language version of the routes it matches. Usage analytics (hit counters, broken-vs-healthy), template sync-back, regex matching, and concurrent-edit detection are deferred to follow-on PRDs.
 
 ## Tech stack
 
@@ -220,10 +220,9 @@ Site-collection + site picker drives a virtualized list of Redirect Maps. Per ma
 
 ## Known limitations (PRD-000 MVP)
 
-- **`en` only.** Multilingual CRUD deferred to PRD-001. [ADR-0010](project-planning/ADR/adr-0010-mvp-language-scope-en-only.md)
-- **Exact-string match in the Context Panel.** Regex source rows are skipped. A non-dismissible banner makes this explicit in the UI. [ADR-0005](project-planning/ADR/adr-0005-context-panel-exact-match-only.md)
+- **Exact-string match in the Context Panel.** Regex source rows are skipped, and the matcher does not normalize language-prefixed routes (e.g. `/de/products` will not match a redirect with source `/products`). A non-dismissible banner makes this explicit in the UI. [ADR-0005](project-planning/ADR/adr-0005-context-panel-exact-match-only.md)
 - **No concurrent-edit detection.** Last writer wins. [PRD § R10]
-- **No usage analytics.** Counts and last-updated timestamps only. Analytics deferred to PRD-001.
+- **No usage analytics.** Counts and last-updated timestamps only. Analytics deferred to a follow-on PRD.
 - **Cloud Portal does not pass per-site context to Dashboard Widget embeds.** The widget falls back to a site picker (operator's last pick persisted via `localStorage`).
 - **Import on cross-tenant promotion mints fresh GUIDs** for `create` actions. The import summary calls this out per item.
 
