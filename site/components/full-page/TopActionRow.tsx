@@ -62,7 +62,7 @@ export function TopActionRow({
   const hasSite = selectedCollection !== null && selectedSite !== null;
 
   return (
-    <header className="flex items-center justify-between gap-4 px-4 py-2 border-b border-border min-h-[48px]">
+    <header className="fp-topbar elev-glass-surface flex items-center justify-between gap-4 px-4 py-2 min-h-[48px]">
       {/* View preferences (left) — renders nothing when env-flag is off */}
       <ThemeSwitcher className="shrink-0" />
 
@@ -107,8 +107,8 @@ export function TopActionRow({
         </BreadcrumbList>
       </Breadcrumb>
 
-      {/* Action buttons — Tranche 5 stubs */}
-      <div className="flex items-center gap-2 shrink-0">
+      {/* Action buttons */}
+      <div className="fp-topbar__actions shrink-0">
         <Button
           variant="outline"
           size="sm"

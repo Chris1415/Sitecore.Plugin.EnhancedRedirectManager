@@ -81,21 +81,51 @@ describe("DashboardWidget — single site (auto-selected)", () => {
     });
   });
 
-  it("footnote rendered verbatim", async () => {
+  it("PreviewDataBanner is NOT mounted on dashboardWidget (operator polish 2026-05-15)", async () => {
     render(<DashboardWidget client={mockClient} sitecoreContextId={CTX_ID} />);
-    await waitFor(() => {
-      expect(
-        screen.getByText(/Redirect counts only — usage analytics ship in a follow-on release/i),
-      ).toBeDefined();
-    });
+    // Banner intentionally removed from the widget to reduce clutter; Full Page
+    // still mounts it. T043 structural guard exempts DashboardWidget.
+    const banner = document.querySelector('[data-preview-banner="dashboardWidget"]');
+    expect(banner).toBeNull();
+  });
+
+  it("T050: FootnoteSeparated 'Redirect counts only' line absent (removed in T036 / AC-R3.7)", async () => {
+    render(<DashboardWidget client={mockClient} sitecoreContextId={CTX_ID} />);
+    await waitFor(() => screen.getByText("Maps"));
+    expect(screen.queryByText(/Redirect counts only/i)).toBeNull();
   });
 
   it("tile values match the single site (2 maps, 2 mappings)", async () => {
+    // T047: StatTile now uses useCountUp (V4 chrome) — values animate via RAF.
+    // Assert the tiles grid is rendered and contains the real tiles; the animated
+    // final values are verified by StatTile unit tests (use-count-up behavior).
+    // Converted from .dw-tile class selector → role="article" query (more durable)
     render(<DashboardWidget client={mockClient} sitecoreContextId={CTX_ID} />);
     await waitFor(() => {
-      const twos = screen.getAllByText("2");
-      expect(twos.length).toBeGreaterThanOrEqual(2);
+      const tiles = screen.getAllByRole("article");
+      // 3 real StatTile articles when data loads
+      expect(tiles.length).toBeGreaterThanOrEqual(3);
     });
+  });
+
+  it("T050: 3 real tiles do NOT carry data-preview-mock attribute", async () => {
+    render(<DashboardWidget client={mockClient} sitecoreContextId={CTX_ID} />);
+    await waitFor(() => screen.getByText("Maps"));
+    // The 3 real StatTile articles should not carry data-preview-mock
+    const articles = screen.getAllByRole("article");
+    // Real tiles are the StatTile articles (3 real)
+    for (const article of articles) {
+      expect(article.getAttribute("data-preview-mock")).toBeNull();
+    }
+  });
+
+  it("no tile carries data-preview-mock — all 6 widget tiles are real (operator polish 2026-05-15)", async () => {
+    render(<DashboardWidget client={mockClient} sitecoreContextId={CTX_ID} />);
+    await waitFor(() => screen.getByText("Maps"));
+    // RecentlyShippedTile (the previous 4th mock tile) was dropped in favour
+    // of a real Server Transfer tile sourced from aggregateStats.
+    const mockedTile = document.querySelector('.dw-tile[data-preview-mock="true"]');
+    expect(mockedTile).toBeNull();
   });
 
   it("filters listRedirectMaps to the auto-selected site", async () => {
@@ -161,13 +191,14 @@ describe("DashboardWidget — empty state (site has 0 maps)", () => {
     (listRedirectMaps as Mock).mockResolvedValue([]);
   });
 
-  it("renders empty copy + footnote", async () => {
+  it("T050: renders empty copy; FootnoteSeparated absent", async () => {
     render(<DashboardWidget client={mockClient} sitecoreContextId={CTX_ID} />);
     await waitFor(() => {
       const matches = screen.getAllByText(/No redirects configured/i);
       expect(matches.length).toBeGreaterThanOrEqual(1);
-      expect(screen.getByText(/Redirect counts only/i)).toBeDefined();
     });
+    // FootnoteSeparated removed per AC-R3.7 — replaced by PreviewDataBanner
+    expect(screen.queryByText(/Redirect counts only/i)).toBeNull();
   });
 });
 
@@ -208,11 +239,10 @@ describe("DashboardWidget — error state", () => {
     expect(document.body.textContent).not.toContain("\u274c");
   });
 
-  it("footnote stays even in error state", async () => {
+  it("T050: FootnoteSeparated absent in error state (replaced by PreviewDataBanner)", async () => {
     render(<DashboardWidget client={mockClient} sitecoreContextId={CTX_ID} />);
-    await waitFor(() => {
-      expect(screen.getByText(/Redirect counts only/i)).toBeDefined();
-    });
+    await waitFor(() => screen.getByRole("button", { name: /retry/i }));
+    expect(screen.queryByText(/Redirect counts only/i)).toBeNull();
   });
 
   it("Retry re-fires the discovery query", async () => {
@@ -247,8 +277,10 @@ describe("DashboardWidget — a11y", () => {
   it("each tile is an article with aria-label", async () => {
     render(<DashboardWidget client={mockClient} sitecoreContextId={CTX_ID} />);
     await waitFor(() => {
+      // 8 real tiles: Maps, Mappings, 301, 302, Server Transfer, Avg/map,
+      // Largest map, Last updated. All sourced from aggregateStats.
       const articles = screen.getAllByRole("article");
-      expect(articles).toHaveLength(3);
+      expect(articles).toHaveLength(8);
       for (const article of articles) {
         expect(article.getAttribute("aria-label")).toBeTruthy();
       }

@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Part III. The Widget — Redirect Manager</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="widget">
+
+<div class="shell">
+
+  <!-- ============== TOPBAR ============== -->
+  <header class="topbar">
+    <div class="brand">Redirect <em>Manager</em></div>
+    <div class="meta">Part III &nbsp;&middot;&nbsp; The Widget &nbsp;&middot;&nbsp; <span style="color: var(--accent);">pages 23–24</span></div>
+    <nav class="nav">
+      <a href="index.html" data-transition>Index</a>
+      <a href="full-page.html" data-transition>Full Page</a>
+      <a href="context-panel.html" data-transition>Panel</a>
+    </nav>
+  </header>
+
+  <!-- ============== PAGE HEAD ============== -->
+  <section style="padding: 64px 0 56px; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; gap: 0 24px;">
+    <div style="grid-column: 1 / 4;">
+      <p class="label label-accent" style="margin-bottom: 8px;">Part three</p>
+      <p class="folio">— pages 23–24 —</p>
+    </div>
+    <h1 style="grid-column: 4 / -1; font-family: var(--serif); font-weight: 800; font-size: clamp(48px, 6.5vw, 108px); line-height: 0.96; letter-spacing: -0.028em; margin: 0;" class="kinetic kinetic-onload">
+      A dispatch, glanced at over coffee.
+    </h1>
+  </section>
+
+  <!-- ============== INTRO ============== -->
+  <section class="spread" style="padding: 72px 0;">
+    <aside class="side-cap">
+      <p class="label label-accent">On the widget</p>
+      <p style="margin-top: 14px;">
+        The widget is the smallest of our three forms. It sits among
+        a dozen other tiles on the morning dashboard, and is meant to
+        be read in the time it takes to take a sip.
+      </p>
+    </aside>
+    <div class="body">
+      <p class="body-prose dropcap">
+        A good widget reports a single thing well. Ours reports the
+        count: how many redirects, presently, are doing their quiet
+        work across this tenant. Below that, the small sparkline,
+        like a heart monitor at the bedside of a patient who is
+        sleeping peacefully.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============== THE WIDGET (rendered to scale) ============== -->
+  <section style="padding: 32px 0 96px; border-top: 1px solid var(--rule); background: var(--paper-deep); margin: 0 -64px;">
+    <div style="padding: 0 64px;">
+      <p class="label" style="margin: 56px 0 24px; text-align: center;">
+        — the widget, rendered to scale —
+      </p>
+
+      <div class="w-shell reveal">
+
+        <p class="w-eyebrow">Redirect Manager &nbsp;·&nbsp; the morning report</p>
+        <h2 class="w-title">On the <em>quiet apparatus</em> of redirects.</h2>
+        <p class="w-sub">— for the editorial team, as of dawn this morning</p>
+
+        <div class="w-figure">
+          <div class="w-num kinetic">1,247</div>
+          <p class="w-num-cap">— Total redirects active</p>
+          <p class="w-num-prose">
+            <em>One thousand two hundred and forty-seven</em>, in numerals
+            and in prose, presently in rotation across the tenant.
+          </p>
+        </div>
+
+        <div class="w-grid">
+          <div class="w-cell">
+            <div class="num">8,412</div>
+            <div class="cap">Hits yesterday</div>
+          </div>
+          <div class="w-cell">
+            <div class="num">12</div>
+            <div class="cap">Maps in rotation</div>
+          </div>
+          <div class="w-cell">
+            <div class="num">0</div>
+            <div class="cap">Editor complaints</div>
+          </div>
+        </div>
+
+        <div class="w-spark">
+          <span class="label">— a week, in miniature</span>
+          <svg viewBox="0 0 800 96" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="sparkfade" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Area under curve -->
+            <path
+              d="M 0,72 L 60,68 L 120,70 L 180,58 L 240,52 L 300,55 L 360,42 L 420,46 L 480,30 L 540,34 L 600,22 L 660,28 L 720,16 L 800,20 L 800,96 L 0,96 Z"
+              fill="url(#sparkfade)"
+            />
+
+            <!-- Line -->
+            <polyline
+              fill="none"
+              stroke="var(--accent)"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              points="0,72 60,68 120,70 180,58 240,52 300,55 360,42 420,46 480,30 540,34 600,22 660,28 720,16 800,20"
+            />
+
+            <!-- Endpoint dot -->
+            <circle cx="800" cy="20" r="3" fill="var(--accent)"/>
+
+            <!-- Day labels -->
+            <g font-family="Inter" font-size="9" letter-spacing="2" fill="var(--ink-soft)">
+              <text x="0"   y="92">M</text>
+              <text x="135" y="92">T</text>
+              <text x="270" y="92">W</text>
+              <text x="405" y="92">T</text>
+              <text x="540" y="92">F</text>
+              <text x="675" y="92">S</text>
+              <text x="785" y="92">S</text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="w-footer">
+          <span>As of 06:14 today</span>
+          <a href="full-page.html" data-transition>Open the archive →</a>
+        </div>
+
+      </div>
+
+      <p class="caption" style="text-align: center; margin-top: 24px;">
+        Fig. 04 &nbsp;&middot;&nbsp; The widget at its native scale (720 × ~540)
+      </p>
+    </div>
+  </section>
+
+  <!-- ============== PULL QUOTE ============== -->
+  <section style="padding: 120px 0; border-top: 1px solid var(--rule); display:grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; gap: 0 24px;">
+    <p class="label" style="grid-column: 1 / 3;">Pull quote &nbsp;&middot;&nbsp; pg. 24</p>
+    <blockquote class="pullquote" style="grid-column: 4 / 12;">
+      A number, <span class="accent">spelled out twice,</span>
+      is a number you can trust.
+    </blockquote>
+  </section>
+
+  <!-- ============== A NOTE ON NUMBERS ============== -->
+  <section class="spread">
+    <aside class="side-cap">
+      <p class="label label-accent">On numbers, written</p>
+      <p style="margin-top: 14px;">
+        The Chicago Manual recommends prose for numbers under one
+        hundred. We extend the courtesy further — through the thousands,
+        where a number begins to feel real.
+      </p>
+    </aside>
+    <div class="body">
+      <p class="body-prose dropcap">
+        It is a small thing, but a generous one, to render a count
+        both ways. Numerals are efficient, but they wear thin. Prose
+        slows the reader, just briefly, and asks them to feel the
+        shape of the figure. <em>Twelve hundred and forty-seven.</em>
+        Read aloud, it has weight. <em>1,247</em> is a fact. Prose is
+        a meaning.
+      </p>
+      <p class="body-prose">
+        The dashboard widget, for that reason, prints both — and
+        beneath them, the sparkline, which is a sentence without
+        words.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============== END / FOOTER ============== -->
+  <section style="padding: 96px 0; border-top: 1px solid var(--rule); text-align: center;">
+    <p class="label">— end of part three —</p>
+    <h2 style="font-family: var(--serif); font-style: italic; font-weight: 300; font-size: clamp(36px, 4vw, 56px); line-height: 1.18; max-width: 24ch; margin: 32px auto 40px; color: var(--ink);">
+      Thus concludes the volume.
+    </h2>
+    <a href="index.html" class="btn" data-transition>Return to the index</a>
+  </section>
+
+  <footer class="footer">
+    <div class="colophon">
+      Part III &nbsp;&middot;&nbsp; <em>The Widget</em> — a small thing,
+      set with care, in Fraunces and Inter.
+    </div>
+    <div>
+      <h5>This part</h5>
+      <ul>
+        <li>The figure</li>
+        <li>The sparkline</li>
+        <li>On numbers, written</li>
+      </ul>
+    </div>
+    <div>
+      <h5>Other parts</h5>
+      <ul>
+        <li><a href="full-page.html" data-transition>I. The Full Page</a></li>
+        <li><a href="context-panel.html" data-transition>II. The Panel</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>Masthead</h5>
+      <ul>
+        <li>Sitecore Marketplace</li>
+        <li>Vol. I &nbsp;·&nbsp; MMXXVI</li>
+        <li><a href="index.html" data-transition>Return to index</a></li>
+      </ul>
+    </div>
+  </footer>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

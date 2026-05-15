@@ -1,6 +1,8 @@
 # Cloud Portal Test App registration runbook
 
 > T063 — One-time setup for running Redirect Manager inside Cloud Portal.
+>
+> **PRD-002 carry-over:** No re-registration is needed for PRD-002. The App ID, the three extension-point identifiers, and all API scopes are unchanged. The V4 redesign is a purely client-side change; the Cloud Portal Test App entry remains valid.
 
 The Redirect Manager is a **Sitecore Marketplace Client-Side app** (Mode A). It runs entirely in the browser inside an iframe hosted by Cloud Portal. To make it visible to operators, register it as a Test App in your tenant's Cloud Portal.
 

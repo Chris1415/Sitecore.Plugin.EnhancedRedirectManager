@@ -1,23 +1,106 @@
 # Host-frame visual smoke
 
-> T064 — Visual regression smoke against the POC clickdummy ground truth.
+> T064 / T055 — Visual regression smoke against the POC clickdummy ground truth.
 
 The original task breakdown called for a `/test` route hosting a Playwright-driven visual comparison harness. After Tranches 6b–8, the operator-led smoke flow (manual review against the POC HTML inside Cloud Portal) covers the same intent with much less harness machinery. This document captures the **manual procedure** so it can be repeated on demand.
 
 If a future tranche reintroduces automated visual regression, the canonical recipe is the `sitecore:marketplace-sdk-host-frame-testing` skill — it scripts Playwright to load the app inside Cloud Portal, clip the iframe origin, and compare against the POC clickdummy with a configurable pixel tolerance.
 
+## PRD-002 V4 redesign additions
+
+PRD-002 replaced all three extension-point visual surfaces with a V4 Blok Elevated design. The checklist below extends the PRD-000 procedure with PRD-002-specific axes.
+
+### POC reference for PRD-002
+
+The canonical PRD-002 visual reference is **`pocs/poc-v1-prd002/`**. Do NOT use the old `pocs/poc-v1/` frames as ground truth for the redesigned surfaces.
+
+To serve the POC standalone (Playwright MCP rejects `file://` origins):
+
+```bash
+npx serve products/redirect-manager/pocs/poc-v1-prd002/
+```
+
+Then open `http://localhost:3000` (or the port reported by `serve`). Each HTML file maps to an extension point:
+
+- `full-page.html` — Full Page at various states
+- `context-panel.html` — Context Panel (loaded with a matching page URL)
+- `dashboard-widget.html` — Dashboard Widget
+
+### PRD-002 visual smoke axes (5-axis check — success metric m2)
+
+Run for each extension point × light mode × dark mode × reduced-motion (9 combinations total):
+
+#### Axis 1 — Layout
+
+| Surface | What to verify |
+|---------|---------------|
+| Full Page | Plume backdrop visible (if reduced-motion OFF); frosted topbar sticky on scroll; hero zone between topbar and map list; 4-tile stat strip; 2-pane body (rail + main) at ≥1024 px |
+| Context Panel | 360 px column; hero count header at top; inline QuickRedirectForm always visible (no modal trigger button); matched-redirect rows below |
+| Dashboard Widget | 480 px card; hero stat number + sparkline; 2×2 tile grid; top-destinations rows; recently-shipped mini-widget; footer attribution |
+
+#### Axis 2 — Typography
+
+| Surface | What to verify |
+|---------|---------------|
+| Full Page hero | Geist Sans 700 at `clamp(48px, 8vw, 96px)` — compare ruler to POC |
+| Context Panel hero h1 | Compact clamp — smaller than Full Page; `font-weight: 700` |
+| Dashboard Widget | Marketing-grade sub-head; hero stat number at 4.5 rem |
+
+#### Axis 3 — Color (theme-aware gradient tokens)
+
+- Gradient text (Full Page hero headline if gradient variant used) composed via `color-mix(in oklch, var(--primary), var(--info))` — renders as primary→info blend in both light and dark.
+- Preview Data banner uses `--primary` tint (not emoji; monochrome info SVG glyph).
+- HTTP code badges: 301 = primary-tinted, 302 = warning-tinted, ServerTransfer = neutral. No `Active` / `Draft` labels anywhere.
+
+#### Axis 4 — Component anatomy (Blok primitives)
+
+- Modals use V4 dialog shell (frosted glass overlay with `@blok/dialog` chrome).
+- Buttons: primary + outline variants on hero CTAs; ghost icon buttons on row actions.
+- Alert component for Preview Data banner.
+- No hard-coded hex colors visible (all token-composed).
+
+#### Axis 5 — State fidelity
+
+For each of the 3 surfaces, verify these states render:
+
+| State | Full Page | Context Panel | Dashboard Widget |
+|-------|-----------|---------------|-----------------|
+| Default (data loaded) | Map list + detail | Matched rows + inline form | Hero stat + tiles |
+| Empty (no maps / no matches) | Empty-state copy + CTA | Empty-state with inline form still visible | Tiles show 0 |
+| Error | Friendly error banner + "Show technical details" | Error in matched area | Error in tile area |
+| Preview Data banner visible | Yes (top of Full Page) | No (real data only) | Yes (top of Dashboard Widget) |
+
+#### Variant matrix
+
+Run all 3 axes × 3 variants = 9 combinations:
+
+| Variant | How to set |
+|---------|-----------|
+| Light mode | Default; or `d` hotkey → System → Light |
+| Dark mode | `d` hotkey → Dark |
+| Reduced-motion | OS: macOS: System Preferences → Accessibility → Reduce Motion ON; or Chrome DevTools → Rendering → Emulate CSS `prefers-reduced-motion: reduce` |
+
+Under reduced-motion:
+- Plume backdrop must be static (no drift animation).
+- Letter-reveal on Full Page hero must show final state immediately (no per-character stagger).
+- Count-up numbers must jump directly to target value (no rAF animation).
+- Hover lifts must be static (transform: none).
+
 ## Manual procedure
 
 ### 1. Open the POC reference
 
-Open `products/redirect-manager/pocs/poc-v1/` in a browser. Each extension point has its own HTML file:
+**PRD-002:** Open `products/redirect-manager/pocs/poc-v1-prd002/` via `npx serve` (see above). Playwright MCP cannot load `file://` origins.
 
-- `pocs/poc-v1/context-panel.html`
-- `pocs/poc-v1/dashboard-widget.html`
-- `pocs/poc-v1/full-page.html`
-- plus a few state-coverage variants (`full-page-empty-no-selection.html`, etc.)
+**PRD-000 reference (carry — do not use as PRD-002 ground truth):** `pocs/poc-v1/` HTML files remain available for PRD-000-era regressions.
 
-These are the **ground truth**. The shipped app should match them within visual tolerance.
+Each extension point has its own HTML file:
+
+- `pocs/poc-v1-prd002/context-panel.html`
+- `pocs/poc-v1-prd002/dashboard-widget.html`
+- `pocs/poc-v1-prd002/full-page.html`
+
+These are the **ground truth** for PRD-002. The shipped app should match them within visual tolerance.
 
 ### 2. Open the live app
 

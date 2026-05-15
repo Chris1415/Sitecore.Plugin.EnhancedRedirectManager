@@ -72,12 +72,11 @@ describe("SitePicker (T037)", () => {
         onSelect={vi.fn()}
       />
     );
+    // Radix Select keeps options in a portal — open the dropdown first, then assert.
+    await waitFor(() => screen.getByRole("combobox"));
+    await userEvent.click(screen.getByRole("combobox"));
     await waitFor(() => {
-      const select = screen.getByRole("combobox");
-      // fixture has 2 sites with collectionId 343b1245e77541cda8f2094b70531eb3
-      const options = Array.from(select.querySelectorAll("option")).filter(
-        (o) => o.value !== ""
-      );
+      const options = screen.getAllByRole("option");
       expect(options.length).toBeGreaterThanOrEqual(1);
     });
   });
@@ -113,21 +112,13 @@ describe("SitePicker (T037)", () => {
         onSelect={onSelect}
       />
     );
-    await waitFor(() => {
-      const select = screen.getByRole("combobox");
-      const options = Array.from(select.querySelectorAll("option")).filter(
-        (o) => o.value !== ""
-      );
-      expect(options.length).toBeGreaterThanOrEqual(1);
-    });
-    // Use displayName (the rendered option text) — fixture has displayName "Global Content"
-    const displayName = fixtureSites[0].displayName || fixtureSites[0].name;
-    await userEvent.selectOptions(
-      screen.getByRole("combobox"),
-      displayName
-    );
+    await waitFor(() => screen.getByRole("combobox"));
+    await userEvent.click(screen.getByRole("combobox"));
+    const displayName = fixtureSites[0].displayName || fixtureSites[0].name || "";
+    await waitFor(() => screen.getByRole("option", { name: displayName }));
+    await userEvent.click(screen.getByRole("option", { name: displayName }));
     expect(onSelect).toHaveBeenCalledWith(
-      expect.objectContaining({ name: fixtureSites[0].name })
+      expect.objectContaining({ name: fixtureSites[0].name }),
     );
   });
 });

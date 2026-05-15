@@ -26,7 +26,7 @@ export default function DashboardWidgetPage() {
   const sitecoreContextId = requireContextId(appCtx);
 
   return (
-    <main className="p-3">
+    <main>
       <DashboardWidget client={client} sitecoreContextId={sitecoreContextId} />
     </main>
   );

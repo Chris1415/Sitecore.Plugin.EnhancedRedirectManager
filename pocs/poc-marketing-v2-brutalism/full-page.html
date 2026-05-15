@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FULL PAGE // REDIRECT MANAGER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="square"></span>
+      REDIRECT MANAGER
+    </div>
+    <nav>
+      <a href="index.html">HOME</a>
+      <a href="full-page.html" class="active">FULL PAGE</a>
+      <a href="context-panel.html">PANEL</a>
+      <a href="dashboard-widget.html">WIDGET</a>
+    </nav>
+  </header>
+
+  <div class="frame-switch">
+    <span class="label">FRAME:</span>
+    <a href="index.html">INDEX</a>
+    <a href="full-page.html" class="current">FULL PAGE</a>
+    <a href="context-panel.html">CONTEXT PANEL</a>
+    <a href="dashboard-widget.html">DASHBOARD WIDGET</a>
+  </div>
+
+  <main class="wrap">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">
+          ALL<br />REDIRECTS
+        </h1>
+        <p class="page-subtitle">
+          // 247 mappings across 4 maps &nbsp; // last sync: 2h ago &nbsp; // 3 issues detected
+        </p>
+      </div>
+      <div class="page-actions">
+        <button class="btn btn-sm">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"><path d="M3 12h18M12 3v18"/></svg>
+          IMPORT CSV
+        </button>
+        <button class="btn btn-sm">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="square"><path d="M12 3v14M5 10l7 7 7-7M3 21h18"/></svg>
+          EXPORT
+        </button>
+        <button class="btn btn-primary">
+          + NEW REDIRECT
+        </button>
+      </div>
+    </div>
+
+    <!-- MAPS ROW -->
+    <span class="slab">MAPS</span>
+    <div class="maps-row">
+      <div class="map-card is-active">
+        <div class="map-name">BLACK FRIDAY 2025</div>
+        <div class="map-meta">
+          <span><strong>129</strong> redirects</span>
+          <span>updated <strong>2h ago</strong></span>
+        </div>
+        <div class="map-numbers">129<span class="of"> / 129 LIVE</span></div>
+        <div class="map-stamps">
+          <span class="stamp stamp-active">ACTIVE</span>
+          <span class="stamp stamp-301">301</span>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <div class="map-name">Q1 LAUNCHES</div>
+        <div class="map-meta">
+          <span><strong>62</strong> redirects</span>
+          <span>updated <strong>yesterday</strong></span>
+        </div>
+        <div class="map-numbers">62<span class="of"> / 62 LIVE</span></div>
+        <div class="map-stamps">
+          <span class="stamp stamp-active">ACTIVE</span>
+          <span class="stamp stamp-301">301</span>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <div class="map-name">WP MIGRATION<br />(LEGACY)</div>
+        <div class="map-meta">
+          <span><strong>53</strong> redirects</span>
+          <span>updated <strong>last tuesday</strong></span>
+        </div>
+        <div class="map-numbers">50<span class="of"> / 53 LIVE</span></div>
+        <div class="map-stamps">
+          <span class="stamp stamp-active">ACTIVE</span>
+          <span class="stamp stamp-broken">3 BROKEN</span>
+        </div>
+      </div>
+
+      <div class="map-card">
+        <div class="map-name">SUMMER SALE<br />DRAFT</div>
+        <div class="map-meta">
+          <span><strong>3</strong> redirects</span>
+          <span>created <strong>20m ago</strong></span>
+        </div>
+        <div class="map-numbers">0<span class="of"> / 3 LIVE</span></div>
+        <div class="map-stamps">
+          <span class="stamp stamp-draft">DRAFT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABLE -->
+    <span class="slab">REDIRECTS</span>
+    <div class="filter-row">
+      <input class="input-brutal" type="text" placeholder="filter by url..." />
+      <button class="btn btn-sm">301 ONLY</button>
+      <button class="btn btn-sm">302 ONLY</button>
+      <button class="btn btn-sm">BROKEN</button>
+      <button class="btn btn-sm">ALL</button>
+      <div style="margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--ash);">
+        SHOWING 8 OF 247
+      </div>
+    </div>
+
+    <table class="redirect-table">
+      <thead>
+        <tr>
+          <th style="width:38%">SOURCE &rarr; TARGET</th>
+          <th>TYPE</th>
+          <th>STATUS</th>
+          <th>HITS</th>
+          <th>UPDATED</th>
+          <th style="text-align:right">DO STUFF</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="url-from">/<span class="changed">black-friday-2024</span>/deals</div>
+            <div class="url-to">&darr; /<span class="changed-add">black-friday-2025</span>/deals</div>
+          </td>
+          <td><span class="stamp stamp-301">301</span></td>
+          <td><span class="stamp stamp-active">ACTIVE</span></td>
+          <td><strong>1,247</strong></td>
+          <td>2h ago</td>
+          <td class="actions">
+            <button class="btn btn-sm">EDIT</button>
+            <button class="btn btn-sm btn-danger">KILL</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="url-from">/old-product-launch</div>
+            <div class="url-to">&darr; /products/<span class="changed-add">2025-collection</span></div>
+          </td>
+          <td><span class="stamp stamp-301">301</span></td>
+          <td><span class="stamp stamp-active">ACTIVE</span></td>
+          <td><strong>892</strong></td>
+          <td>yesterday</td>
+          <td class="actions">
+            <button class="btn btn-sm">EDIT</button>
+            <button class="btn btn-sm btn-danger">KILL</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="url-from">/blog/<span class="changed">2023</span>/holiday-guide</div>
+            <div class="url-to">&darr; /blog/<span class="changed-add">guides</span>/holiday</div>
+          </td>
+          <td><span class="stamp stamp-301">301</span></td>
+          <td><span class="stamp stamp-broken">BROKEN</span></td>
+          <td><strong>344</strong></td>
+          <td>last tuesday</td>
+          <td class="actions">
+            <button class="btn btn-sm">FIX</button>
+            <button class="btn btn-sm btn-danger">KILL</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="url-from">/cart-checkout-v1</div>
+            <div class="url-to">&darr; /checkout</div>
+          </td>
+          <td><span class="stamp stamp-302">302</span></td>
+          <td><span class="stamp stamp-active">ACTIVE</span></td>
+          <td><strong>2,011</strong></td>
+          <td>3d ago</td>
+          <td class="actions">
+            <button class="btn btn-sm">EDIT</button>
+            <button class="btn btn-sm btn-danger">KILL</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="url-from">/wp-content/2019/<span class="changed">about-us-old</span></div>
+            <div class="url-to">&darr; /<span class="changed-add">company</span></div>
+          </td>
+          <td><span class="stamp stamp-301">301</span></td>
+          <td><span class="stamp stamp-active">ACTIVE</span></td>
+          <td><strong>478</strong></td>
+          <td>last tuesday</td>
+          <td class="actions">
+            <button class="btn btn-sm">EDIT</button>
+            <button class="btn btn-sm btn-danger">KILL</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="url-from">/dead-campaign-2024</div>
+            <div class="url-to">&darr; <em>(410 GONE)</em></div>
+          </td>
+          <td><span class="stamp stamp-410">410</span></td>
+          <td><span class="stamp stamp-active">ACTIVE</span></td>
+          <td><strong>12</strong></td>
+          <td>ages ago</td>
+          <td class="actions">
+            <button class="btn btn-sm">EDIT</button>
+            <button class="btn btn-sm btn-danger">KILL</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="url-from">/services/<span class="changed">consulting-2024</span></div>
+            <div class="url-to">&darr; /services/<span class="changed-add">consulting</span></div>
+          </td>
+          <td><span class="stamp stamp-301">301</span></td>
+          <td><span class="stamp stamp-paused">PAUSED</span></td>
+          <td><strong>67</strong></td>
+          <td>last week</td>
+          <td class="actions">
+            <button class="btn btn-sm">RESUME</button>
+            <button class="btn btn-sm btn-danger">KILL</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <div class="url-from">/summer-sale-draft</div>
+            <div class="url-to">&darr; /campaigns/summer-2025</div>
+          </td>
+          <td><span class="stamp stamp-301">301</span></td>
+          <td><span class="stamp stamp-draft">DRAFT</span></td>
+          <td><strong>0</strong></td>
+          <td>20m ago</td>
+          <td class="actions">
+            <button class="btn btn-sm">EDIT</button>
+            <button class="btn btn-rebel btn-sm">PUBLISH</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:20px;flex-wrap:wrap;gap:12px;">
+      <div style="font-family:var(--mono);font-size:12px;color:var(--ash);">
+        // page 1 of 31. yes thirty-one. you have a lot of redirects.
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-sm">&larr; PREV</button>
+        <button class="btn btn-sm btn-primary">1</button>
+        <button class="btn btn-sm">2</button>
+        <button class="btn btn-sm">3</button>
+        <button class="btn btn-sm">&hellip; 31</button>
+        <button class="btn btn-sm">NEXT &rarr;</button>
+      </div>
+    </div>
+
+    <div class="footnote">
+      <strong>FYI</strong> &nbsp; 3 redirects in WP MIGRATION (LEGACY) point at 404s.
+      we noticed. you should fix them. or don't, we're not your boss.
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

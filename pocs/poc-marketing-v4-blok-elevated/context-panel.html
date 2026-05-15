@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Context Panel · Redirect Manager (Blok Elevated)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        background:
+          radial-gradient(circle at 100% 0%, color-mix(in oklch, var(--primary) 8%, transparent), transparent 60%),
+          var(--background);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tone-toggle" data-theme-toggle role="group" aria-label="Theme">
+      <button class="tone-toggle__btn" data-theme="light" aria-pressed="false">Light</button>
+      <button class="tone-toggle__btn" data-theme="dark" aria-pressed="false">Dark</button>
+      <button class="tone-toggle__btn" data-theme="auto" aria-pressed="true">Auto</button>
+    </div>
+
+    <div class="cp-shell">
+      <!-- Header -->
+      <header class="cp-header">
+        <span class="cp-header__eyebrow">Redirects for this page</span>
+        <h1>
+          <span class="gradient-text">3 redirects</span><br />
+          point here.
+        </h1>
+        <div class="cp-header__meta">
+          <span class="mono">/products/sneaker-cloud-runner</span>
+        </div>
+      </header>
+
+      <div class="cp-body">
+        <!-- Hero summary tile -->
+        <div class="cp-summary">
+          <div class="cp-summary__value"><span data-count="3">0</span></div>
+          <div class="cp-summary__label">Sources redirecting to this URL</div>
+        </div>
+
+        <!-- Quick add -->
+        <div class="blok-card" style="padding: 0.875rem; display: flex; flex-direction: column; gap: 0.5rem;">
+          <label class="blok-label">Quick redirect</label>
+          <input class="blok-input blok-input--mono" placeholder="/old-source-url" value="/cloud-runner-2024" />
+          <div style="display:flex; gap: 0.5rem; align-items: center;">
+            <select class="blok-select blok-input--mono" style="width: 84px;">
+              <option>301</option>
+              <option>302</option>
+            </select>
+            <span style="color: var(--muted-foreground); font-family: var(--font-mono); font-size: var(--text-2xs);">→ this page</span>
+            <div style="flex:1"></div>
+            <button class="blok-btn blok-btn--primary blok-btn--sm">Add</button>
+          </div>
+        </div>
+
+        <!-- List of existing redirects -->
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; padding: 0 0.25rem 0.5rem;">
+            <span style="font-size: var(--text-xs); color: var(--muted-foreground); font-weight: 500;">Existing redirects</span>
+            <span class="blok-badge blok-badge--mono blok-badge--muted">3</span>
+          </div>
+          <div class="cp-list">
+            <div class="cp-item">
+              <div class="cp-item__hd">
+                <span class="status-pill status-pill--active"><span class="dot"></span>Active</span>
+                <span class="http-code http-code--301">301</span>
+              </div>
+              <div class="cp-item__url">
+                /cloud-runner<span class="arrow">→</span>/products/sneaker-cloud-runner
+              </div>
+              <div style="display:flex; gap: 0.375rem; font-size: var(--text-2xs); color: var(--muted-foreground);">
+                <span class="mono">Black Friday 2025</span> ·
+                <span class="mono">3 d ago</span>
+              </div>
+            </div>
+
+            <div class="cp-item">
+              <div class="cp-item__hd">
+                <span class="status-pill status-pill--active"><span class="dot"></span>Active</span>
+                <span class="http-code http-code--301">301</span>
+              </div>
+              <div class="cp-item__url">
+                /sneakers/cloud-runner-v2<span class="arrow">→</span>/products/sneaker-cloud-runner
+              </div>
+              <div style="display:flex; gap: 0.375rem; font-size: var(--text-2xs); color: var(--muted-foreground);">
+                <span class="mono">Legacy WP Imports</span> ·
+                <span class="mono">2 wk ago</span>
+              </div>
+            </div>
+
+            <div class="cp-item">
+              <div class="cp-item__hd">
+                <span class="status-pill status-pill--draft"><span class="dot"></span>Draft</span>
+                <span class="http-code http-code--302">302</span>
+              </div>
+              <div class="cp-item__url">
+                /promo/cloud-runner-teaser<span class="arrow">→</span>/products/sneaker-cloud-runner
+              </div>
+              <div style="display:flex; gap: 0.375rem; font-size: var(--text-2xs); color: var(--muted-foreground);">
+                <span class="mono">Q1 Product Launches</span> ·
+                <span class="mono">unpublished</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA to full workspace -->
+        <a href="full-page.html" class="blok-btn blok-btn--outline btn-elevated" style="justify-content: space-between; width: 100%;">
+          <span style="display:inline-flex; align-items:center; gap: 0.5rem;">
+            <span class="glyph"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M8 4v16"/></svg></span>
+            Open full workspace
+          </span>
+          <span class="glyph"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 5l7 7-7 7"/></svg></span>
+        </a>
+
+        <div style="text-align:center; font-family: var(--font-mono); font-size: var(--text-2xs); color: var(--muted-foreground); padding-top: 0.5rem;">
+          Context panel · ~360px · iframe-safe
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

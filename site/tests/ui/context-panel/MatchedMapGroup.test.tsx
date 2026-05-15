@@ -27,7 +27,7 @@ const baseMap: RedirectMapItem = {
 const matchedMappings: Mapping[] = baseMap.mappings;
 
 describe("MatchedMapGroup", () => {
-  it("RED-1: renders map name and RedirectType badge", () => {
+  it("RED-1: renders RedirectType badge; map name appears in meta line (V4 cp-item anatomy)", () => {
     render(
       <MatchedMapGroup
         map={baseMap}
@@ -38,11 +38,15 @@ describe("MatchedMapGroup", () => {
         onEditMapSettings={vi.fn()}
       />
     );
-    expect(screen.getByText("Marketing campaigns")).toBeDefined();
-    expect(screen.getByText(/301 Permanent/i)).toBeDefined();
+    // V4: map name is in cp-item__meta, not in a header. RedirectType badge is the cp-item__hd badge.
+    expect(screen.getAllByText("Marketing campaigns").length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/301 Permanent/i).length).toBeGreaterThan(0);
+    // V4 guard: NO "Active" or "Draft" label
+    expect(screen.queryByText(/^Active$/)).toBeNull();
+    expect(screen.queryByText(/^Draft$/)).toBeNull();
   });
 
-  it("RED-2: renders only true-flag chips", () => {
+  it("RED-2: V4 anatomy — no status-pill / flag chips; RedirectType badge is the only type indicator", () => {
     render(
       <MatchedMapGroup
         map={baseMap}
@@ -53,12 +57,16 @@ describe("MatchedMapGroup", () => {
         onEditMapSettings={vi.fn()}
       />
     );
-    expect(screen.getByText("Pres. QS")).toBeDefined();
+    // V4: flag chips are removed from the row anatomy per T028 reconciliation
+    // The old "Pres. QS" chip no longer appears — flags are internal only
+    expect(screen.queryByText("Pres. QS")).toBeNull();
     expect(screen.queryByText("Pres. Lang")).toBeNull();
     expect(screen.queryByText("Virt. Folder")).toBeNull();
+    // RedirectType badge still present
+    expect(screen.getAllByText(/301 Permanent/i).length).toBeGreaterThan(0);
   });
 
-  it("RED-3: matched source has font-medium class; non-matched target is muted", () => {
+  it("RED-3: matched source span has font-medium class; non-matched is unstyled", () => {
     render(
       <MatchedMapGroup
         map={baseMap}
@@ -70,9 +78,11 @@ describe("MatchedMapGroup", () => {
       />
     );
     const srcEl = screen.getByText(PAGE_ROUTE);
+    // V4: matched side has font-medium text-foreground
     expect(srcEl.className).toContain("font-medium");
+    // target is not matched — no font-medium
     const tgtEl = screen.getByText("/campaigns/summer-2026");
-    expect(tgtEl.className).toContain("muted-foreground");
+    expect(tgtEl.className).not.toContain("font-medium");
   });
 
   it("RED-4: section has aria-label including the map name", () => {
@@ -171,7 +181,7 @@ describe("MatchedMapGroup", () => {
     expect(onEditMapSettings).toHaveBeenCalledWith(baseMap);
   });
 
-  it("RED-10: header is a Collapsible trigger button and toggles body visibility", async () => {
+  it("RED-10: V4 anatomy — no Collapsible toggle; cp-item rows are always visible; Edit map button present", () => {
     render(
       <MatchedMapGroup
         map={baseMap}
@@ -182,12 +192,9 @@ describe("MatchedMapGroup", () => {
         onEditMapSettings={vi.fn()}
       />
     );
-    const trigger = screen.getByRole("button", { name: /Toggle Marketing campaigns/i });
-    expect(trigger).toBeDefined();
-    // Default open → body present
-    expect(screen.queryByRole("button", { name: /Edit settings for Marketing campaigns/i })).not.toBeNull();
-    await userEvent.click(trigger);
-    // After collapse the body's edit button should no longer be in the accessible tree.
-    expect(screen.queryByRole("button", { name: /Edit settings for Marketing campaigns/i })).toBeNull();
+    // V4: Collapsible is removed; items are always visible as cp-item cards
+    expect(screen.queryByRole("button", { name: /Toggle Marketing campaigns/i })).toBeNull();
+    // Edit settings button should be present
+    expect(screen.getByRole("button", { name: /Edit settings for Marketing campaigns/i })).toBeDefined();
   });
 });

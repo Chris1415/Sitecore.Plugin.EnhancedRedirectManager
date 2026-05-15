@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Context Panel · Redirect Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="mesh" aria-hidden="true">
+      <span class="blob-c"></span>
+      <span class="blob-d"></span>
+    </div>
+    <div class="mesh-grain" aria-hidden="true"></div>
+
+    <nav class="topnav">
+      <div class="topnav-inner">
+        <a href="index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Redirect Manager</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Overview</a>
+          <a href="full-page.html" class="nav-link">Full Page</a>
+          <a href="context-panel.html" class="nav-link active">Context Panel</a>
+          <a href="dashboard-widget.html" class="nav-link">Widget</a>
+        </div>
+        <a href="full-page.html" class="btn btn-ghost">
+          Open full workspace
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+    <main class="panel-shell">
+      <div class="panel-frame-label">Context Panel · 360px · Iframe</div>
+
+      <div class="panel-context-banner">
+        <div class="panel-context-title gradient-text">Redirects for this page</div>
+        <div class="panel-context-sub">
+          Three redirects currently point at the page you're editing. Add, remove, or audit them — without leaving the editor.
+        </div>
+      </div>
+
+      <div class="panel-current-page">
+        <span class="panel-current-page-label">Editing</span>
+        <span class="panel-current-page-url">/products/aurora-light-set</span>
+      </div>
+
+      <div>
+        <div class="panel-section-title">
+          <span>Active redirects</span>
+          <span class="count-badge mono"><span data-count="3">0</span></span>
+        </div>
+      </div>
+
+      <div class="panel-redirect-item">
+        <div class="panel-redirect-source">/promo/aurora-launch</div>
+        <div class="panel-redirect-arrow">↓</div>
+        <div class="panel-redirect-target">/products/aurora-light-set</div>
+        <div class="panel-redirect-meta">
+          <span class="pill-301">301</span>
+          <span class="lang-pill lang-en">EN</span>
+          <span style="font-size:11px;color:var(--fg-tertiary);margin-left:auto">2h ago</span>
+        </div>
+      </div>
+
+      <div class="panel-redirect-item">
+        <div class="panel-redirect-source">/de/promo/aurora-start</div>
+        <div class="panel-redirect-arrow">↓</div>
+        <div class="panel-redirect-target">/de/produkte/aurora-licht-set</div>
+        <div class="panel-redirect-meta">
+          <span class="pill-301">301</span>
+          <span class="lang-pill lang-de">DE</span>
+          <span style="font-size:11px;color:var(--fg-tertiary);margin-left:auto">2h ago</span>
+        </div>
+      </div>
+
+      <div class="panel-redirect-item">
+        <div class="panel-redirect-source">/products/aurora-preview</div>
+        <div class="panel-redirect-arrow">↓</div>
+        <div class="panel-redirect-target">/products/aurora-light-set</div>
+        <div class="panel-redirect-meta">
+          <span class="pill-302">302</span>
+          <span class="lang-pill lang-en">EN</span>
+          <span style="font-size:11px;color:var(--fg-tertiary);margin-left:auto">yesterday</span>
+        </div>
+      </div>
+
+      <button class="panel-add-cta" data-ripple>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 5v14M5 12h14" />
+        </svg>
+        Add redirect to this page
+      </button>
+
+      <div style="margin-top:var(--space-4); padding:var(--space-4); border-radius:12px; background:rgba(56,189,248,0.06); border:1px solid rgba(56,189,248,0.18);">
+        <div style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--aurora-blue); margin-bottom:6px; display:flex; align-items:center; gap:6px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="12" height="12" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4M12 8h.01" />
+          </svg>
+          Tip
+        </div>
+        <div style="font-size:12px; color:var(--fg-secondary); line-height:1.5;">
+          When you rename or move this page, Redirect Manager can auto-suggest a 301 from the old path. Enable in
+          <span style="color:var(--aurora-violet); font-weight:500">Settings → Page rename hooks</span>.
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

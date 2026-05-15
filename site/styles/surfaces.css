@@ -1,0 +1,1255 @@
+/* ============================================================================
+ * surfaces.css — per-surface layout shells inheriting from elevated.css.
+ *
+ * Layout grammar (grid templates, sticky topbars, panel widths) for the 3
+ * Marketplace extension-point surfaces:
+ *   Full Page  (.fp-*)     — operator workspace at 1280px design width
+ *   Context Panel (.cp-*)  — narrow 360px iframe surface
+ *   Dashboard Widget (.dw-*) — compact 480px tile
+ *
+ * Also contains shared visual atoms used across surfaces.
+ *
+ * Discipline: all colors/gradients/shadows compose Blok semantic tokens.
+ * Zero #hex literals. No plume styles (those live in elevated-plumes.css,
+ * imported ONLY by Full Page route files per ADR-0027).
+ * ============================================================================ */
+
+/* ============================================================================
+ * HAHN SOLO FOOTER — fixed bottom-right, z-index: 50 (carry from PRD-000)
+ * Below modal overlay (z-index: 100), above topbar (z-index: 40).
+ * ========================================================================== */
+
+.hahn-solo-footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 50;
+  padding: 0.5rem;
+  pointer-events: none;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  opacity: 0.5;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================================
+ * FULL PAGE — operator workspace at 1280px design width
+ * z-index hierarchy: plume backdrop -1 | content 0 | topbar 40 | footer 50
+ * ========================================================================== */
+
+.fp-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Sticky frosted topbar — z-index: 40 (below HahnSoloFooter at 50) */
+.fp-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.875rem 1.5rem;
+  background: color-mix(in oklch, var(--background) 78%, transparent);
+  backdrop-filter: blur(var(--v4-glass-blur, 18px)) saturate(var(--v4-glass-saturation, 160%));
+  -webkit-backdrop-filter: blur(var(--v4-glass-blur, 18px)) saturate(var(--v4-glass-saturation, 160%));
+  border-bottom: 1px solid var(--border);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .fp-topbar {
+    background: color-mix(in oklch, var(--background) 95%, var(--primary) 5%);
+  }
+}
+.fp-topbar__title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+.fp-topbar__title h1 {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.fp-topbar__actions {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+/* Workspace hero zone — slimmed (operator polish 2026-05-15).
+   Was a tall marketing card (~280-350px); now a compact ~140px strip with
+   a single CTA cluster on the right. */
+.fp-hero {
+  position: relative;
+  margin: 0.75rem 1rem 0;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in oklch, var(--primary) 25%, var(--border));
+  background:
+    radial-gradient(circle at 90% 0%, color-mix(in oklch, var(--primary) 12%, transparent), transparent 60%),
+    color-mix(in oklch, var(--card) 85%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.fp-hero__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  max-width: 44rem;
+  min-width: 0;
+}
+.fp-hero__headline {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3.6vw, 2.25rem);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin: 0;
+  color: var(--foreground);
+}
+.fp-hero__sub {
+  color: var(--muted-foreground);
+  font-size: var(--text-sm);
+  margin: 0.125rem 0 0;
+  line-height: 1.4;
+  max-width: 42rem;
+}
+.fp-hero__cta {
+  display: inline-flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Stat strip — 5 real tiles (2-up phone, 3-up tablet, 5-up desktop).
+   Mappings · 301 · 302 · Server Transfer · Conflicts */
+.fp-stat-strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+@media (min-width: 768px) {
+  .fp-stat-strip {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1100px) {
+  .fp-stat-strip {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+.fp-stat {
+  padding: 1rem 1.25rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 220ms var(--v4-premium-ease, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color 220ms var(--v4-premium-ease, cubic-bezier(0.16, 1, 0.3, 1)),
+    box-shadow 220ms var(--v4-premium-ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+.fp-stat:hover {
+  transform: translateY(-2px) scale(1.005);
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
+  box-shadow: 0 12px 32px color-mix(in oklch, var(--primary) 14%, transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .fp-stat,
+  .fp-stat:hover {
+    transform: none;
+    transition: none;
+  }
+}
+.fp-stat__value {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: var(--foreground);
+}
+.fp-stat__label {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+.fp-stat__sub {
+  font-size: var(--text-2xs);
+  color: var(--success-foreground);
+  font-family: var(--font-mono);
+}
+/* Warning tone — applied to .fp-stat[data-tone="warning"] (e.g. Conflicts > 0).
+   Drives the sub-line color, value tint, and bottom-edge spark glyph so the
+   tile reads as "this needs attention" instead of borrowing success-green. */
+.fp-stat[data-tone="warning"] .fp-stat__sub {
+  color: var(--warning-foreground, var(--destructive-foreground));
+}
+.fp-stat[data-tone="warning"] .fp-stat__value {
+  color: var(--warning-foreground, var(--destructive-foreground));
+}
+.fp-stat[data-tone="warning"] .fp-stat__spark {
+  background: linear-gradient(
+    180deg,
+    transparent,
+    color-mix(in oklch, var(--warning-foreground, var(--destructive-foreground)) 18%, transparent)
+  );
+}
+.fp-stat[data-tone="warning"]:hover {
+  border-color: color-mix(in oklch, var(--warning-foreground, var(--destructive-foreground)) 50%, var(--border));
+  box-shadow: 0 12px 32px color-mix(in oklch, var(--warning-foreground, var(--destructive-foreground)) 16%, transparent);
+}
+/* Clickable stat tile (Conflicts when count > 0) — reset native button defaults
+   and signal interactivity with a stronger hover lift + cursor: pointer. */
+button.fp-stat--clickable {
+  appearance: none;
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  cursor: pointer;
+}
+button.fp-stat--clickable:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.fp-stat__spark {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 36%;
+  background: linear-gradient(180deg, transparent, color-mix(in oklch, var(--primary) 14%, transparent));
+  border-bottom-left-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+  pointer-events: none;
+}
+
+/* Body grid: rail + main column at ≥1024px */
+.fp-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  flex: 1;
+}
+@media (min-width: 1024px) {
+  .fp-body {
+    /* Wider rail (operator polish 2026-05-15) — was 320px; bumped to 380px so
+       map names + RedirectType badge fit on a single line without truncation. */
+    grid-template-columns: 380px 1fr;
+  }
+}
+
+/* Left rail — Redirect maps list.
+   Removed `position: sticky; top: 5.5rem; align-self: flex-start` from the
+   old PRD-000 scrolling-page design. In the new overflow-hidden grid body,
+   align-self: flex-start kept the rail at intrinsic height so the inner
+   `flex-1` list section collapsed to 0 px (operator polish 2026-05-15).
+   Rail now stretches to fill its grid row, which lets the inner list grow. */
+.fp-rail {
+  align-self: stretch;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  min-height: 0;
+}
+.fp-rail__hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.25rem 0.5rem 0.5rem;
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  font-weight: 500;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.25rem;
+}
+
+/* Map list row — single static dot color; no --draft variant (FR-R4 + D7) */
+.lr-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition:
+    background-color 200ms var(--v4-premium-ease, cubic-bezier(0.16, 1, 0.3, 1)),
+    transform 200ms var(--v4-premium-ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+.lr-row:hover {
+  background: var(--muted);
+  transform: translateX(2px);
+}
+.lr-row[aria-selected="true"] {
+  background: color-mix(in oklch, var(--primary) 12%, transparent);
+  border: 1px solid color-mix(in oklch, var(--primary) 22%, transparent);
+}
+.lr-row[aria-selected="true"] .lr-row__name {
+  color: var(--primary);
+  font-weight: 600;
+}
+/* Single static dot — no --draft variant */
+.lr-row__dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: var(--primary);
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--primary) 25%, transparent);
+}
+.lr-row__main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.lr-row__name {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--foreground);
+}
+.lr-row__meta {
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+}
+@media (prefers-reduced-motion: reduce) {
+  .lr-row,
+  .lr-row:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+.fp-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+/* Map detail panel — right column */
+.fp-detail {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.fp-detail__hd {
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in oklch, var(--primary) 10%, transparent), transparent 50%),
+    var(--card);
+}
+.fp-detail__hd h2 {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.fp-detail__hd p {
+  margin: 0.125rem 0 0;
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}
+.fp-detail__hd-actions {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+.fp-detail__tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklch, var(--muted) 40%, transparent);
+  flex-wrap: wrap;
+}
+.fp-detail__search {
+  flex: 1;
+  min-width: 12rem;
+}
+
+/* Mappings table — Status column REMOVED per architecture § 11.2 */
+.fp-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.fp-table thead th {
+  text-align: left;
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-foreground);
+  font-weight: 500;
+  padding: 0.625rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklch, var(--muted) 30%, transparent);
+}
+.fp-table tbody td {
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-sm);
+  vertical-align: middle;
+}
+.fp-table tbody tr:hover {
+  background: color-mix(in oklch, var(--primary) 4%, transparent);
+}
+.fp-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.fp-table .mono {
+  color: var(--muted-foreground);
+}
+.fp-table .url-arrow {
+  color: var(--primary);
+  padding: 0 0.375rem;
+  font-family: var(--font-mono);
+}
+.fp-row-actions {
+  display: inline-flex;
+  gap: 0.25rem;
+  opacity: 0.4;
+  transition: opacity 180ms;
+}
+.fp-table tbody tr:hover .fp-row-actions {
+  opacity: 1;
+}
+
+/* ============================================================================
+ * CONTEXT PANEL — narrow 360px iframe surface
+ * Quieter motion budget: hover lifts + single hero count-up only (ADR-0027).
+ * ========================================================================== */
+
+.cp-shell {
+  /* Context Panel embeds in iframes of varying width — narrow (~360px) when
+   * pinned beside the Pages canvas, but can be much wider when the host
+   * stretches the panel. Take the full host width and let internal padding
+   * keep the content readable. A max-width cap prevents the column from
+   * sprawling on ultra-wide hosts. */
+  width: 100%;
+  max-width: 720px;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+.cp-header {
+  padding: 1.25rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.cp-header__eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+.cp-header h1 {
+  font-family: var(--font-sans);
+  font-size: clamp(1.5rem, 8vw, 2rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 0;
+  line-height: 1.05;
+  color: var(--foreground);
+}
+.cp-header__sub {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  line-height: 1.5;
+  margin: 0.25rem 0 0;
+}
+.cp-header__meta {
+  display: inline-flex;
+  gap: 0.375rem;
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}
+.cp-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+/* Toolbar row — RegexBanner + actions on a single line. */
+.cp-toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cp-toolbar-row > .cp-regex-banner {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.cp-toolbar-row__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  flex-shrink: 0;
+}
+
+/* Compact regex/match-scope notice — single-line callout, low visual weight. */
+.cp-regex-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: color-mix(in oklch, var(--foreground) 4%, transparent);
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  line-height: 1.3;
+  min-width: 0;
+  /* Match the icon-button height so banner + actions stay vertically aligned
+   * without one side dictating the row height. */
+  height: 1.75rem;
+}
+.cp-regex-banner__icon {
+  height: 0.875rem;
+  width: 0.875rem;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.cp-regex-banner__text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Hero summary tile — two-column split (inbound / outbound) */
+.cp-summary {
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  background: color-mix(in oklch, var(--primary) 8%, transparent);
+  border: 1px solid color-mix(in oklch, var(--primary) 22%, transparent);
+}
+.cp-summary--split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0;
+  overflow: hidden;
+}
+.cp-summary__col {
+  padding: 0.875rem 1rem;
+  min-width: 0;
+}
+.cp-summary__col + .cp-summary__col {
+  border-left: 1px solid color-mix(in oklch, var(--primary) 22%, transparent);
+}
+.cp-summary__value {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--primary);
+}
+.cp-summary__label {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+  margin-top: 0.375rem;
+}
+
+/* QuickRedirectForm — inline always-visible form (replaces AddRedirectModal) */
+.cp-quick-form {
+  padding: 0.875rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  box-shadow: var(--shadow-sm);
+}
+.cp-quick-form__label {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--foreground);
+}
+.cp-quick-form__multi-match {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--border);
+  margin-bottom: 0.25rem;
+}
+.cp-quick-form__multi-match-label {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+.cp-quick-form__row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.cp-quick-form__type {
+  width: 7.5rem;
+  flex-shrink: 0;
+}
+.cp-quick-form__type[aria-disabled="true"] {
+  background: var(--muted);
+  color: var(--muted-foreground);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.cp-quick-form__arrow {
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  white-space: nowrap;
+}
+/* Direction toggle — replaces the static arrow span. Click flips between
+ * "X → this page" (default) and "this page → X". */
+button.cp-quick-form__direction {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 160ms var(--v4-premium-ease, ease-out),
+              color 160ms var(--v4-premium-ease, ease-out),
+              background 160ms var(--v4-premium-ease, ease-out);
+}
+button.cp-quick-form__direction:hover {
+  border-color: color-mix(in oklch, var(--foreground) 24%, transparent);
+  color: var(--foreground);
+  background: color-mix(in oklch, var(--foreground) 4%, transparent);
+}
+button.cp-quick-form__direction:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+button.cp-quick-form__direction[aria-pressed="true"] {
+  border-color: color-mix(in oklch, var(--foreground) 20%, transparent);
+  color: var(--foreground);
+}
+.cp-quick-form__hint {
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  line-height: 1.4;
+}
+.cp-quick-form__auto-name {
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  line-height: 1.4;
+}
+.cp-quick-form__auto-name strong {
+  color: var(--primary);
+  font-weight: 500;
+}
+.cp-quick-form__add {
+  margin-left: auto;
+}
+
+/* Existing redirects list (matched-rows) */
+.cp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cp-list__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.25rem 0.5rem;
+}
+.cp-list__head-label {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  font-weight: 500;
+}
+.cp-item {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  transition: border-color 180ms var(--v4-premium-ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+.cp-item:hover {
+  border-color: color-mix(in oklch, var(--primary) 30%, var(--border-a11y));
+}
+.cp-item__hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+/* Redirect-type pill — subtle neutral chrome. Readable in both themes,
+ * doesn't compete with the URL row for attention. */
+.cp-item .cp-item__type-badge {
+  background: color-mix(in oklch, var(--foreground) 6%, transparent);
+  border: 1px solid color-mix(in oklch, var(--foreground) 14%, transparent);
+  color: var(--muted-foreground);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.cp-item__url {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--foreground);
+  word-break: break-all;
+  line-height: 1.4;
+}
+.cp-item__url .arrow {
+  color: var(--primary);
+  font-weight: 600;
+  padding: 0 0.25rem;
+}
+.cp-item__meta {
+  display: flex;
+  gap: 0.375rem;
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+}
+.cp-item__meta .mono {
+  font-family: var(--font-mono);
+}
+.cp-item__meta .sep {
+  opacity: 0.5;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cp-item,
+  .cp-item:hover {
+    transition: none;
+  }
+}
+
+/* Empty-state guidance copy */
+.cp-empty-guidance {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  line-height: 1.55;
+  padding: 0.5rem 0.25rem 0;
+}
+
+/* CTA to full workspace */
+.cp-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--background);
+  border: 1px solid var(--border-a11y);
+  color: var(--foreground);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+.cp-cta:hover {
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border-a11y));
+  background: color-mix(in oklch, var(--primary) 4%, transparent);
+}
+.cp-cta__left {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Badge cluster entrance animation — replays on every refresh because the
+   wrapper in DashboardWidget is keyed on refreshKey. */
+@keyframes dw-badge-pop {
+  0%   { opacity: 0; transform: translateY(-4px) scale(0.92); }
+  60%  { opacity: 1; transform: translateY(0)    scale(1.04); }
+  100% { opacity: 1; transform: translateY(0)    scale(1); }
+}
+.dw-badge-cluster > * {
+  animation: dw-badge-pop 520ms var(--v4-premium-ease, cubic-bezier(0.16, 1, 0.3, 1)) both;
+}
+.dw-badge-cluster > *:nth-child(2) { animation-delay: 80ms; }
+@media (prefers-reduced-motion: reduce) {
+  .dw-badge-cluster > * {
+    animation: none;
+  }
+}
+
+/* ============================================================================
+ * DASHBOARD WIDGET — compact 480px tile
+ * Quieter motion budget: hover lifts + single hero count-up only (ADR-0027).
+ * No plume backdrop (ADR-0027 Full Page only).
+ * ========================================================================== */
+
+.dw-shell {
+  /* Edge-to-edge in the iframe (operator polish 2026-05-15): no outer card
+     chrome — the iframe boundary IS the card. Border-radius/box-shadow/border
+     dropped so the widget feels native to the host dashboard surface. */
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  background: color-mix(in oklch, var(--card) 92%, transparent);
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Wide-viewport reflow — 3-column layout (hero | tiles | lists).
+   Below 960px: columns stack (default single-column flow).
+   At ≥960px: 3 equal columns with the column wrappers from JSX. */
+.dw-wide-zone {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  /* Bottom space at narrow viewports so the last content row doesn't sit flush
+     against the iframe edge (small variant — typical 400-500 px column slot). */
+  padding-bottom: 1.25rem;
+}
+.dw-wide-zone__col {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+/* Hero column wrapping: include subhead, hero stat, sparkline */
+.dw-wide-zone__col--hero {
+  padding: 0 1.25rem;
+}
+/* Tiles column: ensure the 2×2 grid fits column width */
+.dw-wide-zone__col--tiles {
+  padding: 1rem 1.25rem 0;
+}
+/* Lists column: TopDestinations + RecentlyShipped stacked */
+.dw-wide-zone__col--lists {
+  padding: 0 1.25rem 0;
+}
+/* At wide viewports, lay out the three columns side by side and remove the
+   top borders that gave the stacked sections separator lines (the column
+   gutters do the visual separation now). */
+@media (min-width: 960px) {
+  .dw-wide-zone {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1.25rem;
+    align-items: start;
+    /* Outer padding gives content breathing room from the iframe edges now
+       that the .dw-shell card chrome (border + radius + p-3 wrapper) is gone. */
+    padding: 0.5rem 1rem;
+  }
+  .dw-wide-zone__col--hero,
+  .dw-wide-zone__col--tiles,
+  .dw-wide-zone__col--lists {
+    padding: 0;
+  }
+  /* Tiles in middle column: keep 2×2 (single column has 2-up); both render OK
+     at column width but lock to 2 cols for visual consistency. */
+  .dw-wide-zone__col--tiles .dw-tiles {
+    grid-template-columns: repeat(2, 1fr);
+    padding-top: 0;
+    border-top: none;
+  }
+  /* Hero spans top of column 1 without the stat-strip border below.
+     Stack the big number above the ACTIVE REDIRECTS / +N delta sub-stack so
+     the number has horizontal room and the delta line isn't clipped at narrow
+     column widths. */
+  .dw-wide-zone__col--hero .dw-hero {
+    padding-bottom: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.375rem;
+  }
+  .dw-wide-zone__col--hero .dw-hero__sub {
+    padding-bottom: 0;
+    flex: none;
+  }
+  /* Sparkline becomes inline to the hero column instead of full-bleed */
+  .dw-wide-zone__col--hero .dw-spark {
+    margin: 0;
+    padding: 0.75rem 0 0;
+  }
+  /* Lists: drop the top borders since the column gutter separates them now */
+  .dw-wide-zone__col--lists .dw-rows,
+  .dw-wide-zone__col--lists .dw-recent {
+    margin-top: 0;
+    border-top: none;
+    padding-top: 0;
+  }
+  .dw-wide-zone__col--lists .dw-recent {
+    margin-top: 1.25rem;
+  }
+}
+/* Very-wide viewport (≥1280px): split lists into a 4th column.
+   `display: contents` flattens the lists wrapper so its children (TopDestinations
+   and RecentlyShipped) become direct grid items, each taking its own column. */
+@media (min-width: 1280px) {
+  .dw-wide-zone {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .dw-wide-zone__col--lists {
+    display: contents;
+  }
+  .dw-wide-zone__col--lists .dw-recent {
+    margin-top: 0;
+  }
+}
+.dw-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 0% 0%, color-mix(in oklch, var(--primary) 14%, transparent), transparent 55%);
+  pointer-events: none;
+  z-index: 0;
+}
+.dw-content {
+  position: relative;
+  z-index: 1;
+  padding: 0.875rem 1rem 0.5rem;
+}
+
+/* Header */
+.dw-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding-bottom: 0.625rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0.625rem;
+}
+.dw-hd h2 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+.dw-hd p {
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  margin: 0.125rem 0 0;
+  font-family: var(--font-mono);
+}
+
+/* Marketing-grade subhead (D5 zone b — Dashboard Widget only) */
+.dw-subhead {
+  font-size: var(--text-base);
+  color: var(--foreground);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem;
+  line-height: 1.35;
+}
+
+/* Hero stat zone */
+.dw-hero {
+  display: flex;
+  align-items: end;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+.dw-hero__big {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 4.5rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+  background: linear-gradient(135deg, var(--foreground), color-mix(in oklch, var(--primary) 70%, var(--foreground)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@supports not (background-clip: text) {
+  .dw-hero__big {
+    color: var(--foreground);
+    background: none;
+  }
+}
+.dw-hero__sub {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  padding-bottom: 0.5rem;
+  flex: 1;
+}
+.dw-hero__sub small {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+.dw-hero__sub strong {
+  font-size: var(--text-xs);
+  color: var(--success-foreground);
+  font-family: var(--font-mono);
+}
+
+/* Sparkline */
+.dw-spark {
+  position: relative;
+  margin: 0 -1.25rem;
+  padding: 0 1.25rem 1rem;
+  height: 60px;
+  overflow: hidden;
+}
+.dw-spark svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+.dw-spark path.fill {
+  fill: url(#dw-spark-grad);
+  opacity: 0.85;
+}
+.dw-spark path.stroke {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 1.5;
+}
+
+/* Real tiles + 4th mock tile — 2x2 grid */
+.dw-tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.625rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.dw-tile {
+  padding: 0.75rem 0.875rem;
+  background: color-mix(in oklch, var(--card) 80%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  transition:
+    transform 200ms var(--v4-premium-ease, cubic-bezier(0.16, 1, 0.3, 1)),
+    border-color 200ms var(--v4-premium-ease, cubic-bezier(0.16, 1, 0.3, 1)),
+    box-shadow 200ms var(--v4-premium-ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+.dw-tile:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in oklch, var(--primary) 30%, var(--border));
+  box-shadow: 0 6px 18px color-mix(in oklch, var(--primary) 8%, transparent);
+}
+.dw-tile__value {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  color: var(--foreground);
+}
+.dw-tile__label {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+}
+.dw-tile__sub {
+  font-size: var(--text-2xs);
+  color: var(--success-foreground);
+  font-family: var(--font-mono);
+}
+@media (prefers-reduced-motion: reduce) {
+  .dw-tile,
+  .dw-tile:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Top destinations rows */
+.dw-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+.dw-rows__head {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+  margin-bottom: 0.5rem;
+}
+.dw-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+.dw-row__name {
+  font-size: var(--text-xs);
+  color: var(--foreground);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+}
+.dw-row__name .swatch {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 2px;
+  background: var(--primary);
+  flex-shrink: 0;
+}
+.dw-row__right {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.dw-row__bar {
+  width: 12rem;
+  height: 0.625rem;
+  /* Light, neutral track that contrasts against the fill on both themes.
+     Mixing foreground at low opacity gives a faint white-wash in dark mode
+     and a faint grey in light mode — always lighter/cooler than the fill. */
+  background: color-mix(in oklch, var(--foreground) 12%, transparent);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+.dw-row__bar-fill {
+  height: 100%;
+  /* Match the sparkline stroke color so the bars read as "the same metric in
+     bar form" — theme-aware via --primary (vivid purple in light theme,
+     pale lavender in dark theme; both pop against the faint track above). */
+  background: var(--primary);
+  /* Width is animated by JS (TopDestinations.tsx sets width to barFillPct in
+     a RAF after mount). CSS just provides the transition. Driving width by
+     JS is more reliable than @keyframes on a CSS var, which would require
+     @property registration to interpolate. */
+  width: 0%;
+  transition: width 1100ms var(--v4-premium-ease, cubic-bezier(0.16, 1, 0.3, 1));
+}
+@media (prefers-reduced-motion: reduce) {
+  .dw-row__bar-fill {
+    transition: none;
+  }
+}
+.dw-row__count {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  min-width: 3rem;
+  text-align: right;
+}
+
+/* Recently shipped mini-widget */
+.dw-recent {
+  margin-top: 1rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+}
+.dw-recent__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.625rem;
+}
+.dw-recent__title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 0;
+}
+.dw-recent__sub {
+  font-size: var(--text-2xs);
+  font-family: var(--font-mono);
+  color: var(--muted-foreground);
+  margin: 0.0625rem 0 0;
+}
+.dw-recent__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.dw-recent__row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: var(--radius-md);
+  background: color-mix(in oklch, var(--card) 60%, transparent);
+  border: 1px solid var(--border);
+}
+.dw-recent__row-pair {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--foreground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dw-recent__row-pair .arrow {
+  color: var(--primary);
+  padding: 0 0.25rem;
+}
+
+/* Footer attribution */
+.dw-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: color-mix(in oklch, var(--muted) 50%, transparent);
+  border-top: 1px solid var(--border);
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+}

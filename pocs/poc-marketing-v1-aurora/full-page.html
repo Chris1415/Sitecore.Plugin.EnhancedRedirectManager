@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Full Page · Redirect Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="mesh" aria-hidden="true">
+      <span class="blob-c"></span>
+      <span class="blob-d"></span>
+    </div>
+    <div class="mesh-grain" aria-hidden="true"></div>
+
+    <nav class="topnav">
+      <div class="topnav-inner">
+        <a href="index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Redirect Manager</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Overview</a>
+          <a href="full-page.html" class="nav-link active">Full Page</a>
+          <a href="context-panel.html" class="nav-link">Context Panel</a>
+          <a href="dashboard-widget.html" class="nav-link">Widget</a>
+        </div>
+        <button class="btn btn-primary" data-ripple>
+          New redirect map
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+            <path d="M12 5v14M5 12h14" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+
+    <section class="workspace shell">
+      <header class="workspace-header">
+        <div>
+          <span class="eyebrow">Full Page Extension</span>
+          <h1 class="workspace-title gradient-text">Redirect Maps</h1>
+          <p class="workspace-sub">
+            Every active redirect across your tenants and locales. Filter by language, lifecycle, or status — and ship
+            with confidence.
+          </p>
+        </div>
+        <div class="workspace-actions">
+          <button class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+            </svg>
+            Export
+          </button>
+          <button class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+              <path d="M21 8v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8M17 8V5a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v3M3 8h18" />
+            </svg>
+            Archive
+          </button>
+          <button class="btn btn-primary" data-ripple>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+            New map
+          </button>
+        </div>
+      </header>
+
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7" />
+            <path d="M21 21l-4.3-4.3" />
+          </svg>
+          <input type="search" placeholder="Search by URL, map name, or author…" aria-label="Search redirects" />
+          <span style="font-size:11px;color:rgba(255,255,255,0.4);font-family:'Inter',monospace">⌘K</span>
+        </div>
+        <div class="filter-chips">
+          <button class="chip chip-active">All</button>
+          <button class="chip">Active</button>
+          <button class="chip">Draft</button>
+          <button class="chip">301 only</button>
+          <button class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="12" height="12">
+              <path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z" />
+            </svg>
+            Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- Map list -->
+      <div class="map-list">
+        <!-- MAP 1 -->
+        <article class="map-card">
+          <div class="map-card-top">
+            <div class="map-meta">
+              <h3 class="map-title">
+                Black Friday 2025
+                <span class="map-id mono">RM-2025-014</span>
+              </h3>
+              <p class="map-desc">Seasonal promo redirects routing legacy campaign URLs into the unified Black Friday hub.</p>
+            </div>
+            <div class="map-stats">
+              <div class="map-stat">
+                <span class="map-stat-value mono"><span data-count="248">0</span></span>
+                <span class="map-stat-label">Redirects</span>
+              </div>
+              <div class="map-stat">
+                <span class="map-stat-value mono"><span data-count="18">0</span>k</span>
+                <span class="map-stat-label">Hits / 24h</span>
+              </div>
+              <span class="status status-active">Active</span>
+            </div>
+          </div>
+          <div class="lang-row">
+            <span class="lang-pill lang-en">EN</span>
+            <span class="lang-pill lang-de">DE</span>
+            <span class="lang-pill lang-fr">FR</span>
+            <span class="lang-pill lang-ja">JA</span>
+            <span class="lang-pill lang-ko">KO</span>
+          </div>
+          <div class="url-pairs">
+            <div class="url-pair">
+              <span class="url">/promo/black-friday-legacy</span>
+              <span class="url-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+              <span class="url url-target">/campaigns/black-friday-2025</span>
+              <span class="pill-301">301</span>
+              <span class="lang-pill lang-en" style="margin-left:auto">EN</span>
+            </div>
+            <div class="url-pair">
+              <span class="url">/de/promo-bf-2024</span>
+              <span class="url-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+              <span class="url url-target">/de/kampagnen/black-friday-2025</span>
+              <span class="pill-301">301</span>
+              <span class="lang-pill lang-de">DE</span>
+            </div>
+            <div class="url-pair">
+              <span class="url">/fr/promotions-archive</span>
+              <span class="url-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+              <span class="url url-target">/fr/campagnes/black-friday-2025</span>
+              <span class="pill-301">301</span>
+              <span class="lang-pill lang-fr">FR</span>
+            </div>
+          </div>
+          <div class="map-footer">
+            <span>Updated <strong style="color:var(--fg-secondary)">2h ago</strong> by Maya Lindgren</span>
+            <div class="avatar-stack">
+              <span class="avatar">ML</span>
+              <span class="avatar">JT</span>
+              <span class="avatar">SK</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- MAP 2 -->
+        <article class="map-card">
+          <div class="map-card-top">
+            <div class="map-meta">
+              <h3 class="map-title">
+                EU Compliance Migration
+                <span class="map-id mono">RM-2025-009</span>
+              </h3>
+              <p class="map-desc">GDPR-required URL restructure consolidating legacy privacy and consent pages.</p>
+            </div>
+            <div class="map-stats">
+              <div class="map-stat">
+                <span class="map-stat-value mono"><span data-count="156">0</span></span>
+                <span class="map-stat-label">Redirects</span>
+              </div>
+              <div class="map-stat">
+                <span class="map-stat-value mono"><span data-count="4">0</span>k</span>
+                <span class="map-stat-label">Hits / 24h</span>
+              </div>
+              <span class="status status-active">Active</span>
+            </div>
+          </div>
+          <div class="lang-row">
+            <span class="lang-pill lang-en">EN</span>
+            <span class="lang-pill lang-de">DE</span>
+            <span class="lang-pill lang-fr">FR</span>
+          </div>
+          <div class="url-pairs">
+            <div class="url-pair">
+              <span class="url">/privacy-policy-2023</span>
+              <span class="url-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+              <span class="url url-target">/legal/privacy</span>
+              <span class="pill-301">301</span>
+              <span class="lang-pill lang-en">EN</span>
+            </div>
+            <div class="url-pair">
+              <span class="url">/de/datenschutz-alt</span>
+              <span class="url-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+              <span class="url url-target">/de/rechtliches/datenschutz</span>
+              <span class="pill-301">301</span>
+              <span class="lang-pill lang-de">DE</span>
+            </div>
+          </div>
+          <div class="map-footer">
+            <span>Updated <strong style="color:var(--fg-secondary)">yesterday</strong> by Ana Petrović</span>
+            <div class="avatar-stack">
+              <span class="avatar">AP</span>
+              <span class="avatar">RB</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- MAP 3 -->
+        <article class="map-card">
+          <div class="map-card-top">
+            <div class="map-meta">
+              <h3 class="map-title">
+                Q1 Product Launches
+                <span class="map-id mono">RM-2025-018</span>
+              </h3>
+              <p class="map-desc">Temporary 302s pointing pre-announce URLs to the launch hub; flips to 301 on GA.</p>
+            </div>
+            <div class="map-stats">
+              <div class="map-stat">
+                <span class="map-stat-value mono"><span data-count="42">0</span></span>
+                <span class="map-stat-label">Redirects</span>
+              </div>
+              <div class="map-stat">
+                <span class="map-stat-value mono"><span data-count="320">0</span></span>
+                <span class="map-stat-label">Hits / 24h</span>
+              </div>
+              <span class="status status-draft">Draft</span>
+            </div>
+          </div>
+          <div class="lang-row">
+            <span class="lang-pill lang-en">EN</span>
+            <span class="lang-pill lang-ja">JA</span>
+            <span class="lang-pill lang-ko">KO</span>
+          </div>
+          <div class="url-pairs">
+            <div class="url-pair">
+              <span class="url">/products/upcoming-q1</span>
+              <span class="url-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+              <span class="url url-target">/launch/spring-2025</span>
+              <span class="pill-302">302</span>
+              <span class="lang-pill lang-en">EN</span>
+            </div>
+            <div class="url-pair">
+              <span class="url">/ja/products/upcoming-q1</span>
+              <span class="url-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+              <span class="url url-target">/ja/launch/spring-2025</span>
+              <span class="pill-302">302</span>
+              <span class="lang-pill lang-ja">JA</span>
+            </div>
+          </div>
+          <div class="map-footer">
+            <span>Updated <strong style="color:var(--fg-secondary)">just now</strong> by Hideo Tanaka</span>
+            <div class="avatar-stack">
+              <span class="avatar">HT</span>
+              <span class="avatar">SP</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- MAP 4 -->
+        <article class="map-card">
+          <div class="map-card-top">
+            <div class="map-meta">
+              <h3 class="map-title">
+                Legacy WP Imports
+                <span class="map-id mono">RM-2024-203</span>
+              </h3>
+              <p class="map-desc">Wildcard rewrites mapping pre-2024 WordPress URLs onto the current content tree.</p>
+            </div>
+            <div class="map-stats">
+              <div class="map-stat">
+                <span class="map-stat-value mono"><span data-count="1840">0</span></span>
+                <span class="map-stat-label">Redirects</span>
+              </div>
+              <div class="map-stat">
+                <span class="map-stat-value mono"><span data-count="62">0</span>k</span>
+                <span class="map-stat-label">Hits / 24h</span>
+              </div>
+              <span class="status status-active">Active</span>
+            </div>
+          </div>
+          <div class="lang-row">
+            <span class="lang-pill lang-en">EN</span>
+          </div>
+          <div class="url-pairs">
+            <div class="url-pair">
+              <span class="url">/blog/2023/*</span>
+              <span class="url-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+              <span class="url url-target">/blog/archive/*</span>
+              <span class="pill-301">301</span>
+              <span class="lang-pill lang-en">EN</span>
+            </div>
+            <div class="url-pair">
+              <span class="url">/wp-content/uploads/*</span>
+              <span class="url-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+              <span class="url url-target">/media/legacy/*</span>
+              <span class="pill-301">301</span>
+              <span class="lang-pill lang-en">EN</span>
+            </div>
+            <div class="url-pair">
+              <span class="url">/old/products</span>
+              <span class="url-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+              <span class="url url-target">/products</span>
+              <span class="pill-301">301</span>
+              <span class="lang-pill lang-en">EN</span>
+            </div>
+          </div>
+          <div class="map-footer">
+            <span>Updated <strong style="color:var(--fg-secondary)">last week</strong> by Eden Carrasco</span>
+            <div class="avatar-stack">
+              <span class="avatar">EC</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>

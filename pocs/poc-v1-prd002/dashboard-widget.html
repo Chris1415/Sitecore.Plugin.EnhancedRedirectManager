@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard Widget · Redirect Manager (PRD-002 V4 Refined — operator polish 2026-05-15)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="elevated.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <!--
+      Operator polish iteration 2026-05-15:
+
+        • Edge-to-edge: outer card chrome dropped (.dw-shell has no border /
+          radius / shadow). The iframe boundary IS the card.
+        • Wide-zone reflow at ≥960 px (3-column) and ≥1280 px (4-column).
+          Below 960 px, columns collapse to single-column stacked.
+        • Preview Data banner removed from this surface (banner was visually
+          cluttering the small variant; mock styling is still distinguishable).
+        • HealthBadge promoted from footer into the header next to the title.
+        • Refresh button next to the site picker — remounts the entire
+          wide-zone subtree on click so animations restart together with the
+          real-data refetch.
+        • Tiles grid now has 8 REAL tiles (no mock 4th tile):
+            Maps · Mappings · 301 Permanent · 302 Temporary
+            Server Transfer · Avg/map · Largest map · Last updated
+        • Recently shipped: REAL data — top N most-recently-updated maps
+          (map-level only — stock Sitecore template has no per-mapping
+          updatedAt). Section renamed to "Recently shipped maps".
+        • Footer attribution dropped (was redundant with Last updated tile).
+
+      SIZE VARIANTS — the Cloud Portal embeds the Dashboard Widget iframe at
+      two very different widths depending on host context:
+
+        Wide variant   ~1200–1800 px — the Cloud Portal Test App and certain
+                                       full-width dashboard layouts. Render
+                                       in 3 or 4 columns.
+        Small variant  ~400–500 px   — typical column slot on a real site
+                                       dashboard alongside other widgets.
+                                       Stack single column.
+
+      All future widget designs must consider BOTH variants from the start.
+      Resize this browser window below 960 px to preview the small variant.
+    -->
+  </head>
+  <body class="dw-page">
+    <!-- Theme toggle -->
+    <div class="tone-toggle" data-theme-toggle role="group" aria-label="Theme">
+      <button class="tone-toggle__btn" data-theme="light" aria-pressed="false">Light</button>
+      <button class="tone-toggle__btn" data-theme="dark" aria-pressed="false">Dark</button>
+      <button class="tone-toggle__btn" data-theme="auto" aria-pressed="true">Auto</button>
+    </div>
+
+    <!-- The widget tile (edge-to-edge — no outer card chrome) -->
+    <div class="dw-shell">
+      <!-- Header (utility voice — title + HealthBadge LEFT; site name + picker + refresh + theme RIGHT) -->
+      <div class="dw-content" style="padding-bottom: 0;">
+        <header class="dw-hd">
+          <div style="display: flex; align-items: center; gap: 0.625rem;">
+            <h2>Redirect Manager</h2>
+            <span class="elev-success-badge">
+              <span class="glyph glyph--success" data-icon="check"></span>
+              all healthy
+            </span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <p style="font-size: var(--text-2xs); color: var(--muted-foreground); margin: 0; font-family: var(--font-mono);">
+              solo-website
+            </p>
+            <select class="blok-select" style="height: 1.75rem; font-size: var(--text-xs); width: 160px;" aria-label="Pick a site">
+              <option>solo-website</option>
+            </select>
+            <button class="blok-btn blok-btn--ghost" style="height: 1.75rem; width: 1.75rem; padding: 0;" aria-label="Refresh redirect counts" title="Refresh">
+              <span class="glyph" data-icon="refreshCw" style="width: 14px; height: 14px;"></span>
+            </button>
+            <button class="blok-btn blok-btn--ghost" style="height: 1.75rem; width: 1.75rem; padding: 0;" aria-label="Toggle theme" title="Theme">
+              <span class="glyph" data-icon="moon" style="width: 14px; height: 14px;"></span>
+            </button>
+          </div>
+        </header>
+      </div>
+
+      <!-- Wide-zone: 3 cols ≥960px, 4 cols ≥1280px, stacked below -->
+      <div class="dw-wide-zone">
+        <!-- ─── Column 1 — Overall numbers (hero + sparkline) ────────────── -->
+        <div class="dw-wide-zone__col dw-wide-zone__col--hero">
+          <!-- Marketing-grade subhead (D5 zone (b)) -->
+          <p class="dw-subhead">Your redirect operations, <span class="gradient-text">at a glance.</span></p>
+
+          <!-- Hero stat number (MOCK in POC; real total in production) -->
+          <div class="dw-hero" data-preview-mock="true">
+            <div class="dw-hero__big elev-count-up">
+              <span data-count="12428" data-duration="1400">0</span>
+            </div>
+            <div class="dw-hero__sub">
+              <small>Active redirects</small>
+              <strong>+412 this week</strong>
+            </div>
+          </div>
+
+          <!-- Gradient sparkline (MOCK) — aria-hidden -->
+          <div class="dw-spark" aria-hidden="true" data-preview-mock="true">
+            <svg viewBox="0 0 480 60" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="dw-spark-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="currentColor" stop-opacity="0.30" />
+                  <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <g style="color: var(--primary);">
+                <path class="fill" d="M0,42 L24,38 L48,40 L72,32 L96,34 L120,28 L144,30 L168,22 L192,26 L216,18 L240,24 L264,14 L288,18 L312,10 L336,16 L360,8 L384,12 L408,6 L432,10 L456,4 L480,8 L480,60 L0,60 Z" />
+                <path class="stroke" d="M0,42 L24,38 L48,40 L72,32 L96,34 L120,28 L144,30 L168,22 L192,26 L216,18 L240,24 L264,14 L288,18 L312,10 L336,16 L360,8 L384,12 L408,6 L432,10 L456,4 L480,8" />
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <!-- ─── Column 2 — 8 real stat tiles (2×4) ──────────────────────── -->
+        <div class="dw-wide-zone__col dw-wide-zone__col--tiles">
+          <div class="dw-tiles">
+            <div class="dw-tile">
+              <span class="dw-tile__value elev-count-up">3</span>
+              <span class="dw-tile__label">Maps</span>
+            </div>
+            <div class="dw-tile">
+              <span class="dw-tile__value elev-count-up">10</span>
+              <span class="dw-tile__label">Mappings</span>
+            </div>
+            <div class="dw-tile">
+              <span class="dw-tile__value elev-count-up">1</span>
+              <span class="dw-tile__label">301 Permanent</span>
+            </div>
+            <div class="dw-tile">
+              <span class="dw-tile__value elev-count-up">2</span>
+              <span class="dw-tile__label">302 Temporary</span>
+            </div>
+            <div class="dw-tile">
+              <span class="dw-tile__value elev-count-up">7</span>
+              <span class="dw-tile__label">Server Transfer</span>
+            </div>
+            <div class="dw-tile">
+              <span class="dw-tile__value elev-count-up">3.3</span>
+              <span class="dw-tile__label">Avg / map</span>
+            </div>
+            <div class="dw-tile">
+              <span class="dw-tile__value elev-count-up">7</span>
+              <span class="dw-tile__label">Largest map</span>
+            </div>
+            <div class="dw-tile">
+              <span class="dw-tile__value" style="font-size: 1rem; line-height: 1.4;">just now</span>
+              <span class="dw-tile__label">Last updated</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ─── Column 3 — Top destinations (MOCK) + Recently shipped maps (REAL) ─ -->
+        <div class="dw-wide-zone__col dw-wide-zone__col--lists">
+          <!-- Top destinations (MOCK) — 6 rows -->
+          <div class="dw-rows" data-preview-mock="true">
+            <span class="dw-rows__head">Top destinations</span>
+            <div class="dw-row">
+              <span class="dw-row__name"><span class="swatch"></span>/products</span>
+              <span class="dw-row__right">
+                <span class="dw-row__bar"><span class="dw-row__bar-fill" data-bar-fill="100"></span></span>
+                <span class="dw-row__count">3,184</span>
+              </span>
+            </div>
+            <div class="dw-row">
+              <span class="dw-row__name"><span class="swatch"></span>/black-friday</span>
+              <span class="dw-row__right">
+                <span class="dw-row__bar"><span class="dw-row__bar-fill" data-bar-fill="71"></span></span>
+                <span class="dw-row__count">2,247</span>
+              </span>
+            </div>
+            <div class="dw-row">
+              <span class="dw-row__name"><span class="swatch"></span>/campaigns/promo</span>
+              <span class="dw-row__right">
+                <span class="dw-row__bar"><span class="dw-row__bar-fill" data-bar-fill="50"></span></span>
+                <span class="dw-row__count">1,602</span>
+              </span>
+            </div>
+            <div class="dw-row">
+              <span class="dw-row__name"><span class="swatch"></span>/sale</span>
+              <span class="dw-row__right">
+                <span class="dw-row__bar"><span class="dw-row__bar-fill" data-bar-fill="32"></span></span>
+                <span class="dw-row__count">1,011</span>
+              </span>
+            </div>
+            <div class="dw-row">
+              <span class="dw-row__name"><span class="swatch"></span>/early-access</span>
+              <span class="dw-row__right">
+                <span class="dw-row__bar"><span class="dw-row__bar-fill" data-bar-fill="20"></span></span>
+                <span class="dw-row__count">638</span>
+              </span>
+            </div>
+            <div class="dw-row">
+              <span class="dw-row__name"><span class="swatch"></span>/newsletter-signup</span>
+              <span class="dw-row__right">
+                <span class="dw-row__bar"><span class="dw-row__bar-fill" data-bar-fill="13"></span></span>
+                <span class="dw-row__count">412</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Recently shipped maps (REAL — top N by updatedAt desc) -->
+          <section class="dw-recent" aria-label="Recently shipped maps">
+            <div class="dw-recent__head">
+              <div>
+                <p class="dw-recent__title">Recently shipped maps</p>
+                <p class="dw-recent__sub">Top 3</p>
+              </div>
+            </div>
+            <div class="dw-recent__rows">
+              <div class="dw-recent__row">
+                <span class="dw-recent__row-pair">
+                  <span style="font-weight: 500;">My Redirect Map 2</span>
+                  <span style="font-size: var(--text-xs); color: var(--muted-foreground);"> &middot; just now</span>
+                </span>
+                <span class="http-code http-code--server-transfer">Server Transfer</span>
+              </div>
+              <div class="dw-recent__row">
+                <span class="dw-recent__row-pair">
+                  <span style="font-weight: 500;">SEO</span>
+                  <span style="font-size: var(--text-xs); color: var(--muted-foreground);"> &middot; just now</span>
+                </span>
+                <span class="http-code http-code--302">302 Found</span>
+              </div>
+              <div class="dw-recent__row">
+                <span class="dw-recent__row-pair">
+                  <span style="font-weight: 500;">Black Friday</span>
+                  <span style="font-size: var(--text-xs); color: var(--muted-foreground);"> &middot; 5 m ago</span>
+                </span>
+                <span class="http-code http-code--301">301 Permanent</span>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <!-- (no footer — HealthBadge moved to header; Last updated lives in the tiles) -->
+    </div>
+
+    <!-- POC navigation -->
+    <nav style="display:flex; gap: 0.5rem; margin-top: 0.75rem; flex-wrap: wrap; justify-content: center;">
+      <a class="blok-btn blok-btn--ghost blok-btn--sm" href="index.html">&larr; Overview</a>
+      <a class="blok-btn blok-btn--ghost blok-btn--sm" href="full-page.html">Full Page</a>
+      <a class="blok-btn blok-btn--ghost blok-btn--sm" href="context-panel.html">Context Panel</a>
+    </nav>
+
+    <div class="hahn-solo-footer" aria-hidden="true">hahn-solo</div>
+
+    <script src="theme-toggle.js"></script>
+    <script src="icons.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

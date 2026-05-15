@@ -1,5 +1,7 @@
 # Smoke checklist — Import / Export round-trip (m4)
 
+> **PRD-002 carry-over verification:** The import/export schema (`redirect-manager/v1`), the 4-step wizard flow, and all conflict-resolution logic are unchanged in PRD-002. The visual chrome of `ImportRedirectMapModal` has been re-skinned with V4 Blok Elevated styling; functionality is identical. This checklist applies in full — no additional PRD-002 steps are required for import/export.
+
 > T066 — Real-tenant verification of the JSON export and 4-step import wizard.
 > Success metric **m4**: complete a full export → modify → import cycle with **zero rule loss** (modulo the newly-minted GUID caveat documented in ADR-0009).
 

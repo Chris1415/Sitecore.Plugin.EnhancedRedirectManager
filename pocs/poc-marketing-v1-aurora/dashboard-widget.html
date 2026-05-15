@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard Widget · Redirect Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="mesh" aria-hidden="true">
+      <span class="blob-c"></span>
+      <span class="blob-d"></span>
+    </div>
+    <div class="mesh-grain" aria-hidden="true"></div>
+
+    <nav class="topnav">
+      <div class="topnav-inner">
+        <a href="index.html" class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Redirect Manager</span>
+        </a>
+        <div class="nav-links">
+          <a href="index.html" class="nav-link">Overview</a>
+          <a href="full-page.html" class="nav-link">Full Page</a>
+          <a href="context-panel.html" class="nav-link">Context Panel</a>
+          <a href="dashboard-widget.html" class="nav-link active">Widget</a>
+        </div>
+        <a href="full-page.html" class="btn btn-ghost">
+          Open full workspace
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </nav>
+
+    <main class="widget-shell">
+      <div class="widget-frame-label">Dashboard Widget · 480px · Tile</div>
+
+      <article class="widget-card">
+        <header class="widget-header">
+          <div class="widget-title-block">
+            <span class="widget-title">Redirect Manager</span>
+            <span class="widget-sub">Live · last 24 hours</span>
+          </div>
+          <span class="widget-time">Updated now</span>
+        </header>
+
+        <!-- Hero stat -->
+        <div class="widget-hero-stat">
+          <span class="widget-hero-value mono"><span data-count="84926">0</span></span>
+          <span class="widget-trend">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="11" height="11" stroke-width="1.8">
+              <path d="M7 17l9.2-9.2M17 17V7H7" />
+            </svg>
+            +12.4%
+          </span>
+          <div class="widget-hero-label">Redirect hits today</div>
+        </div>
+
+        <!-- Sparkline -->
+        <div class="widget-spark">
+          <svg class="spark-svg" viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="sparkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#38bdf8" />
+                <stop offset="50%" stop-color="#8b5cf6" />
+                <stop offset="100%" stop-color="#ec4899" />
+              </linearGradient>
+              <linearGradient id="sparkArea" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="rgba(139, 92, 246, 0.45)" />
+                <stop offset="100%" stop-color="rgba(139, 92, 246, 0)" />
+              </linearGradient>
+            </defs>
+            <path
+              class="spark-area"
+              d="M0,60 L20,52 L40,55 L60,42 L80,46 L100,35 L120,40 L140,28 L160,34 L180,22 L200,30 L220,18 L240,24 L260,14 L280,20 L300,10 L320,16 L340,8 L360,12 L380,6 L400,9 L400,80 L0,80 Z"
+            />
+            <path
+              class="spark-path"
+              d="M0,60 L20,52 L40,55 L60,42 L80,46 L100,35 L120,40 L140,28 L160,34 L180,22 L200,30 L220,18 L240,24 L260,14 L280,20 L300,10 L320,16 L340,8 L360,12 L380,6 L400,9"
+            />
+          </svg>
+        </div>
+
+        <!-- Tile grid -->
+        <div class="widget-tile-grid">
+          <div class="widget-tile">
+            <div class="widget-tile-label">Active maps</div>
+            <div class="widget-tile-value mono"><span data-count="34">0</span></div>
+            <span class="widget-tile-delta up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" stroke-width="2">
+                <path d="M7 17l9.2-9.2M17 17V7H7" />
+              </svg>
+              +3 this week
+            </span>
+          </div>
+          <div class="widget-tile">
+            <div class="widget-tile-label">301 share</div>
+            <div class="widget-tile-value mono"><span data-count="94">0</span>%</div>
+            <span class="widget-tile-delta up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" stroke-width="2">
+                <path d="M7 17l9.2-9.2M17 17V7H7" />
+              </svg>
+              +1.2%
+            </span>
+          </div>
+          <div class="widget-tile">
+            <div class="widget-tile-label">404s caught</div>
+            <div class="widget-tile-value mono"><span data-count="2148">0</span></div>
+            <span class="widget-tile-delta up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" stroke-width="2">
+                <path d="M7 17l9.2-9.2M17 17V7H7" />
+              </svg>
+              +28%
+            </span>
+          </div>
+          <div class="widget-tile">
+            <div class="widget-tile-label">Avg. latency</div>
+            <div class="widget-tile-value mono"><span data-count="62">0</span>ms</div>
+            <span class="widget-tile-delta down">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="10" height="10" stroke-width="2">
+                <path d="M7 7l9.2 9.2M17 7v10H7" />
+              </svg>
+              −8ms
+            </span>
+          </div>
+        </div>
+
+        <!-- Recent activity -->
+        <div class="widget-recent">
+          <div class="widget-recent-title">Most-hit today</div>
+          <div class="widget-recent-list">
+            <div class="widget-recent-item">
+              <span class="widget-recent-url">/promo/black-friday-legacy</span>
+              <span class="widget-recent-time mono">7,402</span>
+            </div>
+            <div class="widget-recent-item">
+              <span class="widget-recent-url">/old/products</span>
+              <span class="widget-recent-time mono">4,118</span>
+            </div>
+            <div class="widget-recent-item">
+              <span class="widget-recent-url">/de/produkte-alt</span>
+              <span class="widget-recent-time mono">2,914</span>
+            </div>
+            <div class="widget-recent-item">
+              <span class="widget-recent-url">/blog/2023/*</span>
+              <span class="widget-recent-time mono">2,201</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="widget-footer">
+          <span style="font-size:11px; color:var(--fg-tertiary);">Showing live data from <strong style="color:var(--fg-secondary)">all sites</strong></span>
+          <a href="full-page.html" class="widget-cta">
+            Open workspace
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+      </article>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>

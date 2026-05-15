@@ -2,6 +2,7 @@
 
 > T065 — Real-tenant verification of the Redirect Manager CRUD surface.
 > Success metric **m3**: complete one full CRUD cycle in under 10 seconds.
+> PRD-002 additions: inline QuickRedirectForm, create-new-map auto-name, multi-match dropdown, re-skinned modals.
 
 This checklist is run inside Cloud Portal against a registered tenant. **Do not run against a production tenant — create / delete operations are destructive.**
 
@@ -94,6 +95,41 @@ If anything below happens, record details and triage **before** ship:
 | Toast says success but item didn't appear | Server returned `result.ok=true` but list didn't refresh — verify `listRefreshKey` bump |
 | Console error `400 Bad Request` from Authoring GraphQL | Envelope shape regressed — refer to memory `reference_sitecore_authoring_write_envelopes` |
 | Discovery missing-template error | No existing Redirect Map under the site — seed one in Content Editor first |
+
+## PRD-002 V4 additions
+
+These items extend the base CRUD round-trip with PRD-002-specific flows. Run after the steps above.
+
+### A. Inline QuickRedirectForm (Context Panel — US-R5)
+
+- [ ] Open the Pages editor → side-panel dropdown → **Redirects**.
+- [ ] The inline `QuickRedirectForm` is visible **without clicking any button** — it is always-on in the Context Panel.
+- [ ] Source field is pre-populated with the current page path (read-only or editable depending on the selected map's RedirectType).
+- [ ] **Add to existing map:** select a redirect map from the multi-match dropdown → fill Target → press **Add**. Toast confirms. Row appears in the matched list.
+- [ ] **Create new map (auto-name):** with no existing maps, the form's "Create new map" path triggers. Verify the auto-generated map name matches the pattern `{pageSlug}-redirects` (e.g. page `/products/new-item` → map name `new-item-redirects`).
+- [ ] **Pass:** inline form flow works end-to-end; no modal is needed for the primary add-redirect path.
+
+### B. Multi-match dropdown
+
+- [ ] Navigate to a Pages page that has redirects in MORE than one Redirect Map.
+- [ ] The Context Panel displays a dropdown above the form to select which map to add to.
+- [ ] Selecting a different map updates the form's target label to reflect the selected map's `RedirectType`.
+- [ ] **Pass:** dropdown renders with all matching maps; selection is reflected in the form.
+
+### C. Toast appearance on success (PRD-002 surfaces)
+
+- [ ] Create a redirect via the inline form → toast appears (Sonner) within 2 seconds.
+- [ ] Delete a redirect map via the Full Page **Delete map** confirm modal → toast appears.
+- [ ] New Redirect Map via `NewRedirectMapModal` (re-skinned in V4) → modal opens with V4 chrome → create succeeds → toast appears.
+- [ ] Import via `ImportRedirectMapModal` (re-skinned) → wizard navigable with V4 chrome.
+- [ ] `DeleteMapConfirmModal` (re-skinned) → confirm dialog opens → delete confirmed → toast appears.
+- [ ] **Pass:** all modal flows use V4 dialog chrome; toasts surface for every write.
+
+### D. Preview Data banner must NOT interfere with CRUD
+
+- [ ] On Full Page, the Preview Data banner is visible at the top. Verify it does NOT block or overlap any map-list row, the topbar actions (Import / Export / New map), or the detail pane.
+- [ ] On Dashboard Widget, the Preview Data banner is visible. Verify the real count tiles are still accessible.
+- [ ] **Pass:** banners are informational only; no CRUD affordance is occluded.
 
 ## Outcome
 

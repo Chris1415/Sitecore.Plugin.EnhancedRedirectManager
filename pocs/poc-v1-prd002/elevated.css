@@ -1,0 +1,371 @@
+/* ============================================================================
+ * elevated.css — site-wide V4 Blok Elevated utilities (PRD-002)
+ *
+ * Single source of truth for V4 tunable values (R-13 mitigation per
+ * architecture § 9). Every component reads from --v4-* variables; no hard-
+ * coded numerics in component CSS or JSX.
+ *
+ * Discipline: every color / gradient / shadow composes Blok semantic tokens
+ * from theme.css. No invented hex values outside theme.css.
+ *
+ * NO plume styles in this file — those live in elevated-plumes.css
+ * (imported ONLY by full-page.html per ADR-0027).
+ * ============================================================================ */
+
+/* PRD-002 V4 design contract values (R-13 mitigation) — single source of truth */
+:root {
+  --v4-plume-duration: 28s;
+  --v4-plume-blur: 120px;
+  --v4-glass-blur: 18px;
+  --v4-glass-alpha: 0.8;
+  --v4-glass-saturate: 1.6;
+  --v4-hover-glow-tint: 14%;
+  --v4-hover-lift-distance: 2px;
+  --v4-hover-lift-scale: 1.005;
+  --v4-hero-clamp-min: 48px;
+  --v4-hero-clamp-max: 96px;
+  --v4-hero-clamp-fluid: 8vw;
+  --v4-letter-reveal-stagger: 28ms;
+  --v4-letter-reveal-duration: 800ms;
+  --v4-count-up-duration: 1400ms;
+  --v4-premium-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ----------------------------------------------------------------------------
+ * Frosted-glass surface — composes Blok --card / --background tokens.
+ * `@supports not (backdrop-filter)` falls back to a solid token mix.
+ * -------------------------------------------------------------------------- */
+
+.elev-glass-surface {
+  background: color-mix(in oklch, var(--card) 88%, transparent);
+  backdrop-filter: blur(var(--v4-glass-blur)) saturate(var(--v4-glass-saturate));
+  -webkit-backdrop-filter: blur(var(--v4-glass-blur)) saturate(var(--v4-glass-saturate));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .elev-glass-surface {
+    background: color-mix(in oklch, var(--card) 95%, var(--primary) 5%);
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Gradient-clip hero text — composes --primary + --info tokens.
+ * Fallback for browsers without background-clip: text: solid --primary.
+ * -------------------------------------------------------------------------- */
+
+.elev-hero-text {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(var(--v4-hero-clamp-min), var(--v4-hero-clamp-fluid), var(--v4-hero-clamp-max));
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--foreground);
+  margin: 0;
+}
+.elev-hero-text .gradient-text {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    color-mix(in oklch, var(--primary) 55%, var(--info)) 60%,
+    color-mix(in oklch, var(--primary) 40%, var(--success)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@supports not (background-clip: text) {
+  .elev-hero-text .gradient-text {
+    color: var(--primary);
+    background: none;
+  }
+}
+
+/* Smaller hero variant used inside Context Panel + Dashboard Widget */
+.elev-hero-text--compact {
+  font-size: clamp(1.625rem, 7vw, 2.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+/* ----------------------------------------------------------------------------
+ * Hover-lift utility — used on cards, tiles, decorative CTAs.
+ * Composes --primary token for the glow tint.
+ * -------------------------------------------------------------------------- */
+
+.elev-hover-lift {
+  transition:
+    transform 220ms var(--v4-premium-ease),
+    border-color 220ms var(--v4-premium-ease),
+    box-shadow 220ms var(--v4-premium-ease);
+}
+.elev-hover-lift:hover {
+  transform: translateY(calc(-1 * var(--v4-hover-lift-distance))) scale(var(--v4-hover-lift-scale));
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
+  box-shadow: 0 12px 32px color-mix(in oklch, var(--primary) var(--v4-hover-glow-tint), transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .elev-hover-lift,
+  .elev-hover-lift:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Elevated button — taller variant of @blok/button with primary-tinted glow.
+ * Used on Full Page hero CTAs (decorative per ADR-0030).
+ * -------------------------------------------------------------------------- */
+
+.elev-btn {
+  height: 2.625rem;
+  padding: 0 1.25rem;
+  font-size: var(--text-base);
+  border-radius: var(--radius-lg);
+  transition:
+    transform 220ms var(--v4-premium-ease),
+    box-shadow 220ms var(--v4-premium-ease),
+    background-color 220ms var(--v4-premium-ease);
+}
+.elev-btn.blok-btn--primary {
+  box-shadow:
+    0 1px 2px color-mix(in oklch, var(--primary) 30%, transparent),
+    0 8px 24px color-mix(in oklch, var(--primary) 22%, transparent);
+}
+.elev-btn.blok-btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 2px color-mix(in oklch, var(--primary) 35%, transparent),
+    0 14px 36px color-mix(in oklch, var(--primary) 30%, transparent);
+}
+.elev-btn.blok-btn--outline {
+  border-color: var(--border);
+  background: color-mix(in oklch, var(--card) 70%, transparent);
+  backdrop-filter: blur(8px);
+}
+.elev-btn.blok-btn--outline:hover {
+  border-color: var(--border-a11y);
+  transform: translateY(-1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .elev-btn,
+  .elev-btn.blok-btn--primary:hover,
+  .elev-btn.blok-btn--outline:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Eyebrow chip — small uppercase mono label with primary-tinted pill.
+ * Used in Full Page workspace hero + Preview Data banner section.
+ * -------------------------------------------------------------------------- */
+
+.elev-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid color-mix(in oklch, var(--primary) 30%, transparent);
+  background: color-mix(in oklch, var(--primary) 8%, transparent);
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.elev-eyebrow .dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 4px color-mix(in oklch, var(--primary) 25%, transparent);
+}
+
+/* ----------------------------------------------------------------------------
+ * Count-up number — tabular-num display for hero stats and tile values.
+ * The actual count-up animation is driven by JS in script.js.
+ * -------------------------------------------------------------------------- */
+
+.elev-count-up {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  letter-spacing: -0.025em;
+}
+
+/* ----------------------------------------------------------------------------
+ * Letter-reveal target — kinetic per-character stagger applied via JS span-split.
+ * Static CSS fallback under reduced-motion (final state).
+ * -------------------------------------------------------------------------- */
+
+[data-letter-reveal] {
+  display: inline-block;
+}
+[data-letter-reveal] .letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  transition:
+    opacity 600ms var(--v4-premium-ease),
+    transform 600ms var(--v4-premium-ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-letter-reveal] .letter {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Preview Data banner (FR-R3) — single @blok/alert with --info tint.
+ * Mounted at the top of Full Page + Dashboard Widget; never on Context Panel.
+ * -------------------------------------------------------------------------- */
+
+.elev-preview-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid color-mix(in oklch, var(--primary) 28%, transparent);
+  background: color-mix(in oklch, var(--primary) 8%, transparent);
+  color: var(--primary);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  margin: 1rem 1.5rem 0;
+}
+.elev-preview-banner__glyph {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--text-2xs);
+  line-height: 1;
+}
+.elev-preview-banner__body {
+  flex: 1;
+}
+.elev-preview-banner__title {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  margin: 0 0 0.0625rem;
+  color: var(--foreground);
+}
+.elev-preview-banner__copy {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+/* ----------------------------------------------------------------------------
+ * Sonner-style toast (decorative) — used by Full Page hero CTAs per ADR-0030
+ * and by every CRUD success/error in production.
+ * -------------------------------------------------------------------------- */
+
+.elev-toast-region {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+.elev-toast {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 0.875rem;
+  background: var(--foreground);
+  color: var(--background);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-default);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  max-width: 28rem;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 200ms var(--v4-premium-ease), transform 200ms var(--v4-premium-ease);
+}
+.elev-toast--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.elev-toast__glyph {
+  flex-shrink: 0;
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  color: var(--color-info-200);
+}
+.elev-toast__copy {
+  flex: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .elev-toast {
+    transition: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Theme tone toggle (floating top-right) — POC chrome for theme switching.
+ * In production the existing PRD-000 ThemeSwitcher replaces this.
+ * -------------------------------------------------------------------------- */
+
+.tone-toggle {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 4rem;
+  z-index: 60;
+  display: inline-flex;
+  background: color-mix(in oklch, var(--card) 80%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.25rem;
+  box-shadow: var(--shadow-default);
+}
+.tone-toggle__btn {
+  border: 0;
+  background: transparent;
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--muted-foreground);
+}
+.tone-toggle__btn[aria-pressed="true"] {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* ----------------------------------------------------------------------------
+ * Surface-level reduced-motion blanket — defensive guard for any animation
+ * that slipped past the per-rule gates above.
+ * -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

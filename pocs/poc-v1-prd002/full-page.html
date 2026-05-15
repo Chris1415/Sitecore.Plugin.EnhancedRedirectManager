@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Full Page · Redirect Manager (PRD-002 V4 Refined)</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="elevated.css" />
+    <!-- Plume CSS imported ONLY here (Full-Page only per ADR-0027) -->
+    <link rel="stylesheet" href="elevated-plumes.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+  </head>
+  <body>
+    <!-- Drifting plume backdrop — z-index: -1 (below all content; below HahnSoloFooter at z-index: 50) -->
+    <div class="fp-plume-backdrop" aria-hidden="true"></div>
+
+    <!-- Theme toggle -->
+    <div class="tone-toggle" data-theme-toggle role="group" aria-label="Theme">
+      <button class="tone-toggle__btn" data-theme="light" aria-pressed="false">Light</button>
+      <button class="tone-toggle__btn" data-theme="dark" aria-pressed="false">Dark</button>
+      <button class="tone-toggle__btn" data-theme="auto" aria-pressed="true">Auto</button>
+    </div>
+
+    <div class="fp-shell">
+      <!-- Sticky frosted topbar — z-index: 40 (below HahnSoloFooter) -->
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <a class="blok-breadcrumb__item" href="index.html">Redirect Manager</a>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item">SneakerCo</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">MainSite &middot; EN</span>
+        </nav>
+        <div class="fp-topbar__title">
+          <h1>Workspace</h1>
+        </div>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" type="button">
+            <span class="glyph" data-icon="download"></span>
+            Import
+          </button>
+          <button class="blok-btn blok-btn--outline" type="button">
+            <span class="glyph" data-icon="upload"></span>
+            Export
+          </button>
+          <button class="blok-btn blok-btn--primary elev-btn" type="button">
+            <span class="glyph" data-icon="plus"></span>
+            New map
+          </button>
+        </div>
+      </header>
+
+      <!-- Preview Data banner (FR-R3) — mounted at the top of Full Page -->
+      <div class="elev-preview-banner" role="status" aria-live="polite">
+        <span class="elev-preview-banner__glyph" aria-hidden="true">i</span>
+        <div class="elev-preview-banner__body">
+          <p class="elev-preview-banner__title">Preview data</p>
+          <p class="elev-preview-banner__copy">Some metrics on this surface use preview data &mdash; wired up in a follow-on release.</p>
+        </div>
+      </div>
+
+      <!-- Workspace hero zone (NEW per ADR-0024 — marketing-voice zone (a) per FR-R8) -->
+      <section class="fp-hero">
+        <div class="fp-hero__body">
+          <span class="elev-eyebrow"><span class="dot"></span>Workspace &middot; MainSite EN</span>
+          <h2 class="fp-hero__headline" data-letter-reveal>Eight active maps, all healthy.</h2>
+          <p class="fp-hero__sub">Last publish 14 minutes ago by Anna. No conflicting source URLs detected.</p>
+        </div>
+        <div class="fp-hero__cta">
+          <button
+            class="blok-btn blok-btn--outline elev-btn"
+            type="button"
+            data-decorative-cta
+            data-toast-copy="Activity log coming in a follow-on release. For now, the Dashboard Widget shows the most recent change timestamp.">
+            <span class="glyph" data-icon="history"></span>
+            View activity
+          </button>
+          <button
+            class="blok-btn blok-btn--primary elev-btn"
+            type="button"
+            data-decorative-cta
+            data-toast-copy="Bulk publish coming in a follow-on release. For now, individual map changes save and publish immediately.">
+            <span class="glyph" data-icon="publish"></span>
+            Publish all
+          </button>
+        </div>
+      </section>
+
+      <div class="fp-body">
+        <!-- Left rail: map list -->
+        <aside class="fp-rail" aria-label="Redirect maps">
+          <div class="fp-rail__hd">
+            <span>Redirect maps</span>
+            <span class="blok-badge blok-badge--mono blok-badge--muted">8</span>
+          </div>
+
+          <a class="lr-row" aria-selected="true" href="full-page.html">
+            <span class="lr-row__dot" aria-hidden="true"></span>
+            <div class="lr-row__main">
+              <span class="lr-row__name">Black Friday 2025</span>
+              <span class="lr-row__meta">68 mappings &middot; EN &middot; 14 m ago</span>
+            </div>
+            <span class="glyph" data-icon="chevronRight"></span>
+          </a>
+
+          <a class="lr-row" href="full-page.html">
+            <span class="lr-row__dot" aria-hidden="true"></span>
+            <div class="lr-row__main">
+              <span class="lr-row__name">EU Compliance Migration</span>
+              <span class="lr-row__meta">142 mappings &middot; EN &middot; 3 d ago</span>
+            </div>
+            <span class="glyph" data-icon="chevronRight"></span>
+          </a>
+
+          <a class="lr-row" href="full-page.html">
+            <span class="lr-row__dot" aria-hidden="true"></span>
+            <div class="lr-row__main">
+              <span class="lr-row__name">Q1 Product Launches</span>
+              <span class="lr-row__meta">12 mappings &middot; EN &middot; 6 h ago</span>
+            </div>
+            <span class="glyph" data-icon="chevronRight"></span>
+          </a>
+
+          <a class="lr-row" href="full-page.html">
+            <span class="lr-row__dot" aria-hidden="true"></span>
+            <div class="lr-row__main">
+              <span class="lr-row__name">Legacy WP Imports</span>
+              <span class="lr-row__meta">418 mappings &middot; EN &middot; 2 wk ago</span>
+            </div>
+            <span class="glyph" data-icon="chevronRight"></span>
+          </a>
+
+          <a class="lr-row" href="full-page.html">
+            <span class="lr-row__dot" aria-hidden="true"></span>
+            <div class="lr-row__main">
+              <span class="lr-row__name">Holiday Microsites 2025</span>
+              <span class="lr-row__meta">22 mappings &middot; EN &middot; 1 mo ago</span>
+            </div>
+            <span class="glyph" data-icon="chevronRight"></span>
+          </a>
+
+          <a class="lr-row" href="full-page.html">
+            <span class="lr-row__dot" aria-hidden="true"></span>
+            <div class="lr-row__main">
+              <span class="lr-row__name">Press release pages</span>
+              <span class="lr-row__meta">6 mappings &middot; EN &middot; 1 mo ago</span>
+            </div>
+            <span class="glyph" data-icon="chevronRight"></span>
+          </a>
+
+          <a class="lr-row" href="full-page.html">
+            <span class="lr-row__dot" aria-hidden="true"></span>
+            <div class="lr-row__main">
+              <span class="lr-row__name">Product routes</span>
+              <span class="lr-row__meta">42 mappings &middot; EN &middot; 1 mo ago</span>
+            </div>
+            <span class="glyph" data-icon="chevronRight"></span>
+          </a>
+
+          <a class="lr-row" href="full-page.html">
+            <span class="lr-row__dot" aria-hidden="true"></span>
+            <div class="lr-row__main">
+              <span class="lr-row__name">Investor pages</span>
+              <span class="lr-row__meta">8 mappings &middot; EN &middot; 2 mo ago</span>
+            </div>
+            <span class="glyph" data-icon="chevronRight"></span>
+          </a>
+        </aside>
+
+        <!-- Main: stat strip + map detail -->
+        <main class="fp-main">
+          <!-- Stat strip — 4 mock tiles with count-up animation -->
+          <div class="fp-stat-strip">
+            <div class="fp-stat" data-preview-mock="true">
+              <span class="fp-stat__value elev-count-up"><span data-count="68" data-duration="1400">0</span></span>
+              <span class="fp-stat__label">Mappings</span>
+              <span class="fp-stat__sub">+4 today</span>
+              <span class="fp-stat__spark" aria-hidden="true"></span>
+            </div>
+            <div class="fp-stat" data-preview-mock="true">
+              <span class="fp-stat__value elev-count-up"><span data-count="64" data-duration="1400">0</span></span>
+              <span class="fp-stat__label">301 permanent</span>
+              <span class="fp-stat__sub">94% of total</span>
+              <span class="fp-stat__spark" aria-hidden="true"></span>
+            </div>
+            <div class="fp-stat" data-preview-mock="true">
+              <span class="fp-stat__value elev-count-up"><span data-count="4" data-duration="1400">0</span></span>
+              <span class="fp-stat__label">302 temporary</span>
+              <span class="fp-stat__sub">expire in 21d</span>
+              <span class="fp-stat__spark" aria-hidden="true"></span>
+            </div>
+            <div class="fp-stat" data-preview-mock="true">
+              <span class="fp-stat__value elev-count-up"><span data-count="0" data-duration="1400">0</span></span>
+              <span class="fp-stat__label">Conflicts</span>
+              <span class="fp-stat__sub">all clear</span>
+              <span class="fp-stat__spark" aria-hidden="true"></span>
+            </div>
+          </div>
+
+          <!-- Map detail -->
+          <section class="fp-detail">
+            <header class="fp-detail__hd">
+              <div>
+                <h2>Black Friday 2025</h2>
+                <p>68 mappings &middot; EN &middot; updated 14 m ago</p>
+              </div>
+              <div class="fp-detail__hd-actions">
+                <button class="blok-btn blok-btn--outline" type="button">
+                  <span class="glyph" data-icon="edit"></span>
+                  Rename
+                </button>
+                <button class="blok-btn blok-btn--outline" type="button">
+                  <span class="glyph" data-icon="edit"></span>
+                  Edit settings
+                </button>
+              </div>
+            </header>
+
+            <div class="fp-detail__tools">
+              <input class="blok-input fp-detail__search" type="search" placeholder="Search source or target URL..." />
+              <button class="blok-btn blok-btn--primary blok-btn--sm" type="button">
+                <span class="glyph" data-icon="plus"></span>
+                Add mapping
+              </button>
+            </div>
+
+            <!-- Mappings table — Status column REMOVED per architecture § 11.2 -->
+            <table class="fp-table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th style="width: 28px"></th>
+                  <th>Target</th>
+                  <th style="width: 90px">Type</th>
+                  <th style="width: 110px">Edited</th>
+                  <th style="width: 90px"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="mono">/old/products</span></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/products</span></td>
+                  <td><span class="http-code http-code--301">301</span></td>
+                  <td class="mono">14 m ago</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Edit"><span class="glyph" data-icon="edit"></span></button>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="mono">/promo-legacy</span></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/campaigns/promo</span></td>
+                  <td><span class="http-code http-code--301">301</span></td>
+                  <td class="mono">26 m ago</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Edit"><span class="glyph" data-icon="edit"></span></button>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="mono">/black-friday-2024</span></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/black-friday</span></td>
+                  <td><span class="http-code http-code--301">301</span></td>
+                  <td class="mono">1 h ago</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Edit"><span class="glyph" data-icon="edit"></span></button>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="mono">/landing/teaser</span></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/black-friday/teaser</span></td>
+                  <td><span class="http-code http-code--302">302</span></td>
+                  <td class="mono">2 h ago</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Edit"><span class="glyph" data-icon="edit"></span></button>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="mono">/sale-2024</span></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/sale</span></td>
+                  <td><span class="http-code http-code--301">301</span></td>
+                  <td class="mono">yesterday</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Edit"><span class="glyph" data-icon="edit"></span></button>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="mono">/promo/early-access</span></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/early-access</span></td>
+                  <td><span class="http-code http-code--301">301</span></td>
+                  <td class="mono">2 d ago</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Edit"><span class="glyph" data-icon="edit"></span></button>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td><span class="mono">/migrated/about</span></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/company</span></td>
+                  <td><span class="http-code http-code--server">Server Transfer</span></td>
+                  <td class="mono">5 d ago</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Edit"><span class="glyph" data-icon="edit"></span></button>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Back to POC index -->
+          <nav style="display:flex; gap: 0.5rem; padding: 0.5rem 0;">
+            <a class="blok-btn blok-btn--ghost blok-btn--sm" href="index.html">&larr; Back to overview</a>
+            <a class="blok-btn blok-btn--ghost blok-btn--sm" href="context-panel.html">Context Panel</a>
+            <a class="blok-btn blok-btn--ghost blok-btn--sm" href="dashboard-widget.html">Dashboard Widget</a>
+          </nav>
+        </main>
+      </div>
+    </div>
+
+    <!-- HahnSoloFooter — fixed bottom-right, z-index: 50 (carry from PRD-000) -->
+    <div class="hahn-solo-footer" aria-hidden="true">hahn-solo</div>
+
+    <script src="theme-toggle.js"></script>
+    <script src="icons.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

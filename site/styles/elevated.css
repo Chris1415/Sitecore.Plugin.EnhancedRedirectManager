@@ -1,0 +1,423 @@
+/* ============================================================================
+ * elevated.css — site-wide V4 Blok Elevated utilities (PRD-002)
+ *
+ * Single source of truth for V4 tunable values (R-13 mitigation per
+ * architecture § 9). Every component reads from --v4-* variables; no hard-
+ * coded numerics in component CSS or JSX.
+ *
+ * Discipline: every color / gradient / shadow composes Blok semantic tokens
+ * from globals.css. No invented hex values outside globals.css.
+ *
+ * NO plume styles in this file — those live in elevated-plumes.css
+ * (imported ONLY by Full Page route files per ADR-0027 + structural guard).
+ * ============================================================================ */
+
+/* PRD-002 V4 design contract values (R-13 mitigation) — single source of truth */
+:root {
+  --v4-plume-duration: 28s;
+  --v4-plume-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --v4-glass-blur: 18px;
+  --v4-glass-saturation: 160%;
+  --v4-glass-alpha: 80%;
+  --v4-hover-lift-distance: 2px;
+  --v4-hover-lift-scale: 1.005;
+  --v4-hover-glow-tint: 14%;
+  --v4-hover-glow-blur: 32px;
+  --v4-hero-clamp-min: 48px;
+  --v4-hero-clamp-max: 96px;
+  --v4-hero-clamp-vw: 8vw;
+  --v4-letter-reveal-stagger: 28ms;
+  --v4-letter-reveal-total: 800ms;
+  --v4-count-up-duration: 1400ms;
+  --v4-premium-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --v4-gradient-text: linear-gradient(
+    135deg,
+    var(--primary),
+    color-mix(in oklch, var(--primary) 55%, var(--info))
+  );
+}
+
+/* ----------------------------------------------------------------------------
+ * Frosted-glass surface — composes Blok --card / --background tokens.
+ * `@supports not (backdrop-filter)` falls back to a solid token mix.
+ * -------------------------------------------------------------------------- */
+
+.elev-glass-surface {
+  background: color-mix(in oklch, var(--card) var(--v4-glass-alpha), transparent);
+  backdrop-filter: blur(var(--v4-glass-blur)) saturate(var(--v4-glass-saturation));
+  -webkit-backdrop-filter: blur(var(--v4-glass-blur)) saturate(var(--v4-glass-saturation));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .elev-glass-surface {
+    background: color-mix(in oklch, var(--card) 95%, var(--primary) 5%);
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Elevated card — frosted surface + hover-lift + primary-tinted glow.
+ * Extends .elev-glass-surface (compose both classes on the element).
+ * -------------------------------------------------------------------------- */
+
+.elev-card {
+  transition:
+    transform 220ms var(--v4-premium-ease),
+    border-color 220ms var(--v4-premium-ease),
+    box-shadow 220ms var(--v4-premium-ease);
+}
+.elev-card:hover {
+  transform: translateY(calc(var(--v4-hover-lift-distance) * -1)) scale(var(--v4-hover-lift-scale));
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
+  box-shadow: 0 12px var(--v4-hover-glow-blur) color-mix(in oklch, var(--primary) var(--v4-hover-glow-tint), transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .elev-card,
+  .elev-card:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Gradient-clip hero text — composes --primary + --info tokens.
+ * .elev-hero-text is the container; .elev-hero-text--gradient applies the clip.
+ * Fallback for browsers without background-clip: text — solid --primary.
+ * -------------------------------------------------------------------------- */
+
+.elev-hero-text {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(var(--v4-hero-clamp-min), var(--v4-hero-clamp-vw), var(--v4-hero-clamp-max));
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--foreground);
+  margin: 0;
+}
+
+.elev-hero-text--gradient {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    color-mix(in oklch, var(--primary) 55%, var(--info)) 60%,
+    color-mix(in oklch, var(--primary) 40%, var(--success)) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@supports not (background-clip: text) {
+  .elev-hero-text--gradient {
+    color: var(--primary);
+    background: none;
+  }
+}
+
+/* Smaller hero variant used inside Context Panel + Dashboard Widget */
+.elev-hero-text--compact {
+  font-size: clamp(1.625rem, 7vw, 2.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+}
+
+/* ----------------------------------------------------------------------------
+ * Hover-lift utility — used on cards, tiles, decorative CTAs.
+ * Composes --primary token for the glow tint.
+ * -------------------------------------------------------------------------- */
+
+.elev-hover-lift {
+  transition:
+    transform 220ms var(--v4-premium-ease),
+    border-color 220ms var(--v4-premium-ease),
+    box-shadow 220ms var(--v4-premium-ease);
+}
+.elev-hover-lift:hover {
+  transform: translateY(calc(-1 * var(--v4-hover-lift-distance))) scale(var(--v4-hover-lift-scale));
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
+  box-shadow: 0 12px var(--v4-hover-glow-blur) color-mix(in oklch, var(--primary) var(--v4-hover-glow-tint), transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .elev-hover-lift,
+  .elev-hover-lift:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Hero-clamp helper — hero text scale composed from --v4-hero-clamp-* vars.
+ * Use as a utility class when .elev-hero-text is insufficient.
+ * -------------------------------------------------------------------------- */
+
+.elev-hero-clamp {
+  font-size: clamp(var(--v4-hero-clamp-min), var(--v4-hero-clamp-vw), var(--v4-hero-clamp-max));
+}
+
+/* ----------------------------------------------------------------------------
+ * Count-up number — tabular-num display for hero stats and tile values.
+ * The actual count-up animation is driven by useCountUp() React hook.
+ * No CSS keyframes here — animation is rAF-driven from JS.
+ * -------------------------------------------------------------------------- */
+
+.elev-count-up {
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  letter-spacing: -0.025em;
+}
+
+/* ----------------------------------------------------------------------------
+ * Eyebrow chip — small uppercase mono label with primary-tinted pill.
+ * Used in Full Page workspace hero + Preview Data banner section.
+ * -------------------------------------------------------------------------- */
+
+.elev-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.625rem;
+  border: 1px solid color-mix(in oklch, var(--primary) 30%, transparent);
+  background: color-mix(in oklch, var(--primary) 8%, transparent);
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.elev-eyebrow .dot {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 4px color-mix(in oklch, var(--primary) 25%, transparent);
+}
+
+/* ----------------------------------------------------------------------------
+ * Elevated button — taller variant of @blok/button with primary-tinted glow.
+ * Used on Full Page hero CTAs (decorative per ADR-0030).
+ * Transitions only; no @keyframes (no reduced-motion gate needed here).
+ * -------------------------------------------------------------------------- */
+
+.elev-btn {
+  height: 2.625rem;
+  padding: 0 1.25rem;
+  font-size: var(--text-base);
+  border-radius: var(--radius-lg);
+  transition:
+    transform 220ms var(--v4-premium-ease),
+    box-shadow 220ms var(--v4-premium-ease),
+    background-color 220ms var(--v4-premium-ease);
+}
+.elev-btn.blok-btn--primary {
+  box-shadow:
+    0 1px 2px color-mix(in oklch, var(--primary) 30%, transparent),
+    0 8px 24px color-mix(in oklch, var(--primary) 22%, transparent);
+}
+.elev-btn.blok-btn--primary:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 2px color-mix(in oklch, var(--primary) 35%, transparent),
+    0 14px 36px color-mix(in oklch, var(--primary) 30%, transparent);
+}
+.elev-btn.blok-btn--outline {
+  border-color: var(--border);
+  background: color-mix(in oklch, var(--card) 70%, transparent);
+  backdrop-filter: blur(8px);
+}
+.elev-btn.blok-btn--outline:hover {
+  border-color: var(--border-a11y);
+  transform: translateY(-1px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .elev-btn,
+  .elev-btn.blok-btn--primary:hover,
+  .elev-btn.blok-btn--outline:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Letter-reveal target — kinetic per-character stagger applied via JS span-split.
+ * Static CSS fallback under reduced-motion (final state, no animation).
+ * -------------------------------------------------------------------------- */
+
+[data-letter-reveal] {
+  display: inline-block;
+}
+[data-letter-reveal] .letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.4em);
+  transition:
+    opacity 600ms var(--v4-premium-ease),
+    transform 600ms var(--v4-premium-ease);
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-letter-reveal] .letter {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * Modal overlay — sits above HahnSoloFooter per architecture Decision 4.
+ * z-index: 100 (above footer z-index: 50, above topbar z-index: 40).
+ * No @keyframes here; backdrop is composited by browser natively.
+ * -------------------------------------------------------------------------- */
+
+.elev-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in oklch, var(--background) 60%, transparent);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .elev-modal {
+    background: color-mix(in oklch, var(--background) 85%, transparent);
+  }
+}
+
+/* ----------------------------------------------------------------------------
+ * HTTP code badge — used in every surface that shows RedirectType.
+ * No status-pill--active / status-pill--draft / --draft variants (ADR-0024).
+ * RedirectType is 3 values: Redirect301 / Redirect302 / ServerTransfer.
+ * -------------------------------------------------------------------------- */
+
+.http-code {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.0625rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: -0.01em;
+  font-weight: 500;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.http-code--301 {
+  background: var(--primary-background);
+  color: var(--primary);
+  border-color: color-mix(in oklch, var(--primary) 24%, transparent);
+}
+.http-code--302 {
+  background: var(--warning-background);
+  color: var(--warning-foreground);
+  border-color: color-mix(in oklch, var(--warning) 22%, transparent);
+}
+.http-code--server {
+  background: var(--neutral-background);
+  color: var(--muted-foreground);
+  border-color: color-mix(in oklch, var(--muted-foreground) 22%, transparent);
+}
+
+/* ----------------------------------------------------------------------------
+ * Preview Data banner — single @blok/alert with --info tint.
+ * Mounted at the top of Full Page + Dashboard Widget; never Context Panel.
+ * -------------------------------------------------------------------------- */
+
+.elev-preview-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid color-mix(in oklch, var(--primary) 28%, transparent);
+  background: color-mix(in oklch, var(--primary) 8%, transparent);
+  color: var(--primary);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  margin: 1rem 1.5rem 0;
+}
+.elev-preview-banner__glyph {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--text-2xs);
+  line-height: 1;
+}
+.elev-preview-banner__body {
+  flex: 1;
+}
+.elev-preview-banner__title {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  margin: 0 0 0.0625rem;
+  color: var(--foreground);
+}
+.elev-preview-banner__copy {
+  margin: 0;
+  color: var(--muted-foreground);
+}
+
+/* ----------------------------------------------------------------------------
+ * Success badge with monochrome check glyph (NOT emoji — per UI spec).
+ * Theme-aware via currentColor / success tokens.
+ * -------------------------------------------------------------------------- */
+
+.elev-success-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  background: var(--success-background);
+  color: var(--success-foreground);
+  border: 1px solid color-mix(in oklch, var(--success) 30%, transparent);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+}
+
+/* ----------------------------------------------------------------------------
+ * Glyph wrapper for inline SVG icons (monochrome — respects currentColor).
+ * -------------------------------------------------------------------------- */
+
+.glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+}
+.glyph svg {
+  width: 14px;
+  height: 14px;
+  stroke-width: 1.75;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.glyph--success {
+  color: var(--success-foreground);
+}
+
+/* ----------------------------------------------------------------------------
+ * Surface-level reduced-motion blanket — defensive guard for any animation
+ * that slipped past the per-rule gates above.
+ * -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CONTEXT PANEL // REDIRECT MANAGER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="square"></span>
+      REDIRECT MANAGER
+    </div>
+    <nav>
+      <a href="index.html">HOME</a>
+      <a href="full-page.html">FULL PAGE</a>
+      <a href="context-panel.html" class="active">PANEL</a>
+      <a href="dashboard-widget.html">WIDGET</a>
+    </nav>
+  </header>
+
+  <div class="frame-switch">
+    <span class="label">FRAME:</span>
+    <a href="index.html">INDEX</a>
+    <a href="full-page.html">FULL PAGE</a>
+    <a href="context-panel.html" class="current">CONTEXT PANEL</a>
+    <a href="dashboard-widget.html">DASHBOARD WIDGET</a>
+  </div>
+
+  <!-- Simulated context: this is what the editor sees as a side panel -->
+  <div style="background:#ddd6c4;padding:24px;border-bottom:var(--border-2);">
+    <div class="wrap-compact" style="text-align:center;font-family:var(--mono);font-size:12px;color:#444;">
+      // SIMULATED CLOUD PORTAL CONTEXT &nbsp; // editing: /campaigns/holiday-2025
+    </div>
+  </div>
+
+  <div style="display:flex;justify-content:center;padding:32px 16px;">
+    <!-- The actual side panel surface -->
+    <div style="width:100%;max-width:380px;border:var(--border-3);box-shadow:var(--shadow-xl);background:var(--paper);">
+
+      <div class="panel-header">
+        <div class="panel-eyebrow">// REDIRECT MANAGER</div>
+        <div class="panel-title">REDIRECTS<br />HITTING<br />THIS PAGE</div>
+        <div class="panel-page-meta">/campaigns/holiday-2025</div>
+      </div>
+
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>ACTIVE</span>
+          <span class="count-pill">7</span>
+        </div>
+
+        <div class="redirect-row">
+          <div class="from-line">/<span style="background:var(--lemon);padding:0 3px;">holiday-2024</span></div>
+          <div class="arrow-line">&darr;</div>
+          <div class="to-line">/<span style="background:var(--lime);padding:0 3px;">campaigns/holiday-2025</span></div>
+          <div class="row-foot">
+            <div class="stamps">
+              <span class="stamp stamp-301">301</span>
+              <span class="stamp stamp-active">ACTIVE</span>
+            </div>
+            <span class="ago">2h ago</span>
+          </div>
+        </div>
+
+        <div class="redirect-row">
+          <div class="from-line">/winter-deals-2024</div>
+          <div class="arrow-line">&darr;</div>
+          <div class="to-line">/campaigns/holiday-2025</div>
+          <div class="row-foot">
+            <div class="stamps">
+              <span class="stamp stamp-301">301</span>
+              <span class="stamp stamp-active">ACTIVE</span>
+            </div>
+            <span class="ago">yesterday</span>
+          </div>
+        </div>
+
+        <div class="redirect-row">
+          <div class="from-line">/blog/2024/<span style="background:var(--lemon);padding:0 3px;">gift-guide</span></div>
+          <div class="arrow-line">&darr;</div>
+          <div class="to-line">/campaigns/holiday-2025</div>
+          <div class="row-foot">
+            <div class="stamps">
+              <span class="stamp stamp-301">301</span>
+              <span class="stamp stamp-active">ACTIVE</span>
+            </div>
+            <span class="ago">3d ago</span>
+          </div>
+        </div>
+
+        <div class="redirect-row">
+          <div class="from-line">/promo/<span style="background:var(--lemon);padding:0 3px;">end-of-year</span></div>
+          <div class="arrow-line">&darr;</div>
+          <div class="to-line">/campaigns/holiday-2025</div>
+          <div class="row-foot">
+            <div class="stamps">
+              <span class="stamp stamp-302">302</span>
+              <span class="stamp stamp-active">ACTIVE</span>
+            </div>
+            <span class="ago">last week</span>
+          </div>
+        </div>
+
+        <div class="redirect-row">
+          <div class="from-line">/seasonal/winter</div>
+          <div class="arrow-line">&darr;</div>
+          <div class="to-line">/campaigns/holiday-2025</div>
+          <div class="row-foot">
+            <div class="stamps">
+              <span class="stamp stamp-301">301</span>
+              <span class="stamp stamp-active">ACTIVE</span>
+            </div>
+            <span class="ago">last tuesday</span>
+          </div>
+        </div>
+
+        <div style="text-align:center;margin-top:8px;">
+          <button class="btn btn-sm">SHOW 2 MORE</button>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>NEEDS LOVE</span>
+          <span class="count-pill" style="background:var(--red);color:var(--paper);">1</span>
+        </div>
+
+        <div class="redirect-row" style="border-color:var(--red);">
+          <div class="from-line">/<span style="background:var(--red);color:var(--paper);padding:0 3px;">xmas-2024</span></div>
+          <div class="arrow-line">&darr;</div>
+          <div class="to-line">/campaigns/<span style="background:var(--red);color:var(--paper);padding:0 3px;">holiday-2025-OLD</span></div>
+          <div class="row-foot">
+            <div class="stamps">
+              <span class="stamp stamp-301">301</span>
+              <span class="stamp stamp-broken">404</span>
+            </div>
+            <span class="ago">never updated</span>
+          </div>
+          <div style="margin-top:10px;font-family:var(--mono);font-size:11px;background:var(--lemon);padding:6px 8px;border:var(--border-1);">
+            // target page doesn't exist. fix or kill.
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;">
+            <button class="btn btn-sm">REPOINT</button>
+            <button class="btn btn-sm btn-danger">KILL IT</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <div class="panel-section-title">
+          <span>DRAFT</span>
+          <span class="count-pill">1</span>
+        </div>
+
+        <div class="redirect-row" style="border-style:dashed;">
+          <div class="from-line">/holiday-promo</div>
+          <div class="arrow-line">&darr;</div>
+          <div class="to-line">/campaigns/holiday-2025</div>
+          <div class="row-foot">
+            <div class="stamps">
+              <span class="stamp stamp-301">301</span>
+              <span class="stamp stamp-draft">DRAFT</span>
+            </div>
+            <span class="ago">10m ago</span>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:10px;">
+            <button class="btn btn-sm">EDIT</button>
+            <button class="btn btn-rebel btn-sm">PUBLISH</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section">
+        <button class="add-redirect-btn">
+          +
+          <div style="font-family:var(--display);font-size:14px;text-transform:uppercase;margin-top:4px;">
+            ADD A REDIRECT
+          </div>
+        </button>
+
+        <div style="margin-top:14px;font-family:var(--mono);font-size:11px;color:var(--ash);text-transform:lowercase;text-align:center;">
+          // shortcut: highlight a url, hit CMD+SHIFT+R.
+        </div>
+      </div>
+
+      <div class="panel-section" style="background:var(--ink);color:var(--paper);">
+        <div style="font-family:var(--mono);font-size:11px;line-height:1.6;">
+          <span style="background:var(--lemon);color:var(--ink);padding:1px 4px;">// HEY</span> &nbsp;
+          this page has <strong style="background:var(--lemon);color:var(--ink);padding:1px 4px;">9 redirects</strong>
+          pointed at it. that's a lot. consider it a sign of either great success
+          or great chaos. probably both.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

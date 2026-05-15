@@ -268,7 +268,7 @@ function EditableMapDetail({
   }
 
   return (
-    <div className="flex flex-col gap-0 overflow-auto h-full">
+    <div className="flex flex-col gap-0 overflow-auto h-full elev-glass-surface">
       <div className="p-5 space-y-5">
         {/* Section 1 — Map attributes */}
         <section aria-label="Map attributes">
@@ -424,7 +424,7 @@ function EditableMapDetail({
           <div
             role="table"
             aria-label="Redirect mappings"
-            className="w-full border border-border rounded-md overflow-hidden text-xs"
+            className="w-full border border-border rounded-md overflow-hidden text-xs elev-glass-surface"
           >
             {/* Header row */}
             <div

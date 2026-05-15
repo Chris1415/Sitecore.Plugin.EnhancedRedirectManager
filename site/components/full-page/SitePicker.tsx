@@ -17,6 +17,13 @@ import { useCallback, useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { listSites } from "@/lib/sdk/sites";
 import type { ClientSDK, Sites } from "@/lib/sdk/types";
 
@@ -83,8 +90,7 @@ export function SitePicker({
     status === "loaded" &&
     filteredSites.length === 0;
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const id = e.target.value;
+  const handleChange = (id: string) => {
     setSelectedId(id);
     if (!id) {
       onSelect(null);
@@ -97,7 +103,7 @@ export function SitePicker({
   const labelId = "site-picker-label";
 
   return (
-    <div className="space-y-1">
+    <div className="space-y-1 elev-glass-surface p-2 rounded-lg">
       <Label htmlFor="site-picker" id={labelId} className="text-xs font-medium">
         Site
       </Label>
@@ -127,23 +133,26 @@ export function SitePicker({
       )}
 
       {status === "loaded" && !showEmpty && (
-        <select
-          id="site-picker"
-          aria-labelledby={labelId}
-          disabled={isDisabled}
-          className="flex h-9 w-full items-center justify-between rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-          value={selectedId}
-          onChange={handleChange}
-        >
-          <option value="">
-            {!selectedCollection ? "Pick a collection first" : "Pick a site"}
-          </option>
-          {filteredSites.map((s) => (
-            <option key={s.id ?? s.name} value={s.id ?? ""}>
-              {s.displayName || s.name}
-            </option>
-          ))}
-        </select>
+        /* Radix Select — see CollectionPicker for rationale (native select
+           opens an OS-controlled list that doesn't respect dark theme). */
+        <Select value={selectedId} onValueChange={handleChange} disabled={isDisabled}>
+          <SelectTrigger
+            id="site-picker"
+            aria-labelledby={labelId}
+            className="h-9 w-full text-sm"
+          >
+            <SelectValue
+              placeholder={!selectedCollection ? "Pick a collection first" : "Pick a site"}
+            />
+          </SelectTrigger>
+          <SelectContent>
+            {filteredSites.map((s) => (
+              <SelectItem key={s.id ?? s.name} value={s.id ?? ""}>
+                {s.displayName || s.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       )}
     </div>
   );

@@ -29,8 +29,12 @@ export interface RedirectMapItem {
   preserveQueryString: boolean;
   preserveLanguage: boolean;
   includeVirtualFolder: boolean;
-  /** ISO-8601 */
+  /** Sitecore compact timestamp (e.g. "20260515T120000Z") */
   updatedAt: string;
+  /** Display name of the Sitecore user who last edited the item.
+   *  Sourced from the standard "__Updated by" field. Optional because legacy
+   *  fixtures and older Authoring versions may not surface it. */
+  updatedBy?: string;
   mappings: Mapping[];
 }
 

@@ -64,6 +64,40 @@ These are not ADRs (they're SDK-shape findings discovered during real-tenant cap
 
 These findings are stable as of 2026-05-12 and will be revisited if SDK behavior changes.
 
+---
+
+## PRD-002 V4-aligned redesign (2026-05-15)
+
+PRD-002 shipped a V4 Blok Elevated visual redesign of all three extension-point routes. Zero new SDK calls, zero new GraphQL mutations, zero new backend — purely presentation-layer changes plus one client-side interaction-pattern replacement (modal → inline form). The governing ADRs are ADR-0024 through ADR-0030.
+
+### Design decisions shipped
+
+**D1 — V4 Blok Elevated as the visual base (ADR-0024).** The four-variant marketing exploration (V1 Aurora / V2 Brutalism / V3 Editorial / V4 Blok Elevated) selected V4 as the shipping target — premium feel within the existing Blok Nova token system. Token discipline is enforced: all color/gradient/shadow expressions compose Blok semantic tokens via `color-mix(in oklch, ...)`. Zero `#` hex literals outside `globals.css` (structural guard T040). Operator-facing content reconciliation: `Active`/`Draft` labels dropped (structural guard T043), `Redirect307` not in enum, `/de/...` paths not in mocks, language-count strings banned.
+
+**D2 — Mock-data architecture (ADR-0025).** Speculative V4 content (hero stats, sparklines, top-destinations, "all healthy" badge, "by Anna" attribution, stat strips) ships as TypeScript constants at `site/lib/mocks/preview-data.ts` with `PREVIEW_DATA_ACTIVE` per-surface flags. A `PreviewDataBanner` component renders on Full Page and Dashboard Widget surfaces (not Context Panel, which uses real data only). When a follow-on data-plumbing PRD wires real data, flipping `PREVIEW_DATA_ACTIVE.fullPage` and `.dashboardWidget` to `false` is the only change needed — consumers swap data source, not types.
+
+**D3 — Inline QuickRedirectForm replaces AddRedirectModal (ADR-0026, ADR-0028, ADR-0029).** The `AddRedirectModal` component was deleted entirely (Option A — no fallback retained). The primary add-redirect path in the Context Panel is now an always-visible `QuickRedirectForm` implementing a 3-state machine: `add-to-existing` / `create-new` / `submitting`. Map selection via a multi-match dropdown when the page appears in multiple Redirect Maps. The map's `RedirectType` sets the form type — operator cannot set per-mapping type (consistent with PRD-000's map-level type model per ADR-0029). Auto-generated map name on `create-new` path: `{pageSlug}-redirects`.
+
+**D4 — Mixed motion budget (ADR-0027).** Full V4 motion (drifting plumes, gradient text, kinetic letter-reveals, count-up animations) is scoped to the Full Page surface only. Context Panel and Dashboard Widget use hover lifts only. Structural guard T044 enforces the plume-CSS import boundary at CI time. Reduced-motion strategy uses three defensive layers: per-`@keyframes` `animation: none` gates, JS hook early-returns (`useCountUp`, `useLetterReveal` both check `matchMedia` inside `useEffect`), and per-class transition suppression.
+
+**D5 — Hero CTAs are decorative (ADR-0030).** The Full Page workspace hero CTAs ("View activity", "Publish all") fire a Sonner toast on click. They are visual elements anticipating a follow-on PRD that wires real navigation. Rationale: shipping functional-looking CTAs that do nothing silently is worse than CTAs that acknowledge their preview status via a toast.
+
+**D6 — Hybrid voice — 3 zones.** Marketing-grade copy on: (a) Full Page workspace hero, (b) Dashboard Widget headline, (c) Context Panel hero count header. Utility-tool voice everywhere else (modal titles, form fields, table content, footer text). Keeps the product feeling purposeful without over-marketing a CRUD tool.
+
+### PRD-002 ADR index
+
+| ADR | Title | Status |
+|-----|-------|:------:|
+| [ADR-0024](../project-planning/ADR/adr-0024-v4-blok-elevated-visual-base.md) | V4 Blok Elevated visual base + relaxed D1 guard | ✅ |
+| [ADR-0025](../project-planning/ADR/adr-0025-mock-data-architecture.md) | Mock-data architecture: PREVIEW_DATA constants + flags + banner | ✅ |
+| [ADR-0026](../project-planning/ADR/adr-0026-context-panel-inline-quick-add.md) | Context Panel inline quick-add replaces modal (US-R5) | ✅ |
+| [ADR-0027](../project-planning/ADR/adr-0027-mixed-motion-budget.md) | Mixed motion budget — Full Page only gets full motion | ✅ |
+| [ADR-0028](../project-planning/ADR/adr-0028-add-redirect-modal-deletion.md) | AddRedirectModal deleted (Option A — no fallback) | ✅ |
+| [ADR-0029](../project-planning/ADR/adr-0029-quick-redirect-form-map-selection.md) | QuickRedirectForm map-selection + RedirectType semantics | ✅ |
+| [ADR-0030](../project-planning/ADR/adr-0030-hero-ctas-decorative.md) | Full Page hero CTAs decorative — toast on click | ✅ |
+
+For the full architecture narrative covering PRD-002 changes, see [architecture.md § 11](architecture.md#11-v4-redesign-architecture-prd-002).
+
 ## PRD-001 Tranche 1 captures (real-tenant probes, 2026-05-13)
 
 PRD-001 (app-internal multilingual CRUD) was cancelled at the Tranche 1 capture pass — see [ADR-0023](../project-planning/ADR/adr-0023-cancel-prd-001-multilingual-template-shared.md). These findings survive the cancellation; they are durable SDK-level knowledge about the Authoring GraphQL surface and the stock Sitecore Redirect Map template.

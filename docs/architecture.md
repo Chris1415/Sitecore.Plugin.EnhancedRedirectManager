@@ -172,3 +172,87 @@ Each of these is captured as a PRD-000 § 15 Future Opportunity. The decision lo
 - **Setup skill (rebuild reference):** `sitecore:setup-marketplace-client-side`
 - **Lifecycle skill:** `sitecore:marketplace-sdk-lifecycle`
 - **Host-frame testing skill:** `sitecore:marketplace-sdk-host-frame-testing`
+
+---
+
+## 11. V4 redesign architecture (PRD-002)
+
+PRD-002 is a **pure presentation-layer redesign** of the three extension-point routes. Zero new SDK calls, zero new GraphQL mutations, zero new GraphQL fields, zero Cloud Portal re-registration. The functional contract is preserved 1:1 from PRD-000.
+
+See **[PRD-002](../project-planning/PRD/prd-002.md)** for the full product scope, and **[ADR-0024 through ADR-0030](../project-planning/ADR/)** for the governing design decisions.
+
+### 11.1 CSS architecture — 3 modules
+
+Three new CSS files layer on top of the PRD-000 `globals.css` baseline:
+
+| File | Scope | Key contents |
+|------|-------|-------------|
+| `site/styles/elevated.css` | Site-wide | 15 `--v4-*` design-contract variables (R-13 mitigation); `.elev-glass-surface`, `.elev-card`, `.elev-hover-lift`, `.elev-hero-text`, `.elev-btn`, `[data-letter-reveal]` utilities; `@supports not (backdrop-filter)` fallback; blanket `@media (prefers-reduced-motion: reduce)` guard |
+| `site/styles/elevated-plumes.css` | Full Page only (ADR-0027) | `.fp-plume-backdrop` with `@keyframes fp-backdrop-drift` (28s loop); `@keyframes fp-letter-reveal-up` (kinetic letter stagger); all `@keyframes` paired with `animation: none` reduced-motion gates |
+| `site/styles/surfaces.css` | All 3 surfaces | Per-surface layout shells (`.fp-*`, `.cp-*`, `.dw-*`), frosted topbar, stat strip, modal overlay, all with reduced-motion gates on hover-lift transitions |
+
+All three files compose Blok semantic tokens exclusively — zero `#` hex literals (enforced by structural guard T040). Import order: `globals.css` → `elevated.css` → `surfaces.css` (root layout); `elevated-plumes.css` imported ONLY by Full Page route files (structural guard T044).
+
+**15 design-contract variables (R-13 mitigation):** `--v4-plume-duration`, `--v4-plume-easing`, `--v4-glass-blur`, `--v4-glass-saturation`, `--v4-glass-alpha`, `--v4-hover-lift-distance`, `--v4-hover-lift-scale`, `--v4-hover-glow-tint`, `--v4-hover-glow-blur`, `--v4-hero-clamp-min`, `--v4-hero-clamp-max`, `--v4-hero-clamp-vw`, `--v4-letter-reveal-stagger`, `--v4-letter-reveal-total`, `--v4-count-up-duration`, `--v4-premium-ease`. Single source of truth for all V4 tunable values; every component reads from these variables.
+
+### 11.2 Mock-data architecture (ADR-0025)
+
+All speculative UI content (hero stats, sparklines, top-destinations, "all healthy" badge, "by Anna" attribution, stat strip) ships as hardcoded TypeScript constants at `site/lib/mocks/preview-data.ts`. This module exports:
+
+- `PREVIEW_DATA_ACTIVE` — `{ fullPage: true, dashboardWidget: true, contextPanel: false }` flags. When a follow-on data-plumbing PRD wires real data, flipping these flags is the only change needed.
+- `PREVIEW_DATA` — typed constants matching the eventual real-data shapes. Consumers swap the data source without changing types.
+
+The `PreviewDataBanner` component (`site/components/ui/preview-data-banner.tsx`) reads `PREVIEW_DATA_ACTIVE[surface]` and renders only when the flag is true. Structural guard T042 enforces that any file containing `data-preview-mock="true"` also imports `<PreviewDataBanner`, and vice versa — pairing can never drift.
+
+### 11.3 Context Panel interaction-pattern change (ADR-0026)
+
+The `AddRedirectModal` component was deleted (ADR-0028 Option A). It is replaced by `QuickRedirectForm` — an always-visible inline form that implements a 3-state machine:
+
+1. **add-to-existing** — user selects a redirect map from the multi-match dropdown (ADR-0029); source is inherited from the current page context; user fills target.
+2. **create-new** — no existing maps, or user explicitly chooses "Create new"; auto-generates map name as `{pageSlug}-redirects`.
+3. **submitting** — disabled state with loading indicator while the SDK write executes.
+
+No modal trigger button exists in the PRD-002 Context Panel. The QuickRedirectForm is the primary CRUD path. The `EditMapSettingsModal` (map-level metadata: name / type / flags) is retained as the only remaining modal on the Context Panel.
+
+### 11.4 Reduced-motion strategy
+
+PRD-002 ships a layered reduced-motion strategy:
+
+1. **Per-`@keyframes` gates** (strongest): `elevated-plumes.css` sets `animation: none` on both `fp-backdrop-drift` and `fp-letter-reveal-up` selectors inside `@media (prefers-reduced-motion: reduce)`. This is the primary gate — no animation fires at all.
+2. **JS hook early-returns**: `useCountUp` and `useLetterReveal` both check `window.matchMedia('(prefers-reduced-motion: reduce)').matches` inside `useEffect` (never in render body — hydration-safety rule). When true, they deliver the final value immediately via a single `requestAnimationFrame` frame without any multi-frame animation.
+3. **Per-class transition gates** (`elevated.css`, `surfaces.css`): all transition-bearing utility classes (`.elev-card`, `.elev-hover-lift`, `.elev-btn`, `.fp-stat`, `.lr-row`, `.dw-tile`, `.dw-row__bar-fill`, `.cp-item`) have explicit `@media (prefers-reduced-motion: reduce)` blocks setting `transform: none; transition: none`.
+4. **Blanket defensive guard** (`elevated.css` bottom): `* { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }` under reduced-motion. Note: this uses `0.001ms` (near-zero) rather than `animation: none` — it is a defensive backstop, not the primary gate. Any animation that escapes layers 1–3 will effectively not be perceived, though technically it does fire one frame.
+
+Structural guard T041 enforces that every CSS file containing `@keyframes` also contains `@media (prefers-reduced-motion: reduce)`.
+
+### 11.5 Mixed motion budget (ADR-0027)
+
+Full motion (drifting plumes, gradient text, kinetic letter-reveals, count-up animations) is scoped exclusively to the Full Page surface. Context Panel and Dashboard Widget use **hover lifts only** — no plume backdrop, no kinetic reveals. This is enforced at two levels: structural guard T044 (plume CSS import boundary) prevents `elevated-plumes.css` from reaching the other routes, and the component compositions in Context Panel / Dashboard Widget do not use `useLetterReveal`.
+
+### 11.6 Theme system (carry from PRD-000)
+
+The Blok Nova preset and the `globals.css` override for `--primary-foreground` in dark mode are unchanged. All PRD-002 color expressions compose token variables (`var(--primary)`, `var(--info)`, `var(--success)`, etc.) via `color-mix(in oklch, ...)`, ensuring light/dark switching happens automatically via Blok's token recomposition. No static hex colors were introduced (structural guard T040 enforces).
+
+### 11.7 Component layout changes (PRD-002)
+
+The component tree additions are summarized in the PRD-002 task breakdown § 1 file-level table. Key changes:
+
+- **Added:** `WorkspaceHero`, `StatStrip`, `PreviewDataBanner`, `GradientText`, `DecorativeCta`, `useCountUp`, `useLetterReveal`, `ContextPanelHero`, `QuickRedirectForm`, `MultiMatchDropdown`, `DashboardHero`, `Sparkline`, `TopDestinations`, `RecentlyShipped`, `HealthBadge`
+- **Deleted:** `AddRedirectModal` (per ADR-0028)
+- **Modified:** all three surface shells + supporting components re-skinned with V4 chrome; CRUD modals re-skinned with frosted dialog shell
+
+The `components/ui/` tree docs at § 5 is updated: `AddRedirectModal` is no longer listed.
+
+### 11.8 Governing ADRs (PRD-002 specific)
+
+| ADR | Decision |
+|-----|----------|
+| [ADR-0024](../project-planning/ADR/adr-0024-v4-blok-elevated-visual-base.md) | V4 Blok Elevated as the visual base; relaxed D1 guard (token discipline, not strict Blok primitive coverage) |
+| [ADR-0025](../project-planning/ADR/adr-0025-mock-data-architecture.md) | `PREVIEW_DATA` constants + `PREVIEW_DATA_ACTIVE` flags + per-surface banner as the mock-data architecture |
+| [ADR-0026](../project-planning/ADR/adr-0026-context-panel-inline-quick-add.md) | Inline `QuickRedirectForm` replaces `AddRedirectModal` as the primary Context Panel add-redirect path (US-R5) |
+| [ADR-0027](../project-planning/ADR/adr-0027-mixed-motion-budget.md) | Full motion on Full Page only; Context Panel + Dashboard Widget: hover lifts only |
+| [ADR-0028](../project-planning/ADR/adr-0028-add-redirect-modal-deletion.md) | `AddRedirectModal.tsx` deleted (Option A — no fallback retained) |
+| [ADR-0029](../project-planning/ADR/adr-0029-quick-redirect-form-map-selection.md) | Multi-match dropdown in `QuickRedirectForm`; map's `RedirectType` sets the form's type (operator cannot override per-mapping) |
+| [ADR-0030](../project-planning/ADR/adr-0030-hero-ctas-decorative.md) | Full Page hero CTAs ("View activity", "Publish all") are decorative — fire toast on click; no real navigation (follow-on PRD wires them) |
+
+Carry-over ADRs from PRD-000 remain in force: ADR-0002, 0003, 0005, 0006, 0007, 0008, 0009, 0010, 0011, 0012, 0013.

@@ -24,6 +24,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TopActionRow } from "@/components/full-page/TopActionRow";
+import { WorkspaceHero } from "@/components/full-page/WorkspaceHero";
+import { StatStrip } from "@/components/full-page/StatStrip";
 import { CollectionPicker } from "@/components/full-page/CollectionPicker";
 import { SitePicker } from "@/components/full-page/SitePicker";
 import { RedirectMapList } from "@/components/full-page/RedirectMapList";
@@ -31,6 +33,7 @@ import { RedirectMapDetail } from "@/components/full-page/RedirectMapDetail";
 import { NewRedirectMapModal } from "@/components/full-page/NewRedirectMapModal";
 import { DeleteMapConfirmModal } from "@/components/full-page/DeleteMapConfirmModal";
 import { ImportRedirectMapModal } from "@/components/full-page/ImportRedirectMapModal";
+import { ConflictsDialog } from "@/components/full-page/ConflictsDialog";
 import { Separator } from "@/components/ui/separator";
 import { listRedirectMaps } from "@/lib/sdk/redirects-read";
 import {
@@ -49,16 +52,17 @@ interface FullPageProps {
 const TABBED_BREAKPOINT = 960;
 
 function useIsTwoPane(): boolean {
-  const [isTwoPane, setIsTwoPane] = useState(
-    typeof window !== "undefined"
-      ? window.innerWidth >= TABBED_BREAKPOINT
-      : true
-  );
+  // HYDRATION FIX (feedback_hydration_mismatch_pattern): useState initializer must
+  // not branch on typeof window — SSR renders true (two-pane default), CSR effect
+  // corrects immediately after mount before the first visible frame.
+  const [isTwoPane, setIsTwoPane] = useState(true);
 
   useEffect(() => {
+    // Sync to real viewport width on mount + on resize
     const handler = () => {
       setIsTwoPane(window.innerWidth >= TABBED_BREAKPOINT);
     };
+    handler(); // sync immediately on mount
     window.addEventListener("resize", handler);
     return () => window.removeEventListener("resize", handler);
   }, []);
@@ -72,11 +76,16 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
   const [selectedCollection, setSelectedCollection] = useState<Sites.SiteCollection | null>(null);
   const [selectedSite, setSelectedSite] = useState<Sites.Site | null>(null);
   const [selectedMap, setSelectedMap] = useState<RedirectMapItem | null>(null);
+  /** Mirror of the freshly-loaded list — kept in sync via handleListLoaded.
+   *  StatStrip reads this to compute real mapping counts / 301 / 302 / conflicts
+   *  instead of mock PREVIEW_DATA. */
+  const [maps, setMaps] = useState<RedirectMapItem[]>([]);
 
   // Tranche 6b — modal + refetch orchestration
   const [showNewMapModal, setShowNewMapModal] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showImportModal, setShowImportModal] = useState(false);
+  const [showConflictsDialog, setShowConflictsDialog] = useState(false);
   const [listRefreshKey, setListRefreshKey] = useState(0);
   /** When set, the next list-load will re-select the map with this id (used after Create). */
   const [pendingSelectId, setPendingSelectId] = useState<string | null>(null);
@@ -87,16 +96,18 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
     reset();
   }, [selectedSite?.id]);
 
-  // Reset site + map when collection changes
+  // Reset site + map + maps when collection changes
   const handleCollectionSelect = useCallback((collection: Sites.SiteCollection | null) => {
     setSelectedCollection(collection);
     setSelectedSite(null);
     setSelectedMap(null);
+    setMaps([]);
   }, []);
 
   const handleSiteSelect = useCallback((site: Sites.Site | null) => {
     setSelectedSite(site);
     setSelectedMap(null);
+    setMaps([]);
   }, []);
 
   const handleMapSelect = useCallback((map: RedirectMapItem) => {
@@ -127,6 +138,8 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
   }, [selectedMap]);
 
   const handleListLoaded = useCallback((maps: RedirectMapItem[]) => {
+    // Keep StatStrip's source-of-truth in sync with the rail's list
+    setMaps(maps);
     if (pendingSelectIdRef.current) {
       const target = maps.find((m) => m.id === pendingSelectIdRef.current) ?? null;
       setSelectedMap(target);
@@ -265,7 +278,10 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
   );
 
   return (
-    <div className="flex flex-col h-full min-h-0">
+    <div className="fp-shell flex flex-col h-full min-h-0 relative">
+      {/* Drifting plume backdrop — z-index: -1 (below all content, below HahnSoloFooter at 50) */}
+      <div className="fp-plume-backdrop" aria-hidden="true" />
+
       <TopActionRow
         selectedCollection={selectedCollection}
         selectedSite={selectedSite}
@@ -276,16 +292,40 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
         onExportClipboard={handleExportClipboard}
       />
 
+      {/* Workspace hero zone — keyed on listRefreshKey so a Refresh click (or
+          any write) remounts the subtree and the count-up + letter-reveal
+          animations replay. */}
+      <div key={`hero-${listRefreshKey}`}>
+        <WorkspaceHero
+          siteName={selectedSite?.displayName || selectedSite?.name || null}
+          maps={maps}
+          onRefresh={handleWriteSuccess}
+          onSelectMap={handleMapSelect}
+        />
+      </div>
+
       {isTwoPane ? (
-        <div className="flex flex-1 min-h-0 overflow-hidden">
+        <div className="flex flex-1 min-h-0 overflow-hidden fp-body">
           <aside
-            className="w-[280px] shrink-0 border-r border-border flex flex-col overflow-hidden"
+            className="fp-rail w-[360px] shrink-0 border-r border-border flex flex-col overflow-hidden"
             aria-label="Redirect maps"
           >
             {railContent}
           </aside>
-          <main className="flex-1 overflow-auto" aria-label="Redirect map detail">
-            {detailContent}
+          <main className="fp-main flex-1 overflow-auto flex flex-col" aria-label="Redirect map detail">
+            {/* Stat strip — real values (Mappings / 301 / 302 / Server Transfer /
+                Conflicts) computed from the maps state synced from
+                handleListLoaded. Keyed on listRefreshKey so a Refresh click
+                remounts the strip and the count-ups replay. */}
+            <div key={`stats-${listRefreshKey}`}>
+              <StatStrip
+                maps={maps}
+                onConflictsClick={() => setShowConflictsDialog(true)}
+              />
+            </div>
+            <div className="flex-1 min-h-0">
+              {detailContent}
+            </div>
           </main>
         </div>
       ) : (
@@ -333,6 +373,14 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
         onOpenChange={setShowImportModal}
         sitePath={sitePath}
         onImportComplete={handleWriteSuccess}
+      />
+
+      {/* Conflicts resolver — opened from the warning Conflicts tile. */}
+      <ConflictsDialog
+        open={showConflictsDialog}
+        onOpenChange={setShowConflictsDialog}
+        maps={maps}
+        onOpenMap={handleMapSelect}
       />
     </div>
   );

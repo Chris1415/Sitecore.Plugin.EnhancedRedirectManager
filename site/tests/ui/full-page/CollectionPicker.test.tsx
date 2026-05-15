@@ -93,11 +93,13 @@ describe("CollectionPicker (T036)", () => {
         onSelect={onSelect}
       />
     );
+    // Radix Select renders a button trigger (role=combobox), not a native <select>.
     await waitFor(() => screen.getByRole("combobox"));
-    await userEvent.selectOptions(
-      screen.getByRole("combobox"),
-      fixtureCollections[0].name
-    );
-    expect(onSelect).toHaveBeenCalledWith(fixtureCollections[0]);
+    await userEvent.click(screen.getByRole("combobox"));
+    const target = fixtureCollections[0];
+    const label = target.displayName || target.name || "";
+    await waitFor(() => screen.getByRole("option", { name: label }));
+    await userEvent.click(screen.getByRole("option", { name: label }));
+    expect(onSelect).toHaveBeenCalledWith(target);
   });
 });

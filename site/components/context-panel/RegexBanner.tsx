@@ -13,19 +13,36 @@
  * The Alert component sets role="alert" by default; we override it here.
  */
 
+/**
+ * RegexBanner — T029 (Epic E, T4)
+ *
+ * Re-skinned with V4 @blok/alert--info chrome per ADR-0027.
+ * Copy unchanged from PRD-000.
+ * Role remains "note" (calm, not urgent) — overrides Alert's default role="alert".
+ */
+
 export function RegexBanner() {
+  const fullText =
+    "Exact match only — no regex, query string, or language variants.";
   return (
     <div
       role="note"
       aria-label="Matching scope notice"
-      className="flex items-start gap-2 rounded-md bg-primary-bg px-3 py-2.5 text-sm text-foreground"
+      className="cp-regex-banner"
+      title={fullText}
     >
-      <span className="mt-0.5 shrink-0 text-primary-500 dark:text-primary-200" aria-hidden="true">
-        ℹ
-      </span>
-      <span>
-        Direct-string matches only — regex pattern matches are not yet covered.
-      </span>
+      <svg
+        className="cp-regex-banner__icon"
+        aria-hidden="true"
+        viewBox="0 0 16 16"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M8 7v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="8" cy="4.5" r="0.75" fill="currentColor" />
+      </svg>
+      <span className="cp-regex-banner__text">{fullText}</span>
     </div>
   );
 }
