@@ -27,13 +27,13 @@ Grouping below is by theme, not by date. For the chronological sequence see the 
 | [ADR-0006](../project-planning/ADR/adr-0006-import-conflict-resolution-three-actions.md) | Import conflict resolution — three actions | ✅ | Per-item action picker with **create / overwrite / skip**. No merge action (collapsed into overwrite during PM critical review). |
 | [ADR-0008](../project-planning/ADR/adr-0008-urlmapping-encoding-contract.md) | `UrlMapping` field encoding contract | ✅ | URL-encoded `source=target` pairs joined by `&`. Round-trip parse/serialize is lossless and order-preserving; enforced via `fast-check` property tests. |
 | [ADR-0009](../project-planning/ADR/adr-0009-import-match-by-item-guid.md) | Import matching by Sitecore item GUID | ✅ | Cross-environment imports key on item GUID, not item name. Note: `createItem` does not accept caller-supplied `id`; cross-tenant `create` actions mint fresh GUIDs on the target. |
-| [ADR-0010](../project-planning/ADR/adr-0010-mvp-language-scope-en-only.md) | MVP language scope = `en` only | ✅ | All Authoring queries / mutations pass `language: "en"`. Multilingual CRUD deferred to PRD-001 along clean parametric seams. |
+| [ADR-0010](../project-planning/ADR/adr-0010-mvp-language-scope-en-only.md) → superseded by [ADR-0023](../project-planning/ADR/adr-0023-cancel-prd-001-multilingual-template-shared.md) | MVP language scope = `en` only → no per-language scope at all | ⛔ | ADR-0010 framed `en` only as a deferred-to-PRD-001 limitation. PRD-001 attempted the multilingual path and was cancelled at Tranche 1 once a real-tenant probe confirmed `UrlMapping` is a SHARED Sitecore field — redirects already apply to every language version of the site, so per-language CRUD is not a deferred limitation but a non-goal. Authoring queries still pass `language: "en"` because it is the canonical version on the SHARED field, but the product has no operator-visible language scoping. |
 
 ## Phasing
 
 | # | Title | Status | One-line rationale |
 |---|---|:--:|---|
-| [ADR-0004](../project-planning/ADR/adr-0004-three-prd-phasing.md) | Three-PRD phasing | ✅ | PRD-000 ships pure Sitecore CRUD (en-only); PRD-001 adds multilingual + analytics (Upstash + head-app instrumentation); PRD-002 adds sync-back with template change. |
+| [ADR-0004](../project-planning/ADR/adr-0004-three-prd-phasing.md) | Three-PRD phasing | ⚠️ partial | PRD-000 shipped pure Sitecore CRUD (against all-language SHARED data — the "en-only" framing turned out to be a non-issue per ADR-0023). PRD-001 (multilingual + analytics) was cancelled at Tranche 1 once the SHARED template field was confirmed. PRD-002 instead became the V4 Blok Elevated visual redesign. Analytics + sync-back deferred to a future PRD-003 candidate. |
 
 ## Frontend
 

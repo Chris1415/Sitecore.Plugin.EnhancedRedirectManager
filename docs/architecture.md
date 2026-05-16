@@ -154,8 +154,8 @@ Smoke validation against a real tenant is **manual and operator-driven**. Five c
 
 PRD-000 is intentionally narrow. The architecture leaves these seams open:
 
-- **`en` only.** All Authoring GraphQL queries pass `language: "en"`. Multilingual CRUD adds language enumeration + per-item version indicators + "create version" prompts; the read query and write mutations parameterize `language` cleanly. [ADR-0010]
-- **Exact-string Context Panel matching.** The matcher in `lib/match/` is one function. Regex matching adds a second pathway behind the same group-by-Redirect-Map UI. [ADR-0005]
+- **No per-language redirect rules.** The stock Sitecore Redirect Map template stores `UrlMapping` as a SHARED field — a rule authored on a Redirect Map applies to every language version of the routes it matches. PRD-001 attempted to add per-language CRUD and was cancelled at Tranche 1 once this was confirmed against a real tenant; see [ADR-0023](../project-planning/ADR/adr-0023-cancel-prd-001-multilingual-template-shared.md). All Authoring queries still pass `language: "en"` because that's the canonical version on the SHARED field, but no operator-visible language scoping exists. The original ADR-0010 (`MVP language scope = en only`) is superseded by ADR-0023.
+- **Exact-string Context Panel matching.** The matcher in `lib/match/` is one function. Regex matching adds a second pathway behind the same group-by-Redirect-Map UI. The matcher also does not normalize language-prefixed page routes (e.g. `/de/products` will not match a redirect with source `/products`), which is the actual user-facing language constraint. [ADR-0005]
 - **No usage analytics.** Adding Upstash counters means a second SDK wrapper family and a head-app instrumentation contract — neither exists in MVP.
 - **No concurrent-edit detection.** Writes do not check freshness tokens. Last writer wins.
 - **No bulk operations.** Each mutation is per-item, sequential.

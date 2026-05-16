@@ -4,8 +4,9 @@
  * WorkspaceHero — slimmer Full Page hero (operator polish 2026-05-15).
  *
  * Layout:
- *   - Eyebrow chip: "Workspace · {siteName} EN" (or "Workspace · pick a site"
- *     when no site selected yet).
+ *   - Eyebrow chip: "Workspace · {siteName}" (or "Workspace · pick a site"
+ *     when no site selected yet). No language suffix — redirects apply to
+ *     every language version of the site (UrlMapping is SHARED per ADR-0023).
  *   - Gradient headline: "{N} active maps." (counted from real fetched maps;
  *     uses real data only — no mock total).
  *   - Sub-line: "Last modified {relativeTime} by {updatedBy}" sourced from
@@ -105,7 +106,9 @@ export function WorkspaceHero({ siteName, maps, onRefresh, onSelectMap }: Worksp
       .slice(0, 8);
   }, [maps]);
 
-  const eyebrowSiteLabel = siteName ? `${siteName} · EN` : "pick a site";
+  // Redirect rules are stored on a SHARED Sitecore field — they apply to every
+  // language version of the site. No per-language scoping in the eyebrow.
+  const eyebrowSiteLabel = siteName ?? "pick a site";
   const headlineText =
     activeMapsCount === 0
       ? siteName
