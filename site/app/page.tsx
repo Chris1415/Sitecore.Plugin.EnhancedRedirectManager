@@ -49,11 +49,13 @@ export default function IntroPage() {
             </div>
             <div className="space-y-2">
               <div className="font-medium text-foreground">Version</div>
-              <div className="text-muted-foreground">1.0.0</div>
+              <div className="text-muted-foreground">2.0.0 (PRD-002)</div>
             </div>
             <div className="space-y-2">
-              <div className="font-medium text-foreground">Released at (V1)</div>
-              <div className="text-muted-foreground">12.05.2026</div>
+              <div className="font-medium text-foreground">Released</div>
+              <div className="text-muted-foreground">
+                V1 — 12.05.2026 · V2 (Blok Elevated redesign) — 15.05.2026
+              </div>
             </div>
             <div className="space-y-2 md:col-span-2">
               <div className="font-medium text-foreground">
@@ -76,8 +78,8 @@ export default function IntroPage() {
             <CardContent className="space-y-4 flex flex-col flex-grow">
               <div className="bg-muted rounded-lg overflow-hidden">
                 <Image
-                  src="/full-page.png"
-                  alt="Redirect Manager — Full Page surface"
+                  src="/full-page-prd002.png"
+                  alt="Redirect Manager — Full Page (PRD-002): workspace hero with real Last modified line and four hero CTAs, 5-tile stat strip (Redirects / 301 / 302 / Server Transfer / Conflicts), wider Redirect Maps rail, mappings table"
                   width={720}
                   height={400}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -85,11 +87,12 @@ export default function IntroPage() {
               </div>
               <CardDescription className="text-sm leading-relaxed flex-grow">
                 The power-user workshop. Site-collection + site picker drives
-                a virtualized Redirect Map list. Per map: editable name,
-                redirect type, three flags, and a mappings table with inline
-                add / edit / delete and drag-reorder. JSON import / export
-                keyed by Sitecore item GUID with a per-conflict three-action
-                picker (create / overwrite / skip).
+                a virtualized Redirect Map list. Workspace hero with real
+                Last-modified line and four hero actions (Refresh / View
+                activity / Validate health / Publish all). 5-tile stat strip
+                including a click-through Conflicts resolver. JSON import /
+                export keyed by Sitecore item GUID with a per-conflict
+                three-action picker (create / overwrite / skip).
               </CardDescription>
               <Link href="/full-page" className="mt-auto mb-2">
                 <Button variant="outline" className="w-full bg-transparent">
@@ -108,8 +111,8 @@ export default function IntroPage() {
             <CardContent className="space-y-4 flex flex-col flex-grow">
               <div className="bg-muted rounded-lg overflow-hidden">
                 <Image
-                  src="/context-panel.png"
-                  alt="Context Panel inside the SitecoreAI Pages editor"
+                  src="/context-panel-prd002.png"
+                  alt="Context Panel inside the SitecoreAI Pages editor (PRD-002): page route as the headline, split inbound/outbound count tile, inline Quick redirect form with source-or-target direction toggle"
                   width={720}
                   height={400}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
@@ -117,9 +120,11 @@ export default function IntroPage() {
               </div>
               <CardDescription className="text-sm leading-relaxed flex-grow">
                 For the page being edited, lists every redirect that affects
-                it (where this page is the source or target by exact-string
-                match), grouped by parent Redirect Map. Add, edit, and delete
-                inline without leaving the Pages editor.
+                it — both sources pointing here and targets this page
+                redirects to — grouped by parent Redirect Map. Inline Quick
+                redirect form at the top with a direction toggle (X → this
+                page ↔ this page → X). Add / edit / delete inline without
+                leaving the Pages editor.
               </CardDescription>
               <Link href="/context-panel" className="mt-auto mb-2">
                 <Button variant="outline" className="w-full bg-transparent">
@@ -138,19 +143,23 @@ export default function IntroPage() {
             <CardContent className="space-y-4 flex flex-col flex-grow">
               <div className="bg-muted rounded-lg overflow-hidden">
                 <Image
-                  src="/dashboard-widget.png"
-                  alt="Dashboard Widget on a SitecoreAI site dashboard"
+                  src="/dashboard-widget-prd002.png"
+                  alt="Dashboard Widget (PRD-002 wide variant): all-healthy + real collisions badges, eight real stat tiles, rainbow top-destinations bar list, recently-shipped-maps panel"
                   width={720}
                   height={400}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <CardDescription className="text-sm leading-relaxed flex-grow">
-                Three at-a-glance count tiles on the site dashboard: Redirect
-                Map items, individual mappings, and last-updated timestamp.
-                Site picker at the top right because the SDK does not surface
-                &quot;current site&quot; to dashboard widgets today — pick
-                once and the widget remembers it via localStorage.
+                Eight real-data tiles per site (Maps / Mappings / 301 / 302 /
+                Server Transfer / Avg per map / Largest map / Last updated),
+                a real source-URL collisions badge, a top-destinations bar
+                list with rotating accent colors, and a recently-shipped-maps
+                panel sourced from `map.updatedAt`. Wide-variant layout at
+                ≥960px; collapses to a single column on small embeds. Site
+                picker at the top right (the SDK does not surface &quot;current
+                site&quot; to dashboard widgets today — pick once, persisted
+                via localStorage).
               </CardDescription>
               <Link href="/dashboard-widget" className="mt-auto mb-2">
                 <Button variant="outline" className="w-full bg-transparent">
