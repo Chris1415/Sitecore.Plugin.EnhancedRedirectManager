@@ -20,6 +20,9 @@
  * Keyboard: arrow keys navigate (Virtuoso built-in), Enter selects.
  *
  * POC reference: full-page.html, full-page-no-redirects.html.
+ *
+ * Tranche 3a: per-map publish button removed (broken-by-design — Redirect Map items
+ * are not Edge-published content; site-wide publish is the only supported path).
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";

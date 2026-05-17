@@ -40,6 +40,8 @@ import {
   buildExportFilename,
   serializeExportToJson,
 } from "@/lib/import-export/serialize";
+import { resolveSiteLocales } from "@/lib/publish/locale-resolver";
+import { PUBLISH_LOCALE_SHORTHAND_ACCEPTED } from "@/lib/publish/config";
 import type { ClientSDK, Sites } from "@/lib/sdk/types";
 import type { RedirectMapItem } from "@/lib/domain/types";
 import { toast } from "sonner";
@@ -298,6 +300,9 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
       <div key={`hero-${listRefreshKey}`}>
         <WorkspaceHero
           siteName={selectedSite?.displayName || selectedSite?.name || null}
+          collectionName={selectedCollection?.name ?? null}
+          siteInternalName={selectedSite?.name ?? null}
+          siteLocales={selectedSite ? resolveSiteLocales(selectedSite, PUBLISH_LOCALE_SHORTHAND_ACCEPTED) : []}
           maps={maps}
           onRefresh={handleWriteSuccess}
           onSelectMap={handleMapSelect}

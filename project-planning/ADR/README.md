@@ -36,6 +36,12 @@ This directory holds ADRs for this product workspace.
 | ADR-0028 | Context Panel inline quick-add Option A locked — `AddRedirectModal` removed entirely | Accepted (amends ADR-0026) |
 | ADR-0029 | Context Panel `QuickRedirectForm` map-selection + RedirectType semantics | Accepted |
 | ADR-0030 | Full Page hero CTAs ("View activity" / "Publish all") are decorative in PRD-002 | Accepted |
+| ADR-0031 | Publish surface decided at Tranche 1 (SDK wrapper vs server-side OAuth proxy) — PRD-003 | Accepted |
+| ADR-0032 | Per-map Publish placement — icon button at row end | Superseded by ADR-0036 |
+| ADR-0033 | Publish service module contract — branch-agnostic skeleton | Accepted |
+| ADR-0034 | Publish surface branch resolution (Tranche 1 outcome) — Branch B selected | Accepted |
+| ADR-0036 | Per-map publish removed — Sitecore silently no-ops Items publish for Redirect Map items | Accepted |
+| ADR-0037 | Lightweight publish-job polling (3s) + cross-session resume (localStorage + name-prefix list scan) | Accepted |
 
 ## Next number
 

@@ -1,14 +1,51 @@
 /**
- * WorkspaceHero tests — slim real-data hero (operator polish 2026-05-15).
+ * WorkspaceHero tests — slim real-data hero.
  *
  * Real data: maps prop drives the active-maps count and the Last-Modified
  * sub-line (sourced from the most-recently-updated map in the list).
+ *
+ * Tranche 3b: polling/resume hooks mocked to idle/null so these tests
+ * don't trigger real fetch calls or timers.
  */
 
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { WorkspaceHero } from "@/components/full-page/WorkspaceHero";
 import type { RedirectMapItem } from "@/lib/domain/types";
+
+// Tranche 3b — mock hooks and collaborators to keep tests focused on hero display logic
+const { trackerIdle, resumeNull } = vi.hoisted(() => ({
+  trackerIdle: vi.fn().mockReturnValue({ kind: "idle" as const }),
+  resumeNull: vi.fn().mockReturnValue({ jobId: null, kickedOffAt: null, resumedFrom: null }),
+}));
+
+vi.mock("@/lib/publish/use-publish-job-tracker", () => ({
+  usePublishJobTracker: trackerIdle,
+}));
+vi.mock("@/lib/publish/use-publish-resume", () => ({
+  usePublishResume: resumeNull,
+}));
+vi.mock("@/lib/publish/in-flight-store", () => ({
+  setInFlightJob: vi.fn(),
+  clearInFlightJob: vi.fn(),
+  getInFlightJob: vi.fn().mockReturnValue(null),
+}));
+vi.mock("@/lib/publish/publish-service", () => ({
+  publish: vi.fn().mockResolvedValue({ kind: "queued", jobId: "test", jobIdShort: "test" }),
+}));
+vi.mock("@/lib/publish/transport-server", () => ({
+  callPublishViaServerRoute: vi.fn(),
+}));
+vi.mock("@/lib/publish/toast-adapter", () => ({
+  createSonnerToastAdapter: vi.fn(() => ({
+    requested: vi.fn().mockReturnValue("t"),
+    queued: vi.fn(),
+    failed: vi.fn(),
+  })),
+}));
+vi.mock("sonner", () => ({
+  toast: { loading: vi.fn(), success: vi.fn(), error: vi.fn(), warning: vi.fn() },
+}));
 
 function makeMap(
   id: string,
@@ -33,6 +70,12 @@ function makeMap(
 }
 
 describe("WorkspaceHero", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    trackerIdle.mockReturnValue({ kind: "idle" as const });
+    resumeNull.mockReturnValue({ jobId: null, kickedOffAt: null, resumedFrom: null });
+  });
+
   it("renders the eyebrow chip with site name when site is selected", () => {
     render(<WorkspaceHero siteName="MainSite" maps={[]} />);
     expect(screen.getByText(/Workspace/i)).toBeDefined();
@@ -104,7 +147,7 @@ describe("WorkspaceHero", () => {
     expect(document.body.textContent).not.toMatch(/\blanguages\b/i);
   });
 
-  it("renders all four CTAs: Refresh · View activity · Validate health · Publish all", () => {
+  it("renders all four CTAs: Refresh · View activity · Validate health · Publish Site (PRD-003 rename)", () => {
     render(
       <WorkspaceHero
         siteName="MainSite"
@@ -114,7 +157,9 @@ describe("WorkspaceHero", () => {
     expect(screen.getByRole("button", { name: /refresh/i })).toBeDefined();
     expect(screen.getByRole("button", { name: /view activity/i })).toBeDefined();
     expect(screen.getByText(/validate health/i)).toBeDefined();
-    expect(screen.getByText(/publish all/i)).toBeDefined();
+    // PRD-003 AC-P1.1 — "Publish all" renamed to "Publish Site"
+    expect(screen.queryByText(/publish all/i)).toBeNull();
+    expect(screen.getByRole("button", { name: /publish site/i })).toBeDefined();
   });
 
   it("Refresh button disabled when there are no maps", () => {
