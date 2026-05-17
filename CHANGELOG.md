@@ -4,6 +4,49 @@ All notable changes to Redirect Manager are recorded here. Entries are derived f
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) loosely; releases are tracked per PRD rather than by semantic version while the product is pre-1.0.
 
+## [PRD-003] — Publish Site wired + lightweight job tracking — 2026-05-17
+
+**Ship status:** shipped_with_caveats
+
+The decorative "Publish all" hero CTA from PRD-002 is now a real **"Publish Site"** button wired to the SitecoreAI Publishing v1 API. Operators trigger a site-wide Republish without leaving the Redirect Manager, see in-flight elapsed time on the button, and get a completion toast with items-processed / items-failed counts. Cross-session resume — close the tab and reopen, the app re-finds the in-flight job and continues tracking. First server-side Next.js API route in this app (narrow carve-out from ADR-0002 documented in ADR-0035).
+
+### Delivered
+
+- "Publish all" hero CTA renamed to **"Publish Site"** + wired to a real publish (US-P1, FR-P1).
+- Confirmation dialog (`PublishSiteConfirmModal`) reusing the Blok AlertDialog shell from PRD-002 — shows site name, locale count, mode "Republish (full)", source "Redirect Manager". Primary action triggers the publish; Cancel closes cleanly (US-P1, FR-P2, NFR-P3).
+- Server-side OAuth proxy route at `app/api/publish/route.ts` — holds `xmcloud.cm:admin` + `xmcpub.jobs.a:r` + `xmcpub.jobs.a:w` scoped client-credentials and forwards to `https://edge-platform.sitecorecloud.io/authoring/publishing/v1/jobs`. Server-only enforcement via `import "server-only"` + structural test (FR-P4, NFR-P2, ADR-0035).
+- Branch-agnostic publish service module (`lib/publish/`) — `PublishScope` types, `buildSitePublishBody` per the create.md docs nested shape, `outcomeFrom` mapper handling 201/4xx/5xx + ProblemDetails detail/title fallback, Sonner-backed toast adapter, `publish()` orchestration with the transport adapter as the only branch-specific seam (ADR-0033, FR-P5..P10).
+- **Lightweight job-status polling (US-P3, ADR-0037)** — 3-second `GET /api/publish/jobs/{id}` polling via `usePublishJobTracker` hook; button shows `Publishing… Xs` while polling; terminal toast replaces the loading toast via stable `publish-job-<jobId>` Sonner id pattern; resume toast explicitly dismissed on terminal so toasts never stack.
+- **Cross-session resume (US-P3)** — `usePublishResume` hook chains Tier 2 (localStorage `redirect-manager:publish-in-flight:<collection>:<site>`) + Tier 3 (name-prefix list scan against `GET /api/publish/jobs?source=Redirect+Manager`, filtered to non-terminal jobs queued in the last 60 min). Resumed jobs show a one-time "Found in-progress publish from Xm ago — tracking…" toast.
+- **Operator-readable job names** — publish jobs land in SitecoreAI's publishing list as `Redirect Manager — <collection>/<site> — <ISO timestamp>` (stable prefix doubles as the list-scan search key).
+- Idempotency guard (NFR-P6) — `isSubmitting` state closes the race window between dialog-close and the first polling tick; button stays disabled across the gap. Code-review major fix.
+- Theme parity (NFR-P5) — dialog renders correctly in dark/light/system themes; 6 structural theme tests.
+- Mobile responsive verified at 375/768/1280 viewports — no horizontal scroll, no grid overflow, no fixed-width sidebar, no headline overflow.
+
+### Deferred
+
+- **Per-map "Publish" button (US-P2 cut)** — discovered during real-tenant smoke that Sitecore silently no-ops Items publish for Redirect Map items (not Edge-published content). The whole feature was removed cleanly before ship; ADR-0036 records the finding. Only **Site publish** updates redirect content on Edge.
+- **Multi-locale publish** — simplified to `["en"]` only because `UrlMapping` is a SHARED Sitecore field (no language axis). Publishing multiple locales would re-publish byte-identical data. Resolver signature retained for future flexibility.
+- **`locales: ["*"]` shorthand** — operator skipped the Tranche 1 live probe. Enumerated `["en"]` works; revisit if multi-locale returns to scope.
+- **Recent publishes panel** — out of "lightweight" charter for this PRD. Routes (`GET /api/publish/jobs`) are in place; a future PRD can add the panel cheaply.
+- **Cancel-mid-publish UI** — `POST /jobs/{id}/cancel` endpoint exists (Tranche 1.5 spike probed it); UI not wired. Future PRD candidate.
+- **Server-side body validation defense-in-depth** — `validateBody` only enforces `source` non-empty. No production exposure (typed client builder + same-origin route). Future cleanup pass.
+
+### Known limitations
+
+- Operators must register a Cloud Portal automation client (`xmcloud.cm:admin` + `xmcpub.jobs.a:r` + `xmcpub.jobs.a:w`) and populate `SITECORE_PUBLISH_CLIENT_ID` + `SITECORE_PUBLISH_CLIENT_SECRET` in `.env.local`. Token endpoint + audience + Publishing base URL have universal defaults — no setup needed for those.
+- Cross-machine resume is best-effort within a 60-minute window — list-scan does not look further back. Publishes triggered on machine A more than an hour ago must be verified via SitecoreAI's publishing list directly when opened on machine B.
+- Polling interval is 3s with no progress bar; elapsed time only. Statistics (`itemsProcessed / itemsSent`) are available via the API and could be surfaced in a future PRD.
+- Host-frame Playwright pixel-comparison test was skipped this PRD (no POC produced — light-rigor scope). Visual fidelity verified by operator live walkthrough on the solo tenant.
+
+### Stats
+
+- **Tests:** 521 passing across 66 files (+61 vs PRD-002 baseline of 460)
+- **Lint:** 0 errors / 2 baseline warnings (unchanged from PRD-002)
+- **Build:** clean — 9 routes (5 static + 3 dynamic API routes + 1 not-found)
+- **Smoke:** m_publish PASSED 2026-05-17 (operator-driven on solo tenant); m1 + m3 carry-forward PASSED; host_frame_smoke SKIPPED (no POC)
+- **ADRs authored:** 7 (ADR-0031 deferred decision, ADR-0032 superseded by ADR-0036, ADR-0033 module contract, ADR-0034 Branch B selected, ADR-0035 server-route carve-out from ADR-0002, ADR-0036 per-map removed, ADR-0037 polling + resume)
+
 ## [PRD-002] — V4 Blok Elevated redesign — 2026-05-15
 
 **Ship status:** shipped

@@ -9,5 +9,13 @@ export default defineConfig({
     setupFiles: ['./vitest.setup.ts', './tests/setup.ts'],
     globals: true,
   },
-  resolve: { alias: { '@': path.resolve(__dirname, '.') } },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, '.'),
+      // server-only is a Next.js package that throws in browser/non-Next builds.
+      // In vitest (jsdom) it must resolve to a no-op so server-side modules
+      // can be imported and tested in isolation (token cache, route handler).
+      'server-only': path.resolve(__dirname, 'tests/mocks/server-only.ts'),
+    },
+  },
 });
