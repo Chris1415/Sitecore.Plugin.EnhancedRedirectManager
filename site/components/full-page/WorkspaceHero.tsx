@@ -143,6 +143,11 @@ export function WorkspaceHero({
   // T021 — Publish Site flow state (confirm dialog)
   const [publishDialogOpen, setPublishDialogOpen] = useState(false);
 
+  // Idempotency guard (code-review fix): true while handleConfirmPublish is in flight
+  // (awaiting the POST /api/publish response). Prevents double-submit in the race window
+  // between dialog-close and the first tracker polling tick that sets isPolling=true.
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   // Tranche 3b — polling job id (set after 201 response or resume)
   const [pollingJobId, setPollingJobId] = useState<string | null>(null);
 
@@ -227,35 +232,43 @@ export function WorkspaceHero({
   async function handleConfirmPublish() {
     if (!siteName || !collectionName || !siteInternalName) return;
     setPublishDialogOpen(false);
+    setIsSubmitting(true);
 
-    const outcome = await publish(
-      {
-        collectionName,
-        siteName: siteInternalName,
-        siteDisplayName: siteName,
-        locales: siteLocales.length > 0 ? siteLocales : ["en"],
-      },
-      { callPublish: callPublishViaServerRoute, toasts: createSonnerToastAdapter() },
-    );
-
-    if (outcome.kind === "queued" && siteContextKey) {
-      const now = new Date().toISOString();
-      setInFlightJob({
-        jobId: outcome.jobId,
-        kickedOffAt: now,
-        siteContextKey,
-      });
-      setPollingJobId(outcome.jobId);
-
-      // Reposition the toast onto the stable `publish-job-<jobId>` id so the
-      // terminal handler can REPLACE it instead of stacking. The publish-service's
-      // queued() toast auto-dismisses on Sonner default (~4s) — we replace it with
-      // a sticky loading toast under the stable id so operators have continuous
-      // visual feedback through the polling phase.
-      toast.loading(
-        `Publishing site — job ${outcome.jobId.slice(0, 8)}`,
-        { id: `publish-job-${outcome.jobId}`, duration: Infinity },
+    try {
+      const outcome = await publish(
+        {
+          collectionName,
+          siteName: siteInternalName,
+          siteDisplayName: siteName,
+          locales: siteLocales.length > 0 ? siteLocales : ["en"],
+        },
+        { callPublish: callPublishViaServerRoute, toasts: createSonnerToastAdapter() },
       );
+
+      if (outcome.kind === "queued" && siteContextKey) {
+        const now = new Date().toISOString();
+        setInFlightJob({
+          jobId: outcome.jobId,
+          kickedOffAt: now,
+          siteContextKey,
+        });
+        setPollingJobId(outcome.jobId);
+
+        // Reposition the toast onto the stable `publish-job-<jobId>` id so the
+        // terminal handler can REPLACE it instead of stacking. The publish-service's
+        // queued() toast auto-dismisses on Sonner default (~4s) — we replace it with
+        // a sticky loading toast under the stable id so operators have continuous
+        // visual feedback through the polling phase.
+        toast.loading(
+          `Publishing site — job ${outcome.jobId.slice(0, 8)}`,
+          { id: `publish-job-${outcome.jobId}`, duration: Infinity },
+        );
+      }
+    } finally {
+      // Always clear submitting state so the button re-enables.
+      // If a polling job was started, isPolling will immediately take over
+      // as the disabled guard; if it failed/errored, we release the lock.
+      setIsSubmitting(false);
     }
   }
 
@@ -284,9 +297,11 @@ export function WorkspaceHero({
     ? `Publishing… ${formatElapsed(elapsedMs)}`
     : "Publish Site";
 
-  // Button disabled when no site context, or while polling
+  // Button disabled when no site context, while submitting (awaiting POST response),
+  // or while polling (awaiting terminal job status). isSubmitting covers the race
+  // window between dialog-close and the first polling tick (code-review fix).
   const publishButtonDisabled =
-    !siteName || !collectionName || !siteInternalName || isPublishing;
+    !siteName || !collectionName || !siteInternalName || isSubmitting || isPublishing;
 
   return (
     <section className="fp-hero" aria-label="Workspace hero">
@@ -388,7 +403,7 @@ export function WorkspaceHero({
           onClick={() => setPublishDialogOpen(true)}
           disabled={publishButtonDisabled}
           className="elev-btn"
-          aria-label="Publish Site"
+          aria-label={publishButtonLabel}
         >
           {publishButtonLabel}
         </Button>

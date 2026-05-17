@@ -103,7 +103,10 @@ describe("WorkspaceHero", () => {
 
     render(<WorkspaceHero {...defaultProps} />);
 
-    const btn = screen.getByRole("button", { name: "Publish Site" });
+    // During polling the button's accessible name becomes the polling label
+    // (e.g. "Publishing… 7s") since aria-label now mirrors publishButtonLabel.
+    // Match the polling-state label pattern instead of the idle "Publish Site".
+    const btn = screen.getByRole("button", { name: /Publishing…/ });
     expect(btn).toBeDisabled();
     expect(screen.getByText(/Publishing…/)).toBeTruthy();
   });

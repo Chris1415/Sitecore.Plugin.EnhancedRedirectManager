@@ -88,7 +88,7 @@ async function fetchFreshToken(): Promise<string> {
   // per sitecore:sitecoreai-auth § 5 tenant-id logging placement note).
   const sub = decodeJwtSub(access_token);
   if (sub) {
-    console.log(`[redirect-manager] publish-probe tenant=${sub}`);
+    console.log(`[redirect-manager] publish-auth tenant=${sub}`);
   }
 
   return access_token;
