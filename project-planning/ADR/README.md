@@ -7,7 +7,7 @@ This directory holds ADRs for this product workspace.
 | ADR | Title | Status |
 |-----|-------|--------|
 | ADR-0001 | Use ADRs as architecture backbone | Accepted |
-| ADR-0002 | Marketplace SDK Mode A scaffold (no server-side OAuth proxy) | Accepted |
+| ADR-0002 | Marketplace SDK Mode A scaffold (no server-side OAuth proxy) | Accepted (narrowed by ADR-0035 for publishing surface only) |
 | ADR-0003 | Authoring GraphQL is the single canonical source for redirect rules | Accepted |
 | ADR-0004 | Three-PRD phasing — pure CRUD, then multilingual+analytics, then sync-back | Superseded by ADR-0014 |
 | ADR-0005 | Context Panel matching is exact-string only in MVP | Accepted |
@@ -40,6 +40,7 @@ This directory holds ADRs for this product workspace.
 | ADR-0032 | Per-map Publish placement — icon button at row end | Superseded by ADR-0036 |
 | ADR-0033 | Publish service module contract — branch-agnostic skeleton | Accepted |
 | ADR-0034 | Publish surface branch resolution (Tranche 1 outcome) — Branch B selected | Accepted |
+| ADR-0035 | Server-side OAuth proxy for publishing — narrow carve-out from ADR-0002 | Accepted (partially supersedes ADR-0002 for publishing surface) |
 | ADR-0036 | Per-map publish removed — Sitecore silently no-ops Items publish for Redirect Map items | Accepted |
 | ADR-0037 | Lightweight publish-job polling (3s) + cross-session resume (localStorage + name-prefix list scan) | Accepted |
 

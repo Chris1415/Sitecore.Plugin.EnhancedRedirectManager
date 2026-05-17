@@ -2,7 +2,7 @@
   "schema_version": 6,
   "run_id": "20260516T194651Z",
   "created_at": "2026-05-16T19:46:51Z",
-  "updated_at": "2026-05-17T18:53:00Z",
+  "updated_at": "2026-05-17T21:30:00Z",
   "// tranche_3_complete_at": "2026-05-17T18:00:00Z (Tranche 3: per-map removed + polling + resume)",
   "// architecture_ready_at": "2026-05-16T22:06:00Z",
   "// plan_ready_at": "2026-05-16T22:18:00Z",
@@ -13,7 +13,7 @@
   "// status_history_note": "spec_ready → architecture_ready → plan_ready → qa_ready → implementation_in_progress (T1 partial → T1.5 spike → T1.5 cleanup → T2 main) → implemented 2026-05-17T15:30Z (28 tasks done; T028 manual smoke gate pending; 508/508 tests green; build clean)",
   "product_slug": "redirect-manager",
   "product_root": "products/redirect-manager",
-  "status": "implemented",
+  "status": "shipped_with_caveats",
   "prd_input_mode": "prompt_only",
   "platform_target": "marketplace",
   "task_breakdown_style": "tdd",
@@ -49,11 +49,11 @@
     "task_breakdown_pre_qa": null,
     "qa_report": null,
     "implementation_runbook": "products/redirect-manager/project-planning/plans/implementation-runbook-20260516T194651Z.md",
-    "code_review_report": "products/redirect-manager/project-planning/plans/code-review-20260517T185230Z.md",
-    "test_report": null,
+    "code_review_report": null,
+    "test_report": "products/redirect-manager/project-planning/plans/test-report-20260517T210000Z.md",
+    "ship_report": "products/redirect-manager/project-planning/plans/ship-report-20260517T213000Z.md",
     "content_model": null,
     "content_examples": null,
-    "ship_report": null,
     "friction_log": null
   },
   "friction_log": {
@@ -133,6 +133,33 @@
       "outcome": "completed",
       "error": null,
       "notes": "Tranche 1 (T001–T005) complete; implementation-runbook-20260516T194651Z.md written. T001 = D-T1.1 = Branch B CONFIRMED via grep of all *.gen.d.ts under @sitecore-marketplace-sdk/xmc — zero xmc.publishing.* surfaces; all `jobs` hits are sites/xmapp background jobs (excluded per ADR-0034 step 1); all `publish*` hits are page-state properties or the `Publishing` type. T002 type-shape captured (Sites.Site.languages?: Array<string> | null at types.gen.d.ts:1019; double .data.data unwrap from site/lib/sdk/sites.ts:35-39; example values in xx-YY format). T003 (Publishing host URL), T004 (locales:['*'] live probe), T005 (D-T1.3 OAuth credentials verification) — all marked OPERATOR ACTION REQUIRED in capture artifact. ADR-0034 partially amended: Status=Proposed (Tranche 1 partial — awaiting T002 values / T003 host / T004 shorthand verdict / D-T1.3 OAuth creds). Branch A struck. Branch B SELECTED with known specifics (route path site/app/api/publish/route.ts, OAuth scopes, env var names). Tranche 1 capture log table appended to ADR. No code under site/ written — Tranche 1 is read-only. HARD OPERATOR GATE pending."
+    },
+    {
+      "stage": "tested",
+      "agent": "07-qa-specialist",
+      "entered_at": "2026-05-17T21:00:00Z",
+      "exited_at": "2026-05-17T21:10:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Phase 1 test pass complete. Automated: lint 0/2, build clean 9 routes, 521/521 tests. Manual verification: secret hygiene PASS, toast-id discipline PASS, polling cleanup PASS, localStorage SSR safety PASS, per-map removal PASS, M1 idempotency fix CONFIRMED, m1 log-label fix CONFIRMED, m2 aria-label fix CONFIRMED, m3 route-validation DEFERRED (known non-blocking). Mobile responsive: PASS at 375/768/1280 (6 screenshots in test-evidence/). Smoke: m_publish PASSED (carry from operator 2026-05-17), m1 PASSED (carry-forward PRD-002), m3 PASSED (carry-forward PRD-002), host_frame_smoke SKIPPED (no POC; light-rigor charter). 0 critical / 0 major / 1 minor deferred. Phase 2 is a no-op. Release verdict: READY FOR /ship."
+    },
+    {
+      "stage": "documented",
+      "agent": "02-product-manager",
+      "entered_at": "2026-05-17T21:25:00Z",
+      "exited_at": "2026-05-17T21:30:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Auto-lite emission per scope_dial.docs_at_ship=auto-lite. CHANGELOG.md prepended with [PRD-003] entry (Delivered + Deferred + Known limitations + Stats). README.md not touched — no existing ## Status section to update (per /ship § 15a auto-lite conservative reading; README otherwise customized by operator). Doc Writer (09) not invoked — PM did it inline."
+    },
+    {
+      "stage": "shipped",
+      "agent": "02-product-manager",
+      "entered_at": "2026-05-17T21:30:00Z",
+      "exited_at": "2026-05-17T21:30:00Z",
+      "outcome": "completed",
+      "error": null,
+      "notes": "Ship status: shipped_with_caveats. Smoke gate: host_frame_smoke=skipped (no POC; operator-acceptable per scope_dial.ui_variants=skip; mix of passed + skipped forces shipped_with_caveats per /ship § 13). All PRD requirements either delivered (US-P1, US-P3, FR-P1/P2/P4-P14, NFR-P1-P6) or cleanly cut (US-P2 + FR-P3 per ADR-0036, with smoke-evidence rationale). Code-review major fix + 2/3 minors landed; 1 minor deferred (m3 server-side body validation defense-in-depth gap; non-blocking). 7 ADRs authored this PRD (0031-0037). ADR-0035 narrows ADR-0002 for publishing surface only (carve-out documented). Tests 521/521. m_publish operator smoke PASSED 2026-05-17 on solo tenant."
     }
   ],
   "implementation": {
@@ -151,6 +178,27 @@
       "outcome": "passed",
       "evidence": "Operator confirmation 2026-05-17: 'smoke pass commit and code-review' after running through the 8-test checklist. Both happy paths produced real jobs in SitecoreAI publishing list with source='Redirect Manager' and createdBy.type='Application'.",
       "notes": null
+    },
+    "m1": {
+      "gate": "registration",
+      "description": "Cloud Portal extension-point registration; PRD-003 made no extension-route changes.",
+      "outcome": "passed",
+      "evidence": "PRD-002 m1 passed 2026-05-15; PRD-003 diff does not touch app/(extension-points)/* or registration manifest",
+      "notes": "Carry-forward from PRD-002"
+    },
+    "m3": {
+      "gate": "live_walkthrough",
+      "description": "CRUD round-trip; PRD-003 reverted RedirectMapList.tsx (only the per-map publish button was removed; CRUD logic untouched).",
+      "outcome": "passed",
+      "evidence": "PRD-002 m3 passed 2026-05-15",
+      "notes": "Carry-forward from PRD-002"
+    },
+    "host_frame_smoke": {
+      "gate": "host_frame_smoke",
+      "description": "No POC produced this PRD (ui_variants=skip); visual scope is rename + new dialog reusing PRD-002 Blok primitives.",
+      "outcome": "skipped",
+      "evidence": null,
+      "notes": "Operator-acceptable per scope_dial light-rigor charter. Visual scope (label rename + AlertDialog reuse) is below the host-frame gate threshold. No pixel comparison target exists."
     }
   },
   "operator_attention": [
@@ -470,15 +518,35 @@
       "references": "Tranche 3 Developer 08 subagent report"
     },
     {
-      "stage": "code_reviewed",
-      "agent": "08-developer",
-      "entered_at": "2026-05-17T18:49:00Z",
-      "exited_at": "2026-05-17T18:53:00Z",
-      "outcome": "completed",
-      "error": null,
-      "notes": "0 critical / 1 major / 4 minor. M1 FIXED: idempotency race in WorkspaceHero — isSubmitting state added to cover dialog-close → first-poll-tick window. Minor findings (m1 stale log label, m2 aria-label polling state, m3 route validation gaps) left for operator triage. Post-fix: lint 0 errors / 2 baseline warnings; build clean (9 routes); tests 521/521. Report at products/redirect-manager/project-planning/plans/code-review-20260517T185230Z.md"
+      "stage": "test",
+      "severity": "info",
+      "kind": "resolved",
+      "item": "/test Phase 1 complete (QA Specialist 07). Automated: lint 0/2-baseline, build clean, 521/521 tests. Mobile responsive 375/768/1280 on /full-page: PASS all axes (no h-scroll, no grid overflow, no fixed sidebar, padding within budget, no headline overflow). Dialog standalone: WARN (env) — Publish button absent without Marketplace SDK context; verified by operator in host frame during m_publish smoke. Code-review fixes (M1 isSubmitting + m1 log + m2 aria-label) all CONFIRMED in source. Phase 2 no-op (zero critical/major findings). Test report at plans/test-report-20260517T210000Z.md.",
+      "raised_at": "2026-05-17T21:00:00Z",
+      "resolved_at": "2026-05-17T21:00:00Z",
+      "references": "plans/test-report-20260517T210000Z.md; smoke_outcomes m1/m3/host_frame_smoke appended"
+    },
+    {
+      "stage": "test",
+      "severity": "info",
+      "kind": "decision",
+      "item": "Host-frame Playwright pixel comparison SKIPPED with operator-acceptable reason: ui_design.selected_poc_path is null (scope_dial.ui_variants=skip). Visual scope is rename + new dialog reusing PRD-002 Blok primitives; no new visual direction to compare against. Live walkthrough (m_publish) already passed 2026-05-17 satisfies the visual-fidelity question for this PRD.",
+      "raised_at": "2026-05-17T21:00:00Z",
+      "resolved_at": "2026-05-17T21:00:00Z",
+      "references": "smoke_outcomes.host_frame_smoke (skipped); test-report-20260517T210000Z.md § Visual Testing"
+    },
+    {
+      "stage": "test",
+      "severity": "info",
+      "kind": "concern",
+      "item": "Server-side body validation defense gap (code-review minor m3) remains deferred — /api/publish/route.ts validateBody only enforces source non-empty; name + options + strict source equality not checked. No production exposure (client constructs body via typed buildSitePublishBody; route is same-origin). Future-PRD candidate for a defensive cleanup pass.",
+      "raised_at": "2026-05-17T21:00:00Z",
+      "resolved_at": null,
+      "references": "code-review-20260517T185230Z.md minor m3; test-report-20260517T210000Z.md Minor findings"
     }
   ],
+  "// stage_tested_at": "2026-05-17T21:00:00Z",
+  "// stage_shipped_at": "2026-05-17T21:30:00Z",
   "notes": [
     "PRD-003 lineage: PRD-000 (shipped 2026-05-12 — en-only foundation, PR#1) → PRD-001 (CANCELLED 2026-05-13 — multilingual UrlMapping SHARED, ADR-0023) → PRD-002 (shipped 2026-05-15 — V4 Blok Elevated visual redesign + operator polish wave, PR#3 merged 2026-05-16) → PRD-003 (this run — wire 'Publish all' placeholder + per-map Publish).",
     "scope_dial: light/minimal/skip/auto-lite/skip_gate. Operator-chosen at kickoff (4-question AskUserQuestion). 'Light' applies to BOTH discovery and critical review per scope_dial.rigor inheritance rule.",
