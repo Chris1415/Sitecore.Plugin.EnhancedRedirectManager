@@ -141,14 +141,7 @@ For the full narrative see [`docs/architecture.md`](docs/architecture.md). For t
 
 ### Dashboard Widget
 
-At-a-glance count tiles per site — maps, individual mappings, last-updated timestamp. Embeds on the SitecoreAI site dashboard. The widget includes a site picker at the top right because the SDK does not surface "current site" to dashboard widgets today (operator's last pick persisted via `localStorage`).
-
-<p align="center">
-  <img src="docs/screenshots/dashboard-widget.png" alt="Dashboard Widget — focused view of the redirect count tiles" width="720" />
-</p>
-<p align="center">
-  <img src="docs/screenshots/dashboard-widget-context.png" alt="Dashboard Widget rendered in the full SitecoreAI site overview" width="720" />
-</p>
+At-a-glance count tiles per site — maps, individual mappings, last-updated timestamp. Embeds on the SitecoreAI site dashboard. The widget includes a site picker at the top right because the SDK does not surface "current site" to dashboard widgets today (operator's last pick persisted via `localStorage`). See the hero block at the top of this README for the live PRD-002 widget; fresh in-dashboard captures will be added on the next host-frame walkthrough.
 
 ### Context Panel (inside the Pages editor)
 
@@ -200,11 +193,7 @@ Site-collection + site picker drives a virtualized list of Redirect Maps. Per ma
   <img src="docs/screenshots/full-page-prd002-new-map.png" alt="Full Page — New redirect map dialog: name field (My Redirect Map), Type select (Server Transfer chosen), three flag checkboxes (Preserve query string, Preserve language, Include virtual folder), Cancel / Create buttons" width="960" />
 </p>
 
-**Inline mapping edit.** Per-mapping inline edit row with drag-reorder.
-
-<p align="center">
-  <img src="docs/screenshots/full-page-mapping-edit.png" alt="Full Page — inline mapping edit row" width="900" />
-</p>
+**Inline mapping edit.** Per-mapping inline edit row with drag-reorder — source and target inputs side by side with Save / Cancel, with a drag handle on each row for reordering inside the map.
 
 **Import.** Versioned `redirect-manager/v1` JSON keyed by Sitecore item GUID. Pick a file or paste the JSON; the next step previews per-item conflicts and offers a three-action picker (create / overwrite / skip).
 
