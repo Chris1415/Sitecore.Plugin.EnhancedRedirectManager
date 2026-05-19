@@ -150,3 +150,13 @@ First public release. Three Cloud Portal extension points (Context Panel, Dashbo
 - Cross-tenant imports always mint fresh GUIDs on `create` actions.
 - No concurrent-edit detection — last writer wins.
 - Cloud Portal does not pass per-site context to Dashboard Widget embeds — picker fallback only.
+
+---
+
+## Roadmap
+
+- **PRD-001** — Cancelled. Multilingual CRUD is blocked by the stock Sitecore Redirect Map template having `UrlMapping` as a SHARED field (no language axis). See [ADR-0023](project-planning/ADR/adr-0023-cancel-prd-001-multilingual-template-shared.md).
+- **PRD-002** — Shipped 2026-05-15. V4 Blok Elevated visual redesign of all three extension-point routes. See [PRD-002] entry above.
+- **PRD-003** — Shipped 2026-05-17. Publish Site wired to SitecoreAI Publishing v1 API with job-status polling and cross-session resume. See [PRD-003] entry above.
+- **PRD candidate** — Data plumbing: wire real data into the PRD-002 visual chassis by flipping `PREVIEW_DATA_ACTIVE` flags (Dashboard Widget hero stats, sparkline, top-destinations, recently-shipped).
+- **Later** — Regex-aware Context Panel matching, concurrent-edit detection, bulk operations, audit log, public Marketplace submission. See PRD-000 § 15 Future Opportunities.
