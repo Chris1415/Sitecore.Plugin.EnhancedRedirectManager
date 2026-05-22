@@ -4,6 +4,10 @@
 
 A Sitecore Marketplace client-side app that gives content authors and site managers a purpose-built UI for redirect operations across a SitecoreAI tenant. Replaces the Content Editor workflow for managing items under `/sitecore/content/{COLLECTION}/{SITE}/Settings/Redirects/*` and surfaces redirects inside the Pages editor, on the site dashboard, and on a dedicated full-page workshop.
 
+## Status
+
+Latest: **PRD-004 — shipped_with_caveats** (2026-05-22). Regex source mode + Test surface with a faithful local port of the upstream Content SDK `RedirectsProxy` (100% upstream-fixture parity). See [CHANGELOG.md](CHANGELOG.md) for history.
+
 <p align="center">
   <img src="docs/screenshots/full-page-prd002-general.png" alt="Redirect Manager — Full Page workspace: hero with Last modified line, 5-tile stat strip (Redirects · 301 · 302 · Server Transfer · Conflicts), rail of Redirect Maps, mappings table" width="960" />
 </p>

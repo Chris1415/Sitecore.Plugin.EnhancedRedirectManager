@@ -4,6 +4,58 @@ All notable changes to Redirect Manager are recorded here. Entries are derived f
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) loosely; releases are tracked per PRD rather than by semantic version while the product is pre-1.0.
 
+## [PRD-004] — Regex source mode + Test surface — 2026-05-22
+
+**Ship status:** shipped_with_caveats
+
+Authoring gains a dedicated **`EditRowModal`** with a Pattern / Regex mode toggle and save-time regex validation (invalid regex blocked at save; capture-group references cross-checked against source group count). The modal **replaces the existing PRD-000 inline row-editing** in the Redirect Map detail pane — one way to edit, no UX duality. Full Page gains a secondary **"Test" tab** that simulates how the Content SDK `RedirectsProxy` would evaluate a URL against the currently-loaded redirect inventory, with a structured trace (pre-filter → normalize → candidates → per-row evaluation → substitution → flag effects → dispatch). The simulator is a verbatim local port of upstream (15/15 upstream fixture cases + 8/8 tenant cases GREEN; zero known divergences).
+
+### Added
+
+- **`EditRowModal`** (new component) — modal dialog opens on row click in `RedirectMapDetail`. Owns source + destination + Pattern/Regex mode toggle. Save-time validation: `try { new RegExp(source, flags) }` blocks save on parse failure; `$N` references cross-checked against source capture-group count (`$0` rejected; gap-in-numbering rejected; `$siteLang` exempt). Map-level fields (`RedirectType`, `IncludeVirtualFolder`, `PreserveQueryString`, `PreserveLanguage`) stay in the existing map-settings UI by design (structural guard enforces this).
+- **"Manage / Test" tab control** on the Full Page workspace, below the WorkspaceHero.
+- **Test tab — two-column layout**: sticky left rail with read-only maps list (maps inherit from the Manage tab's `CollectionPicker` + `SitePicker` — shared scope, no duplicate picker) + URL input + Test button; scrollable right area with trace cards. Layout stacks below 768px.
+- **`simulate()` library** at `site/lib/redirects/proxy-simulator.ts` — verbatim port of upstream `RedirectsProxy.handle()` + helpers (`isRegexOrUrl`, `getRedirectPatternRegex`, `escapeNonSpecialQuestionMarks`, `mergeURLSearchParams`, `areURLSearchParamsEqual`). Header records upstream commit SHAs (`30b0db8f…`, `e6153e5e…`), retrieval date, ADR references, and a Known-divergences list (target: empty per M2 100% parity).
+- **Dual time-cap regex safety** — per-row `Promise.race([test, 100ms])` + total simulation wall-clock cap at 3 seconds. Catastrophic patterns surface a "pattern too slow" trace card; wall-clock cap emits a `diagnostic-incomplete` final card naming evaluated-vs-total rule counts.
+- **Trace card stack** — typed `SimulationStage` discriminated union with `assertNeverStage` compile-time exhaustiveness; matched results render a result card with a deep-link that closes the Test tab, switches to Manage, scrolls to the parent map, and opens `EditRowModal` for the matched row.
+- **Copy-as-JSON** footer button — copies the full structured trace object to clipboard.
+- **Locale derived from URL prefix** via `LOCALE_PREFIX_REGEX = /^\/([a-z]{2}(-[A-Z]{2})?)(?=\/|$)/`; defaults to `'en'`. No locale dropdown in v0.
+- **Reproducible upstream-fixture extraction** — committed AST-walking script at `site/scripts/extract-upstream-fixtures.ts` parses the upstream test file and emits `__fixtures__/upstream-cases.json` with `extractedAt` + `upstreamSha` + `count` metadata. Re-runnable via `npm run extract:upstream-fixtures`.
+
+### Changed
+
+- **Inline row editing in `RedirectMapDetail` removed** — clicking a row now opens `EditRowModal` instead. Operator-visible UX change to existing PRD-000 behavior: more focused edits, slightly more click-through. Per ADR-0043.
+- **`useEntitlement`-style state lift on the Test surface** — `lastTrace` + `activeTab` lifted into `FullPage` so the Test→Manage deep-link can unmount `TestSurface` without losing trace state, and the `EditRowModal` deep-link opens pre-focused on the matched row via `forwardRef` imperative handle (ADR-0041).
+
+### Deferred (operator-driven 2026-05-21 simplification — see PRD-004 § 16)
+
+Six originally-planned affordances moved to Future Opportunities after the post-implementation visual smoke:
+
+- **FO-9** — Cross-site scope picker in Test tab (Collection → Site → Map(s) cascading multi-select with localStorage persistence). Replaced by shared rail (maps-as-prop) which covers single-site testing cleanly.
+- **FO-10** — Locale picker dropdown in Test tab. Replaced by URL-prefix derivation; default `en`.
+- **FO-11** — Snippet library in Regex mode (5 one-click patterns: anchored start, trailing slash, query strip, blog migration, file extension).
+- **FO-12** — Capture-group chips in destination input (`$1`, `$2`, `$siteLang`).
+- **FO-13** — Live sample-URL tester inline in modal (redundant with the Test tab).
+- **FO-14** — Inline mode-mismatch hint when manual mode disagrees with `isRegexOrUrl()` auto-detect. (`isRegexOrUrl` is exported for a future return.)
+
+### Known limitations
+
+- **Host-frame Playwright pixel comparison skipped** — host URL not supplied this run. 5-axis (light / dark / system / reduced-motion / mobile <768px) against `pocs/poc-v1-prd004/` remains outstanding. Live operator walkthrough is the visual verification this PRD.
+- **`live_walkthrough: pass_with_caveats`** — a `TestSurface` bug (Test button race + null-safety crash) was found and patched mid-smoke; no current open bugs.
+- **EmptyState copy** in `EmptyState.tsx:50` — "Select a collection, site, and one or more redirect maps on the left." is slightly imprecise after § 16 (the picker is in the shared rail, not panel-specific). Cosmetic; operator-triage.
+- **`isRegexOrUrl("/")` returns `'regex'`** — degenerate-case upstream behavior, replicated verbatim per ADR-0038.
+- **3s wall-clock cap is enforced between rule iterations**, not mid-`.test()` — synchronous `regex.test()` cannot be interrupted by `Promise.race` in single-threaded JS. The per-row 100ms cap remains the catastrophic-pattern stop-loss. Documented in `proxy-simulator.ts` header.
+- **`_upstream-source.ts` gitignored staging file** — required by ADR-0042 extractor; carries 10 lint errors that are confined to this file (not part of the build).
+
+### Stats
+
+- **Tests:** 691 passing across 76 files (+170 vs PRD-003 baseline of 521)
+- **Build:** clean — Next 16.1.7 Turbopack, 9 routes
+- **Lint:** 10 errors / 44 warnings (all 10 errors in gitignored `_upstream-source.ts`; warning delta −4 vs pre-code-review baseline)
+- **SDK-contract greps:** clean (0 hits for `client.mutate`, `.data.data`, empty catches)
+- **Smoke:** `tranche_1_regex_roundtrip_probe: passed`, `fixture_parity_upstream: passed`, `tranche_6_real_tenant_smoke: passed (operator 2026-05-22)`, `live_walkthrough: pass_with_caveats`, `host_frame_smoke_test_tab: skipped (no host URL)`
+- **ADRs authored:** 6 (ADR-0038 simulator verbatim parity, ADR-0039 regex dual-cap safety, ADR-0040 mode transient + async simulator [amended 2026-05-21], ADR-0041 state lifted to FullPage, ADR-0042 AST extractor for fixtures, ADR-0043 EditRowModal replaces inline editing)
+
 ## [PRD-003] — Publish Site wired + lightweight job tracking — 2026-05-17
 
 **Ship status:** shipped_with_caveats
@@ -158,5 +210,8 @@ First public release. Three Cloud Portal extension points (Context Panel, Dashbo
 - **PRD-001** — Cancelled. Multilingual CRUD is blocked by the stock Sitecore Redirect Map template having `UrlMapping` as a SHARED field (no language axis). See [ADR-0023](project-planning/ADR/adr-0023-cancel-prd-001-multilingual-template-shared.md).
 - **PRD-002** — Shipped 2026-05-15. V4 Blok Elevated visual redesign of all three extension-point routes. See [PRD-002] entry above.
 - **PRD-003** — Shipped 2026-05-17. Publish Site wired to SitecoreAI Publishing v1 API with job-status polling and cross-session resume. See [PRD-003] entry above.
+- **PRD-004** — Shipped 2026-05-22 (with caveats). Regex source mode + Test surface; verbatim local port of upstream `RedirectsProxy` with 100% upstream-fixture parity. See [PRD-004] entry above.
+- **PRD-005 — Next up** — Upstream proxy drift detection + AI re-sync. Simulator now has a SHA-stamped baseline and a reproducible extractor (ADR-0042) — drift detection builds on a stable foundation.
+- **Regex authoring polish PRD (FO-11/12/13/14 bundle)** — snippet library + capture-group chips + live sample-URL tester + inline mode-mismatch hint. All four deferred at PRD-004 § 16; reintroduce as one small PRD when operator demand emerges.
 - **PRD candidate** — Data plumbing: wire real data into the PRD-002 visual chassis by flipping `PREVIEW_DATA_ACTIVE` flags (Dashboard Widget hero stats, sparkline, top-destinations, recently-shipped).
 - **Later** — Regex-aware Context Panel matching, concurrent-edit detection, bulk operations, audit log, public Marketplace submission. See PRD-000 § 15 Future Opportunities.

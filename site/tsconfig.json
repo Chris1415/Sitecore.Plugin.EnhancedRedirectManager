@@ -31,5 +31,9 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    "lib/redirects/__fixtures__/_upstream-source.ts",
+    "scripts/**"
+  ]
 }

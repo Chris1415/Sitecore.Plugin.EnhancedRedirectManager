@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * T035 — FullPage
+ * T027 (PRD-004) — FullPage
  *
  * Top-level shell for the Full Page extension point (xmc:fullscreen).
  *
@@ -19,10 +19,21 @@
  *   - Delete Map confirm modal (RedirectMapDetail → onDeleteRequested).
  *   - listRefreshKey: incremented after every write so RedirectMapList refetches.
  *   - onLoaded reconciles selectedMap against the freshly-loaded list (re-selects by id).
+ *
+ * T027 (PRD-004 T4): Manage/Test segmented tab control (ADR-0041).
+ *   - activeTab: 'manage' | 'test' lives here (never persisted).
+ *   - lastTrace: SimulationTrace | null lives here (survives tab toggles within one page lifecycle).
+ *
+ * T036 (PRD-004 T4): Lifted state — lastTrace + activeTab.
+ *
+ * T039 (PRD-004 T4): Test→Manage deep-link via forwardRef imperative handle on RedirectMapDetail.
+ *   - handleRequestEditRow(mapId, rowIndex): switches to Manage tab, selects the parent map,
+ *     drives startEditRow() on the RedirectMapDetail via detailRef.
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils";
 import { TopActionRow } from "@/components/full-page/TopActionRow";
 import { WorkspaceHero } from "@/components/full-page/WorkspaceHero";
 import { StatStrip } from "@/components/full-page/StatStrip";
@@ -30,6 +41,8 @@ import { CollectionPicker } from "@/components/full-page/CollectionPicker";
 import { SitePicker } from "@/components/full-page/SitePicker";
 import { RedirectMapList } from "@/components/full-page/RedirectMapList";
 import { RedirectMapDetail } from "@/components/full-page/RedirectMapDetail";
+import type { RedirectMapDetailHandle } from "@/components/full-page/RedirectMapDetail";
+import { TestSurface } from "@/components/full-page/TestSurface";
 import { NewRedirectMapModal } from "@/components/full-page/NewRedirectMapModal";
 import { DeleteMapConfirmModal } from "@/components/full-page/DeleteMapConfirmModal";
 import { ImportRedirectMapModal } from "@/components/full-page/ImportRedirectMapModal";
@@ -44,12 +57,16 @@ import { resolveSiteLocales } from "@/lib/publish/locale-resolver";
 import { PUBLISH_LOCALE_SHORTHAND_ACCEPTED } from "@/lib/publish/config";
 import type { ClientSDK, Sites } from "@/lib/sdk/types";
 import type { RedirectMapItem } from "@/lib/domain/types";
+import type { SimulationTrace } from "@/lib/redirects/proxy-simulator";
 import { toast } from "sonner";
 
 interface FullPageProps {
   client: ClientSDK;
   sitecoreContextId: string;
 }
+
+/** Workspace Manage/Test tab — ADR-0041: transient; never persisted. */
+type WorkspaceTab = "manage" | "test";
 
 const TABBED_BREAKPOINT = 960;
 
@@ -74,6 +91,27 @@ function useIsTwoPane(): boolean {
 
 export function FullPage({ client, sitecoreContextId }: FullPageProps) {
   const isTwoPane = useIsTwoPane();
+
+  // ---------------------------------------------------------------------------
+  // T027 — Manage/Test segmented tab control (ADR-0041)
+  // ---------------------------------------------------------------------------
+
+  /** Active workspace tab — default 'manage'; transient (not persisted). */
+  const [activeTab, setActiveTab] = useState<WorkspaceTab>("manage");
+
+  // ---------------------------------------------------------------------------
+  // T036 — Lifted trace state (ADR-0041)
+  // lastTrace survives Manage↔Test tab toggles within one page lifecycle.
+  // Cleared on page reload (not stored in localStorage).
+  // ---------------------------------------------------------------------------
+
+  const [lastTrace, setLastTrace] = useState<SimulationTrace | null>(null);
+
+  // ---------------------------------------------------------------------------
+  // T039 deep-link ref — wired to RedirectMapDetail's forwardRef imperative handle.
+  //  Used by the Test→Manage deep-link callback to drive startEditRow() after tab switch.
+  // ---------------------------------------------------------------------------
+  const detailRef = useRef<RedirectMapDetailHandle>(null);
 
   const [selectedCollection, setSelectedCollection] = useState<Sites.SiteCollection | null>(null);
   const [selectedSite, setSelectedSite] = useState<Sites.Site | null>(null);
@@ -139,18 +177,18 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
     selectedMapRef.current = selectedMap;
   }, [selectedMap]);
 
-  const handleListLoaded = useCallback((maps: RedirectMapItem[]) => {
+  const handleListLoaded = useCallback((loadedMaps: RedirectMapItem[]) => {
     // Keep StatStrip's source-of-truth in sync with the rail's list
-    setMaps(maps);
+    setMaps(loadedMaps);
     if (pendingSelectIdRef.current) {
-      const target = maps.find((m) => m.id === pendingSelectIdRef.current) ?? null;
+      const target = loadedMaps.find((m) => m.id === pendingSelectIdRef.current) ?? null;
       setSelectedMap(target);
       setPendingSelectId(null);
       return;
     }
     const current = selectedMapRef.current;
     if (!current) return;
-    const fresh = maps.find((m) => m.id === current.id) ?? null;
+    const fresh = loadedMaps.find((m) => m.id === current.id) ?? null;
     setSelectedMap(fresh);
   }, []);
 
@@ -182,10 +220,10 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
     async (mode: "new-tab" | "clipboard") => {
       if (!sitePath || !selectedSite) return;
       try {
-        const maps = await listRedirectMaps(client, sitecoreContextId, sitePath);
-        const json = serializeExportToJson(maps);
+        const exportMaps = await listRedirectMaps(client, sitecoreContextId, sitePath);
+        const json = serializeExportToJson(exportMaps);
         const filename = buildExportFilename(selectedSite.name ?? "site");
-        const countLabel = `${maps.length} map${maps.length === 1 ? "" : "s"}`;
+        const countLabel = `${exportMaps.length} map${exportMaps.length === 1 ? "" : "s"}`;
 
         if (mode === "clipboard") {
           await navigator.clipboard.writeText(json);
@@ -218,7 +256,53 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
   const handleExportNewTab = useCallback(() => runExport("new-tab"), [runExport]);
   const handleExportClipboard = useCallback(() => runExport("clipboard"), [runExport]);
 
-  const railContent = (
+  // ---------------------------------------------------------------------------
+  // T039 — Test→Manage deep-link callback (ADR-0041 / architecture § 4.4)
+  //
+  // No event bus / pubsub / context provider — plain prop-drilled callback + ref.
+  //
+  // The `setTimeout(0)` lets React commit setActiveTab + setSelectedMap before
+  // the ref-driven startEditRow() fires (architecture § 4.4 sequencing note).
+  // ---------------------------------------------------------------------------
+  const mapsRef = useRef(maps);
+  useEffect(() => {
+    mapsRef.current = maps;
+  }, [maps]);
+
+  const handleRequestEditRow = useCallback(
+    (mapId: string, rowIndex: number) => {
+      const map = mapsRef.current.find((m) => m.id === mapId) ?? null;
+      if (!map) {
+        toast.error("This map no longer exists — please refresh to reload.", {
+          description: "The map may have been deleted since the last simulation.",
+        });
+        return;
+      }
+      setActiveTab("manage");
+      setSelectedMap(map);
+      // setTimeout 0: let React commit the tab + map selection before driving the ref
+      setTimeout(() => {
+        detailRef.current?.startEditRow(rowIndex);
+      }, 0);
+    },
+    [],
+  );
+
+  // ---------------------------------------------------------------------------
+  // Render helpers
+  // ---------------------------------------------------------------------------
+
+  /**
+   * railContent — shared across Manage and Test tabs.
+   *
+   * In Manage: RedirectMapList rows are clickable (readOnly={false}).
+   * In Test:   RedirectMapList rows are non-clickable (readOnly={true}) — the
+   *            user picks scope but doesn't open maps for editing from that context.
+   *
+   * The `readOnly` prop is passed here so the same JSX node is used in both
+   * paths; FullPage renders it once outside the tab-body branch.
+   */
+  const buildRailContent = (readOnly: boolean) => (
     <div className="flex flex-col h-full gap-3 p-3">
       <CollectionPicker
         client={client}
@@ -249,6 +333,7 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
               onRetry={() => {}}
               refreshKey={listRefreshKey}
               onLoaded={handleListLoaded}
+              readOnly={readOnly}
             />
           </div>
         </>
@@ -270,6 +355,7 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
 
   const detailContent = (
     <RedirectMapDetail
+      ref={detailRef}
       client={client}
       sitecoreContextId={sitecoreContextId}
       selectedMap={selectedMap}
@@ -292,6 +378,8 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
         onImportClick={() => setShowImportModal(true)}
         onExportNewTab={handleExportNewTab}
         onExportClipboard={handleExportClipboard}
+        t1ProbeClient={client}
+        t1ProbeSitecoreContextId={sitecoreContextId}
       />
 
       {/* Workspace hero zone — keyed on listRefreshKey so a Refresh click (or
@@ -309,38 +397,114 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
         />
       </div>
 
+      {/* T027 — Manage/Test segmented tab control (below WorkspaceHero, above body content).
+          Visual contract: pocs/poc-v1-prd004/index.html (Manage) + test-empty.html (Test).
+          Uses role="tablist" buttons instead of Radix Tabs component so we can render
+          body content outside the Tabs tree (conditional rendering pattern, ADR-0041). */}
+      <div className="px-4 pt-3 pb-0 border-b border-border">
+        <div
+          role="tablist"
+          aria-label="Workspace"
+          className="inline-flex h-9 items-center"
+        >
+          <button
+            role="tab"
+            aria-selected={activeTab === "manage"}
+            aria-controls="workspace-manage-panel"
+            id="workspace-tab-manage"
+            onClick={() => setActiveTab("manage")}
+            className={cn(
+              "inline-flex h-9 items-center justify-center gap-1.5 font-medium whitespace-nowrap px-4 text-sm border-b-2 transition-colors",
+              activeTab === "manage"
+                ? "border-primary text-foreground"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground/50",
+            )}
+          >
+            Manage
+          </button>
+          <button
+            role="tab"
+            aria-selected={activeTab === "test"}
+            aria-controls="workspace-test-panel"
+            id="workspace-tab-test"
+            onClick={() => setActiveTab("test")}
+            className={cn(
+              "inline-flex h-9 items-center justify-center gap-1.5 font-medium whitespace-nowrap px-4 text-sm border-b-2 transition-colors",
+              activeTab === "test"
+                ? "border-primary text-foreground"
+                : "border-transparent text-muted-foreground hover:text-foreground hover:border-muted-foreground/50",
+            )}
+          >
+            Test
+          </button>
+        </div>
+      </div>
+
+      {/* Body — two-pane vs narrow-tabbed.
+          In both cases the rail is always present across Manage and Test tabs.
+          Only the main-panel content changes (detail in Manage, trace in Test).
+          ADR-0041: activeTab lives here; rail is shared. */}
       {isTwoPane ? (
         <div className="flex flex-1 min-h-0 overflow-hidden fp-body">
+          {/* Rail — always visible; readOnly when on Test tab */}
           <aside
             className="fp-rail w-[360px] shrink-0 border-r border-border flex flex-col overflow-hidden"
             aria-label="Redirect maps"
           >
-            {railContent}
+            {buildRailContent(activeTab === "test")}
           </aside>
-          <main className="fp-main flex-1 overflow-auto flex flex-col" aria-label="Redirect map detail">
-            {/* Stat strip — real values (Mappings / 301 / 302 / Server Transfer /
-                Conflicts) computed from the maps state synced from
-                handleListLoaded. Keyed on listRefreshKey so a Refresh click
-                remounts the strip and the count-ups replay. */}
-            <div key={`stats-${listRefreshKey}`}>
-              <StatStrip
+
+          {/* Main panel — switches on activeTab */}
+          {activeTab === "test" ? (
+            /* T030 — TestSurface right-panel (URL input + Test button + trace) */
+            <main
+              className="fp-main flex-1 overflow-auto flex flex-col"
+              id="workspace-test-panel"
+              role="tabpanel"
+              aria-labelledby="workspace-tab-test"
+            >
+              <TestSurface
+                siteLanguage={selectedSite?.languages?.[0] ?? "en"}
                 maps={maps}
-                onConflictsClick={() => setShowConflictsDialog(true)}
+                lastTrace={lastTrace}
+                onTraceComplete={setLastTrace}
+                onRequestEditRow={handleRequestEditRow}
               />
-            </div>
-            <div className="flex-1 min-h-0">
-              {detailContent}
-            </div>
-          </main>
+            </main>
+          ) : (
+            <main
+              className="fp-main flex-1 overflow-auto flex flex-col"
+              id="workspace-manage-panel"
+              role="tabpanel"
+              aria-labelledby="workspace-tab-manage"
+            >
+              {/* Stat strip — real values (Mappings / 301 / 302 / Server Transfer /
+                  Conflicts) computed from the maps state synced from
+                  handleListLoaded. Keyed on listRefreshKey so a Refresh click
+                  remounts the strip and the count-ups replay. */}
+              <div key={`stats-${listRefreshKey}`}>
+                <StatStrip
+                  maps={maps}
+                  onConflictsClick={() => setShowConflictsDialog(true)}
+                />
+              </div>
+              <div className="flex-1 min-h-0">
+                {detailContent}
+              </div>
+            </main>
+          )}
         </div>
       ) : (
+        /* Narrow (< 960px): tabbed Browse/Detail fallback — Manage only.
+           Test tab is not accessible on narrow viewports in this iteration
+           (operator scope: desktop-first marketplace app). */
         <Tabs defaultValue="browse" className="flex-1 flex flex-col min-h-0">
           <TabsList className="mx-3 mt-2 self-start">
             <TabsTrigger value="browse">Browse</TabsTrigger>
             <TabsTrigger value="detail">Detail</TabsTrigger>
           </TabsList>
           <TabsContent value="browse" className="flex-1 flex flex-col min-h-0 mt-0">
-            <div className="flex flex-col flex-1 overflow-auto">{railContent}</div>
+            <div className="flex flex-col flex-1 overflow-auto">{buildRailContent(false)}</div>
           </TabsContent>
           <TabsContent value="detail" className="flex-1 overflow-auto mt-0">
             {detailContent}

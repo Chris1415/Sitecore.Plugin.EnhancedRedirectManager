@@ -1,0 +1,279 @@
+{
+  "capturedAt": "2026-05-20T18:32:24.180Z",
+  "tenantHost": "operator-tenant (see T1 probe capture)",
+  "count": 8,
+  "cases": [
+    {
+      "description": "Row 1: Anchors only — ^/products$ → /catalog (Redirect301)",
+      "capturedAt": "2026-05-20T18:32:24.180Z",
+      "tenantHost": "T1-probe-roundtrip",
+      "redirects": [
+        {
+          "pattern": "^/products$",
+          "target": "/catalog",
+          "redirectType": "Redirect301",
+          "isQueryStringPreserved": false,
+          "isLanguagePreserved": false
+        }
+      ],
+      "request": {
+        "url": "/products",
+        "locale": "en",
+        "siteLanguage": "en"
+      },
+      "expected": {
+        "matched": true,
+        "rule": {
+          "mapId": "tenant-fixture",
+          "rowIndex": 0,
+          "source": "^/products$",
+          "target": "/catalog",
+          "redirectType": "Redirect301",
+          "preserveQueryString": false,
+          "preserveLanguage": false,
+          "includeVirtualFolder": false
+        },
+        "finalUrl": "/catalog",
+        "redirectType": "Redirect301"
+      }
+    },
+    {
+      "description": "Row 2: Groups — capturing (.+) and non-capturing (?:legacy) with $1",
+      "capturedAt": "2026-05-20T18:32:24.180Z",
+      "tenantHost": "T1-probe-roundtrip",
+      "redirects": [
+        {
+          "pattern": "^/blog/(.+)/(?:legacy)$",
+          "target": "/blog/$1",
+          "redirectType": "Redirect301",
+          "isQueryStringPreserved": false,
+          "isLanguagePreserved": false
+        }
+      ],
+      "request": {
+        "url": "/blog/my-post/legacy",
+        "locale": "en",
+        "siteLanguage": "en"
+      },
+      "expected": {
+        "matched": true,
+        "rule": {
+          "mapId": "tenant-fixture",
+          "rowIndex": 0,
+          "source": "^/blog/(.+)/(?:legacy)$",
+          "target": "/blog/$1",
+          "redirectType": "Redirect301",
+          "preserveQueryString": false,
+          "preserveLanguage": false,
+          "includeVirtualFolder": false
+        },
+        "finalUrl": "/blog/my-post",
+        "redirectType": "Redirect301"
+      }
+    },
+    {
+      "description": "Row 3: Escapes — \\.html?$ matches .html extension",
+      "capturedAt": "2026-05-20T18:32:24.180Z",
+      "tenantHost": "T1-probe-roundtrip",
+      "redirects": [
+        {
+          "pattern": "\\.html?$",
+          "target": "/static",
+          "redirectType": "Redirect301",
+          "isQueryStringPreserved": false,
+          "isLanguagePreserved": false
+        }
+      ],
+      "request": {
+        "url": "/page.html",
+        "locale": "en",
+        "siteLanguage": "en"
+      },
+      "expected": {
+        "matched": true,
+        "rule": {
+          "mapId": "tenant-fixture",
+          "rowIndex": 0,
+          "source": "\\.html?$",
+          "target": "/static",
+          "redirectType": "Redirect301",
+          "preserveQueryString": false,
+          "preserveLanguage": false,
+          "includeVirtualFolder": false
+        },
+        "finalUrl": "/static",
+        "redirectType": "Redirect301"
+      }
+    },
+    {
+      "description": "Row 4: Quantifiers — ^/items/[0-9]{4,6}$ matches 5-digit item IDs",
+      "capturedAt": "2026-05-20T18:32:24.180Z",
+      "tenantHost": "T1-probe-roundtrip",
+      "redirects": [
+        {
+          "pattern": "^/items/[0-9]{4,6}$",
+          "target": "/products",
+          "redirectType": "Redirect301",
+          "isQueryStringPreserved": false,
+          "isLanguagePreserved": false
+        }
+      ],
+      "request": {
+        "url": "/items/12345",
+        "locale": "en",
+        "siteLanguage": "en"
+      },
+      "expected": {
+        "matched": true,
+        "rule": {
+          "mapId": "tenant-fixture",
+          "rowIndex": 0,
+          "source": "^/items/[0-9]{4,6}$",
+          "target": "/products",
+          "redirectType": "Redirect301",
+          "preserveQueryString": false,
+          "preserveLanguage": false,
+          "includeVirtualFolder": false
+        },
+        "finalUrl": "/products",
+        "redirectType": "Redirect301"
+      }
+    },
+    {
+      "description": "Row 5: Char class — ^/users/[a-zA-Z0-9_-]+$ matches slug username",
+      "capturedAt": "2026-05-20T18:32:24.180Z",
+      "tenantHost": "T1-probe-roundtrip",
+      "redirects": [
+        {
+          "pattern": "^/users/[a-zA-Z0-9_-]+$",
+          "target": "/profiles",
+          "redirectType": "Redirect301",
+          "isQueryStringPreserved": false,
+          "isLanguagePreserved": false
+        }
+      ],
+      "request": {
+        "url": "/users/john-doe_123",
+        "locale": "en",
+        "siteLanguage": "en"
+      },
+      "expected": {
+        "matched": true,
+        "rule": {
+          "mapId": "tenant-fixture",
+          "rowIndex": 0,
+          "source": "^/users/[a-zA-Z0-9_-]+$",
+          "target": "/profiles",
+          "redirectType": "Redirect301",
+          "preserveQueryString": false,
+          "preserveLanguage": false,
+          "includeVirtualFolder": false
+        },
+        "finalUrl": "/profiles",
+        "redirectType": "Redirect301"
+      }
+    },
+    {
+      "description": "Row 6: Alternation — ^/(news|press|media)/(.+)$ matches /news/article → /announcements/$2",
+      "capturedAt": "2026-05-20T18:32:24.180Z",
+      "tenantHost": "T1-probe-roundtrip",
+      "redirects": [
+        {
+          "pattern": "^/(news|press|media)/(.+)$",
+          "target": "/announcements/$2",
+          "redirectType": "Redirect301",
+          "isQueryStringPreserved": false,
+          "isLanguagePreserved": false
+        }
+      ],
+      "request": {
+        "url": "/news/breaking-story",
+        "locale": "en",
+        "siteLanguage": "en"
+      },
+      "expected": {
+        "matched": true,
+        "rule": {
+          "mapId": "tenant-fixture",
+          "rowIndex": 0,
+          "source": "^/(news|press|media)/(.+)$",
+          "target": "/announcements/$2",
+          "redirectType": "Redirect301",
+          "preserveQueryString": false,
+          "preserveLanguage": false,
+          "includeVirtualFolder": false
+        },
+        "finalUrl": "/announcements/breaking-story",
+        "redirectType": "Redirect301"
+      }
+    },
+    {
+      "description": "Row 7: Pattern mode (URL) — /old-page → /new-page exact match",
+      "capturedAt": "2026-05-20T18:32:24.180Z",
+      "tenantHost": "T1-probe-roundtrip",
+      "redirects": [
+        {
+          "pattern": "/old-page",
+          "target": "/new-page",
+          "redirectType": "Redirect301",
+          "isQueryStringPreserved": false,
+          "isLanguagePreserved": false
+        }
+      ],
+      "request": {
+        "url": "/old-page",
+        "locale": "en",
+        "siteLanguage": "en"
+      },
+      "expected": {
+        "matched": true,
+        "rule": {
+          "mapId": "tenant-fixture",
+          "rowIndex": 0,
+          "source": "/old-page",
+          "target": "/new-page",
+          "redirectType": "Redirect301",
+          "preserveQueryString": false,
+          "preserveLanguage": false,
+          "includeVirtualFolder": false
+        },
+        "finalUrl": "/new-page",
+        "redirectType": "Redirect301"
+      }
+    },
+    {
+      "description": "Row 8: Mixed — ^/legacy/[a-z]+/(.+)?$ captures optional path segment → /archive/$1",
+      "capturedAt": "2026-05-20T18:32:24.180Z",
+      "tenantHost": "T1-probe-roundtrip",
+      "redirects": [
+        {
+          "pattern": "^/legacy/[a-z]+/(.+)?$",
+          "target": "/archive/$1",
+          "redirectType": "Redirect301",
+          "isQueryStringPreserved": false,
+          "isLanguagePreserved": false
+        }
+      ],
+      "request": {
+        "url": "/legacy/blog/my-old-post",
+        "locale": "en",
+        "siteLanguage": "en"
+      },
+      "expected": {
+        "matched": true,
+        "rule": {
+          "mapId": "tenant-fixture",
+          "rowIndex": 0,
+          "source": "^/legacy/[a-z]+/(.+)?$",
+          "target": "/archive/$1",
+          "redirectType": "Redirect301",
+          "preserveQueryString": false,
+          "preserveLanguage": false,
+          "includeVirtualFolder": false
+        },
+        "finalUrl": "/archive/my-old-post",
+        "redirectType": "Redirect301"
+      }
+    }
+  ]
+}
