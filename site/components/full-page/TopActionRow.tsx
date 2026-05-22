@@ -35,6 +35,8 @@ import {
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Upload, Download, Plus, ExternalLink, Clipboard } from "lucide-react";
 import type { Sites } from "@/lib/sdk/types";
+import type { ClientSDK } from "@/lib/sdk/types";
+import { T1ProbeButton } from "@/components/dev/T1ProbeButton";
 
 interface TopActionRowProps {
   selectedCollection: Sites.SiteCollection | null;
@@ -48,6 +50,12 @@ interface TopActionRowProps {
   onExportClipboard?: () => void;
   /** Tranche 7 T048: opens the Import wizard. */
   onImportClick?: () => void;
+  /**
+   * PRD-004 T1 probe — only used when NEXT_PUBLIC_T1_PROBE=true.
+   * Both must be supplied together for the probe button to render.
+   */
+  t1ProbeClient?: ClientSDK;
+  t1ProbeSitecoreContextId?: string;
 }
 
 export function TopActionRow({
@@ -58,7 +66,13 @@ export function TopActionRow({
   onExportNewTab,
   onExportClipboard,
   onImportClick,
+  t1ProbeClient,
+  t1ProbeSitecoreContextId,
 }: TopActionRowProps) {
+  const showT1Probe =
+    process.env.NEXT_PUBLIC_T1_PROBE === 'true' &&
+    t1ProbeClient !== undefined &&
+    t1ProbeSitecoreContextId !== undefined;
   const hasSite = selectedCollection !== null && selectedSite !== null;
 
   return (
@@ -109,6 +123,14 @@ export function TopActionRow({
 
       {/* Action buttons */}
       <div className="fp-topbar__actions shrink-0">
+        {/* PRD-004 T1 probe — dev only (NEXT_PUBLIC_T1_PROBE=true) */}
+        {showT1Probe && (
+          <T1ProbeButton
+            client={t1ProbeClient!}
+            sitecoreContextId={t1ProbeSitecoreContextId!}
+          />
+        )}
+
         <Button
           variant="outline"
           size="sm"

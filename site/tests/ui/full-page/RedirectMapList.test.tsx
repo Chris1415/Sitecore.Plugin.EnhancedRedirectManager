@@ -193,4 +193,60 @@ describe("RedirectMapList (T038)", () => {
       expect(screen.getByText(/2 mappings/i)).toBeDefined();
     });
   });
+
+  it("RED-8: readOnly={true} — clicking a row does NOT call onSelect", async () => {
+    (listRedirectMaps as Mock).mockResolvedValue([fixtureMap1]);
+    const onSelect = vi.fn();
+    render(
+      <RedirectMapList
+        client={mockClient}
+        sitecoreContextId={CTX_ID}
+        sitePath={SITE_PATH}
+        selectedMapId={null}
+        onSelect={onSelect}
+        onRetry={vi.fn()}
+        readOnly
+      />
+    );
+    await waitFor(() => screen.getByText("Marketing campaigns"));
+    fireEvent.click(screen.getByText("Marketing campaigns").closest("[role='option']")!);
+    expect(onSelect).not.toHaveBeenCalled();
+  });
+
+  it("RED-9: readOnly={true} — rows have tabIndex=-1 (not keyboard navigable)", async () => {
+    (listRedirectMaps as Mock).mockResolvedValue([fixtureMap1]);
+    render(
+      <RedirectMapList
+        client={mockClient}
+        sitecoreContextId={CTX_ID}
+        sitePath={SITE_PATH}
+        selectedMapId={null}
+        onSelect={vi.fn()}
+        onRetry={vi.fn()}
+        readOnly
+      />
+    );
+    await waitFor(() => screen.getByText("Marketing campaigns"));
+    const row = screen.getByText("Marketing campaigns").closest("[role='option']");
+    expect(row?.getAttribute("tabindex")).toBe("-1");
+  });
+
+  it("RED-10: readOnly={false} (default) — clicking a row calls onSelect normally", async () => {
+    (listRedirectMaps as Mock).mockResolvedValue([fixtureMap1]);
+    const onSelect = vi.fn();
+    render(
+      <RedirectMapList
+        client={mockClient}
+        sitecoreContextId={CTX_ID}
+        sitePath={SITE_PATH}
+        selectedMapId={null}
+        onSelect={onSelect}
+        onRetry={vi.fn()}
+        readOnly={false}
+      />
+    );
+    await waitFor(() => screen.getByText("Marketing campaigns"));
+    fireEvent.click(screen.getByText("Marketing campaigns").closest("[role='option']")!);
+    expect(onSelect).toHaveBeenCalledWith(fixtureMap1);
+  });
 });

@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Manage · Redirect Manager (PRD-004 "Trace & Tame")</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="elevated.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <link rel="stylesheet" href="prd004.css" />
+  </head>
+  <body>
+    <!-- Theme toggle -->
+    <div class="tone-toggle" data-theme-toggle role="group" aria-label="Theme">
+      <button class="tone-toggle__btn" data-theme="light" aria-pressed="false">Light</button>
+      <button class="tone-toggle__btn" data-theme="dark" aria-pressed="false">Dark</button>
+      <button class="tone-toggle__btn" data-theme="auto" aria-pressed="true">Auto</button>
+    </div>
+
+    <div class="fp-shell">
+      <!-- Sticky frosted topbar (carried from PRD-002) -->
+      <header class="fp-topbar">
+        <nav class="blok-breadcrumb" aria-label="breadcrumb">
+          <span class="blok-breadcrumb__item">Redirect Manager</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item">SneakerCo</span>
+          <span class="blok-breadcrumb__sep">/</span>
+          <span class="blok-breadcrumb__item blok-breadcrumb__item--current">MainSite &middot; EN</span>
+        </nav>
+        <div class="fp-topbar__title">
+          <h1>Workspace</h1>
+        </div>
+        <div class="fp-topbar__actions">
+          <button class="blok-btn blok-btn--outline" type="button">
+            <span class="glyph" data-icon="download"></span>
+            Import
+          </button>
+          <button class="blok-btn blok-btn--outline" type="button">
+            <span class="glyph" data-icon="upload"></span>
+            Export
+          </button>
+          <button class="blok-btn blok-btn--primary elev-btn" type="button">
+            <span class="glyph" data-icon="plus"></span>
+            New map
+          </button>
+        </div>
+      </header>
+
+      <!-- Workspace hero (unchanged carry-forward from PRD-002 V4) -->
+      <section class="fp-hero">
+        <div class="fp-hero__body">
+          <span class="elev-eyebrow"><span class="dot"></span>Workspace &middot; MainSite EN</span>
+          <h2 class="fp-hero__headline" data-letter-reveal>Three maps, all healthy.</h2>
+          <p class="fp-hero__sub">Last publish 14 minutes ago by Anna. No conflicting source URLs detected.</p>
+        </div>
+        <div class="fp-hero__cta">
+          <button class="blok-btn blok-btn--outline elev-btn" type="button" data-decorative-cta data-toast-copy="Activity log coming in a follow-on release.">
+            <span class="glyph" data-icon="history"></span>
+            View activity
+          </button>
+          <button class="blok-btn blok-btn--primary elev-btn" type="button" data-decorative-cta data-toast-copy="Bulk publish coming in a follow-on release.">
+            <span class="glyph" data-icon="publish"></span>
+            Publish all
+          </button>
+        </div>
+      </section>
+
+      <!-- NEW: Workspace-level Manage / Test tab control (Area 1) -->
+      <div class="fp-workspace-tabs">
+        <div class="fp-tabs" role="tablist" aria-label="Workspace view">
+          <a class="fp-tab" href="index.html" role="tab" aria-selected="true" data-tab="manage">
+            <span class="glyph" data-icon="grid"></span>
+            Manage
+          </a>
+          <a class="fp-tab" href="test-empty.html" role="tab" aria-selected="false" data-tab="test">
+            <span class="glyph" data-icon="search"></span>
+            Test
+            <!-- No dot here: lastTrace=null on canonical "before" baseline (A-UI-2) -->
+          </a>
+        </div>
+      </div>
+
+      <div class="fp-body">
+        <!-- Left rail: map list -->
+        <aside class="fp-rail" aria-label="Redirect maps">
+          <div class="fp-rail__hd">
+            <span>Redirect maps</span>
+            <span class="blok-badge blok-badge--mono blok-badge--muted">3</span>
+          </div>
+
+          <a class="lr-row" aria-selected="true" href="index.html">
+            <span class="lr-row__dot" aria-hidden="true"></span>
+            <div class="lr-row__main">
+              <span class="lr-row__name">Marketing Site Redirects</span>
+              <span class="lr-row__meta">68 mappings &middot; EN &middot; 14 m ago</span>
+            </div>
+            <span class="glyph" data-icon="chevronRight"></span>
+          </a>
+
+          <a class="lr-row" href="index.html">
+            <span class="lr-row__dot" aria-hidden="true"></span>
+            <div class="lr-row__main">
+              <span class="lr-row__name">Blog Migration 2026</span>
+              <span class="lr-row__meta">142 mappings &middot; EN &middot; 3 d ago</span>
+            </div>
+            <span class="glyph" data-icon="chevronRight"></span>
+          </a>
+
+          <a class="lr-row" href="index.html">
+            <span class="lr-row__dot" aria-hidden="true"></span>
+            <div class="lr-row__main">
+              <span class="lr-row__name">Legacy URL Cleanup</span>
+              <span class="lr-row__meta">418 mappings &middot; EN &middot; 2 wk ago</span>
+            </div>
+            <span class="glyph" data-icon="chevronRight"></span>
+          </a>
+        </aside>
+
+        <!-- Main column: stat strip + map detail (Manage tab content) -->
+        <main class="fp-main" role="tabpanel" aria-label="Manage">
+          <div class="fp-stat-strip">
+            <div class="fp-stat">
+              <span class="fp-stat__value elev-count-up"><span data-count="68" data-duration="1400">0</span></span>
+              <span class="fp-stat__label">Mappings</span>
+              <span class="fp-stat__sub">+4 today</span>
+              <span class="fp-stat__spark" aria-hidden="true"></span>
+            </div>
+            <div class="fp-stat">
+              <span class="fp-stat__value elev-count-up"><span data-count="64" data-duration="1400">0</span></span>
+              <span class="fp-stat__label">301 permanent</span>
+              <span class="fp-stat__sub">94% of total</span>
+              <span class="fp-stat__spark" aria-hidden="true"></span>
+            </div>
+            <div class="fp-stat">
+              <span class="fp-stat__value elev-count-up"><span data-count="4" data-duration="1400">0</span></span>
+              <span class="fp-stat__label">302 temporary</span>
+              <span class="fp-stat__sub">expire in 21d</span>
+              <span class="fp-stat__spark" aria-hidden="true"></span>
+            </div>
+            <div class="fp-stat">
+              <span class="fp-stat__value elev-count-up"><span data-count="0" data-duration="1400">0</span></span>
+              <span class="fp-stat__label">Conflicts</span>
+              <span class="fp-stat__sub">all clear</span>
+              <span class="fp-stat__spark" aria-hidden="true"></span>
+            </div>
+          </div>
+
+          <!-- Map detail -->
+          <section class="fp-detail">
+            <header class="fp-detail__hd">
+              <div>
+                <h2>Marketing Site Redirects</h2>
+                <p>68 mappings &middot; EN &middot; updated 14 m ago</p>
+              </div>
+              <div class="fp-detail__hd-actions">
+                <button class="blok-btn blok-btn--outline" type="button">
+                  <span class="glyph" data-icon="edit"></span>
+                  Rename
+                </button>
+                <button class="blok-btn blok-btn--outline" type="button">
+                  <span class="glyph" data-icon="edit"></span>
+                  Edit settings
+                </button>
+              </div>
+            </header>
+
+            <div class="fp-detail__tools">
+              <input class="blok-input fp-detail__search" type="search" placeholder="Search source or target URL..." />
+              <a class="blok-btn blok-btn--primary blok-btn--sm" href="rowedit-pattern.html">
+                <span class="glyph" data-icon="plus"></span>
+                Add mapping
+              </a>
+            </div>
+
+            <p class="blok-helper" style="font-size: var(--text-2xs); color: var(--muted-foreground); margin: 0.25rem 0 0.5rem;">
+              Tip: click any row to edit it &mdash; the editor opens as a modal on top of this view (no page navigation).
+            </p>
+
+            <table class="fp-table">
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th style="width: 28px"></th>
+                  <th>Target</th>
+                  <th style="width: 90px">Type</th>
+                  <th style="width: 110px">Edited</th>
+                  <th style="width: 90px"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr onclick="window.location='rowedit-pattern.html'" style="cursor:pointer;">
+                  <td><a href="rowedit-pattern.html" aria-label="Edit row 1: /old-page" style="color:inherit; text-decoration:none;"><span class="mono">/old-page</span></a></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/new-page</span></td>
+                  <td><span class="http-code http-code--301">301</span></td>
+                  <td class="mono">14 m ago</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <a class="blok-btn blok-btn--ghost blok-btn--icon" href="rowedit-pattern.html" aria-label="Edit row 1"><span class="glyph" data-icon="edit"></span></a>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete" onclick="event.stopPropagation();"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+                <tr onclick="window.location='rowedit-regex.html'" style="cursor:pointer;">
+                  <td><a href="rowedit-regex.html" aria-label="Edit row 2: ^/blog/(.+)$" style="color:inherit; text-decoration:none;"><span class="mono">^/blog/(.+)$</span></a></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/articles/$1</span></td>
+                  <td><span class="http-code http-code--301">301</span></td>
+                  <td class="mono">26 m ago</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <a class="blok-btn blok-btn--ghost blok-btn--icon" href="rowedit-regex.html" aria-label="Edit row 2"><span class="glyph" data-icon="edit"></span></a>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete" onclick="event.stopPropagation();"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+                <tr onclick="window.location='rowedit-regex.html'" style="cursor:pointer;">
+                  <td><a href="rowedit-regex.html" aria-label="Edit row 3: \.html?$" style="color:inherit; text-decoration:none;"><span class="mono">\.html?$</span></a></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/</span></td>
+                  <td><span class="http-code http-code--301">301</span></td>
+                  <td class="mono">1 h ago</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <a class="blok-btn blok-btn--ghost blok-btn--icon" href="rowedit-regex.html" aria-label="Edit row 3"><span class="glyph" data-icon="edit"></span></a>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete" onclick="event.stopPropagation();"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+                <tr onclick="window.location='rowedit-pattern.html'" style="cursor:pointer;">
+                  <td><a href="rowedit-pattern.html" aria-label="Edit row 4: /promo-legacy" style="color:inherit; text-decoration:none;"><span class="mono">/promo-legacy</span></a></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/campaigns/promo</span></td>
+                  <td><span class="http-code http-code--301">301</span></td>
+                  <td class="mono">2 h ago</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <a class="blok-btn blok-btn--ghost blok-btn--icon" href="rowedit-pattern.html" aria-label="Edit row 4"><span class="glyph" data-icon="edit"></span></a>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete" onclick="event.stopPropagation();"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+                <tr onclick="window.location='rowedit-pattern.html'" style="cursor:pointer;">
+                  <td><a href="rowedit-pattern.html" aria-label="Edit row 5: /landing/teaser" style="color:inherit; text-decoration:none;"><span class="mono">/landing/teaser</span></a></td>
+                  <td class="url-arrow mono">&rarr;</td>
+                  <td><span class="mono">/black-friday/teaser</span></td>
+                  <td><span class="http-code http-code--302">302</span></td>
+                  <td class="mono">5 d ago</td>
+                  <td>
+                    <span class="fp-row-actions">
+                      <a class="blok-btn blok-btn--ghost blok-btn--icon" href="rowedit-pattern.html" aria-label="Edit row 5"><span class="glyph" data-icon="edit"></span></a>
+                      <button class="blok-btn blok-btn--ghost blok-btn--icon" type="button" aria-label="Delete" onclick="event.stopPropagation();"><span class="glyph" data-icon="trash"></span></button>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Footer nav -->
+          <nav style="display:flex; gap: 0.5rem; padding: 0.5rem 0; flex-wrap: wrap;">
+            <a class="blok-btn blok-btn--ghost blok-btn--sm" href="test-empty.html">Open Test tab &rarr;</a>
+            <a class="blok-btn blok-btn--ghost blok-btn--sm" href="rowedit-pattern.html">RowEditForm (Pattern)</a>
+            <a class="blok-btn blok-btn--ghost blok-btn--sm" href="rowedit-regex.html">RowEditForm (Regex)</a>
+            <a class="blok-btn blok-btn--ghost blok-btn--sm" href="README.md">README</a>
+          </nav>
+        </main>
+      </div>
+    </div>
+
+    <!-- HahnSoloFooter -->
+    <div class="hahn-solo-footer" aria-hidden="true">hahn-solo</div>
+
+    <script src="theme-toggle.js"></script>
+    <script src="icons.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

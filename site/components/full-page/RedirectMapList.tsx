@@ -55,6 +55,13 @@ interface RedirectMapListProps {
    * a map by id after a write (e.g. after create, parent wants to select the new map).
    */
   onLoaded?: (maps: RedirectMapItem[]) => void;
+  /**
+   * When true, rows are non-clickable and non-focusable (no cursor-pointer, no
+   * onClick, no tabIndex). Visual appearance is otherwise identical.
+   * Used by the Test tab's shared rail — the user picks scope but does not
+   * open maps for editing from that context.
+   */
+  readOnly?: boolean;
 }
 
 type Status = "loading" | "loaded" | "empty" | "error";
@@ -84,6 +91,7 @@ export function RedirectMapList({
   onRetry,
   refreshKey = 0,
   onLoaded,
+  readOnly = false,
 }: RedirectMapListProps) {
   const [maps, setMaps] = useState<RedirectMapItem[]>([]);
   const [status, setStatus] = useState<Status>("loading");
@@ -193,17 +201,18 @@ export function RedirectMapList({
             <div
               role="option"
               aria-selected={isSelected}
-              tabIndex={0}
+              tabIndex={readOnly ? -1 : 0}
               className={[
-                "lr-row elev-card flex items-center justify-between gap-2 px-3 py-2.5 cursor-pointer",
-                "focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+                "lr-row elev-card flex items-center justify-between gap-2 px-3 py-2.5",
+                readOnly ? "cursor-default" : "cursor-pointer",
+                readOnly ? "" : "focus:outline-none focus-visible:ring-1 focus-visible:ring-ring",
                 "border-l-2 transition-colors",
                 isSelected
                   ? "border-l-primary bg-muted/40"
                   : "border-l-transparent",
               ].join(" ")}
-              onClick={() => onSelect(map)}
-              onKeyDown={(e) => handleKeyDown(e, index, map)}
+              onClick={readOnly ? undefined : () => onSelect(map)}
+              onKeyDown={readOnly ? undefined : (e) => handleKeyDown(e, index, map)}
             >
               {/* Left-rail dot — single static --primary color (no --draft variant per ADR-0024) */}
               <span className="lr-row__dot" aria-hidden="true" />

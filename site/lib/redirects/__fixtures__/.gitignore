@@ -1,0 +1,4 @@
+# T004 — upstream test file staged for the extractor (T010 / ADR-0042)
+# Do NOT commit — regenerated from upstream at T2 start.
+# Upstream SHA recorded in proxy-simulator.ts header.
+_upstream-source.ts
