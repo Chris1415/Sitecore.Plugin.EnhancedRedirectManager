@@ -4,13 +4,20 @@
 
 A Sitecore Marketplace client-side app that gives content authors and site managers a purpose-built UI for redirect operations across a SitecoreAI tenant. Replaces the Content Editor workflow for managing items under `/sitecore/content/{COLLECTION}/{SITE}/Settings/Redirects/*` and surfaces redirects inside the Pages editor, on the site dashboard, and on a dedicated full-page workshop.
 
-## Status
-
-Latest: **PRD-005 — shipped_with_caveats** (2026-05-28). On-demand upstream drift detection in the Test tab + dev-time `/sync-redirect-proxy` Claude Code slash command in the product repo. SHA-mismatch check against Sitecore/content-sdk `dev` via unauthenticated GitHub commits API; destructive-tinted banner when upstream moves, success inline confirmation when in-sync. Zero new Sitecore SDK surfaces. See [CHANGELOG.md](CHANGELOG.md) for history.
-
 <p align="center">
-  <img src="docs/screenshots/full-page-prd002-general.png" alt="Redirect Manager — Full Page workspace: hero with Last modified line, 5-tile stat strip (Redirects · 301 · 302 · Server Transfer · Conflicts), rail of Redirect Maps, mappings table" width="960" />
+  <img src="docs/screenshots/full-page-prd005-manage.png" alt="Redirect Manager — Full Page workspace, Manage tab: workspace hero with 5 active maps, stat strip (17 redirects · 8 301 Permanent · 3 302 Temporary · 6 Server Transfer · 0 Conflicts), rail of Redirect Maps, expanded Test Map showing 6 regex mappings" width="960" />
 </p>
+
+## What's new
+
+The workspace has grown into a real authoring + testing surface this quarter:
+
+- **Regex source mode + Test tab** — author redirect rules with anchors, capture groups, character classes and alternation; save-time `try { new RegExp() }` validation rejects bad patterns before they reach Sitecore. The Test tab dry-runs any URL through a local simulator that mirrors the upstream Content SDK `RedirectsProxy` step-by-step (normalize → candidates → per-row evaluation → substitute → flag effects → dispatch) and shows the matched row, final URL, and redirect type. No more publish-and-pray.
+- **Upstream parity check** — an on-demand "Check upstream" button on the Test tab confirms the local simulator is in sync with upstream Sitecore/content-sdk; when upstream moves, an inline banner tells you the trace may be subtly inaccurate and points you at a one-shot fix. The dev-time `/sync-redirect-proxy` Claude Code slash command in this repo (see [Dev-time tools](#dev-time-tools)) does the verbatim re-port for you.
+- **Publish Site, wired end-to-end** — the workspace "Publish Site" button now triggers a real publish job against the SitecoreAI Publishing v1 API. Lightweight job polling, cross-session resume, and operator-readable job names so the job is recognizable inside SitecoreAI's publishing list.
+- **V4 Blok Elevated redesign across all three surfaces** — frosted-glass workspace with a hero zone + 5-tile stat strip and a drifting plume backdrop on the Full Page; an always-visible inline Quick Redirect form replaces the old modal on the Context Panel; a Dashboard Widget with 8 real stat tiles, collision badge, top-destinations bar list, and recently-shipped panel.
+
+See [CHANGELOG.md](CHANGELOG.md) for the per-release detail.
 
 ## What this does
 
