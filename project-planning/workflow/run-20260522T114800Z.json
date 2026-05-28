@@ -1,0 +1,659 @@
+{
+  "schema_version": 7,
+  "run_id": "20260522T114800Z",
+  "created_at": "2026-05-22T11:48:00Z",
+  "updated_at": "2026-05-28T12:10:00Z",
+  "product_slug": "redirect-manager",
+  "product_root": "products/redirect-manager",
+  "status": "tested_pending_smoke",
+  "prd_input_mode": "brain_dump_only",
+  "platform_target": "marketplace",
+  "task_breakdown_style": "tdd",
+  "scope_dial": {
+    "rigor": "light",
+    "track": "full",
+    "ui_variants": "1",
+    "docs_at_ship": "auto-lite",
+    "task_breakdown_review": "skip_gate"
+  },
+  "ui_design": {
+    "proposal_count": 1,
+    "divergence": "subtle",
+    "variant_paths": [
+      "products/redirect-manager/project-planning/ui-design/ui-design-20260522T114800Z-v1.md"
+    ],
+    "selected_variant_path": "products/redirect-manager/project-planning/ui-design/ui-design-20260522T114800Z-v1.md",
+    "selected_poc_path": "products/redirect-manager/pocs/poc-v1-prd005"
+  },
+  "source": {
+    "kind": "raw_idea",
+    "values": [
+      "operator prompt: PRD-005 for redirect-manager — upstream Content SDK RedirectsProxy drift detection + AI re-sync. Builds on PRD-004 simulator foundation. See products/redirect-manager/project-planning/plans/ship-report-20260522T000000Z.md § 8 for context."
+    ],
+    "analysis_mode": "greenfield",
+    "source_analysis_artifact": null,
+    "content_dump": null,
+    "assets_bundle": null
+  },
+  "canonical_artifacts": {
+    "brain_dump": "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260522T114800Z.md",
+    "prd": "products/redirect-manager/project-planning/PRD/prd-005.md",
+    "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-005.md",
+    "architecture": "products/redirect-manager/project-planning/architecture/architecture-20260522T114800Z.md",
+    "baseline": "products/redirect-manager/project-planning/baseline.md",
+    "task_breakdown": "products/redirect-manager/project-planning/plans/task-breakdown-20260522T114800Z.md",
+    "task_breakdown_pre_qa": "products/redirect-manager/project-planning/plans/task-breakdown-20260522T114800Z.md",
+    "qa_report": null,
+    "content_model": null,
+    "content_examples": null,
+    "ship_report": null,
+    "friction_log": null,
+    "status_index": "products/redirect-manager/project-planning/STATUS.md",
+    "code_review_report": "products/redirect-manager/project-planning/plans/code-review-20260527T120000Z.md",
+    "test_report": "products/redirect-manager/project-planning/plans/test-report-20260527T130000Z.md"
+  },
+  "friction_log": {
+    "path": "products/redirect-manager/project-planning/workflow/friction-log-20260522T114800Z.md",
+    "min_severity": "medium",
+    "enabled": true
+  },
+  "stage_history": [
+    {
+      "stage": "discovery",
+      "agent": "01-rubber-ducky",
+      "entered_at": "2026-05-22T11:30:00Z",
+      "exited_at": "2026-05-22T11:48:00Z",
+      "outcome": "completed",
+      "one_line": "PRD-005 brain dump — drift detection (in-app passive banner) + AI re-sync (dev-time slash command); 12 decisions, 7 open questions",
+      "deliverables": [
+        "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260522T114800Z.md",
+        "products/redirect-manager/project-planning/workflow/run-20260522T114800Z.json",
+        "products/redirect-manager/project-planning/workflow/current-run.json"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Tracked upstream branch switched from `dev` (PRD-004) to `main` for PRD-005 — main is what real tenants run. T1 includes a one-shot re-snapshot and possible re-port if main differs.",
+          "resolved_at": "2026-05-22T11:48:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "AI involvement is OUTSIDE the deployed Marketplace app — passive SHA-mismatch detection in-app, AI patch proposal lives in a dev-time slash command in the product repo's `.claude/commands/`.",
+          "resolved_at": "2026-05-22T11:48:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "GitHub API unauthenticated for v0 (60/hr per IP) — on-demand only; if hit, banner shows rate-limit error gracefully. PAT-based auth is FO-5.2.",
+          "resolved_at": "2026-05-22T11:48:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "question",
+          "item": "OQ-1..OQ-7 carried forward to /create-prd discovery (snapshot file commit policy, banner placement, force-mode, simulator-file hash, T1 split decision, extractor refetch flow, banner tab-order).",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": null
+    },
+    {
+      "stage": "discovery_summary",
+      "agent": "02-product-manager",
+      "entered_at": "2026-05-22T11:50:00Z",
+      "exited_at": "2026-05-22T11:55:00Z",
+      "outcome": "completed",
+      "one_line": "Discovery summary confirmed; light rigor; platform=marketplace; 1 new HTTP integration (GitHub API); no SDK-surface split needed (<3)",
+      "deliverables": [],
+      "escalations": [],
+      "error": null,
+      "notes": "User replied 'proceed' to discovery summary. Brain-dump completeness made light rigor appropriate; no fresh Q&A needed."
+    },
+    {
+      "stage": "spec_ready",
+      "agent": "02-product-manager",
+      "entered_at": "2026-05-22T12:00:00Z",
+      "exited_at": "2026-05-22T12:30:00Z",
+      "outcome": "completed",
+      "one_line": "PRD-005 + prd-minimal-005 written; light critical review found 6 blockers (all mechanical, no scope changes); 5 new ADRs (0044-0048)",
+      "deliverables": [
+        "products/redirect-manager/project-planning/PRD/prd-005.md",
+        "products/redirect-manager/project-planning/PRD/prd-minimal-005.md",
+        "products/redirect-manager/project-planning/ADR/adr-0044-upstream-snapshot-json-authoritative-track-main.md",
+        "products/redirect-manager/project-planning/ADR/adr-0045-in-app-passive-detection-only-ai-dev-time.md",
+        "products/redirect-manager/project-planning/ADR/adr-0046-github-api-unauthenticated-on-demand-only.md",
+        "products/redirect-manager/project-planning/ADR/adr-0047-slash-command-atomic-state-transitions-knowndivergences-escape-hatch.md",
+        "products/redirect-manager/project-planning/ADR/adr-0048-no-app-level-csp-introduced-in-prd-005.md",
+        "products/redirect-manager/project-planning/ADR/README.md",
+        "products/redirect-manager/project-planning/STATUS.md"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Critical review (light) surfaced 6 blockers; all resolved via PRD revisions before this stage closed (B1 missing Step 5 inserted as AC-3.5b; B2 AC-3.3 clarified to specify two-fetch pattern; B3 originalPort field added to snapshot schema preserving dev-branch provenance; B4 deploy-cycle latency explicit in AC-3.8 + R8; B5+B6 CSP removed entirely after T1-style audit confirmed empty next.config.mjs — ADR-0048 records the no-CSP decision).",
+          "resolved_at": "2026-05-22T12:30:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "assumption",
+          "item": "snapshot SHA bump only reaches in-app baseline after next Vercel deploy (R8). Operators may see banner for a window between slash-command success and deploy completion.",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "scope_dial.rigor=light + brain-dump-only → discovery skipped Q&A (brain-dump fully covered blockers); discovery summary confirmed with 'proceed'. Critical review at light rigor surfaced 6 mechanical blockers; all addressed in-place before spec_ready close."
+    },
+    {
+      "stage": "archived",
+      "agent": "00-team-lead",
+      "entered_at": "2026-05-22T12:35:00Z",
+      "exited_at": "2026-05-22T12:35:00Z",
+      "outcome": "completed",
+      "one_line": "Archived 2 predecessor artifacts from PRD-004 (architecture + ui-design)",
+      "deliverables": [
+        "products/redirect-manager/project-planning/archive/architecture/architecture-20260520T080000Z.md",
+        "products/redirect-manager/project-planning/archive/ui-design/ui-design-20260520T080000Z-v1.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": null
+    },
+    {
+      "stage": "architecture_ready",
+      "agent": "04-software-architect",
+      "entered_at": "2026-05-22T12:40:00Z",
+      "exited_at": "2026-05-22T13:30:00Z",
+      "outcome": "completed",
+      "one_line": "PRD-005 architecture blueprint (375 lines); 1 new ADR (0049 hook state machine); OQ-A1 main 404 finding resolved at gate → track dev for v0",
+      "deliverables": [
+        "products/redirect-manager/project-planning/architecture/architecture-20260522T114800Z.md",
+        "products/redirect-manager/project-planning/ADR/adr-0049-drift-hook-state-machine-sequential-fetch-concurrent-call-contract.md",
+        "products/redirect-manager/project-planning/ADR/README.md",
+        "products/redirect-manager/project-planning/ADR/adr-0044-upstream-snapshot-json-authoritative-track-main.md",
+        "products/redirect-manager/project-planning/PRD/prd-005.md",
+        "products/redirect-manager/project-planning/PRD/prd-minimal-005.md"
+      ],
+      "escalations": [
+        {
+          "severity": "warn",
+          "kind": "decision",
+          "item": "OQ-A1 RESOLVED — operator picked option (b): track `dev` for v0 (Sitecore/content-sdk has no `main` branch today with the watched file). ADR-0044 amended in place; PRD-005 + prd-minimal-005 updated (M1, A2, FR-A1 schema, FR-A3 T1 narrative, R1, OQ-5). Promote to `main` via single-line snapshot edit when Sitecore publishes it.",
+          "resolved_at": "2026-05-22T13:30:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "concern",
+          "item": "R-arch1 — Next 16 + Turbopack HMR may not pick up edits to a statically-imported JSON file during `npm run dev`. Engineer may need to restart dev server after running slash command. Surfaced by architect; document in task breakdown.",
+          "resolved_at": null
+        },
+        {
+          "severity": "info",
+          "kind": "concern",
+          "item": "R-arch2 — sessionStorage inside Cloud Portal iframe — per-origin per-tab scope confirmed by spec; tested in PRD-002/004 dismiss flows. No regression expected.",
+          "resolved_at": "2026-05-22T13:30:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "concern",
+          "item": "R-arch3 — AST extractor staleness if upstream introduces a new test pattern not recognized by the extractor. Mitigation: T6 fixture-count check; document in task breakdown.",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "Architect ran live probes (Sitecore/content-sdk default_branch + commits API), invoked sitecore:marketplace-sdk-client + sitecore:marketplace-sdk-extension-routes + sitecore:blok-marketplace-integration. Confirmed 0 new SDK surfaces, 0 extension-point changes. SDK contract verification gate satisfied with live-captured GitHub commits API response embedded in architecture § 5. OQ-6 (AST extractor refetch) resolved — extractor reads from gitignored _upstream-source.ts and does NOT refetch; slash command writes the staging file before invoking the extractor."
+    },
+    {
+      "stage": "baseline_promoted",
+      "agent": "04-software-architect",
+      "entered_at": "2026-05-22T13:30:00Z",
+      "exited_at": "2026-05-22T13:45:00Z",
+      "outcome": "completed",
+      "one_line": "Promoted 31 ADRs into baseline.md (initial promotion; ADR count threshold ≥5 met)",
+      "deliverables": [
+        "products/redirect-manager/project-planning/baseline.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "Operator picked 'Promote now (full)'. 31 non-superseded foundational ADRs consolidated by theme (App architecture, Data layer, Multilingual cancelled, UI framework, Mock-data, Context Panel, Full Page workspace, Import+export, Publish flow, Simulator+parity). PRD-005 ADRs (0044-0049) deliberately excluded — too fresh. Superseded ADRs excluded per gate rule (0004, 0014-0022, 0032). Baseline is the readable constitution; source ADRs remain canonical in project-planning/ADR/."
+    },
+    {
+      "stage": "ui_ready",
+      "agent": "05-ui-designer",
+      "entered_at": "2026-05-22T13:50:00Z",
+      "exited_at": "2026-05-26T12:00:00Z",
+      "outcome": "completed",
+      "one_line": "Quiet Diagnostic direction locked (1 variant); POC v1 with 21 frames; tone revision 2026-05-26 — drifted→destructive, errors→warning",
+      "deliverables": [
+        "products/redirect-manager/project-planning/ui-design/ui-design-20260522T114800Z-v1.md",
+        "products/redirect-manager/pocs/poc-v1-prd005/index.html",
+        "products/redirect-manager/pocs/poc-v1-prd005/click-targets.md",
+        "products/redirect-manager/pocs/poc-v1-prd005/README.md",
+        "products/redirect-manager/pocs/poc-v1-prd005/prd005.css",
+        "products/redirect-manager/pocs/poc-v1-prd005/icons.js",
+        "products/redirect-manager/project-planning/ADR/adr-0045-in-app-passive-detection-only-ai-dev-time.md",
+        "products/redirect-manager/project-planning/ADR/README.md"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Operator approved Quiet Diagnostic direction with one revision (2026-05-26): drifted banner escalated to destructive (red) tone + AlertTriangle glyph; error sub-states escalated to warning (amber). role=\"status\" a11y semantic preserved across all states. ADR-0045 amended in place.",
+          "resolved_at": "2026-05-26T12:00:00Z"
+        }
+      ],
+      "error": null,
+      "notes": "Single-variant run per scope_dial.ui_variants=1. Subtle divergence + (revised) two-tier tone. 17 base states × 3 theme variants (light/dark/mobile) = 21 total POC frames. POC tokens copied from PRD-004 theme.css (Blok Nova preset, snapshot 2026-05-14). Click-targets enumerated per source command rule. Variant scoring skipped (single variant)."
+    },
+    {
+      "stage": "archived",
+      "agent": "00-team-lead",
+      "entered_at": "2026-05-27T10:00:00Z",
+      "exited_at": "2026-05-27T10:00:00Z",
+      "outcome": "completed",
+      "one_line": "Archived 2 predecessor plans (PRD-004 task-breakdown + legacy schema-6 runbook)",
+      "deliverables": [
+        "products/redirect-manager/project-planning/archive/plans/task-breakdown-20260520T080000Z.md",
+        "products/redirect-manager/project-planning/archive/plans/implementation-runbook-20260520T080000Z.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": null
+    },
+    {
+      "stage": "plan_ready",
+      "agent": "06-lead-developer",
+      "entered_at": "2026-05-27T10:05:00Z",
+      "exited_at": "2026-05-27T10:30:00Z",
+      "outcome": "completed",
+      "one_line": "Task breakdown: 36 tasks across 6 tranches (T1 foundation, T2 client+reader, T3 hook, T4 UI, T5 NFR, T6 slash command); all 7 § 4c subsections filled; no new ADRs",
+      "deliverables": [
+        "products/redirect-manager/project-planning/plans/task-breakdown-20260522T114800Z.md"
+      ],
+      "escalations": [],
+      "error": null,
+      "notes": "scope_dial.task_breakdown_review=skip_gate → auto-continued to QA enrichment without operator stop. No new ADRs surfaced — architecture (0044-0049) covered everything. 4c-7 explicitly N/A (greenfield feature delta)."
+    },
+    {
+      "stage": "implemented",
+      "agent": "08-developer",
+      "entered_at": "2026-05-22T15:30:00Z",
+      "exited_at": "2026-05-22T16:15:00Z",
+      "outcome": "completed",
+      "one_line": "PRD-005 implemented TDD-first: 41 tasks, 55 new tests (unit+UI+structural), 746 total GREEN; lint 0 new errors; build GREEN",
+      "deliverables": [
+        "products/redirect-manager/site/lib/redirects/__fixtures__/upstream-snapshot.json",
+        "products/redirect-manager/site/lib/upstream-drift/types.ts",
+        "products/redirect-manager/site/lib/upstream-drift/github-client.ts",
+        "products/redirect-manager/site/lib/upstream-drift/github-client.test.ts",
+        "products/redirect-manager/site/lib/upstream-drift/snapshot-reader.ts",
+        "products/redirect-manager/site/lib/upstream-drift/snapshot-reader.test.ts",
+        "products/redirect-manager/site/lib/upstream-drift/sync-helpers.ts",
+        "products/redirect-manager/site/lib/upstream-drift/sync-helpers.test.ts",
+        "products/redirect-manager/site/hooks/use-upstream-drift.ts",
+        "products/redirect-manager/site/hooks/use-upstream-drift.test.tsx",
+        "products/redirect-manager/site/components/full-page/UpstreamDriftBanner.tsx",
+        "products/redirect-manager/site/components/full-page/UpstreamDriftBanner.test.tsx",
+        "products/redirect-manager/site/components/full-page/upstream-drift-copy.ts",
+        "products/redirect-manager/site/components/full-page/TestSurface.tsx (modified)",
+        "products/redirect-manager/site/components/full-page/TestSurface.test.tsx (modified)",
+        "products/redirect-manager/site/app/globals.css (modified)",
+        "products/redirect-manager/site/__tests__/next-config-csp-guard.test.ts",
+        "products/redirect-manager/.claude/commands/sync-redirect-proxy.md",
+        "products/redirect-manager/.gitignore (modified)"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "T002 NO-OP — T001 probe confirmed both watched file SHAs on dev branch match PRD-004 baseline exactly; no re-port required.",
+          "resolved_at": "2026-05-22T15:45:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "T028 contrast: substituted token-class assertion for jsdom getComputedStyle (CSS variable inheritance not available in jsdom without full stylesheet injection).",
+          "resolved_at": "2026-05-22T16:00:00Z"
+        }
+      ],
+      "error": null,
+      "notes": "TDD sequence followed throughout. vi.resetAllMocks() required (not clearAllMocks) to properly reset mockResolvedValue chains in Vitest. 746/746 GREEN; 82 test files; 0 new lint errors."
+    },
+    {
+      "stage": "code_reviewed",
+      "agent": "08-developer",
+      "entered_at": "2026-05-27T12:00:00Z",
+      "exited_at": "2026-05-27T12:00:00Z",
+      "outcome": "completed",
+      "one_line": "PRD-005 adversarial review: 0 Critical, 1 Major (T028 contrast assertions vacuous — CSS var injection absent), 4 Minor; 1 auto-fix applied; 746/746 tests GREEN post-fix",
+      "deliverables": [
+        "products/redirect-manager/project-planning/plans/code-review-20260527T120000Z.md"
+      ],
+      "escalations": [
+        {
+          "severity": "warn",
+          "kind": "concern",
+          "item": "M1 — T028 runtime-contrast test assertions do not inject Blok Nova CSS variables into jsdom; structural class-name assertions substitute but cannot detect CSS variable token collapse. /test should implement CSS var injection helper and add getComputedStyle-based assertions per § 4c-8.",
+          "resolved_at": null
+        },
+        {
+          "severity": "info",
+          "kind": "concern",
+          "item": "Minor: CT-3 (banner dismiss writes sessionStorage), CT-4 (network retry interaction), CT-5 (rate-limit retry disabled), CT-6 (not-found no retry) click-target interactions are not covered in TestSurface.test.tsx. /test should add these interaction paths.",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "SDK contract greps: 0 hits for client.mutate, .data.data, empty catch{}. No Sitecore SDK calls, no Authoring GraphQL, no xmc.* calls added. GitHub API call shape matches architecture § 5a (plain array, body[0].sha, no .data envelope). Auto-fix applied: removed unused `vi` import from snapshot-reader.test.ts. Pre-existing lint errors (10 in error-states.tsx) are out of PRD-005 scope."
+    },
+    {
+      "stage": "qa_ready",
+      "agent": "07-qa-specialist",
+      "entered_at": "2026-05-27T10:30:00Z",
+      "exited_at": "2026-05-27T11:00:00Z",
+      "outcome": "completed",
+      "one_line": "Enriched task breakdown in place: 36 → 41 tasks (5 RED scaffolds Txxxa added); § 9 TDD contract + § 10 per-task tests populated; ~53 new automated tests planned",
+      "deliverables": [
+        "products/redirect-manager/project-planning/plans/task-breakdown-20260522T114800Z.md"
+      ],
+      "escalations": [
+        {
+          "severity": "warn",
+          "kind": "concern",
+          "item": "Runtime-contrast test setup (T028) requires injecting Blok Nova CSS variables into jsdom via Vitest's setupFiles before tests can read --destructive-background etc. via getComputedStyle. Developer must wire this up before T028 runs.",
+          "resolved_at": null
+        },
+        {
+          "severity": "info",
+          "kind": "concern",
+          "item": "Visual smoke (S6) deferred until operator supplies Cloud Portal host URL at T036. Status will be tested_pending_smoke until S6 transitions from pending. Same pattern as PRD-002/003/004 — operator-acceptable historically.",
+          "resolved_at": null
+        }
+      ],
+      "error": null,
+      "notes": "5 RED scaffolds added: T007a (github-client RED), T009a (snapshot-reader RED), T013a (hook transitions RED), T020a (banner RED), T035a (slash helpers RED). § 5 Execution Order reordered for test-first throughout. All 691 PRD-004 tests must stay GREEN throughout; expected baseline after PRD-005 ≈ 744 tests."
+    },
+    {
+      "stage": "tested",
+      "agent": "07-qa-specialist",
+      "entered_at": "2026-05-27T13:00:00Z",
+      "exited_at": "2026-05-27T14:30:00Z",
+      "outcome": "completed",
+      "one_line": "Phase 1 /test: M1 closed (jsdom CSS-var injection), CT-3/4/5/6 added (15 new tests), m2/m3 cleanup; 761/761 GREEN; smokes S2-S6 pending operator T036",
+      "deliverables": [
+        "products/redirect-manager/project-planning/plans/test-report-20260527T130000Z.md",
+        "products/redirect-manager/site/tests/setup/inject-blok-nova-vars.ts",
+        "products/redirect-manager/site/components/full-page/UpstreamDriftBanner.test.tsx",
+        "products/redirect-manager/site/components/full-page/TestSurface.test.tsx",
+        "products/redirect-manager/site/hooks/use-upstream-drift.test.tsx",
+        "products/redirect-manager/site/components/full-page/TestSurface.tsx"
+      ],
+      "escalations": [
+        {
+          "severity": "warn",
+          "kind": "concern",
+          "item": "host_frame_smoke_test_tab: skipped — Cloud Portal host URL not supplied this session. Same pattern as PRD-002/003/004; operator-acceptable historically. Status forced to tested_pending_smoke per source command rule.",
+          "resolved_at": null
+        },
+        {
+          "severity": "warn",
+          "kind": "concern",
+          "item": "live_walkthrough: pending — T036 operator-driven smoke (bump SHA → check → banner → /sync-redirect-proxy → accept → tests GREEN → snapshot bump → check → in-sync). Requires Cloud Portal session.",
+          "resolved_at": null
+        },
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "F-N1 informational: code-review report misidentified react-hooks/set-state-in-effect as a non-existent rule. It IS a real installed rule; the disable comment was correctly placed. /code-review's m3 fix proposal would have introduced a lint error; reverted in /test.",
+          "resolved_at": "2026-05-27T14:30:00Z"
+        }
+      ],
+      "error": null,
+      "notes": "M1 closure: jsdom CSS-var injection via tests/setup/inject-blok-nova-vars.ts sets --destructive/--destructive-background/--warning/--foreground/--success/--muted-foreground/--border at document.documentElement; runtime contrast assertions via getComputedStyle(documentElement).getPropertyValue(token). 15 new tests (UpstreamDriftBanner 13-17 contrast; TestSurface CT-3/4/5/6). m2 auto-fixed (unused _path). m3 reverted (rule is real). m4 left as documented edge case per /code-review."
+    },
+    {
+      "stage": "live_walkthrough",
+      "agent": "00-team-lead",
+      "entered_at": "2026-05-28T11:30:00Z",
+      "exited_at": "2026-05-28T12:10:00Z",
+      "outcome": "completed",
+      "one_line": "Operator live walkthrough on localhost dev — drift end-to-end visually validated (forced+revert); 3 UX iterations applied + tests still 761/761 GREEN",
+      "deliverables": [
+        "products/redirect-manager/site/components/full-page/TestSurface.tsx",
+        "products/redirect-manager/site/components/full-page/TestSurface.test.tsx",
+        "products/redirect-manager/site/components/full-page/TraceCardStack.tsx",
+        "products/redirect-manager/site/components/full-page/RedirectMapDetail.tsx",
+        "products/redirect-manager/site/components/full-page/FullPage.tsx"
+      ],
+      "escalations": [
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Operator UX iteration 1: URL input + Test button full-width (was max-w-xl) — input felt cramped in workspace.",
+          "resolved_at": "2026-05-28T11:35:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Operator UX iteration 2: TraceCardStack evaluate-row cards in auto-fit grid (minmax(320px, 1fr)) — long no-match runs were scroll-heavy; non-evaluate stages stay single-column.",
+          "resolved_at": "2026-05-28T11:40:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Operator UX iteration 3: Toolbar split into two-column 'Testing' (left, flex-1) + 'Upstream parity' (right, 320px) with vertical divider — Check upstream now reads as peer of Test, not buried below it.",
+          "resolved_at": "2026-05-28T11:50:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Double-scrollbar fix: dropped `overflow-auto` from test-panel <main> + `h-full` from TestSurface root. Page scrolls naturally; Manage tab keeps overflow-auto for its detail-pane scrolling pattern.",
+          "resolved_at": "2026-05-28T12:00:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Mappings table polish: actions column widened w-[56px] → w-[72px] to fit two icon-sm buttons + gap-1 without clipping trash icon. Pre-existing tightness amplified by recent layout shifts.",
+          "resolved_at": "2026-05-28T12:08:00Z"
+        },
+        {
+          "severity": "info",
+          "kind": "decision",
+          "item": "Smoke gates updated: S2 (drift banner visual) + S4 (in-sync inline status) marked `passed` after operator forced SHAs=0000 then reverted. S3 (slash-command end-to-end) + S5 (X dismiss manual) stay pending — component-test coverage exists, operator-driven exercise deferred to real-tenant moment. S6 host-frame Playwright stays `skipped` (no Cloud Portal host URL this session).",
+          "resolved_at": "2026-05-28T12:10:00Z"
+        }
+      ],
+      "error": null,
+      "notes": "TestSurface.test.tsx regex tightened (line 372: /in sync/i → /In sync with upstream/i) because the new 'Upstream parity' section helper text contains 'in sync' as a phrase. 761/761 GREEN preserved across all iterations. Three sub-tests of T036 sub-smokes now closed (S1, S2, S4); two sub-smokes remain pending (S3, S5) — acceptable per scope_dial.rigor=light + same pattern as PRD-002/003/004."
+    }
+  ],
+  "implementation": {
+    "mode": "pipeline",
+    "target_directory": "site",
+    "branch_name": "prd-005",
+    "remote_url": "https://github.com/Chris1415/Sitecore.Plugin.EnhancedRedirectManager.git",
+    "status": "completed",
+    "resumed_from_stage": null
+  },
+  "smoke_outcomes": {
+    "S1": { "step": "T1 hard gate — 691 baseline tests GREEN after header migration", "outcome": "pass" },
+    "S2": { "step": "T036 — bump SHA to stale → click Check → banner appears (destructive tone, AlertTriangle, role=status)", "outcome": "passed", "recorded_at": "2026-05-28T12:05:00Z", "notes": "Operator validated 2026-05-28 by forcing snapshot SHAs to 0000…0000; Check upstream rendered the destructive banner with AlertTriangle glyph above the trace area." },
+    "S3": { "step": "T036 — run /sync-redirect-proxy → accept patch → npm test -- proxy-simulator GREEN → snapshot SHA updated", "outcome": "pending", "notes": "Slash command not exercised end-to-end this session; deferred to operator-driven /sync-redirect-proxy run when real drift surfaces from upstream." },
+    "S4": { "step": "T036 — re-click Check → in-sync success state (green Check glyph, muted text, no banner)", "outcome": "passed", "recorded_at": "2026-05-28T12:08:00Z", "notes": "Operator validated 2026-05-28 — reverted snapshot SHAs to live `dev` values; Check upstream rendered the in-sync inline status with success-green Check glyph and muted-foreground text, no banner. No regression to PRD-004 691-test baseline." },
+    "S5": { "step": "T036 — dismiss banner (X click) → sessionStorage flag set → banner hidden; full page reload resets it", "outcome": "pending", "notes": "Component-test coverage GREEN (CT-3 + 4 dismissal tests in TestSurface.test.tsx); operator did not exercise the X-click manually this session but the assertion shape matches AC-1.5." },
+    "S6": { "step": "Visual smoke vs POC — five-axis check in host frame (layout, typography, color, anatomy, state fidelity)", "outcome": "skipped", "recorded_at": "2026-05-28T12:10:00Z", "notes": "Host-frame Playwright pixel diff vs pocs/poc-v1-prd005/ deferred — Cloud Portal host URL not supplied this session. Same pattern as PRD-002/003/004 (also shipped with this caveat). Operator-acceptable historically." },
+    "live_walkthrough": { "step": "Operator-driven live walkthrough on localhost dev with UX polish iterations", "outcome": "pass_with_caveats", "recorded_at": "2026-05-28T12:10:00Z", "category": "live_walkthrough", "notes": "Operator validated drift detection end-to-end via localhost: drifted banner (SHA=0000 force), in-sync inline status (revert), Test tab toolbar layout, evaluate-row grid pack. Three UX iterations applied + tests re-verified (toolbar split into two-column testing/upstream-parity sections; trace-area evaluate-row cards in auto-fit grid; mappings table actions column widened 56→72px to fix trash-icon clip)." }
+  },
+  "operator_attention": [
+    {
+      "stage": "rubber-ducky",
+      "severity": "info",
+      "kind": "decision",
+      "item": "Tracked upstream branch switched from `dev` (PRD-004) to `main` for PRD-005 — main is what real tenants run. T1 includes a one-shot re-snapshot and possible re-port if main differs.",
+      "raised_at": "2026-05-22T11:48:00Z",
+      "resolved_at": "2026-05-22T11:48:00Z",
+      "references": null
+    },
+    {
+      "stage": "rubber-ducky",
+      "severity": "info",
+      "kind": "decision",
+      "item": "AI involvement OUTSIDE the deployed Marketplace app — passive SHA-mismatch detection in-app; AI patch proposal lives in dev-time slash command in product repo's `.claude/commands/`.",
+      "raised_at": "2026-05-22T11:48:00Z",
+      "resolved_at": "2026-05-22T11:48:00Z",
+      "references": null
+    },
+    {
+      "stage": "rubber-ducky",
+      "severity": "info",
+      "kind": "question",
+      "item": "OQ-1..OQ-7 carried forward to /create-prd discovery",
+      "raised_at": "2026-05-22T11:48:00Z",
+      "resolved_at": "2026-05-22T12:30:00Z",
+      "references": "Resolved at create-prd close: OQ-1 → default 'committed verbatim'; OQ-2 → punt to /architect; OQ-3 → punt to FO-5.8; OQ-4 → out of scope; OQ-5 → absorb into T1 by default, split decision at spike; OQ-6 → verify at /architect; OQ-7 → punt to UI design + a11y. All captured in prd-005.md § 14."
+    },
+    {
+      "stage": "create-prd",
+      "severity": "info",
+      "kind": "decision",
+      "item": "Critical review (light) found 6 mechanical blockers in PRD draft (missing Step 5 in slash command flow; AC-3.3 contradiction on raw vs commits API; lost dev-branch provenance after header migration; deploy-cycle latency unstated; CSP audit gap; raw.githubusercontent.com in CSP unnecessary). All resolved before spec_ready close. CSP narrative removed entirely after audit confirmed next.config.mjs is empty.",
+      "raised_at": "2026-05-22T12:15:00Z",
+      "resolved_at": "2026-05-22T12:30:00Z",
+      "references": "ADR-0044 + ADR-0048; PRD-005 § 9 Network access + § 9 Deploy-cycle assumption"
+    },
+    {
+      "stage": "create-prd",
+      "severity": "info",
+      "kind": "assumption",
+      "item": "Snapshot SHA bump only reaches in-app baseline after next Vercel deploy (R8). Operators may see banner for a window between slash-command success and deploy completion.",
+      "raised_at": "2026-05-22T12:30:00Z",
+      "resolved_at": null,
+      "references": "prd-005.md § 9 Deploy-cycle assumption + AC-3.8 + R8"
+    },
+    {
+      "stage": "create-prd",
+      "severity": "info",
+      "kind": "assumption",
+      "item": "GitHub API unauthenticated for v0 (60/hr per IP) is sufficient for on-demand-only traffic profile. PAT-based auth is FO-5.2 if rate limit becomes painful in real usage.",
+      "raised_at": "2026-05-22T12:30:00Z",
+      "resolved_at": null,
+      "references": "ADR-0046; prd-005.md § 9 GitHub API rate limit"
+    },
+    {
+      "stage": "create-prd",
+      "severity": "info",
+      "kind": "concern",
+      "item": "T1 spike-and-decide may reveal substantive divergence between dev (PRD-004 baseline) and main (PRD-005 target), requiring a one-shot re-port in the same tranche. OQ-5 splits PRD-005 into 005a + 005b if pain emerges at T1; default is absorb.",
+      "raised_at": "2026-05-22T12:30:00Z",
+      "resolved_at": null,
+      "references": "prd-005.md § 12 T1 + R1"
+    },
+    {
+      "stage": "create-prd",
+      "severity": "info",
+      "kind": "concern",
+      "item": "knownDivergences[] array could become a dumping ground over time (R10). Structured `reason` + `upstreamSha` per entry + periodic operator review is the long-term safeguard.",
+      "raised_at": "2026-05-22T12:30:00Z",
+      "resolved_at": null,
+      "references": "ADR-0047; prd-005.md § 13 R10"
+    },
+    {
+      "stage": "architect",
+      "severity": "warn",
+      "kind": "decision",
+      "item": "OQ-A1 — Sitecore/content-sdk has no `main` branch with the watched files today (architecture-time probe returned 404). Operator picked option (b): track `dev` for v0; ADR-0044 amended in place. Promote to `main` via snapshot edit when Sitecore publishes it.",
+      "raised_at": "2026-05-22T13:00:00Z",
+      "resolved_at": "2026-05-22T13:30:00Z",
+      "references": "ADR-0044 (amended); architecture § 1; prd-005 § 1 Executive Summary"
+    },
+    {
+      "stage": "architect",
+      "severity": "info",
+      "kind": "concern",
+      "item": "R-arch1 — Next 16 + Turbopack HMR may not pick up edits to statically-imported JSON file (`upstream-snapshot.json`) during `npm run dev`. Engineer may need to restart dev server after slash-command bump.",
+      "raised_at": "2026-05-22T13:30:00Z",
+      "resolved_at": null,
+      "references": "architecture-20260522T114800Z.md § 9"
+    },
+    {
+      "stage": "architect",
+      "severity": "info",
+      "kind": "concern",
+      "item": "R-arch3 — AST extractor staleness if upstream introduces a new test-block pattern the extractor doesn't recognize. T6 fixture-count check is the mitigation.",
+      "raised_at": "2026-05-22T13:30:00Z",
+      "resolved_at": null,
+      "references": "architecture-20260522T114800Z.md § 9"
+    },
+    {
+      "stage": "architect",
+      "severity": "info",
+      "kind": "decision",
+      "item": "Baseline promoted (31 ADRs). PRD-005 ADRs (0044-0049) deliberately excluded — too fresh; re-evaluate at next /architect run.",
+      "raised_at": "2026-05-22T13:45:00Z",
+      "resolved_at": "2026-05-22T13:45:00Z",
+      "references": "baseline.md; Re-promotion log row 1"
+    },
+    {
+      "stage": "task-breakdown",
+      "severity": "warn",
+      "kind": "concern",
+      "item": "Runtime-contrast test setup (T028) requires injecting Blok Nova CSS variables into jsdom via Vitest's setupFiles before tests can read --destructive-background etc. via getComputedStyle. Developer must wire this up before T028 runs — otherwise contrast assertions trivially pass with empty CSS variable lookups.",
+      "raised_at": "2026-05-27T11:00:00Z",
+      "resolved_at": null,
+      "references": "task-breakdown § 10 T028 + § 4c-4"
+    },
+    {
+      "stage": "task-breakdown",
+      "severity": "info",
+      "kind": "concern",
+      "item": "Visual smoke (S6 / host-frame Playwright vs POC) deferred until operator supplies Cloud Portal host URL at T036. Status will be tested_pending_smoke until S6 transitions from pending. Same pattern as PRD-002/003/004 — operator-acceptable historically.",
+      "raised_at": "2026-05-27T11:00:00Z",
+      "resolved_at": null,
+      "references": "task-breakdown § 10 T036; pocs/poc-v1-prd005/"
+    },
+    {
+      "stage": "test",
+      "severity": "warn",
+      "kind": "concern",
+      "item": "M1 (Major from /code-review) RESOLVED in /test Phase 1 — wired site/tests/setup/inject-blok-nova-vars.ts; UpstreamDriftBanner tests 13-17 now read CSS variables via getComputedStyle. 5 new contrast/destructive-tone assertions. Closes ADR-0045 amendment verification.",
+      "raised_at": "2026-05-27T14:30:00Z",
+      "resolved_at": "2026-05-27T14:30:00Z",
+      "references": "test-report-20260527T130000Z.md § Fixes Applied; site/tests/setup/inject-blok-nova-vars.ts"
+    },
+    {
+      "stage": "test",
+      "severity": "warn",
+      "kind": "decision",
+      "item": "[BLOCKER] live_walkthrough (S2-S6) pending — operator-driven T036 smoke required before status can advance from tested_pending_smoke → shipped. Requires Cloud Portal session: bump baseline SHA to stale value → click Check → see destructive banner → run /sync-redirect-proxy → accept patch → tests GREEN → snapshot bumped → re-Check → in-sync. /ship will force shipped_with_caveats while smokes are pending.",
+      "raised_at": "2026-05-27T14:30:00Z",
+      "resolved_at": null,
+      "references": "smoke_outcomes.S2..S6; task-breakdown § 10 T036"
+    },
+    {
+      "stage": "test",
+      "severity": "warn",
+      "kind": "decision",
+      "item": "[BLOCKER] host_frame_smoke_test_tab skipped — Cloud Portal host URL not supplied this session. 5-axis Playwright pixel-diff vs pocs/poc-v1-prd005/ remains outstanding. Same pattern as PRD-002/003/004 (also shipped with this caveat) — operator-acceptable historically.",
+      "raised_at": "2026-05-27T14:30:00Z",
+      "resolved_at": null,
+      "references": "smoke_outcomes.host_frame_smoke_test_tab; pocs/poc-v1-prd005/"
+    }
+  ],
+  "notes": [
+    "PRD-005 follows PRD-004 ship 2026-05-22 (merge commit 9de685c). Builds on PRD-004's simulator foundation per ship report § 8 recommendation #1.",
+    "Source brain dump is operator-prompt-only (no external file source); ship report § 8 inputs cited inline.",
+    "Branch tracking change (dev → main) is a notable carry-over decision; will require a re-snapshot at T1.",
+    "discovery_level: light",
+    "discovery_summary: confirmed",
+    "critical_review: completed",
+    "critical_review_level: light",
+    "critical_review: 6 mechanical blockers surfaced; all resolved in PRD revisions before spec_ready close (B1 missing step, B2 AC-3.3 contradiction, B3 lost provenance, B4 deploy-cycle latency, B5+B6 CSP removed after audit)",
+    "base_branch: main",
+    "stacked_on: null",
+    "sdk_surface_split: n/a (1 new HTTP integration — GitHub REST API — under 3-surface heuristic threshold)",
+    "Predecessor PRD-004 merged to main at commit 9d58a6f (Note: 9d58a6f is PRD-003; PRD-004 merged at 9de685c via PR#7 on 2026-05-22)",
+    "CSP audit: next.config.mjs is empty; no Content-Security-Policy response header is set by the app today. In-app fetch to api.github.com works without CSP changes. ADR-0048 records the no-CSP decision."
+  ]
+}

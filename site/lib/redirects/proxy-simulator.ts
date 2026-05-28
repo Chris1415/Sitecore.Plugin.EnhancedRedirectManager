@@ -15,12 +15,8 @@
  * ADR-0042: Upstream fixture extraction via committed AST-walking script
  *           (site/scripts/extract-upstream-fixtures.ts). Output committed as upstream-cases.json.
  *
- * Upstream sources (SHA-pinned; retrieved 2026-05-20T18:32:14.895Z):
- *   redirects-proxy.ts → 30b0db8fe768b83f03fd6b9772b0d3e14711c6b2
- *     https://github.com/Sitecore/content-sdk/blob/30b0db8fe768b83f03fd6b9772b0d3e14711c6b2/packages/nextjs/src/proxy/redirects-proxy.ts
- *
- *   utils.ts → e6153e5e80c2076704cad0876eec3b85ec3a1a9f
- *     https://github.com/Sitecore/content-sdk/blob/e6153e5e80c2076704cad0876eec3b85ec3a1a9f/packages/core/src/tools/utils.ts
+ * Originally ported from Sitecore/content-sdk@dev as of 2026-05-20 — see
+ * __fixtures__/upstream-snapshot.json originalPort field for full SHAs.
  *
  * Known divergences from upstream:
  *   (empty — target state per M2: 100% parity)

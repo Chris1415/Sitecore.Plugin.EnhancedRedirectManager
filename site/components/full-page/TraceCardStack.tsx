@@ -52,12 +52,54 @@ export function TraceCardStack({ trace, onRowClick }: TraceCardStackProps) {
     }
   }, [trace]);
 
+  // Operator feedback 2026-05-28: long lists of evaluate-row cards waste horizontal space.
+  // Group consecutive evaluate-row stages and render them in a responsive auto-fit grid
+  // (min 320px per card → 1/2/3+ columns depending on viewport). Non-evaluate stages
+  // (normalize / candidates / substitute / flag-effects / dispatch) stay single-column —
+  // their content is wider and they read better full-width.
+  const groupedStages: Array<{ kind: "single"; stage: typeof visibleStages[number]; idx: number } | { kind: "grid"; stages: typeof visibleStages; startIdx: number }> = [];
+  for (let i = 0; i < visibleStages.length; i++) {
+    const stage = visibleStages[i];
+    if (stage.kind === "evaluate-row") {
+      const groupStart = i;
+      const group: typeof visibleStages = [];
+      while (i < visibleStages.length && visibleStages[i].kind === "evaluate-row") {
+        group.push(visibleStages[i]);
+        i++;
+      }
+      i--; // step back so the outer `i++` doesn't skip the next non-evaluate stage
+      groupedStages.push({ kind: "grid", stages: group, startIdx: groupStart });
+    } else {
+      groupedStages.push({ kind: "single", stage, idx: i });
+    }
+  }
+
   return (
     <div className="space-y-3">
-      {/* Stage cards — staggered via useStaggeredRender */}
-      {visibleStages.map((stage, i) => (
-        <TraceCard key={`stage-${i}-${stage.kind}`} stage={stage} index={i} />
-      ))}
+      {/* Stage cards — staggered via useStaggeredRender; evaluate-row runs render in a grid */}
+      {groupedStages.map((entry, groupIdx) =>
+        entry.kind === "single" ? (
+          <TraceCard
+            key={`stage-${entry.idx}-${entry.stage.kind}`}
+            stage={entry.stage}
+            index={entry.idx}
+          />
+        ) : (
+          <div
+            key={`grid-${groupIdx}-${entry.startIdx}`}
+            className="grid gap-3"
+            style={{ gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))" }}
+          >
+            {entry.stages.map((stage, j) => (
+              <TraceCard
+                key={`stage-${entry.startIdx + j}-${stage.kind}`}
+                stage={stage}
+                index={entry.startIdx + j}
+              />
+            ))}
+          </div>
+        )
+      )}
 
       {/* Result card — shown after all stages are revealed */}
       {visibleStages.length === trace.stages.length && (

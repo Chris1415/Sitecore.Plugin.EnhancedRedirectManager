@@ -4,13 +4,20 @@
 
 A Sitecore Marketplace client-side app that gives content authors and site managers a purpose-built UI for redirect operations across a SitecoreAI tenant. Replaces the Content Editor workflow for managing items under `/sitecore/content/{COLLECTION}/{SITE}/Settings/Redirects/*` and surfaces redirects inside the Pages editor, on the site dashboard, and on a dedicated full-page workshop.
 
-## Status
-
-Latest: **PRD-004 — shipped_with_caveats** (2026-05-22). Regex source mode + Test surface with a faithful local port of the upstream Content SDK `RedirectsProxy` (100% upstream-fixture parity). See [CHANGELOG.md](CHANGELOG.md) for history.
-
 <p align="center">
-  <img src="docs/screenshots/full-page-prd002-general.png" alt="Redirect Manager — Full Page workspace: hero with Last modified line, 5-tile stat strip (Redirects · 301 · 302 · Server Transfer · Conflicts), rail of Redirect Maps, mappings table" width="960" />
+  <img src="docs/screenshots/full-page-prd005-manage.png" alt="Redirect Manager — Full Page workspace, Manage tab: workspace hero with 5 active maps, stat strip (17 redirects · 8 301 Permanent · 3 302 Temporary · 6 Server Transfer · 0 Conflicts), rail of Redirect Maps, expanded Test Map showing 6 regex mappings" width="960" />
 </p>
+
+## What's new
+
+The workspace has grown into a real authoring + testing surface this quarter:
+
+- **Regex source mode + Test tab** — author redirect rules with anchors, capture groups, character classes and alternation; save-time `try { new RegExp() }` validation rejects bad patterns before they reach Sitecore. The Test tab dry-runs any URL through a local simulator that mirrors the upstream Content SDK `RedirectsProxy` step-by-step (normalize → candidates → per-row evaluation → substitute → flag effects → dispatch) and shows the matched row, final URL, and redirect type. No more publish-and-pray.
+- **Upstream parity check** — an on-demand "Check upstream" button on the Test tab confirms the local simulator is in sync with upstream Sitecore/content-sdk; when upstream moves, an inline banner tells you the trace may be subtly inaccurate and points you at a one-shot fix. The dev-time `/sync-redirect-proxy` Claude Code slash command in this repo (see [Dev-time tools](#dev-time-tools)) does the verbatim re-port for you.
+- **Publish Site, wired end-to-end** — the workspace "Publish Site" button now triggers a real publish job against the SitecoreAI Publishing v1 API. Lightweight job polling, cross-session resume, and operator-readable job names so the job is recognizable inside SitecoreAI's publishing list.
+- **V4 Blok Elevated redesign across all three surfaces** — frosted-glass workspace with a hero zone + 5-tile stat strip and a drifting plume backdrop on the Full Page; an always-visible inline Quick Redirect form replaces the old modal on the Context Panel; a Dashboard Widget with 8 real stat tiles, collision badge, top-destinations bar list, and recently-shipped panel.
+
+See [CHANGELOG.md](CHANGELOG.md) for the per-release detail.
 
 ## What this does
 
@@ -18,11 +25,27 @@ Redirect Manager exposes three Cloud Portal extension points, all backed by Site
 
 - **Context Panel** — inside the Pages editor, lists every redirect affecting the current page (exact source/target match), with inline add / edit / delete.
 - **Dashboard Widget** — at-a-glance tiles (Maps / Mappings / 301 / 302 / Server Transfer / Avg per map / Largest map / Last updated), collision badges, top-destinations bar list, and recently-shipped maps.
-- **Full Page** — virtualized Redirect Map list, full CRUD with drag-reorder, JSON import / export keyed by Sitecore item GUID, conflict resolver, and a real **Publish Site** button wired to the SitecoreAI Publishing v1 API (PRD-003).
+- **Full Page** — Two tabs:
+  - **Manage** — virtualized Redirect Map list, full CRUD via the `EditRowModal` (Pattern / Regex mode toggle + save-time validation per PRD-004), drag-reorder, JSON import / export keyed by Sitecore item GUID, conflict resolver, and a real **Publish Site** button wired to the SitecoreAI Publishing v1 API (PRD-003).
+  - **Test** — local simulation of how the Content SDK `RedirectsProxy` would evaluate a URL against the loaded redirect inventory; structured-card trace per pipeline stage; on-demand **Upstream parity** check that surfaces when the local simulator has drifted from upstream Sitecore/content-sdk (PRD-004 + PRD-005).
 
 Redirects are shared across all language versions of a site — `UrlMapping` is a SHARED Sitecore field (no language axis). See [docs/features.md](docs/features.md) for per-surface deep-dives.
 
 ## Screenshots
+
+**Full Page → Test tab** with structured trace (PRD-004) — paste a URL, the simulator walks through the same pipeline the upstream Content SDK `RedirectsProxy` would (normalize → candidates → per-row evaluation → substitute → flag effects → dispatch) and surfaces the matched row + final URL + redirect type. "In sync with upstream `dev`" inline status confirms the simulator is current (PRD-005):
+
+<p align="center">
+  <img src="docs/screenshots/test-tab-prd005-trace-success.png" alt="Test tab — structured trace cards for a /123 lookup matching /test222 via map row 1; in-sync upstream-parity status; left-rail collection/site/redirect-map picker" width="960" />
+</p>
+
+**Regex mode in `EditRowModal`** (PRD-004) — segmented Pattern / Regex toggle, save-time `try { new RegExp() }` validation, contextual regex cheatsheet for anchors / captures / character classes / `$siteLang` substitution:
+
+<p align="center">
+  <img src="docs/screenshots/edit-row-modal-prd004-regex.png" alt="Edit mapping modal in Regex mode — Pattern/Regex segmented control, source + destination inputs, regex cheatsheet with anchor / capture-group / character class / alternation reference" width="720" />
+</p>
+
+**Context Panel and Dashboard Widget** (PRD-002 carry-forward):
 
 <p align="center">
   <img src="docs/screenshots/context-panel-prd002-general.png" alt="Context Panel — page route as headline, two-column hero (inbound vs outbound), Quick redirect form with direction toggle" width="720" />
@@ -81,12 +104,41 @@ npm run test         # Vitest single-pass
 npm run test:watch   # Vitest watch mode
 ```
 
+## Dev-time tools
+
+The repo ships with Claude Code slash commands under [`.claude/commands/`](.claude/commands/) — they are auto-discovered when you open Claude Code at the product root. Today there is one:
+
+### `/sync-redirect-proxy`
+
+Resync the local `proxy-simulator.ts` with upstream Sitecore Content SDK `RedirectsProxy` after a drift signal. **Use when** the in-app drift banner on the Test tab says *"Upstream `RedirectsProxy` has changed since this simulator was ported"* — that signal means baseline SHAs in `site/lib/redirects/__fixtures__/upstream-snapshot.json` differ from upstream `dev`.
+
+<p align="center">
+  <img src="docs/screenshots/test-tab-prd005-drift-detected.png" alt="Drift banner on the Test tab — destructive-tinted band with AlertTriangle glyph, copy 'Upstream RedirectsProxy has changed since this simulator was ported. Trace may be subtly inaccurate. Ask your engineer to run /sync-redirect-proxy to update.', Last sync timestamp, dismiss button" width="960" />
+</p>
+
+What it does (procedural Markdown — Claude Code executes it step-by-step):
+
+1. Reads the baseline SHAs from `upstream-snapshot.json`
+2. Fetches latest upstream raw + commit SHA for both watched files (`packages/nextjs/src/proxy/redirects-proxy.ts` + `packages/core/src/tools/utils.ts`)
+3. If SHAs already match → prints "Already in sync" and exits (idempotent)
+4. Otherwise: proposes a **verbatim re-port** patch on `proxy-simulator.ts` via Claude Code's edit flow — you review each hunk inline
+5. On accept: regenerates `__fixtures__/upstream-cases.json` via the committed AST extractor (`npm run extract:upstream-fixtures`)
+6. Runs `npm test -- proxy-simulator` — must be GREEN before SHA bump
+7. On green: bumps the SHAs + `retrievedAt` + `fileHash` in `upstream-snapshot.json`. Atomic state — failed tests leave simulator + snapshot consistent (no half-applied state)
+
+**Commit the resulting diff** (simulator + snapshot + regenerated fixtures together) and push. The in-app baseline picks up the bump on the next deploy. See [ADR-0044](project-planning/ADR/adr-0044-upstream-snapshot-json-authoritative-track-main.md), [ADR-0045](project-planning/ADR/adr-0045-in-app-passive-detection-only-ai-dev-time.md), [ADR-0047](project-planning/ADR/adr-0047-slash-command-atomic-state-transitions-knowndivergences-escape-hatch.md) for the design rationale.
+
+If a particular upstream change is one you deliberately do NOT want to port (rare — e.g. tied to a feature this app doesn't support), record it in the snapshot's `knownDivergences[]` array with `reason` + `upstreamSha` — the slash command honors it and skips proposing changes for that function.
+
 ## Project structure
 
 ```
 products/redirect-manager/
 ├── README.md
 ├── CHANGELOG.md
+├── .claude/
+│   └── commands/
+│       └── sync-redirect-proxy.md  ← dev-time slash command (PRD-005, see "Dev-time tools")
 ├── docs/
 │   ├── architecture.md      ← system narrative + PRD-002/003 additions
 │   ├── decisions.md         ← ADR summary table (ADR-0001 – ADR-0037)

@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Index · Redirect Manager · PRD-005 "Quiet Diagnostic" POC</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="elevated.css" />
+    <link rel="stylesheet" href="surfaces.css" />
+    <link rel="stylesheet" href="prd005.css" />
+  </head>
+  <body class="idx-page">
+    <div class="tone-toggle" data-theme-toggle role="group" aria-label="Theme">
+      <button class="tone-toggle__btn" data-theme="light" aria-pressed="false">Light</button>
+      <button class="tone-toggle__btn" data-theme="dark" aria-pressed="false">Dark</button>
+      <button class="tone-toggle__btn" data-theme="auto" aria-pressed="true">Auto</button>
+    </div>
+
+    <main class="idx-shell">
+      <header class="idx-head">
+        <h1>Redirect Manager &middot; PRD-005 POC</h1>
+        <p>
+          <strong>"Quiet Diagnostic"</strong> &mdash; upstream drift detection
+          surface inside the existing Test tab. Chrome-neutral, muted-foreground,
+          informational instrumentation (not alarm). Drift surfaces via three
+          additions: a secondary "Check upstream" button below the Test button,
+          an inline status block, and a muted banner above the trace area.
+        </p>
+        <p style="font-size:var(--text-xs);color:var(--muted-foreground);font-family:var(--font-mono);">
+          Inherits PRD-002 V4 Blok Elevated tokens &middot; PRD-004 two-column Test surface
+          &middot; tokens from poc-v1-prd004/theme.css (Blok Nova preset, copied 2026-05-14)
+        </p>
+      </header>
+
+      <section>
+        <h2 style="font-size:var(--text-lg);font-weight:600;letter-spacing:-0.015em;margin:0 0 0.75rem;color:var(--foreground);">
+          Idle &mdash; Test tab loaded, no drift check run yet
+        </h2>
+        <div class="idx-grid">
+          <a class="idx-card" href="screen-test-idle.html">
+            <span class="idx-card__tag">Light &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-idle.html</h3>
+            <p class="idx-card__desc">Check button visible in left rail; no banner; no inline status.</p>
+          </a>
+          <a class="idx-card" href="screen-test-idle-dark.html">
+            <span class="idx-card__tag">Dark &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-idle-dark.html</h3>
+            <p class="idx-card__desc">Dark theme variant of the idle state.</p>
+          </a>
+          <a class="idx-card" href="screen-test-idle-mobile.html">
+            <span class="idx-card__tag">Light &middot; mobile</span>
+            <h3 class="idx-card__title">screen-test-idle-mobile.html</h3>
+            <p class="idx-card__desc">&lt;768px stacked layout; rail above trace.</p>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2 style="font-size:var(--text-lg);font-weight:600;letter-spacing:-0.015em;margin:0 0 0.75rem;color:var(--foreground);">
+          Checking &mdash; button shows spinner + "Checking&hellip;" label
+        </h2>
+        <div class="idx-grid">
+          <a class="idx-card" href="screen-test-checking.html">
+            <span class="idx-card__tag">Light &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-checking.html</h3>
+            <p class="idx-card__desc">aria-busy="true" + disabled; no inline status during checking.</p>
+          </a>
+          <a class="idx-card" href="screen-test-checking-dark.html">
+            <span class="idx-card__tag">Dark &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-checking-dark.html</h3>
+            <p class="idx-card__desc">Dark variant.</p>
+          </a>
+          <a class="idx-card" href="screen-test-checking-mobile.html">
+            <span class="idx-card__tag">Light &middot; mobile</span>
+            <h3 class="idx-card__title">screen-test-checking-mobile.html</h3>
+            <p class="idx-card__desc">Stacked mobile variant.</p>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2 style="font-size:var(--text-lg);font-weight:600;letter-spacing:-0.015em;margin:0 0 0.75rem;color:var(--foreground);">
+          In sync &mdash; terminal state, persists until next recheck
+        </h2>
+        <div class="idx-grid">
+          <a class="idx-card" href="screen-test-in-sync.html">
+            <span class="idx-card__tag">Light &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-in-sync.html</h3>
+            <p class="idx-card__desc">Check icon + muted "In sync with dev (checked 2 minutes ago)".</p>
+          </a>
+          <a class="idx-card" href="screen-test-in-sync-dark.html">
+            <span class="idx-card__tag">Dark &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-in-sync-dark.html</h3>
+            <p class="idx-card__desc">Dark variant.</p>
+          </a>
+          <a class="idx-card" href="screen-test-in-sync-mobile.html">
+            <span class="idx-card__tag">Light &middot; mobile</span>
+            <h3 class="idx-card__title">screen-test-in-sync-mobile.html</h3>
+            <p class="idx-card__desc">Stacked mobile variant.</p>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2 style="font-size:var(--text-lg);font-weight:600;letter-spacing:-0.015em;margin:0 0 0.75rem;color:var(--foreground);">
+          Drifted &mdash; muted informational banner above the trace area
+        </h2>
+        <div class="idx-grid">
+          <a class="idx-card" href="screen-test-drifted.html">
+            <span class="idx-card__tag">Light &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-drifted.html</h3>
+            <p class="idx-card__desc">Banner with Info icon + dismiss X; bg-muted; 2px left accent border (NOT red).</p>
+          </a>
+          <a class="idx-card" href="screen-test-drifted-dark.html">
+            <span class="idx-card__tag">Dark &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-drifted-dark.html</h3>
+            <p class="idx-card__desc">Dark variant.</p>
+          </a>
+          <a class="idx-card" href="screen-test-drifted-mobile.html">
+            <span class="idx-card__tag">Light &middot; mobile</span>
+            <h3 class="idx-card__title">screen-test-drifted-mobile.html</h3>
+            <p class="idx-card__desc">Banner above stacked rail+trace; 44px touch dismiss.</p>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2 style="font-size:var(--text-lg);font-weight:600;letter-spacing:-0.015em;margin:0 0 0.75rem;color:var(--foreground);">
+          Error &middot; rate-limit (GitHub 403)
+        </h2>
+        <div class="idx-grid">
+          <a class="idx-card" href="screen-test-error-rate-limit.html">
+            <span class="idx-card__tag">Light &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-error-rate-limit.html</h3>
+            <p class="idx-card__desc">Info icon + "Try again in 23 minutes." Retry DISABLED.</p>
+          </a>
+          <a class="idx-card" href="screen-test-error-rate-limit-dark.html">
+            <span class="idx-card__tag">Dark &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-error-rate-limit-dark.html</h3>
+            <p class="idx-card__desc">Dark variant.</p>
+          </a>
+          <a class="idx-card" href="screen-test-error-rate-limit-mobile.html">
+            <span class="idx-card__tag">Light &middot; mobile</span>
+            <h3 class="idx-card__title">screen-test-error-rate-limit-mobile.html</h3>
+            <p class="idx-card__desc">Stacked mobile variant.</p>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2 style="font-size:var(--text-lg);font-weight:600;letter-spacing:-0.015em;margin:0 0 0.75rem;color:var(--foreground);">
+          Error &middot; not-found (404 / file moved)
+        </h2>
+        <div class="idx-grid">
+          <a class="idx-card" href="screen-test-error-not-found.html">
+            <span class="idx-card__tag">Light &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-error-not-found.html</h3>
+            <p class="idx-card__desc">Info icon + "engineer review required". NO retry button.</p>
+          </a>
+          <a class="idx-card" href="screen-test-error-not-found-dark.html">
+            <span class="idx-card__tag">Dark &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-error-not-found-dark.html</h3>
+            <p class="idx-card__desc">Dark variant.</p>
+          </a>
+          <a class="idx-card" href="screen-test-error-not-found-mobile.html">
+            <span class="idx-card__tag">Light &middot; mobile</span>
+            <h3 class="idx-card__title">screen-test-error-not-found-mobile.html</h3>
+            <p class="idx-card__desc">Stacked mobile variant.</p>
+          </a>
+        </div>
+      </section>
+
+      <section>
+        <h2 style="font-size:var(--text-lg);font-weight:600;letter-spacing:-0.015em;margin:0 0 0.75rem;color:var(--foreground);">
+          Error &middot; network (5xx / fetch fail)
+        </h2>
+        <div class="idx-grid">
+          <a class="idx-card" href="screen-test-error-network.html">
+            <span class="idx-card__tag">Light &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-error-network.html</h3>
+            <p class="idx-card__desc">Info icon + "Try again." Outline retry button ENABLED.</p>
+          </a>
+          <a class="idx-card" href="screen-test-error-network-dark.html">
+            <span class="idx-card__tag">Dark &middot; desktop</span>
+            <h3 class="idx-card__title">screen-test-error-network-dark.html</h3>
+            <p class="idx-card__desc">Dark variant.</p>
+          </a>
+          <a class="idx-card" href="screen-test-error-network-mobile.html">
+            <span class="idx-card__tag">Light &middot; mobile</span>
+            <h3 class="idx-card__title">screen-test-error-network-mobile.html</h3>
+            <p class="idx-card__desc">Stacked mobile variant.</p>
+          </a>
+        </div>
+      </section>
+
+      <p class="idx-meta">
+        21 state frames (7 base &times; 3 themes/viewports) &middot;
+        Lucide icons inlined as monochrome SVG (no emoji codepoints) &middot;
+        See <a href="click-targets.md">click-targets.md</a> for the click matrix &middot;
+        See <a href="README.md">README.md</a> for the design direction note
+      </p>
+    </main>
+
+    <div class="hahn-solo-footer" aria-hidden="true">hahn-solo</div>
+    <script src="theme-toggle.js"></script>
+    <script src="icons.js"></script>
+  </body>
+</html>

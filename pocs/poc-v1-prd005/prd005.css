@@ -1,0 +1,2010 @@
+/* ============================================================================
+ * prd004.css — PRD-004 "Trace & Tame" surface additions
+ *
+ * Base theme: carried forward verbatim from pocs/poc-v1-prd002/ (V4 Blok
+ * Elevated, Blok Nova preset). Snapshot date: 2026-05-20.
+ *
+ * What this file adds (utility extension only; ZERO new tokens):
+ *   1. Workspace-level Manage/Test tab control (.fp-workspace-tabs)
+ *   2. TestSurface + TestToolbar (.test-surface, .test-toolbar)
+ *   3. TraceCardStack + TraceCard variants (.trace-card-stack, .test-card)
+ *   4. ResultCard (.test-card--result variants)
+ *   5. TestEmptyState (.test-empty)
+ *   6. RowEditForm mode toggle (.row-edit-form*)
+ *   7. SnippetLibrary + SnippetPill (.snippet-lib, .snippet-pill)
+ *   8. CaptureGroupChipStrip (.capture-chip-strip, .capture-chip)
+ *   9. InlineHint (.inline-hint)
+ *  10. SaveErrorMessage (.save-error)
+ *  11. RowsConsidered card (.rows-considered)
+ *  12. LiveRegexTester (.sample-tester)
+ *  13. TraceFooter (.trace-footer)
+ *
+ * Every accent expression composes Blok semantic tokens via
+ * color-mix(in oklch, var(--<token>) <pct>%, transparent). No invented hex.
+ * All motion respects prefers-reduced-motion.
+ * ============================================================================ */
+
+/* ============================================================================
+ * 1. Workspace-level Manage / Test tab control (Area 1)
+ * ========================================================================== */
+
+.fp-workspace-tabs {
+  margin: 1rem 1.5rem 0;
+  display: flex;
+  align-items: center;
+}
+
+.fp-tabs {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.375rem;
+  background: color-mix(in oklch, var(--card) 80%, transparent);
+  backdrop-filter: blur(12px) saturate(1.4);
+  -webkit-backdrop-filter: blur(12px) saturate(1.4);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+
+.fp-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  height: 2.125rem;
+  padding: 0 1rem;
+  border: 0;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 200ms var(--v4-premium-ease),
+    color 200ms var(--v4-premium-ease);
+}
+
+.fp-tab:hover {
+  background: color-mix(in oklch, var(--primary) 6%, transparent);
+  color: var(--foreground);
+}
+
+.fp-tab[aria-selected="true"] {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.fp-tab[aria-selected="true"]:hover {
+  background: var(--primary);
+}
+
+.fp-tab-dot {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.5rem;
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--primary) 25%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fp-tab,
+  .fp-tab:hover {
+    transition: none;
+  }
+}
+
+/* ============================================================================
+ * 2. TestSurface + TestToolbar (Area 2 — top of Test panel)
+ * ========================================================================== */
+
+.test-surface {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 0 1.5rem 2rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.test-toolbar {
+  display: flex;
+  align-items: end;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding: 1rem 1.25rem;
+  background: color-mix(in oklch, var(--card) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.test-toolbar__url-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1 1 22rem;
+  min-width: 0;
+}
+
+.test-toolbar__label {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--foreground);
+}
+
+.test-toolbar__url {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  height: 2.375rem;
+}
+
+.test-toolbar__prefill {
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.test-toolbar__prefill .link-button {
+  background: none;
+  border: 0;
+  color: var(--primary);
+  font-family: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.test-toolbar__locale-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 0 0 9rem;
+}
+
+.test-toolbar__locale {
+  height: 2.375rem;
+}
+
+.test-toolbar__submit {
+  height: 2.625rem;
+  min-width: 6rem;
+  align-self: end;
+}
+
+@media (max-width: 640px) {
+  .test-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .test-toolbar__url-block,
+  .test-toolbar__locale-block {
+    flex: 1 1 100%;
+  }
+}
+
+/* ============================================================================
+ * 3. TraceCardStack + TraceCard variants
+ * ========================================================================== */
+
+.trace-card-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 880px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 0.25rem;
+}
+
+.test-card {
+  position: relative;
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  border-left-color: var(--muted-foreground);
+  border-radius: var(--radius-lg);
+  padding: 0.875rem 1rem;
+  transition:
+    border-color 220ms var(--v4-premium-ease),
+    box-shadow 220ms var(--v4-premium-ease);
+  /* stagger reveal target — entry state */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.test-card.is-revealing {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.test-card.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.test-card:hover {
+  border-color: color-mix(in oklch, var(--primary) 30%, var(--border));
+  box-shadow: 0 8px 24px color-mix(in oklch, var(--primary) 8%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .test-card,
+  .test-card:hover,
+  .test-card.is-revealing,
+  .test-card.is-revealed {
+    transition: none;
+    transform: none;
+    opacity: 1;
+    box-shadow: none;
+  }
+}
+
+/* Left-border accent tints per stage kind */
+.test-card--primary { border-left-color: var(--primary); }
+.test-card--info { border-left-color: var(--info); }
+.test-card--success { border-left-color: var(--success); }
+.test-card--warning { border-left-color: var(--warning); }
+.test-card--muted { border-left-color: var(--muted-foreground); }
+.test-card--destructive { border-left-color: var(--destructive); }
+
+.test-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.test-card__num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  height: 1.25rem;
+  padding: 0 0.4375rem;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  color: var(--muted-foreground);
+  background: var(--muted);
+  border-radius: var(--radius-sm);
+  letter-spacing: -0.02em;
+}
+
+.test-card__title {
+  font-weight: 600;
+  color: var(--foreground);
+  font-size: var(--text-sm);
+}
+
+.test-card__sublabel {
+  color: var(--muted-foreground);
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  margin-left: 0.125rem;
+}
+
+.test-card__outcome {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+.test-card__outcome--match { color: var(--primary); }
+.test-card__outcome--warning { color: var(--warning-foreground); }
+.test-card__outcome--destructive { color: var(--destructive-foreground); }
+
+.test-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.test-card__body pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  background: var(--muted);
+  border-radius: var(--radius-md);
+  padding: 0.625rem 0.75rem;
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--foreground);
+  line-height: 1.55;
+}
+
+.test-card__body .kv-row {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.test-card__body .kv-key {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.test-card__body .kv-val {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--foreground);
+  word-break: break-all;
+}
+
+.test-card__body .kv-val--muted {
+  color: var(--muted-foreground);
+}
+
+.test-card__body .kv-val .arrow {
+  color: var(--primary);
+  padding: 0 0.25rem;
+}
+
+.test-card__note {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.test-card__note--warning {
+  color: var(--warning-foreground);
+}
+
+/* Trace card skeleton */
+.test-card--skeleton {
+  padding: 0.875rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.test-card--skeleton .blok-skeleton {
+  height: 0.875rem;
+}
+.test-card--skeleton .blok-skeleton.head { height: 1rem; width: 40%; }
+.test-card--skeleton .blok-skeleton.line-1 { width: 75%; }
+.test-card--skeleton .blok-skeleton.line-2 { width: 60%; height: 2.25rem; border-radius: var(--radius-md); }
+
+/* ============================================================================
+ * 4. ResultCard — visually dominant final card
+ * ========================================================================== */
+
+.test-card--result {
+  background: color-mix(in oklch, var(--card) 92%, var(--primary) 8%);
+  border: 1px solid color-mix(in oklch, var(--primary) 40%, var(--border));
+  border-left-width: 1px;
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.375rem;
+  box-shadow:
+    0 1px 2px color-mix(in oklch, var(--primary) 18%, transparent),
+    0 14px 36px color-mix(in oklch, var(--primary) 12%, transparent);
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.test-card--result.test-card--unmatched {
+  background: color-mix(in oklch, var(--card) 96%, var(--muted) 4%);
+  border-color: var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.test-card--result.test-card--diagnostic-incomplete {
+  background: color-mix(in oklch, var(--card) 92%, var(--warning) 8%);
+  border-color: color-mix(in oklch, var(--warning) 40%, var(--border));
+  box-shadow:
+    0 1px 2px color-mix(in oklch, var(--warning) 18%, transparent),
+    0 14px 36px color-mix(in oklch, var(--warning) 12%, transparent);
+}
+
+.test-card--result .result-header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.test-card--result .result-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--primary) 18%, transparent);
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.test-card--unmatched .result-glyph {
+  background: color-mix(in oklch, var(--muted-foreground) 15%, transparent);
+  color: var(--muted-foreground);
+}
+
+.test-card--diagnostic-incomplete .result-glyph {
+  background: color-mix(in oklch, var(--warning) 18%, transparent);
+  color: var(--warning);
+}
+
+.test-card--result .result-title {
+  margin: 0;
+  font-size: var(--text-xl);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--foreground);
+}
+
+.test-card--result .result-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.test-card--result .result-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.test-card--result .result-cta {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.25rem;
+}
+
+/* ============================================================================
+ * 5. TestEmptyState — pre-first-run hero
+ * ========================================================================== */
+
+.test-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 32rem;
+  margin: 2.5rem auto 1rem;
+  padding: 2.5rem 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.test-empty__illustration {
+  width: 9rem;
+  height: 5.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted-foreground);
+}
+
+.test-empty__illustration .accent {
+  stroke: var(--primary);
+}
+
+.test-empty__title {
+  margin: 0;
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.test-empty__body {
+  margin: 0;
+  color: var(--muted-foreground);
+  font-size: var(--text-base);
+  line-height: 1.55;
+  max-width: 26rem;
+}
+
+.test-empty__cta {
+  margin-top: 0.5rem;
+}
+
+/* ============================================================================
+ * 6. RowEditForm + mode toggle (Area 3)
+ * ========================================================================== */
+
+.row-edit-form {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  max-width: 720px;
+  margin: 1.5rem auto;
+}
+
+.row-edit-form__hd {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 0.25rem;
+}
+
+.row-edit-form__hd h2 {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.row-edit-form__hd-sub {
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+}
+
+/* Full-width segmented mode toggle (line-variant @blok/tabs override) */
+.row-edit-form__mode {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+
+.mode-toggle__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  height: 2.25rem;
+  border: 0;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  transition: color 180ms var(--v4-premium-ease);
+}
+
+.mode-toggle__btn:hover {
+  color: var(--foreground);
+}
+
+.mode-toggle__btn[aria-selected="true"] {
+  color: var(--foreground);
+  border-bottom-color: var(--primary);
+  font-weight: 600;
+}
+
+.mode-toggle__btn[aria-selected="true"] .glyph {
+  color: var(--primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mode-toggle__btn,
+  .mode-toggle__btn:hover {
+    transition: none;
+  }
+}
+
+.row-edit-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.row-edit-form__source,
+.row-edit-form__target {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  height: 2.375rem;
+}
+
+.row-edit-form__source[aria-invalid="true"] {
+  border-color: var(--destructive);
+  box-shadow: 0 0 0 1px color-mix(in oklch, var(--destructive) 40%, transparent);
+}
+
+.row-edit-form__type-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.row-edit-form__type-block {
+  flex: 0 0 10rem;
+}
+
+.row-edit-form__flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.875rem;
+  padding: 0.5rem 0;
+}
+
+.row-edit-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+  margin-top: 0.25rem;
+}
+
+/* ============================================================================
+ * 7. SnippetLibrary + SnippetPill
+ * ========================================================================== */
+
+.snippet-lib {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  background: color-mix(in oklch, var(--muted) 30%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.snippet-lib__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0.5rem 0.75rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--foreground);
+  text-align: left;
+}
+
+.snippet-lib__pm-flag {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.snippet-lib__chevron {
+  display: inline-flex;
+  color: var(--muted-foreground);
+  transition: transform 180ms var(--v4-premium-ease);
+}
+
+.snippet-lib[data-open="true"] .snippet-lib__chevron {
+  transform: rotate(180deg);
+}
+
+.snippet-lib__body {
+  padding: 0 0.75rem 0.75rem;
+}
+
+.snippet-lib[data-open="false"] .snippet-lib__body {
+  display: none;
+}
+
+.snippet-lib__pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.snippet-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.375rem 0.625rem;
+  border: 1px solid var(--border);
+  background: color-mix(in oklch, var(--card) 92%, var(--primary) 8%);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  color: var(--foreground);
+  cursor: pointer;
+  transition:
+    border-color 180ms var(--v4-premium-ease),
+    background 180ms var(--v4-premium-ease),
+    transform 180ms var(--v4-premium-ease);
+}
+
+.snippet-pill:hover {
+  border-color: color-mix(in oklch, var(--primary) 50%, var(--border));
+  background: color-mix(in oklch, var(--card) 80%, var(--primary) 20%);
+  transform: translateY(-1px);
+}
+
+.snippet-pill:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.snippet-pill__pattern {
+  font-family: var(--font-mono);
+  color: var(--primary);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.snippet-pill__label {
+  color: var(--muted-foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .snippet-pill,
+  .snippet-pill:hover {
+    transform: none;
+    transition: none;
+  }
+  .snippet-lib__chevron,
+  .snippet-lib[data-open="true"] .snippet-lib__chevron {
+    transition: none;
+  }
+}
+
+/* ============================================================================
+ * 8. CaptureGroupChipStrip
+ * ========================================================================== */
+
+.capture-chip-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-top: 0.5rem;
+  align-items: center;
+}
+
+.capture-chip-strip__label {
+  font-size: var(--text-2xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  margin-right: 0.25rem;
+}
+
+.capture-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid color-mix(in oklch, var(--primary) 30%, var(--border));
+  background: color-mix(in oklch, var(--primary) 6%, transparent);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-2xs);
+  color: var(--primary);
+  cursor: pointer;
+  transition:
+    border-color 180ms var(--v4-premium-ease),
+    background 180ms var(--v4-premium-ease),
+    transform 180ms var(--v4-premium-ease);
+}
+
+.capture-chip:hover {
+  border-color: var(--primary);
+  background: color-mix(in oklch, var(--primary) 12%, transparent);
+  transform: translateY(-1px);
+}
+
+.capture-chip:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.capture-chip__token {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.capture-chip__helper {
+  color: var(--muted-foreground);
+  font-weight: 400;
+  font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .capture-chip,
+  .capture-chip:hover {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================================
+ * 9. InlineHint (mode-mismatch advisory)
+ * ========================================================================== */
+
+.inline-hint {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  margin: 0.375rem 0 0;
+  border-radius: var(--radius-md);
+  background: color-mix(in oklch, var(--muted) 90%, transparent);
+  border: 1px solid var(--border);
+  color: var(--muted-foreground);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+.inline-hint__glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1rem;
+  height: 1rem;
+  color: var(--muted-foreground);
+  flex-shrink: 0;
+}
+
+.inline-hint__body {
+  flex: 1;
+}
+
+.inline-hint__action {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--primary);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  flex-shrink: 0;
+}
+
+.inline-hint__action:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================================
+ * 10. SaveErrorMessage
+ * ========================================================================== */
+
+.save-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.625rem 0.75rem;
+  margin-top: 0.375rem;
+  border-radius: var(--radius-md);
+  background: var(--destructive-background);
+  border: 1px solid color-mix(in oklch, var(--destructive) 30%, transparent);
+  color: var(--destructive-foreground);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+.save-error__glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--destructive);
+  flex-shrink: 0;
+  margin-top: 0.0625rem;
+}
+
+.save-error__body {
+  flex: 1;
+}
+
+.save-error__title {
+  display: block;
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--destructive-foreground);
+  margin-bottom: 0.125rem;
+}
+
+.save-error__detail {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--destructive-foreground);
+  word-break: break-word;
+}
+
+.save-error__caveat {
+  margin: 0.375rem 0 0;
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+}
+
+/* ============================================================================
+ * 11. RowsConsidered card (no-match summary)
+ * ========================================================================== */
+
+.rows-considered {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  border-left-color: var(--muted-foreground);
+  border-radius: var(--radius-lg);
+  padding: 0.875rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rows-considered__head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.rows-considered__count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+}
+
+.rows-considered__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rows-considered__row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.4375rem 0.625rem;
+  background: color-mix(in oklch, var(--muted) 50%, transparent);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--foreground);
+  line-height: 1.5;
+}
+
+.rows-considered__row .row-ref {
+  color: var(--muted-foreground);
+  white-space: nowrap;
+}
+
+.rows-considered__row .row-pattern {
+  color: var(--foreground);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.rows-considered__row .row-outcome {
+  color: var(--muted-foreground);
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+}
+
+.rows-considered__expand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.625rem;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--foreground);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  cursor: pointer;
+  align-self: flex-start;
+  transition:
+    border-color 180ms var(--v4-premium-ease),
+    background 180ms var(--v4-premium-ease);
+}
+
+.rows-considered__expand:hover {
+  border-color: color-mix(in oklch, var(--primary) 40%, var(--border));
+  background: color-mix(in oklch, var(--primary) 6%, transparent);
+}
+
+.rows-considered__footer {
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  padding: 0.25rem 0.625rem;
+}
+
+/* ============================================================================
+ * 12. LiveRegexTester (sample URL subform)
+ * ========================================================================== */
+
+.sample-tester {
+  background: color-mix(in oklch, var(--muted) 30%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sample-tester__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.sample-tester__title {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.sample-tester__input {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.sample-tester__result {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  padding: 0.4375rem 0.625rem;
+  background: color-mix(in oklch, var(--success) 8%, transparent);
+  border: 1px solid color-mix(in oklch, var(--success) 24%, transparent);
+  border-radius: var(--radius-sm);
+  color: var(--success-foreground);
+}
+
+.sample-tester__result-glyph {
+  display: inline-flex;
+  color: var(--success);
+}
+
+.sample-tester__result--no-match {
+  background: color-mix(in oklch, var(--muted) 60%, transparent);
+  border-color: var(--border);
+  color: var(--muted-foreground);
+}
+
+.sample-tester__toggle {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background: none;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-md);
+  padding: 0.375rem 0.625rem;
+  color: var(--muted-foreground);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  transition:
+    border-color 180ms var(--v4-premium-ease),
+    color 180ms var(--v4-premium-ease);
+}
+
+.sample-tester__toggle:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* ============================================================================
+ * 13. TraceFooter (resolved-in-Xms + Copy as JSON)
+ * ========================================================================== */
+
+.trace-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  max-width: 880px;
+  margin: 0.5rem auto 0;
+  padding: 0.75rem 1rem;
+  background: color-mix(in oklch, var(--muted) 30%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.trace-footer__meta {
+  font-size: var(--text-xs);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================================
+ * Misc — http-code chip override (carry from surfaces.css) +
+ *        small monochrome dot glyph for outcomes
+ * ========================================================================== */
+
+.outcome-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* In-context tab-content area inside the Manage / Test surfaces */
+.fp-tabpanel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+/* Subdued explanatory paragraph above the trace stack */
+.test-surface__intro {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0.25rem 0 0;
+  color: var(--muted-foreground);
+  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ============================================================================
+ * AMENDMENT 2026-05-20 — EditRowModal + two-column Test + ScopePicker
+ *
+ * Adds:
+ *   14. .edit-row-modal + .edit-row-modal-overlay (Blok dialog overlay
+ *       opened on row click; replaces standalone row-edit page chrome)
+ *   15. .test-surface-twocol grid (360px sticky left rail + flex-1 right)
+ *   16. .test-rail (the sticky rail container)
+ *   17. .scope-picker (vertical stack of three @blok/select instances)
+ *       with skeleton + error + cascading-disabled states
+ *   18. Mobile <768px stacking + scope-picker-as-accordion
+ *
+ * Token discipline preserved: zero invented hex; everything composes via
+ * color-mix(in oklch, var(--<blok-token>) <pct>%, transparent).
+ * ========================================================================== */
+
+/* ----- 14. EditRowModal overlay ----- */
+
+.edit-row-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: color-mix(in oklch, var(--foreground) 35%, transparent);
+  backdrop-filter: blur(4px) saturate(1.1);
+  -webkit-backdrop-filter: blur(4px) saturate(1.1);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.edit-row-modal {
+  position: relative;
+  max-width: 720px;
+  width: 92vw;
+  max-height: 88vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    0 1px 2px color-mix(in oklch, var(--foreground) 6%, transparent),
+    0 24px 60px color-mix(in oklch, var(--foreground) 18%, transparent);
+  overflow: hidden;
+  z-index: 41;
+}
+
+.edit-row-modal__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem 0.625rem;
+}
+
+.edit-row-modal__title-block { display: flex; flex-direction: column; gap: 0.125rem; }
+
+.edit-row-modal__title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--foreground);
+}
+
+.edit-row-modal__sub {
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+}
+
+.edit-row-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  background: transparent;
+  border: 0;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 180ms var(--v4-premium-ease), color 180ms var(--v4-premium-ease);
+}
+
+.edit-row-modal__close:hover {
+  background: color-mix(in oklch, var(--muted) 60%, transparent);
+  color: var(--foreground);
+}
+
+.edit-row-modal__close:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.edit-row-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 0.25rem 1.25rem 1.25rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.edit-row-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.875rem 1.25rem;
+  border-top: 1px solid var(--border);
+  background: color-mix(in oklch, var(--card) 96%, var(--muted) 4%);
+}
+
+/* Dim the underlying Manage shell while a modal is open (POC visual aid) */
+.fp-shell--dimmed {
+  filter: blur(2px) saturate(0.92);
+  opacity: 0.62;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 640px) {
+  .edit-row-modal-overlay {
+    padding: 0;
+    align-items: stretch;
+  }
+  .edit-row-modal {
+    max-width: 100vw;
+    width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .edit-row-modal-overlay,
+  .edit-row-modal,
+  .edit-row-modal__close,
+  .edit-row-modal__close:hover {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* The row-edit-form inside the modal uses existing .row-edit-form__* utilities
+ * but loses its outer card chrome (the modal IS the card). */
+.edit-row-modal .row-edit-form {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  max-width: none;
+  box-shadow: none;
+}
+
+.edit-row-modal .row-edit-form__hd { display: none; /* modal header replaces */ }
+.edit-row-modal .row-edit-form__actions { display: none; /* modal footer replaces */ }
+
+/* ----- 15. Two-column Test surface grid ----- */
+
+.test-surface-twocol {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 1.25rem;
+  padding: 0 1.5rem 2rem;
+  align-items: start;
+  min-width: 0;
+}
+
+.test-surface-twocol .trace-card-stack {
+  max-width: 880px;
+  margin: 0;
+}
+
+.test-surface-twocol .test-surface__intro {
+  margin: 0;
+  padding-bottom: 0.25rem;
+}
+
+.test-surface-twocol .trace-footer {
+  margin: 0.5rem 0 0;
+}
+
+.test-surface-twocol .test-empty {
+  margin: 0;
+  max-width: none;
+}
+
+@media (max-width: 1279.98px) {
+  .test-surface-twocol { grid-template-columns: 320px 1fr; }
+}
+
+@media (max-width: 959.98px) {
+  .test-surface-twocol { grid-template-columns: 300px 1fr; }
+}
+
+/* ----- 16. .test-rail (sticky left rail) ----- */
+
+.test-rail {
+  position: sticky;
+  top: 1rem;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  padding: 1rem 1.125rem 1.125rem;
+  background: color-mix(in oklch, var(--card) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  max-height: calc(100vh - 2rem);
+  overflow-y: auto;
+}
+
+.test-rail__hd {
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted-foreground);
+  margin: 0;
+  font-family: var(--font-mono);
+}
+
+.test-rail__stale {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.5rem 0.625rem;
+  background: color-mix(in oklch, var(--info) 8%, var(--card));
+  border: 1px solid color-mix(in oklch, var(--info) 30%, var(--border));
+  border-radius: var(--radius-md);
+  font-size: var(--text-2xs);
+  color: var(--foreground);
+  line-height: 1.45;
+}
+
+.test-rail__stale .glyph { color: var(--info); flex-shrink: 0; margin-top: 0.0625rem; }
+
+.test-rail__sep {
+  height: 1px;
+  background: var(--border);
+  border: 0;
+  margin: 0.125rem 0;
+}
+
+.test-rail__url-block,
+.test-rail__locale-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.test-rail__url { font-family: var(--font-mono); font-size: var(--text-sm); height: 2.375rem; }
+.test-rail__locale { height: 2.375rem; }
+
+.test-rail__submit {
+  width: 100%;
+  margin-top: 0.25rem;
+  height: 2.625rem;
+}
+
+.test-rail__submit[aria-disabled="true"],
+.test-rail__submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.test-rail__submit-helper {
+  margin: 0.25rem 0 0;
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  line-height: 1.4;
+}
+
+/* ----- 17. .scope-picker ----- */
+
+.scope-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.scope-picker__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.scope-picker__label {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--foreground);
+  display: flex;
+  align-items: baseline;
+  gap: 0.375rem;
+}
+
+.scope-picker__label-helper {
+  font-size: var(--text-2xs);
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-weight: 400;
+}
+
+.scope-picker__select {
+  height: 2.375rem;
+  width: 100%;
+}
+
+.scope-picker__select[aria-disabled="true"],
+.scope-picker__select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  color: var(--muted-foreground);
+}
+
+.scope-picker__select[data-state="loading"] { pointer-events: none; }
+
+/* Skeleton trigger (replaces the live select while loading) */
+.scope-picker__skel {
+  height: 2.375rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--muted) 60%, transparent) 0%,
+    color-mix(in oklch, var(--muted) 85%, transparent) 50%,
+    color-mix(in oklch, var(--muted) 60%, transparent) 100%
+  );
+  background-size: 200% 100%;
+  animation: scope-skel-shimmer 1.4s ease-in-out infinite;
+  border: 1px solid var(--border);
+}
+
+@keyframes scope-skel-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.scope-picker__error {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4375rem 0.625rem;
+  background: var(--destructive-background);
+  border: 1px solid color-mix(in oklch, var(--destructive) 30%, transparent);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-2xs);
+  color: var(--destructive-foreground);
+  line-height: 1.4;
+}
+
+.scope-picker__error-text { flex: 1; }
+
+.scope-picker__retry {
+  background: transparent;
+  border: 1px solid color-mix(in oklch, var(--destructive) 40%, transparent);
+  color: var(--destructive-foreground);
+  padding: 0.1875rem 0.5rem;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-2xs);
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: background 180ms var(--v4-premium-ease);
+}
+
+.scope-picker__retry:hover {
+  background: color-mix(in oklch, var(--destructive) 12%, transparent);
+}
+
+.scope-picker__retry:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Multi-select chips strip (Maps multiselect) */
+.scope-picker__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+.scope-picker__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1875rem 0.4375rem;
+  background: color-mix(in oklch, var(--primary) 8%, transparent);
+  border: 1px solid color-mix(in oklch, var(--primary) 25%, var(--border));
+  border-radius: var(--radius-sm);
+  font-size: var(--text-2xs);
+  color: var(--primary);
+  font-family: var(--font-mono);
+}
+
+.scope-picker__chip-remove {
+  background: none;
+  border: 0;
+  padding: 0;
+  display: inline-flex;
+  color: var(--primary);
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.scope-picker__chip-remove:hover { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scope-picker__skel { animation: none; }
+  .scope-picker__retry { transition: none; }
+}
+
+/* ----- 18. Mobile <768px: stack columns + scope-picker accordion ----- */
+
+@media (max-width: 767.98px) {
+  .test-surface-twocol {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 0 1rem 2rem;
+  }
+  .test-rail {
+    position: static;
+    max-height: none;
+    padding: 0.75rem 0.875rem;
+  }
+  .test-rail[data-mode="accordion"] {
+    padding: 0;
+    overflow: visible;
+  }
+  .test-rail[data-mode="accordion"] .test-rail__accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 0.875rem;
+    background: none;
+    border: 0;
+    text-align: left;
+    color: var(--foreground);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .test-rail[data-mode="accordion"][data-collapsed="true"] .test-rail__body {
+    display: none;
+  }
+  .test-rail[data-mode="accordion"] .test-rail__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    padding: 0 0.875rem 0.875rem;
+  }
+  .test-rail__accordion-summary {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    color: var(--muted-foreground);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 60%;
+  }
+}
+
+/* ============================================================================
+ * AMENDMENT 2026-05-22 — PRD-005 "Quiet Diagnostic"
+ *
+ * Adds the upstream-drift surface inside the existing Test tab:
+ *   19. .drift-check-divider          — hairline rail separator
+ *   20. .drift-check-btn              — secondary "Check upstream" rail button
+ *   21. .drift-status                 — inline status block (in-sync / error)
+ *   22. .drift-banner                 — muted informational banner above trace
+ *
+ * Direction: chrome-neutral, muted-foreground. NO new visual identity, NO red
+ * borders, NO exclamation iconography. The whole surface reads as
+ * "informational instrumentation," not alarm.
+ *
+ * Token discipline: every color/background composes existing Blok semantic
+ * tokens (--muted, --muted-foreground, --border, --card, --primary,
+ * --success, --ring, --radius-md) via color-mix(in oklch, …). Zero invented
+ * hex. Reduced-motion short-circuits all animation.
+ * ========================================================================== */
+
+/* ----- 19. Hairline divider between Test button and Check-upstream button ----- */
+
+.drift-check-divider {
+  height: 1px;
+  background: var(--border);
+  border: 0;
+  margin: 0.25rem 0 0;
+}
+
+/* ----- 20. .drift-check-btn — secondary "Check upstream" rail button ----- */
+
+.drift-check-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4375rem;
+  height: 2.375rem;
+  padding: 0 0.875rem;
+  background: color-mix(in oklch, var(--card) 90%, transparent);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 180ms var(--v4-premium-ease),
+    border-color 180ms var(--v4-premium-ease),
+    color 180ms var(--v4-premium-ease);
+}
+
+.drift-check-btn:hover {
+  background: color-mix(in oklch, var(--muted) 80%, transparent);
+  border-color: color-mix(in oklch, var(--foreground) 14%, var(--border));
+}
+
+.drift-check-btn:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.drift-check-btn[aria-busy="true"],
+.drift-check-btn[disabled],
+.drift-check-btn[aria-disabled="true"] {
+  opacity: 0.7;
+  cursor: progress;
+  pointer-events: none;
+}
+
+.drift-check-btn .glyph svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Spinning glyph during checking state */
+.prd005-spin {
+  animation: prd005-spin 900ms linear infinite;
+  transform-origin: 50% 50%;
+}
+
+@keyframes prd005-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drift-check-btn,
+  .drift-check-btn:hover {
+    transition: none;
+  }
+  .prd005-spin {
+    animation: none;
+  }
+}
+
+/* ----- 21. .drift-status — inline status block under the Check button ----- */
+
+.drift-status {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4375rem;
+  margin-top: 0.5rem;
+  font-size: var(--text-xs);
+  line-height: 1.45;
+  color: var(--muted-foreground);
+  min-height: 1rem;
+}
+
+.drift-status__glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.0625rem;
+  color: var(--muted-foreground);
+}
+
+.drift-status__glyph svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* In-sync glyph adopts success tone (--success token, muted enough not to alarm) */
+.drift-status--in-sync .drift-status__glyph {
+  color: var(--success);
+}
+
+/* Error glyph uses warning tone (revised 2026-05-26 — operator wanted error states
+ * more obvious than the baseline muted; one step less severe than drift's
+ * destructive red, because errors are recoverable via retry). */
+.drift-status--error .drift-status__glyph {
+  color: var(--warning);
+}
+.drift-status--error .drift-status__primary {
+  color: var(--warning-foreground);
+}
+
+.drift-status__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.drift-status__primary {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.drift-status__primary--muted {
+  color: var(--muted-foreground);
+  font-weight: 400;
+}
+
+.drift-status__secondary {
+  display: block;
+  color: var(--muted-foreground);
+  font-size: var(--text-2xs);
+  margin-top: 0.125rem;
+}
+
+.drift-status__time {
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Retry button (outline, small) for network errors */
+.drift-status__retry {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3125rem;
+  height: 1.75rem;
+  padding: 0 0.625rem;
+  margin-top: 0.375rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--foreground);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 180ms var(--v4-premium-ease),
+    border-color 180ms var(--v4-premium-ease);
+}
+
+.drift-status__retry:hover {
+  background: color-mix(in oklch, var(--muted) 70%, transparent);
+  border-color: color-mix(in oklch, var(--foreground) 14%, var(--border));
+}
+
+.drift-status__retry:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.drift-status__retry[aria-disabled="true"],
+.drift-status__retry[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.drift-status__retry .glyph svg {
+  width: 12px;
+  height: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drift-status__retry,
+  .drift-status__retry:hover {
+    transition: none;
+  }
+}
+
+/* ----- 22. .drift-banner — drift signal above the trace area (REVISED 2026-05-26) ----- */
+/*
+ * Revised per operator feedback 2026-05-26 — "error like not in sync should be
+ * more obvious with a red tone". Drift state ESCALATED from muted-informational
+ * to destructive-tinted to give it visual weight without becoming an alert.
+ *
+ * Composed from primitives (rejecting @blok/alert for layout consistency). The banner is:
+ *   - destructive-background tint + foreground text (legible on both light + dark)
+ *   - 2px left accent border in --destructive tone
+ *   - Lucide AlertTriangle glyph (replaces Info) in --destructive color
+ *   - radius-md, padding space-3 equivalent (0.75rem)
+ *   - role="status" aria-live="polite" PRESERVED — tone change is presentational,
+ *     drift remains an informational signal (NOT role="alert"; operator can still
+ *     dismiss + continue Test-tab interaction without resolving)
+ *   - dismiss X is a ghost icon-button, keyboard-reachable in tab order
+ *
+ * Inline error sub-states (.drift-status--error) use the WARNING (amber) tone —
+ * one step less severe than drift, because errors are recoverable via retry
+ * while drift requires a real fix.
+ */
+
+.drift-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  margin: 0 0 0.875rem;
+  padding: 0.75rem 0.875rem;
+  background: color-mix(in oklch, var(--destructive-background) 75%, transparent);
+  color: var(--foreground);
+  border: 1px solid color-mix(in oklch, var(--destructive) 30%, var(--border));
+  border-left-width: 2px;
+  border-left-color: var(--destructive);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+.drift-banner__glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 0.0625rem;
+  color: var(--destructive);
+}
+
+.drift-banner__glyph svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 1.75;
+}
+
+.drift-banner__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.drift-banner__body code {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  background: color-mix(in oklch, var(--card) 80%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.0625rem 0.3125rem;
+  color: var(--foreground);
+}
+
+.drift-banner__meta {
+  display: block;
+  color: var(--muted-foreground);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  margin-top: 0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.drift-banner__dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.625rem;
+  height: 1.625rem;
+  margin: -0.1875rem -0.1875rem -0.1875rem 0;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-sm);
+  color: var(--muted-foreground);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background-color 180ms var(--v4-premium-ease),
+    color 180ms var(--v4-premium-ease);
+}
+
+.drift-banner__dismiss:hover {
+  background: color-mix(in oklch, var(--foreground) 8%, transparent);
+  color: var(--foreground);
+}
+
+.drift-banner__dismiss:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.drift-banner__dismiss .glyph svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Touch-target ≥ 44px on mobile per the spec */
+@media (max-width: 767.98px) {
+  .drift-banner__dismiss {
+    width: 2.75rem;
+    height: 2.75rem;
+    margin: -0.5rem -0.375rem -0.5rem 0;
+  }
+  .drift-banner__dismiss .glyph svg {
+    width: 16px;
+    height: 16px;
+  }
+  .drift-banner__meta {
+    /* truncate the relative-time tail at very narrow widths */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drift-banner__dismiss,
+  .drift-banner__dismiss:hover {
+    transition: none;
+  }
+}
