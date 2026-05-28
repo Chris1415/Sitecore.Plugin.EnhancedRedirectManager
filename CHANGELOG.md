@@ -4,6 +4,65 @@ All notable changes to Redirect Manager are recorded here. Entries are derived f
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) loosely; releases are tracked per PRD rather than by semantic version while the product is pre-1.0.
 
+## [PRD-005] — Upstream drift detection + AI re-sync — 2026-05-28
+
+**Ship status:** shipped_with_caveats
+
+PRD-005 closes the parity contract introduced by PRD-004 over time. The Test tab gains a **"Check upstream"** affordance (right column "Upstream parity" section, peer to the Test button) that fetches the latest commit SHA per ported file from the GitHub commits API on Sitecore/content-sdk `dev` and compares against a new committed baseline at `site/lib/redirects/__fixtures__/upstream-snapshot.json`. When the simulator is current, an inline success status renders (`✓ In sync with upstream dev (checked Nm ago)`). When upstream has moved, a **destructive-tinted banner with `AlertTriangle` glyph** appears above the trace area: *"Upstream `RedirectsProxy` has changed since this simulator was ported. Trace may be subtly inaccurate. Ask your engineer to run `/sync-redirect-proxy` to update. (Last sync: <date>)"*. Error sub-states (rate-limit, not-found, network/5xx) render with warning-amber tone and contextual retry behavior. `role="status"` semantics preserved across all tones (presentational change only; banner is informational, not alarming).
+
+The dev-time **`/sync-redirect-proxy` Claude Code slash command** lives in the product repo's `.claude/commands/` — when drift is signalled, an engineer runs it locally inside Claude Code, the command fetches latest upstream, proposes a verbatim re-port patch via Claude Code's edit flow, regenerates fixtures via the existing AST extractor (ADR-0042), runs `npm test -- proxy-simulator`, and on accept auto-bumps the snapshot SHA. Atomic state transitions: SHA only updates after fixtures regenerate AND tests pass; failed-test state leaves simulator + snapshot consistent. No LLM dependency reaches the deployed app — AI resolution is exclusively dev-time.
+
+### Added
+
+- **`site/lib/redirects/__fixtures__/upstream-snapshot.json`** — new committed file. Source of truth for baseline SHAs + retrieval metadata. Shape: `{ schemaVersion: 1, branch: "dev", repository: "Sitecore/content-sdk", originalPort: { branch: "dev", ports: [...] }, watchedFiles: WatchedFile[], knownDivergences: KnownDivergence[] }`. The `originalPort` field preserves PRD-004's `dev`-branch port provenance as an audit anchor.
+- **`site/lib/upstream-drift/` module** — `github-client.ts` (unauthenticated GitHub commits API, discriminated-union response with rate-limit / not-found / network reasons), `snapshot-reader.ts` (static-import + schema validation), `sync-helpers.ts` (`compareSnapshot()` matrix for slash-command logic), `types.ts`.
+- **`site/hooks/use-upstream-drift.ts`** — 5-state machine (idle / checking / in-sync / drifted / error). Sequential per-file fetches (not parallel) per ADR-0049. Reentrancy protection: `recheck()` returns early when `state === 'checking'`. No `useEffect` auto-fetch on mount.
+- **`site/components/full-page/UpstreamDriftBanner.tsx`** — drifted-state banner above the trace area; destructive-tinted background + `AlertTriangle` glyph + dismiss button (writes `sessionStorage['rm-drift-banner-dismissed']='1'`, session-scoped). `role="status"` + `aria-live="polite"`.
+- **"Check upstream" button** in the Test tab right column ("Upstream parity" section after operator UX iteration 2026-05-28) — Lucide `RefreshCw` glyph; spinner during `state === 'checking'`; inline status below for terminal states.
+- **`.claude/commands/sync-redirect-proxy.md`** — dev-time Claude Code slash command. 8-step procedural flow (read snapshot → fetch upstream → diff → propose patch → operator review → regenerate fixtures → run tests → bump SHA). Honors `knownDivergences[]` (the operator escape hatch for deliberate non-ports). Audit log to `.claude/sync-redirect-proxy.log` (gitignored).
+- **Two-column Test-tab toolbar** (operator iteration during live walkthrough 2026-05-28) — `Testing` (URL input + Test button, left, flex-1) and `Upstream parity` (Check button + status, right, 320px) with vertical divider. Below 1024px stacks vertically. The Check upstream affordance now reads as a peer feature, not buried below the Test button.
+- **TraceCardStack `evaluate-row` grid** (operator iteration) — consecutive evaluate-row stages render in an auto-fit grid (`minmax(320px, 1fr)`) instead of stacking vertically. Non-evaluate stages (normalize / candidates / substitute / flag-effects / dispatch) stay single-column for readability.
+- **`tests/setup/inject-blok-nova-vars.ts`** — Vitest setupFiles entry that injects Blok Nova CSS variables into jsdom's `document.documentElement` via `style.setProperty()` so component tests can read tokens via `getComputedStyle().getPropertyValue('--token')`. Closes the M1 finding from /code-review (runtime contrast assertions were vacuous without this).
+- **Structural CSP guard** at `site/__tests__/next-config-csp-guard.test.ts` — asserts `next.config.mjs` introduces no `Content-Security-Policy` directive (ADR-0048).
+
+### Changed
+
+- **`site/lib/redirects/proxy-simulator.ts` header** — data-bearing `dev`-branch SHAs removed from the comment block; header now references `__fixtures__/upstream-snapshot.json` as authoritative. One-line preservation of the original-port commit reference ("Originally ported from Sitecore/content-sdk@dev as of 2026-05-20 — see __fixtures__/upstream-snapshot.json originalPort field for full SHAs."). Simulator algorithm untouched; 100% upstream-fixture parity contract from PRD-004 preserved.
+- **`site/components/full-page/TestSurface.tsx`** — drift hook integration; new "Upstream parity" section in the right column; banner mount above the trace area; inline status block below the Check button. Layout reworked into two columns (operator iteration).
+- **`site/components/full-page/FullPage.tsx`** — dropped `overflow-auto` from the test-panel `<main>` (double-scrollbar fix during operator live walkthrough); Manage tab keeps `overflow-auto` for the detail-pane scrolling pattern.
+- **`site/app/globals.css`** — PRD-005 drift styles block (destructive-tinted banner + warning-toned inline error status + reduced-motion fallbacks).
+- **`site/components/full-page/RedirectMapDetail.tsx`** — mappings table actions column widened `w-[56px]` → `w-[72px]` (operator iteration during live walkthrough — trash icon was clipping at the right edge under `overflow-hidden`).
+
+### Deferred (PRD § 15 Future Opportunities)
+
+- **FO-5.1** Scheduled background drift check (Vercel cron / GitHub Action)
+- **FO-5.2** PAT-based GitHub API auth (higher rate limit)
+- **FO-5.3** Auto-PR opener (`gh pr create`) inside slash command
+- **FO-5.4** `knownDivergences[]` UI surface (currently JSON-only)
+- **FO-5.5** File-hash comparison (less noisy than SHA-only)
+- **FO-5.6** Semantic AST-level diff
+- **FO-5.7** Watch transitive upstream dependencies
+- **FO-5.8** Slash command `--force` mode
+
+### Known limitations
+
+- **Snapshot bump latency** — engineer-side SHA bumps reach the deployed app only after the next Vercel build + deploy. The snapshot is bundled at build time via static import. Slash command output explicitly states this on accept.
+- **GitHub API rate limit (60 req/hr/IP)** — unauthenticated v0 per ADR-0046. On-demand-only traffic profile (no auto-fetch) keeps typical per-operator usage at ~10/hr. Banner shows `retryAfterSeconds` from `X-RateLimit-Reset` on 403.
+- **Tracked branch is `dev`, not `main`** — ADR-0044 was amended at /architect after a live probe found `Sitecore/content-sdk@main` 404s for the watched files (repo default is `dev`). Promote to `main` via single-line snapshot edit (no code change) once Sitecore publishes a `main` branch with the watched files.
+- **`compareSnapshot()` missing-path silent-in-sync** — `sync-helpers.ts:47` treats watched paths not present in the live response as in-sync. Safe for current 2-file watch; documented in /code-review.
+- **`live_walkthrough: pass_with_caveats`** — operator validated drift detection end-to-end on localhost during the same session (forced SHAs=0000 → destructive banner rendered; reverted → in-sync inline status) and applied three rounds of UX iteration in the same PR. The full `/sync-redirect-proxy` end-to-end flow + manual X-click dismiss were not exercised — deferred to first real upstream drift moment.
+- **Host-frame Playwright pixel-diff skipped** — Cloud Portal host URL not supplied this session. Same pattern as PRD-002/003/004 (all shipped with this caveat).
+
+### Stats
+
+- **Tests:** 761 passing across 82 files (+70 vs PRD-004 baseline of 691). +10 GitHub client + 4 snapshot reader + 5 sync helpers + 12 drift hook + 14 banner (incl. 5 jsdom runtime-contrast) + 12 TestSurface integration + 1 CSP structural guard.
+- **Build:** clean — Next 16.1.7 Turbopack, 9 routes.
+- **Lint:** 0 new errors vs PRD-004 baseline (10 pre-existing in gitignored `_upstream-source.ts`).
+- **SDK-contract greps:** clean (0 hits for `client.mutate`, `.data.data`, empty catches) — confirms zero new Sitecore SDK surfaces.
+- **Smoke:** `S1: passed` (T1 baseline GREEN), `S2: passed` (operator drift visual 2026-05-28), `S3: pending` (slash command end-to-end deferred to first real-drift moment), `S4: passed` (operator in-sync visual 2026-05-28), `S5: pending` (manual X-dismiss deferred — component tests cover), `S6: skipped` (no Cloud Portal host URL), `live_walkthrough: pass_with_caveats` (UX iterations applied + validated).
+- **ADRs authored:** 6 (ADR-0044 snapshot JSON authoritative + tracked branch `dev` after amendment; ADR-0045 in-app passive + dev-time slash + two-tier tone after amendment; ADR-0046 GitHub unauth + on-demand; ADR-0047 slash command atomic state + `knownDivergences[]`; ADR-0048 no CSP introduced; ADR-0049 hook 5-state machine + sequential fetches).
+- **Baseline promoted at /architect:** 31 carry-forward ADRs consolidated into `project-planning/baseline.md` (initial promotion; PRD-005 ADRs 0044–0049 excluded as too fresh).
+
 ## [PRD-004] — Regex source mode + Test surface — 2026-05-22
 
 **Ship status:** shipped_with_caveats
@@ -211,7 +270,8 @@ First public release. Three Cloud Portal extension points (Context Panel, Dashbo
 - **PRD-002** — Shipped 2026-05-15. V4 Blok Elevated visual redesign of all three extension-point routes. See [PRD-002] entry above.
 - **PRD-003** — Shipped 2026-05-17. Publish Site wired to SitecoreAI Publishing v1 API with job-status polling and cross-session resume. See [PRD-003] entry above.
 - **PRD-004** — Shipped 2026-05-22 (with caveats). Regex source mode + Test surface; verbatim local port of upstream `RedirectsProxy` with 100% upstream-fixture parity. See [PRD-004] entry above.
-- **PRD-005 — Next up** — Upstream proxy drift detection + AI re-sync. Simulator now has a SHA-stamped baseline and a reproducible extractor (ADR-0042) — drift detection builds on a stable foundation.
-- **Regex authoring polish PRD (FO-11/12/13/14 bundle)** — snippet library + capture-group chips + live sample-URL tester + inline mode-mismatch hint. All four deferred at PRD-004 § 16; reintroduce as one small PRD when operator demand emerges.
+- **PRD-005** — Shipped 2026-05-28 (with caveats). Upstream drift detection in the Test tab + dev-time `/sync-redirect-proxy` slash command. See [PRD-005] entry above.
+- **PRD-006 — Drift automation polish (next candidate)** — scheduled background drift check (FO-5.1, Vercel cron / GitHub Action), PAT auth for higher rate-limit (FO-5.2), auto-PR opener in slash command (FO-5.3). Builds on PRD-005's manual baseline.
+- **Regex authoring polish PRD (FO-11/12/13/14 bundle from PRD-004)** — snippet library + capture-group chips + live sample-URL tester + inline mode-mismatch hint. All four deferred at PRD-004 § 16; reintroduce as one small PRD when operator demand emerges.
 - **PRD candidate** — Data plumbing: wire real data into the PRD-002 visual chassis by flipping `PREVIEW_DATA_ACTIVE` flags (Dashboard Widget hero stats, sparkline, top-destinations, recently-shipped).
 - **Later** — Regex-aware Context Panel matching, concurrent-edit detection, bulk operations, audit log, public Marketplace submission. See PRD-000 § 15 Future Opportunities.

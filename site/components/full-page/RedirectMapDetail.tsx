@@ -420,7 +420,7 @@ const EditableMapDetail = forwardRef<RedirectMapDetailHandle, EditableMapDetailP
                 <div role="columnheader" className="px-3 py-1.5 text-xs font-medium text-muted-foreground">
                   Target
                 </div>
-                <div role="columnheader" className="px-2 py-1.5 text-xs font-medium text-muted-foreground w-[56px]" aria-hidden="true" />
+                <div role="columnheader" className="px-2 py-1.5 text-xs font-medium text-muted-foreground w-[72px]" aria-hidden="true" />
               </div>
 
               {/* Existing rows — click to open EditRowModal (T017) */}
@@ -451,7 +451,7 @@ const EditableMapDetail = forwardRef<RedirectMapDetailHandle, EditableMapDetailP
                   <div role="cell" className="px-3 py-2 font-mono text-xs text-foreground truncate" title={mapping.target}>
                     {mapping.target}
                   </div>
-                  <div role="cell" className="px-2 py-2 flex gap-1 w-[56px] opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
+                  <div role="cell" className="px-2 py-2 flex gap-1 w-[72px] opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity">
                     <Button
                       size="icon-sm"
                       variant="ghost"

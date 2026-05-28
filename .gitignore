@@ -29,3 +29,6 @@ pnpm-debug.log*
 coverage/
 playwright-report/
 test-results/
+
+# PRD-005: /sync-redirect-proxy slash command audit log (local only, per FR-G5)
+.claude/sync-redirect-proxy.log

@@ -456,9 +456,14 @@ export function FullPage({ client, sitecoreContextId }: FullPageProps) {
 
           {/* Main panel — switches on activeTab */}
           {activeTab === "test" ? (
-            /* T030 — TestSurface right-panel (URL input + Test button + trace) */
+            /* T030 — TestSurface right-panel (URL input + Test button + trace).
+               Operator feedback 2026-05-28: dropped `overflow-auto` here — with the
+               new toolbar split + grid trace cards, the inner scroll + page scroll
+               showed a double scrollbar. Let the page scroll naturally for the Test
+               tab; only one scrollbar surfaces. Manage tab keeps `overflow-auto`
+               for the detail-pane scrolling pattern. */
             <main
-              className="fp-main flex-1 overflow-auto flex flex-col"
+              className="fp-main flex-1 flex flex-col"
               id="workspace-test-panel"
               role="tabpanel"
               aria-labelledby="workspace-tab-test"

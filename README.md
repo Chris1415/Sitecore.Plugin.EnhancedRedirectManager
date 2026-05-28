@@ -6,7 +6,7 @@ A Sitecore Marketplace client-side app that gives content authors and site manag
 
 ## Status
 
-Latest: **PRD-004 — shipped_with_caveats** (2026-05-22). Regex source mode + Test surface with a faithful local port of the upstream Content SDK `RedirectsProxy` (100% upstream-fixture parity). See [CHANGELOG.md](CHANGELOG.md) for history.
+Latest: **PRD-005 — shipped_with_caveats** (2026-05-28). On-demand upstream drift detection in the Test tab + dev-time `/sync-redirect-proxy` Claude Code slash command in the product repo. SHA-mismatch check against Sitecore/content-sdk `dev` via unauthenticated GitHub commits API; destructive-tinted banner when upstream moves, success inline confirmation when in-sync. Zero new Sitecore SDK surfaces. See [CHANGELOG.md](CHANGELOG.md) for history.
 
 <p align="center">
   <img src="docs/screenshots/full-page-prd002-general.png" alt="Redirect Manager — Full Page workspace: hero with Last modified line, 5-tile stat strip (Redirects · 301 · 302 · Server Transfer · Conflicts), rail of Redirect Maps, mappings table" width="960" />

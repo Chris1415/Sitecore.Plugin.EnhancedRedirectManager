@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "repository": "Sitecore/content-sdk",
+  "branch": "dev",
+  "originalPort": {
+    "branch": "dev",
+    "ports": [
+      {
+        "path": "packages/nextjs/src/proxy/redirects-proxy.ts",
+        "sha": "30b0db8fe768b83f03fd6b9772b0d3e14711c6b2",
+        "portedAt": "2026-05-20T18:32:24Z"
+      },
+      {
+        "path": "packages/core/src/tools/utils.ts",
+        "sha": "e6153e5e80c2076704cad0876eec3b85ec3a1a9f",
+        "portedAt": "2026-05-20T18:32:24Z"
+      }
+    ]
+  },
+  "watchedFiles": [
+    {
+      "path": "packages/nextjs/src/proxy/redirects-proxy.ts",
+      "sha": "30b0db8fe768b83f03fd6b9772b0d3e14711c6b2",
+      "retrievedAt": "2026-05-22T15:45:00Z",
+      "fileHash": "8c6641538346ce3faf9cb73f480baf0434cde02853b0591a9bb4d70a4d999c0f"
+    },
+    {
+      "path": "packages/core/src/tools/utils.ts",
+      "sha": "e6153e5e80c2076704cad0876eec3b85ec3a1a9f",
+      "retrievedAt": "2026-05-22T15:45:00Z",
+      "fileHash": "3d278d8741c30999e2160d14ea5affeedc4d5c7656d10d69f7d97c9f01c92356"
+    }
+  ],
+  "knownDivergences": []
+}
