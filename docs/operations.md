@@ -55,6 +55,24 @@ The token endpoint, audience, and Publishing base URL (`https://edge-platform.si
 
 ---
 
+## Upstream parity maintenance (PRD-005)
+
+When the Test tab surfaces a drift banner — *"Upstream `RedirectsProxy` has changed since this simulator was ported"* — an engineer needs to resync the local `proxy-simulator.ts` with the latest upstream code from Sitecore/content-sdk `dev`. This is a dev-time task.
+
+### Quick procedure
+
+1. Open Claude Code at the product root (`products/redirect-manager/`).
+2. Run **`/sync-redirect-proxy`** — the slash command lives at [`.claude/commands/sync-redirect-proxy.md`](../.claude/commands/sync-redirect-proxy.md) and is auto-discovered.
+3. Review each proposed patch hunk in the inline edit flow; accept all to proceed.
+4. The command then regenerates `__fixtures__/upstream-cases.json`, runs `npm test -- proxy-simulator`, and on green bumps the SHAs in `__fixtures__/upstream-snapshot.json`.
+5. Commit the three files (`proxy-simulator.ts` + `upstream-snapshot.json` + `upstream-cases.json`) together and push. The in-app baseline picks up the bump on the next Vercel deploy.
+
+If a particular upstream change is one you deliberately do not want to port (rare), record it in the snapshot's `knownDivergences[]` array (`reason` + `function` + `upstreamSha`). The slash command honors that list and skips proposing changes for the named functions.
+
+See README → **Dev-time tools** for the full step-by-step + design rationale (ADR-0044, ADR-0045, ADR-0047).
+
+---
+
 ## Smoke checklists
 
 Before any ship, run the applicable real-tenant smoke checklists. All checklists live under [`site/docs/`](../site/docs/):

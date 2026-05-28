@@ -81,12 +81,37 @@ npm run test         # Vitest single-pass
 npm run test:watch   # Vitest watch mode
 ```
 
+## Dev-time tools
+
+The repo ships with Claude Code slash commands under [`.claude/commands/`](.claude/commands/) — they are auto-discovered when you open Claude Code at the product root. Today there is one:
+
+### `/sync-redirect-proxy`
+
+Resync the local `proxy-simulator.ts` with upstream Sitecore Content SDK `RedirectsProxy` after a drift signal. **Use when** the in-app drift banner on the Test tab says *"Upstream `RedirectsProxy` has changed since this simulator was ported"* — that signal means baseline SHAs in `site/lib/redirects/__fixtures__/upstream-snapshot.json` differ from upstream `dev`.
+
+What it does (procedural Markdown — Claude Code executes it step-by-step):
+
+1. Reads the baseline SHAs from `upstream-snapshot.json`
+2. Fetches latest upstream raw + commit SHA for both watched files (`packages/nextjs/src/proxy/redirects-proxy.ts` + `packages/core/src/tools/utils.ts`)
+3. If SHAs already match → prints "Already in sync" and exits (idempotent)
+4. Otherwise: proposes a **verbatim re-port** patch on `proxy-simulator.ts` via Claude Code's edit flow — you review each hunk inline
+5. On accept: regenerates `__fixtures__/upstream-cases.json` via the committed AST extractor (`npm run extract:upstream-fixtures`)
+6. Runs `npm test -- proxy-simulator` — must be GREEN before SHA bump
+7. On green: bumps the SHAs + `retrievedAt` + `fileHash` in `upstream-snapshot.json`. Atomic state — failed tests leave simulator + snapshot consistent (no half-applied state)
+
+**Commit the resulting diff** (simulator + snapshot + regenerated fixtures together) and push. The in-app baseline picks up the bump on the next deploy. See [ADR-0044](project-planning/ADR/adr-0044-upstream-snapshot-json-authoritative-track-main.md), [ADR-0045](project-planning/ADR/adr-0045-in-app-passive-detection-only-ai-dev-time.md), [ADR-0047](project-planning/ADR/adr-0047-slash-command-atomic-state-transitions-knowndivergences-escape-hatch.md) for the design rationale.
+
+If a particular upstream change is one you deliberately do NOT want to port (rare — e.g. tied to a feature this app doesn't support), record it in the snapshot's `knownDivergences[]` array with `reason` + `upstreamSha` — the slash command honors it and skips proposing changes for that function.
+
 ## Project structure
 
 ```
 products/redirect-manager/
 ├── README.md
 ├── CHANGELOG.md
+├── .claude/
+│   └── commands/
+│       └── sync-redirect-proxy.md  ← dev-time slash command (PRD-005, see "Dev-time tools")
 ├── docs/
 │   ├── architecture.md      ← system narrative + PRD-002/003 additions
 │   ├── decisions.md         ← ADR summary table (ADR-0001 – ADR-0037)
