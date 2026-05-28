@@ -18,11 +18,27 @@ Redirect Manager exposes three Cloud Portal extension points, all backed by Site
 
 - **Context Panel** — inside the Pages editor, lists every redirect affecting the current page (exact source/target match), with inline add / edit / delete.
 - **Dashboard Widget** — at-a-glance tiles (Maps / Mappings / 301 / 302 / Server Transfer / Avg per map / Largest map / Last updated), collision badges, top-destinations bar list, and recently-shipped maps.
-- **Full Page** — virtualized Redirect Map list, full CRUD with drag-reorder, JSON import / export keyed by Sitecore item GUID, conflict resolver, and a real **Publish Site** button wired to the SitecoreAI Publishing v1 API (PRD-003).
+- **Full Page** — Two tabs:
+  - **Manage** — virtualized Redirect Map list, full CRUD via the `EditRowModal` (Pattern / Regex mode toggle + save-time validation per PRD-004), drag-reorder, JSON import / export keyed by Sitecore item GUID, conflict resolver, and a real **Publish Site** button wired to the SitecoreAI Publishing v1 API (PRD-003).
+  - **Test** — local simulation of how the Content SDK `RedirectsProxy` would evaluate a URL against the loaded redirect inventory; structured-card trace per pipeline stage; on-demand **Upstream parity** check that surfaces when the local simulator has drifted from upstream Sitecore/content-sdk (PRD-004 + PRD-005).
 
 Redirects are shared across all language versions of a site — `UrlMapping` is a SHARED Sitecore field (no language axis). See [docs/features.md](docs/features.md) for per-surface deep-dives.
 
 ## Screenshots
+
+**Full Page → Test tab** with structured trace (PRD-004) — paste a URL, the simulator walks through the same pipeline the upstream Content SDK `RedirectsProxy` would (normalize → candidates → per-row evaluation → substitute → flag effects → dispatch) and surfaces the matched row + final URL + redirect type. "In sync with upstream `dev`" inline status confirms the simulator is current (PRD-005):
+
+<p align="center">
+  <img src="docs/screenshots/test-tab-prd005-trace-success.png" alt="Test tab — structured trace cards for a /123 lookup matching /test222 via map row 1; in-sync upstream-parity status; left-rail collection/site/redirect-map picker" width="960" />
+</p>
+
+**Regex mode in `EditRowModal`** (PRD-004) — segmented Pattern / Regex toggle, save-time `try { new RegExp() }` validation, contextual regex cheatsheet for anchors / captures / character classes / `$siteLang` substitution:
+
+<p align="center">
+  <img src="docs/screenshots/edit-row-modal-prd004-regex.png" alt="Edit mapping modal in Regex mode — Pattern/Regex segmented control, source + destination inputs, regex cheatsheet with anchor / capture-group / character class / alternation reference" width="720" />
+</p>
+
+**Context Panel and Dashboard Widget** (PRD-002 carry-forward):
 
 <p align="center">
   <img src="docs/screenshots/context-panel-prd002-general.png" alt="Context Panel — page route as headline, two-column hero (inbound vs outbound), Quick redirect form with direction toggle" width="720" />
@@ -88,6 +104,10 @@ The repo ships with Claude Code slash commands under [`.claude/commands/`](.clau
 ### `/sync-redirect-proxy`
 
 Resync the local `proxy-simulator.ts` with upstream Sitecore Content SDK `RedirectsProxy` after a drift signal. **Use when** the in-app drift banner on the Test tab says *"Upstream `RedirectsProxy` has changed since this simulator was ported"* — that signal means baseline SHAs in `site/lib/redirects/__fixtures__/upstream-snapshot.json` differ from upstream `dev`.
+
+<p align="center">
+  <img src="docs/screenshots/test-tab-prd005-drift-detected.png" alt="Drift banner on the Test tab — destructive-tinted band with AlertTriangle glyph, copy 'Upstream RedirectsProxy has changed since this simulator was ported. Trace may be subtly inaccurate. Ask your engineer to run /sync-redirect-proxy to update.', Last sync timestamp, dismiss button" width="960" />
+</p>
 
 What it does (procedural Markdown — Claude Code executes it step-by-step):
 
