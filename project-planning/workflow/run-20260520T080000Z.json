@@ -1,4 +1,4 @@
-{
+﻿{
   "schema_version": 6,
   "run_id": "20260520T080000Z",
   "created_at": "2026-05-20T08:00:00Z",
@@ -20,15 +20,15 @@
     "proposal_count": 1,
     "divergence": "subtle",
     "variant_paths": [
-      "products/redirect-manager/project-planning/ui-design/ui-design-20260520T080000Z-v1.md"
+      "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260520T080000Z-v1.md"
     ],
-    "selected_variant_path": "products/redirect-manager/project-planning/ui-design/ui-design-20260520T080000Z-v1.md",
-    "selected_poc_path": "products/redirect-manager/pocs/poc-v1-prd004"
+    "selected_variant_path": "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260520T080000Z-v1.md",
+    "selected_poc_path": "products/marketplace/redirect-manager/pocs/poc-v1-prd004"
   },
   "source": {
     "kind": "file",
     "values": [
-      "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260519T140000Z.md"
+      "products/marketplace/redirect-manager/project-planning/brain-dumps/brain-dump-20260519T140000Z.md"
     ],
     "analysis_mode": "greenfield",
     "source_analysis_artifact": null,
@@ -36,23 +36,23 @@
     "assets_bundle": null
   },
   "canonical_artifacts": {
-    "brain_dump": "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260519T140000Z.md",
-    "prd": "products/redirect-manager/project-planning/PRD/prd-004.md",
-    "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-004.md",
-    "architecture": "products/redirect-manager/project-planning/architecture/architecture-20260520T080000Z.md",
-    "task_breakdown": "products/redirect-manager/project-planning/plans/task-breakdown-20260520T080000Z.md",
+    "brain_dump": "products/marketplace/redirect-manager/project-planning/brain-dumps/brain-dump-20260519T140000Z.md",
+    "prd": "products/marketplace/redirect-manager/project-planning/PRD/prd-004.md",
+    "prd_minimal": "products/marketplace/redirect-manager/project-planning/PRD/prd-minimal-004.md",
+    "architecture": "products/marketplace/redirect-manager/project-planning/architecture/architecture-20260520T080000Z.md",
+    "task_breakdown": "products/marketplace/redirect-manager/project-planning/plans/task-breakdown-20260520T080000Z.md",
     "task_breakdown_pre_qa": null,
-    "qa_report": "products/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md",
-    "test_report": "products/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md",
-    "implementation_runbook": "products/redirect-manager/project-planning/plans/implementation-runbook-20260520T080000Z.md",
-    "code_review_report": "products/redirect-manager/project-planning/plans/code-review-20260521T200000Z.md",
+    "qa_report": "products/marketplace/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md",
+    "test_report": "products/marketplace/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md",
+    "implementation_runbook": "products/marketplace/redirect-manager/project-planning/plans/implementation-runbook-20260520T080000Z.md",
+    "code_review_report": "products/marketplace/redirect-manager/project-planning/plans/code-review-20260521T200000Z.md",
     "content_model": null,
     "content_examples": null,
     "ship_report": null,
     "friction_log": null
   },
   "friction_log": {
-    "path": "products/redirect-manager/project-planning/workflow/friction-log-20260520T080000Z.md",
+    "path": "products/marketplace/redirect-manager/project-planning/workflow/friction-log-20260520T080000Z.md",
     "min_severity": "medium",
     "enabled": true
   },
@@ -129,7 +129,7 @@
       "exited_at": "2026-05-21T22:00:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "Phase 1 /test pass complete. 691/691 GREEN, build clean, lint baseline matched. Code-review fixes M1+M2 verified in source. 2026-05-21 simplification verified clean (no orphan tests). All US-R1/R2/T0/T1/T2/T3 covered. 15 upstream + 8 tenant fixture cases GREEN. Live walkthrough: pass_with_caveats. Host-frame smoke: WARN deferred (host URL not supplied). Status: tested_pending_smoke. 0 Critical, 0 Major, 1 Minor (m5 operator triage). Test report at products/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md."
+      "notes": "Phase 1 /test pass complete. 691/691 GREEN, build clean, lint baseline matched. Code-review fixes M1+M2 verified in source. 2026-05-21 simplification verified clean (no orphan tests). All US-R1/R2/T0/T1/T2/T3 covered. 15 upstream + 8 tenant fixture cases GREEN. Live walkthrough: pass_with_caveats. Host-frame smoke: WARN deferred (host URL not supplied). Status: tested_pending_smoke. 0 Critical, 0 Major, 1 Minor (m5 operator triage). Test report at products/marketplace/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md."
     }
   ],
   "implementation": {
@@ -144,26 +144,26 @@
   },
   "smoke_outcomes": {
     "tranche_1_regex_roundtrip_probe": {
-      "required_by": "PRD § 12 Tranches T1",
+      "required_by": "PRD Â§ 12 Tranches T1",
       "description": "Author 8 regex rows in tenant; CRUD round-trip; verify preservation per-character-class; capture upstream commit SHAs",
       "outcome": "passed",
       "recorded_at": "2026-05-20T18:32:24.180Z",
-      "evidence": "products/redirect-manager/project-planning/captures/tranche-1-regex-roundtrip-20260520.md",
-      "notes": "Automated via T1 probe button (NEXT_PUBLIC_T1_PROBE=true) — 8/8 rows + 12/12 character classes round-trip byte-identical. Upstream SHAs captured: redirects-proxy.ts=30b0db8fe768b83f03fd6b9772b0d3e14711c6b2, utils.ts=e6153e5e80c2076704cad0876eec3b85ec3a1a9f. Gate decision PASS — queue T2.",
+      "evidence": "products/marketplace/redirect-manager/project-planning/captures/tranche-1-regex-roundtrip-20260520.md",
+      "notes": "Automated via T1 probe button (NEXT_PUBLIC_T1_PROBE=true) â€” 8/8 rows + 12/12 character classes round-trip byte-identical. Upstream SHAs captured: redirects-proxy.ts=30b0db8fe768b83f03fd6b9772b0d3e14711c6b2, utils.ts=e6153e5e80c2076704cad0876eec3b85ec3a1a9f. Gate decision PASS â€” queue T2.",
       "category": "live_walkthrough"
     },
     "tranche_6_real_tenant_smoke": {
-      "required_by": "PRD § 12 Tranches T6, M3",
+      "required_by": "PRD Â§ 12 Tranches T6, M3",
       "description": "Real-tenant smoke: 5-10 known URLs predicted by simulator vs. tenant Edge response; operator-driven walkthrough on Full Page Test tab",
       "outcome": "pending",
       "recorded_at": null,
       "evidence": null,
-      "notes": "≥80% match → shipped; <80% → shipped_with_caveats with per-mismatch follow-up tasks; parity-breaking bug → hard-stop. Smoke procedure in PRD § 3 M3.",
+      "notes": "â‰¥80% match â†’ shipped; <80% â†’ shipped_with_caveats with per-mismatch follow-up tasks; parity-breaking bug â†’ hard-stop. Smoke procedure in PRD Â§ 3 M3.",
       "category": "live_walkthrough"
     },
     "fixture_parity_upstream": {
-      "required_by": "PRD § 3 M2",
-      "description": "100% parity on imported upstream test fixtures (__fixtures__/upstream-cases.json) — failing CI for any regression",
+      "required_by": "PRD Â§ 3 M2",
+      "description": "100% parity on imported upstream test fixtures (__fixtures__/upstream-cases.json) â€” failing CI for any regression",
       "outcome": "passed",
       "recorded_at": "2026-05-21T22:00:00Z",
       "evidence": "site/lib/redirects/proxy-simulator.test.ts",
@@ -171,7 +171,7 @@
       "category": "other"
     },
     "host_frame_smoke_test_tab": {
-      "required_by": "PRD § 8 NFR-3 + global theme policy",
+      "required_by": "PRD Â§ 8 NFR-3 + global theme policy",
       "description": "5-axis Playwright vs winning POC for the Test tab + edit-modal mode toggle (light + dark + reduced-motion)",
       "outcome": "skipped",
       "recorded_at": "2026-05-21T22:00:00Z",
@@ -180,11 +180,11 @@
       "category": "host_frame_smoke"
     },
     "live_walkthrough": {
-      "required_by": "PRD § 12 operator Level 1 validation",
+      "required_by": "PRD Â§ 12 operator Level 1 validation",
       "description": "Operator live walkthrough of PRD-004 features prior to /test phase",
       "outcome": "pass_with_caveats",
       "recorded_at": "2026-05-21T22:00:00Z",
-      "evidence": "test-report-20260521T220000Z.md § 3 Visual Testing",
+      "evidence": "test-report-20260521T220000Z.md Â§ 3 Visual Testing",
       "notes": "Exercised: (1) URL-mode rules -- passes; (2) Regex-mode rules with capture-group substitution -- passes; (3) Save-time validation -- passes; (4) Cheatsheet card in Regex mode -- visually accepted; (5) Shared CollectionPicker + SitePicker across Manage/Test tabs -- scope inheritance works; (6) RedirectMapList readonly in Test tab -- no click handler fires; (7) TestSurface bug (Test button race + null-safety crash) -- found and fixed. Caveat: T6 real-tenant URL-prediction smoke still pending.",
       "category": "live_walkthrough"
     }
@@ -194,7 +194,7 @@
       "stage": "create-prd",
       "severity": "warn",
       "kind": "assumption",
-      "item": "Existing CRUD pipeline preserves regex special chars (^, $, (, ), ?, \\) on save/read round-trip — verified in T1; if false, T0 fix-first triggers in encoder/decoder",
+      "item": "Existing CRUD pipeline preserves regex special chars (^, $, (, ), ?, \\) on save/read round-trip â€” verified in T1; if false, T0 fix-first triggers in encoder/decoder",
       "raised_at": "2026-05-20T08:00:00Z",
       "resolved_at": null,
       "references": null
@@ -203,7 +203,7 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "assumption",
-      "item": "Snippet library set (5 PM-proposed patterns: anchored start, trailing slash, query strip, blog migration, file extension) is pending operator validation in T3 — may be revised before code lands",
+      "item": "Snippet library set (5 PM-proposed patterns: anchored start, trailing slash, query strip, blog migration, file extension) is pending operator validation in T3 â€” may be revised before code lands",
       "raised_at": "2026-05-20T08:00:00Z",
       "resolved_at": null,
       "references": null
@@ -212,7 +212,7 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "assumption",
-      "item": "Capture-group counting via paren-regex over-counts escaped \\( and parens inside char classes [(] — documented v0 known limitation; advisory cross-check only; regex-parse step (new RegExp) is authoritative",
+      "item": "Capture-group counting via paren-regex over-counts escaped \\( and parens inside char classes [(] â€” documented v0 known limitation; advisory cross-check only; regex-parse step (new RegExp) is authoritative",
       "raised_at": "2026-05-20T08:00:00Z",
       "resolved_at": null,
       "references": null
@@ -221,7 +221,7 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "concern",
-      "item": "100% upstream-fixture parity required (M2); any failing fixture is a bug OR requires explicit ADR-0038 waiver entry before merge — never silently skipped",
+      "item": "100% upstream-fixture parity required (M2); any failing fixture is a bug OR requires explicit ADR-0038 waiver entry before merge â€” never silently skipped",
       "raised_at": "2026-05-20T08:00:00Z",
       "resolved_at": null,
       "references": null
@@ -239,7 +239,7 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "question",
-      "item": "OQ-1 — empty-state sample URL: pre-fill from first rule of first map (default) vs hardcoded sample? Revisit if empty-state quality drops in T4 walkthrough",
+      "item": "OQ-1 â€” empty-state sample URL: pre-fill from first rule of first map (default) vs hardcoded sample? Revisit if empty-state quality drops in T4 walkthrough",
       "raised_at": "2026-05-20T08:00:00Z",
       "resolved_at": null,
       "references": null
@@ -248,7 +248,7 @@
       "stage": "architect",
       "severity": "info",
       "kind": "concern",
-      "item": "R8 added by architect — RowEditForm extraction from RedirectMapDetail introduces regression risk; T3 must follow extract-then-test-parity, then add affordances; R8 extraction-regression test suite must be green before mode toggle / snippet helpers / hint land",
+      "item": "R8 added by architect â€” RowEditForm extraction from RedirectMapDetail introduces regression risk; T3 must follow extract-then-test-parity, then add affordances; R8 extraction-regression test suite must be green before mode toggle / snippet helpers / hint land",
       "raised_at": "2026-05-20T12:00:00Z",
       "resolved_at": null,
       "references": null
@@ -260,13 +260,13 @@
       "item": "PRD wording corrected from 'edit modal' to 'row edit form' (Full Page does inline editing, not modal); operator approved fix 2026-05-20",
       "raised_at": "2026-05-20T12:00:00Z",
       "resolved_at": "2026-05-20T12:00:00Z",
-      "references": "architect § 2.6"
+      "references": "architect Â§ 2.6"
     },
     {
       "stage": "architect",
       "severity": "info",
       "kind": "decision",
-      "item": "Post-write amendment 2026-05-20T13:00: EditRowModal replaces inline row editing (ADR-0043); Test surface is two-column with sticky scope picker (Collection→Site→Map(s)); simulator scope is per-picked-maps not tenant-wide. Operator approved all three changes.",
+      "item": "Post-write amendment 2026-05-20T13:00: EditRowModal replaces inline row editing (ADR-0043); Test surface is two-column with sticky scope picker (Collectionâ†’Siteâ†’Map(s)); simulator scope is per-picked-maps not tenant-wide. Operator approved all three changes.",
       "raised_at": "2026-05-20T13:00:00Z",
       "resolved_at": "2026-05-20T13:00:00Z",
       "references": "architecture amendment block; ADR-0043"
@@ -284,7 +284,7 @@
       "stage": "architect",
       "severity": "info",
       "kind": "concern",
-      "item": "R8b — EditRowModal CRUD path must produce identical persistence behavior to the prior inline edit. T3 carry-over CRUD smoke (read → open modal → edit → save → re-read) is mandatory before mode-toggle / regex affordances land on top",
+      "item": "R8b â€” EditRowModal CRUD path must produce identical persistence behavior to the prior inline edit. T3 carry-over CRUD smoke (read â†’ open modal â†’ edit â†’ save â†’ re-read) is mandatory before mode-toggle / regex affordances land on top",
       "raised_at": "2026-05-20T13:00:00Z",
       "resolved_at": null,
       "references": null
@@ -311,8 +311,8 @@
     "Source brain-dump captured 2026-05-19 with operator decisions D-001..D-016 (D-011..D-016 added during /create-prd discovery)",
     "ADRs introduced: ADR-0038 (simulator verbatim parity), ADR-0039 (dual time-cap regex safety), ADR-0040 (transient mode + async simulator), ADR-0041 (Test-surface state lifted to FullPage), ADR-0042 (committed AST-walking fixture extractor), ADR-0043 (EditRowModal replaces inline editing)",
     "adr_density_check: 3 new ADRs total at /architect (well under 5+ hard stop)",
-    "PRD wording correction applied 2026-05-20: s/'edit modal'/'row edit form'/g across prd-004.md + prd-minimal-004.md — Full Page does inline row editing, not a modal (architect § 2.6 finding)",
-    "Post-write architecture amendment applied 2026-05-20T13:00 — operator pivoted to: (1) small EditRowModal replaces inline editing entirely (ADR-0043); (2) Test surface is two-column with sticky Collection→Site→Map scope picker; (3) simulator scope is per-picked-maps not tenant-wide. Architecture doc has an amendment block at the top; PRD-004 + prd-minimal-004 + UI design spec + POC are all updated to reflect.",
-    "Scope picker reuses existing SDK helpers (lib/sdk/sites.ts:30-50 listCollections + listSites with verified shapes) + existing map-loading — zero new SDK surfaces confirmed"
+    "PRD wording correction applied 2026-05-20: s/'edit modal'/'row edit form'/g across prd-004.md + prd-minimal-004.md â€” Full Page does inline row editing, not a modal (architect Â§ 2.6 finding)",
+    "Post-write architecture amendment applied 2026-05-20T13:00 â€” operator pivoted to: (1) small EditRowModal replaces inline editing entirely (ADR-0043); (2) Test surface is two-column with sticky Collectionâ†’Siteâ†’Map scope picker; (3) simulator scope is per-picked-maps not tenant-wide. Architecture doc has an amendment block at the top; PRD-004 + prd-minimal-004 + UI design spec + POC are all updated to reflect.",
+    "Scope picker reuses existing SDK helpers (lib/sdk/sites.ts:30-50 listCollections + listSites with verified shapes) + existing map-loading â€” zero new SDK surfaces confirmed"
   ]
 }

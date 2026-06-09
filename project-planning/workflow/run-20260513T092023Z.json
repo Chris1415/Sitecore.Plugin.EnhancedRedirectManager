@@ -1,4 +1,4 @@
-{
+﻿{
   "schema_version": 6,
   "run_id": "20260513T092023Z",
   "created_at": "2026-05-13T09:20:23Z",
@@ -20,22 +20,22 @@
     "proposal_count": 3,
     "divergence": "moderate",
     "variant_paths": [
-      "products/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v1.md",
-      "products/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v2.md",
-      "products/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v3.md"
+      "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v1.md",
+      "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v2.md",
+      "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v3.md"
     ],
-    "selected_variant_path": "products/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v1.md",
-    "selected_poc_path": "products/redirect-manager/pocs/poc-v1-prd001/",
+    "selected_variant_path": "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v1.md",
+    "selected_poc_path": "products/marketplace/redirect-manager/pocs/poc-v1-prd001/",
     "variants": [
-      { "id": "v1", "direction": "Topbar Pilot", "spec_path": "products/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v1.md", "poc_path": "products/redirect-manager/pocs/poc-v1-prd001/", "core_thesis": "Picker-dominant command-bar; binary filled/outlined dot indicator; current-language strict Dashboard. 14 HTML frames, ~115 click targets." },
-      { "id": "v2", "direction": "Coverage Atlas", "spec_path": "products/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v2.md", "poc_path": "products/redirect-manager/pocs/poc-v2-prd001/", "core_thesis": "Per-row multi-chip coverage strip; twin Dashboard tiles; stepper create-version; card-pattern delete with visual consequence. 16 HTML frames, ~140 click targets." },
-      { "id": "v3", "direction": "Workspace Frame", "spec_path": "products/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v3.md", "poc_path": "products/redirect-manager/pocs/poc-v3-prd001/", "core_thesis": "Sticky sidebar language nav; coverage-matrix heatmap; tabbed map detail; right-edge drawer create-version; consequence-preview delete with live data manifest. 18 HTML frames, 135 click targets." }
+      { "id": "v1", "direction": "Topbar Pilot", "spec_path": "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v1.md", "poc_path": "products/marketplace/redirect-manager/pocs/poc-v1-prd001/", "core_thesis": "Picker-dominant command-bar; binary filled/outlined dot indicator; current-language strict Dashboard. 14 HTML frames, ~115 click targets." },
+      { "id": "v2", "direction": "Coverage Atlas", "spec_path": "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v2.md", "poc_path": "products/marketplace/redirect-manager/pocs/poc-v2-prd001/", "core_thesis": "Per-row multi-chip coverage strip; twin Dashboard tiles; stepper create-version; card-pattern delete with visual consequence. 16 HTML frames, ~140 click targets." },
+      { "id": "v3", "direction": "Workspace Frame", "spec_path": "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260513T092023Z-v3.md", "poc_path": "products/marketplace/redirect-manager/pocs/poc-v3-prd001/", "core_thesis": "Sticky sidebar language nav; coverage-matrix heatmap; tabbed map detail; right-edge drawer create-version; consequence-preview delete with live data manifest. 18 HTML frames, 135 click targets." }
     ]
   },
   "source": {
     "kind": "raw_idea",
     "values": [
-      "PRD-001 Multilingual for Redirect Manager — split per ADR-0004 reframe (analytics deferred to PRD-003, sync-back to PRD-004). PRD-000 shipped 2026-05-12 as en-only pure CRUD; language seam pre-parameterized on all Authoring reads/writes."
+      "PRD-001 Multilingual for Redirect Manager â€” split per ADR-0004 reframe (analytics deferred to PRD-003, sync-back to PRD-004). PRD-000 shipped 2026-05-12 as en-only pure CRUD; language seam pre-parameterized on all Authoring reads/writes."
     ],
     "analysis_mode": "greenfield",
     "source_analysis_artifact": null,
@@ -43,21 +43,21 @@
     "assets_bundle": null
   },
   "canonical_artifacts": {
-    "brain_dump": "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260513T092023Z.md",
-    "prd": "products/redirect-manager/project-planning/PRD/prd-001.md",
-    "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-001.md",
-    "architecture": "products/redirect-manager/project-planning/architecture/architecture-20260513T092023Z.md",
-    "task_breakdown": "products/redirect-manager/project-planning/plans/task-breakdown-20260513T092023Z.md",
+    "brain_dump": "products/marketplace/redirect-manager/project-planning/brain-dumps/brain-dump-20260513T092023Z.md",
+    "prd": "products/marketplace/redirect-manager/project-planning/PRD/prd-001.md",
+    "prd_minimal": "products/marketplace/redirect-manager/project-planning/PRD/prd-minimal-001.md",
+    "architecture": "products/marketplace/redirect-manager/project-planning/architecture/architecture-20260513T092023Z.md",
+    "task_breakdown": "products/marketplace/redirect-manager/project-planning/plans/task-breakdown-20260513T092023Z.md",
     "task_breakdown_pre_qa": null,
     "qa_report": null,
-    "implementation_runbook": "products/redirect-manager/project-planning/plans/implementation-runbook-20260513T092023Z.md",
+    "implementation_runbook": "products/marketplace/redirect-manager/project-planning/plans/implementation-runbook-20260513T092023Z.md",
     "content_model": null,
     "content_examples": null,
     "ship_report": null,
     "friction_log": null
   },
   "friction_log": {
-    "path": "products/redirect-manager/project-planning/workflow/friction-log-20260513T092023Z.md",
+    "path": "products/marketplace/redirect-manager/project-planning/workflow/friction-log-20260513T092023Z.md",
     "min_severity": "medium",
     "enabled": true
   },
@@ -132,7 +132,7 @@
       "entered_at": "2026-05-13T17:41:53Z",
       "exited_at": "2026-05-13T18:53:21Z",
       "outcome": "failed",
-      "error": "PRD-001 cancelled at Tranche 1 (T001 capture pass). Real-tenant probe against CHAH DevEx Journey / PROD revealed UrlMapping field is SHARED on the stock Redirect Map template, not VERSIONED as PRD-001 assumed. Multilingual thesis (per-language redirect rules) does not hold; only __Display name is per-language (UNVERSIONED). Shipping PRD-001 as scoped would produce a misleading feature. Operator-confirmed cancellation; see ADR-0023 + docs/decisions.md § PRD-001 Tranche 1 captures."
+      "error": "PRD-001 cancelled at Tranche 1 (T001 capture pass). Real-tenant probe against CHAH DevEx Journey / PROD revealed UrlMapping field is SHARED on the stock Redirect Map template, not VERSIONED as PRD-001 assumed. Multilingual thesis (per-language redirect rules) does not hold; only __Display name is per-language (UNVERSIONED). Shipping PRD-001 as scoped would produce a misleading feature. Operator-confirmed cancellation; see ADR-0023 + docs/decisions.md Â§ PRD-001 Tranche 1 captures."
     }
   ],
   "implementation": {
@@ -155,7 +155,7 @@
     "m2": {
       "id": "m2",
       "gate_category": "crud_round_trip",
-      "description": "Per-language CRUD round-trip (read → edit → save → re-read) in <10s for en, de, and one additional language",
+      "description": "Per-language CRUD round-trip (read â†’ edit â†’ save â†’ re-read) in <10s for en, de, and one additional language",
       "outcome": "pending",
       "evidence": null,
       "notes": null
@@ -163,7 +163,7 @@
     "m3": {
       "id": "m3",
       "gate_category": "crud_round_trip",
-      "description": "Create-version flow end-to-end on real tenant: (a) empty start, (b) copy from chosen source language — new version visible in Sitecore Authoring after one round trip",
+      "description": "Create-version flow end-to-end on real tenant: (a) empty start, (b) copy from chosen source language â€” new version visible in Sitecore Authoring after one round trip",
       "outcome": "pending",
       "evidence": null,
       "notes": null
@@ -171,7 +171,7 @@
     "m4": {
       "id": "m4",
       "gate_category": "import_export_round_trip",
-      "description": "Multi-language import/export round-trip: export site with maps in ≥2 languages → bundle contains all language versions → import to clean state → all language versions reconstituted",
+      "description": "Multi-language import/export round-trip: export site with maps in â‰¥2 languages â†’ bundle contains all language versions â†’ import to clean state â†’ all language versions reconstituted",
       "outcome": "pending",
       "evidence": null,
       "notes": null
@@ -179,7 +179,7 @@
     "m5": {
       "id": "m5",
       "gate_category": "live_walkthrough",
-      "description": "Live walkthrough ≥5 min covering language switching across surfaces, create-version (both paths), delete (both scopes), display name editing, multilingual import/export — zero unrecoverable errors",
+      "description": "Live walkthrough â‰¥5 min covering language switching across surfaces, create-version (both paths), delete (both scopes), display name editing, multilingual import/export â€” zero unrecoverable errors",
       "outcome": "pending",
       "evidence": null,
       "notes": null
@@ -190,7 +190,7 @@
       "description": "Playwright host-frame visual smoke: clipped iframe screenshots vs 10 POC frames from pocs/poc-v1-prd001/ on 5 axes (layout, typography, color, anatomy, state fidelity). All 10 frames must yield PASS or documented WARN with no unresolved FAIL.",
       "outcome": "pending",
       "evidence": null,
-      "notes": "Requires operator-supplied host URL + app origin. Auth is interactive — never script SSO. Serve POC via: npx serve pocs/poc-v1-prd001/"
+      "notes": "Requires operator-supplied host URL + app origin. Auth is interactive â€” never script SSO. Serve POC via: npx serve pocs/poc-v1-prd001/"
     },
     "registration": {
       "id": "registration",
@@ -215,28 +215,28 @@
       "stage": "create-prd",
       "severity": "blocker",
       "kind": "concern",
-      "item": "OQ-1 (createItemVersion/deleteItemVersion mutation shapes) is load-bearing — if deleteItemVersion absent, US-8 version-only is cut; if createItemVersion absent, US-6/US-7/US-11-create are cut. No silent fallback. Decision rule in PRD § 13 R-1.",
+      "item": "OQ-1 (createItemVersion/deleteItemVersion mutation shapes) is load-bearing â€” if deleteItemVersion absent, US-8 version-only is cut; if createItemVersion absent, US-6/US-7/US-11-create are cut. No silent fallback. Decision rule in PRD Â§ 13 R-1.",
       "raised_at": "2026-05-13T09:40:00Z",
       "resolved_at": null,
-      "references": "prd-001.md § 13 R-1; ADR-0018"
+      "references": "prd-001.md Â§ 13 R-1; ADR-0018"
     },
     {
       "stage": "create-prd",
       "severity": "blocker",
       "kind": "concern",
-      "item": "OQ-2 (shared vs versioned field matrix on Redirect Map template) is a hard prerequisite at /architect — not progressive. Drives FR-3/4/7/21, AC-3.2/7.3/7.4, § 10 schema split, R-2, ADR-0015 schema final shape.",
+      "item": "OQ-2 (shared vs versioned field matrix on Redirect Map template) is a hard prerequisite at /architect â€” not progressive. Drives FR-3/4/7/21, AC-3.2/7.3/7.4, Â§ 10 schema split, R-2, ADR-0015 schema final shape.",
       "raised_at": "2026-05-13T09:40:00Z",
       "resolved_at": null,
-      "references": "prd-001.md § 14 Pre-/architect Prerequisites"
+      "references": "prd-001.md Â§ 14 Pre-/architect Prerequisites"
     },
     {
       "stage": "create-prd",
       "severity": "warn",
       "kind": "question",
-      "item": "OQ-4 (__Display name accessor) — verify `field(name: \"__Display name\")` named accessor against real-tenant fixture during /architect.",
+      "item": "OQ-4 (__Display name accessor) â€” verify `field(name: \"__Display name\")` named accessor against real-tenant fixture during /architect.",
       "raised_at": "2026-05-13T09:40:00Z",
       "resolved_at": null,
-      "references": "prd-001.md § 14 Pre-/architect Prerequisites"
+      "references": "prd-001.md Â§ 14 Pre-/architect Prerequisites"
     },
     {
       "stage": "create-prd",
@@ -245,22 +245,22 @@
       "item": "OQ-5 (picker placement + Dashboard tile scoping + map list multilingual indicators + import preview language axis) resolved via 3 UI clickdummy variants at /architect.",
       "raised_at": "2026-05-13T09:40:00Z",
       "resolved_at": null,
-      "references": "prd-001.md § 14"
+      "references": "prd-001.md Â§ 14"
     },
     {
       "stage": "create-prd",
       "severity": "info",
       "kind": "question",
-      "item": "OQ-7 (real-tenant fixture availability) — does CHAH DevEx Journey / PROD have multilingual Redirect Maps? Confirm or set up test data before /test.",
+      "item": "OQ-7 (real-tenant fixture availability) â€” does CHAH DevEx Journey / PROD have multilingual Redirect Maps? Confirm or set up test data before /test.",
       "raised_at": "2026-05-13T09:40:00Z",
       "resolved_at": null,
-      "references": "prd-001.md § 9 + § 14"
+      "references": "prd-001.md Â§ 9 + Â§ 14"
     },
     {
       "stage": "architect",
       "severity": "warn",
       "kind": "decision",
-      "item": "Verb name corrected: createItemVersion → addItemVersion per Sitecore Authoring schema (ADR-0019). ADR-0016 amended in place. PRD-001 references rename via downstream task breakdown.",
+      "item": "Verb name corrected: createItemVersion â†’ addItemVersion per Sitecore Authoring schema (ADR-0019). ADR-0016 amended in place. PRD-001 references rename via downstream task breakdown.",
       "raised_at": "2026-05-13T10:00:00Z",
       "resolved_at": "2026-05-13T10:05:00Z",
       "references": "ADR-0019; ADR-0016 amend"
@@ -269,7 +269,7 @@
       "stage": "architect",
       "severity": "info",
       "kind": "decision",
-      "item": "Site-scoped languages via Sites.Site.languages property access (no extra SDK call) — verified in node_modules .d.ts at line 1019. Tenant-wide xmc.sites.listLanguages is fallback only (ADR-0020).",
+      "item": "Site-scoped languages via Sites.Site.languages property access (no extra SDK call) â€” verified in node_modules .d.ts at line 1019. Tenant-wide xmc.sites.listLanguages is fallback only (ADR-0020).",
       "raised_at": "2026-05-13T10:00:00Z",
       "resolved_at": "2026-05-13T10:05:00Z",
       "references": "ADR-0020"
@@ -278,19 +278,19 @@
       "stage": "architect",
       "severity": "warn",
       "kind": "assumption",
-      "item": "addItemVersion / deleteItemVersion input + payload shapes NOT in @sitecore-marketplace-sdk/xmc .d.ts (file types only the SDK envelope). Verbs confirmed via sitecoreai-graphql-schemas skill § 1.7. Real-tenant probe required at /implement Tranche 1; per PRD R-1, if absent → US-6/US-7/US-8(a)/US-11-create cut.",
+      "item": "addItemVersion / deleteItemVersion input + payload shapes NOT in @sitecore-marketplace-sdk/xmc .d.ts (file types only the SDK envelope). Verbs confirmed via sitecoreai-graphql-schemas skill Â§ 1.7. Real-tenant probe required at /implement Tranche 1; per PRD R-1, if absent â†’ US-6/US-7/US-8(a)/US-11-create cut.",
       "raised_at": "2026-05-13T10:00:00Z",
       "resolved_at": null,
-      "references": "architecture § 5.2/5.3, § 10 OQ-A1/A2; ADR-0019; PRD § 13 R-1"
+      "references": "architecture Â§ 5.2/5.3, Â§ 10 OQ-A1/A2; ADR-0019; PRD Â§ 13 R-1"
     },
     {
       "stage": "architect",
       "severity": "warn",
       "kind": "assumption",
-      "item": "Field-versioning matrix pinned in architecture § 4.3 as assumed shape (UrlMapping + __Display name versioned; RedirectType + 3 flags + itemName shared). ADR-0015 amended in place. /implement Tranche 1 capture confirms via itemTemplate.fields.versioning introspection.",
+      "item": "Field-versioning matrix pinned in architecture Â§ 4.3 as assumed shape (UrlMapping + __Display name versioned; RedirectType + 3 flags + itemName shared). ADR-0015 amended in place. /implement Tranche 1 capture confirms via itemTemplate.fields.versioning introspection.",
       "raised_at": "2026-05-13T10:00:00Z",
       "resolved_at": null,
-      "references": "architecture § 4.3; ADR-0015 amend; PRD OQ-2"
+      "references": "architecture Â§ 4.3; ADR-0015 amend; PRD OQ-2"
     },
     {
       "stage": "architect",
@@ -299,7 +299,7 @@
       "item": "Envelope correction: xmc.authoring.graphql mutations use DOUBLE .data.data unwrap (not single, as the old PRD-000 architecture incorrectly stated in one section). Production code in site/lib/sdk/redirects-write.ts already correct. Memory reference_marketplace_sdk_envelope_authoring_graphql confirms.",
       "raised_at": "2026-05-13T10:00:00Z",
       "resolved_at": "2026-05-13T10:05:00Z",
-      "references": "architecture § 5.6 unwrap table; memory reference_marketplace_sdk_envelope_authoring_graphql"
+      "references": "architecture Â§ 5.6 unwrap table; memory reference_marketplace_sdk_envelope_authoring_graphql"
     }
   ],
   "architecture": {
@@ -312,20 +312,20 @@
   },
   "notes": [
     "Reframes ADR-0004 three-PRD phasing into four phases via ADR-0014. PRD-001 multilingual CRUD app-internal; PRD-002 Context Panel multilingual + head-app contract; PRD-003 analytics; PRD-004 sync-back. ADR-0004 marked Superseded.",
-    "Lifts ADR-0010 (en-only MVP) constraint — PRD-001 fulfills the deferral commitment.",
+    "Lifts ADR-0010 (en-only MVP) constraint â€” PRD-001 fulfills the deferral commitment.",
     "Branch prd-001 stacked off main (PRD-000 already merged 2026-05-12 per ship report).",
     "discovery_level: standard",
     "discovery_summary: confirmed",
     "critical_review_level: standard",
     "critical_review: completed",
-    "sdk_surface_split: n/a (1 new SDK surface — heuristic does not trigger)",
+    "sdk_surface_split: n/a (1 new SDK surface â€” heuristic does not trigger)",
     "base_branch: main",
     "5 new ADRs landed (0014-0018); ADR-0004 superseded by ADR-0014; ADR README index updated.",
     "architect run: 4 new ADRs (0019-0022); ADR-0015 + ADR-0016 amended in place. SDK contract verification gate passed with honest absences recorded for addItemVersion/deleteItemVersion payload shapes.",
-    "adr_density_split: n/a (4 new ADRs in /architect run — under 5-ADR density gate)",
-    "verb correction: createItemVersion → addItemVersion (Sitecore Authoring schema). PRD-001 text not bulk-renamed; ADR-0019 + ADR-0016 amend carry the contract. Lead Developer must reference ADR-0019 over PRD prose for the verb name.",
+    "adr_density_split: n/a (4 new ADRs in /architect run â€” under 5-ADR density gate)",
+    "verb correction: createItemVersion â†’ addItemVersion (Sitecore Authoring schema). PRD-001 text not bulk-renamed; ADR-0019 + ADR-0016 amend carry the contract. Lead Developer must reference ADR-0019 over PRD prose for the verb name.",
     "UI variants produced: 3 (V1 Topbar Pilot, V2 Coverage Atlas, V3 Workspace Frame). All Blok-conformant, real semantic tokens, no invented hex.",
-    "UI winner: V1 Topbar Pilot — operator selected for visual continuity with PRD-000 and natural-extension feel. POC at pocs/poc-v1-prd001/ (14 HTML frames, ~115 click targets) is the canonical visual reference for implementation.",
-    "CANCELLED 2026-05-13 at Tranche 1. Real-tenant probe (T001 OQ-A4 field-versioning matrix introspection) revealed UrlMapping field is SHARED on the stock Sitecore Redirect Map template — not VERSIONED as PRD-001 assumed. Multilingual thesis invalid against actual template configuration. PRD-001 closed without shipping. ADRs 0014-0022 marked Superseded by new ADR-0023. SDK findings (verb names, envelope shapes, full field-versioning matrix) preserved in docs/decisions.md § PRD-001 Tranche 1 captures. Branch prd-001 retains all planning artifacts as historical record + a dev-tools probe surface added to FullPage.tsx; the branch will not be merged to main. Operator decides next PRD at next /rubber-ducky."
+    "UI winner: V1 Topbar Pilot â€” operator selected for visual continuity with PRD-000 and natural-extension feel. POC at pocs/poc-v1-prd001/ (14 HTML frames, ~115 click targets) is the canonical visual reference for implementation.",
+    "CANCELLED 2026-05-13 at Tranche 1. Real-tenant probe (T001 OQ-A4 field-versioning matrix introspection) revealed UrlMapping field is SHARED on the stock Sitecore Redirect Map template â€” not VERSIONED as PRD-001 assumed. Multilingual thesis invalid against actual template configuration. PRD-001 closed without shipping. ADRs 0014-0022 marked Superseded by new ADR-0023. SDK findings (verb names, envelope shapes, full field-versioning matrix) preserved in docs/decisions.md Â§ PRD-001 Tranche 1 captures. Branch prd-001 retains all planning artifacts as historical record + a dev-tools probe surface added to FullPage.tsx; the branch will not be merged to main. Operator decides next PRD at next /rubber-ducky."
   ]
 }

@@ -1,4 +1,4 @@
-{
+﻿{
   "schema_version": 6,
   "run_id": "20260513T194022Z",
   "created_at": "2026-05-13T19:40:22Z",
@@ -20,12 +20,12 @@
     "proposal_count": 1,
     "divergence": "subtle",
     "variant_paths": [
-      "products/redirect-manager/project-planning/ui-design/ui-design-20260513T194022Z-v1.md"
+      "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260513T194022Z-v1.md"
     ],
-    "selected_variant_path": "products/redirect-manager/project-planning/ui-design/ui-design-20260513T194022Z-v1.md",
-    "selected_poc_path": "products/redirect-manager/pocs/poc-v1-prd002/",
+    "selected_variant_path": "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260513T194022Z-v1.md",
+    "selected_poc_path": "products/marketplace/redirect-manager/pocs/poc-v1-prd002/",
     "variants": [
-      { "id": "v1", "direction": "Refined V4 Blok Elevated (PRD-002)", "spec_path": "products/redirect-manager/project-planning/ui-design/ui-design-20260513T194022Z-v1.md", "poc_path": "products/redirect-manager/pocs/poc-v1-prd002/", "core_thesis": "Refines V4 marketing POC into a production-aligned visual source of truth: applies 17 reconciliations from architecture § 11.2 (drops Active/Draft, 7-languages copy, /de paths; adds Server Transfer 3rd option, inline QuickRedirectForm, hero count header, Preview Data banner, decorative-CTA toasts). 6 HTML frames, 58 click targets, 15 CSS variables locked in single inventory per R-13." }
+      { "id": "v1", "direction": "Refined V4 Blok Elevated (PRD-002)", "spec_path": "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260513T194022Z-v1.md", "poc_path": "products/marketplace/redirect-manager/pocs/poc-v1-prd002/", "core_thesis": "Refines V4 marketing POC into a production-aligned visual source of truth: applies 17 reconciliations from architecture Â§ 11.2 (drops Active/Draft, 7-languages copy, /de paths; adds Server Transfer 3rd option, inline QuickRedirectForm, hero count header, Preview Data banner, decorative-CTA toasts). 6 HTML frames, 58 click targets, 15 CSS variables locked in single inventory per R-13." }
     ]
   },
   "source": {
@@ -39,23 +39,23 @@
     "assets_bundle": null
   },
   "canonical_artifacts": {
-    "brain_dump": "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260513T194022Z.md",
-    "prd": "products/redirect-manager/project-planning/PRD/prd-002.md",
-    "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-002.md",
-    "architecture": "products/redirect-manager/project-planning/architecture/architecture-20260514T000000Z.md",
-    "task_breakdown": "products/redirect-manager/project-planning/plans/task-breakdown-20260513T194022Z.md",
+    "brain_dump": "products/marketplace/redirect-manager/project-planning/brain-dumps/brain-dump-20260513T194022Z.md",
+    "prd": "products/marketplace/redirect-manager/project-planning/PRD/prd-002.md",
+    "prd_minimal": "products/marketplace/redirect-manager/project-planning/PRD/prd-minimal-002.md",
+    "architecture": "products/marketplace/redirect-manager/project-planning/architecture/architecture-20260514T000000Z.md",
+    "task_breakdown": "products/marketplace/redirect-manager/project-planning/plans/task-breakdown-20260513T194022Z.md",
     "task_breakdown_pre_qa": null,
     "qa_report": null,
-    "implementation_runbook": "products/redirect-manager/project-planning/plans/implementation-runbook-20260513T194022Z.md",
-    "code_review_report": "products/redirect-manager/project-planning/plans/code-review-20260515T140000Z.md",
-    "test_report": "products/redirect-manager/project-planning/plans/test-report-20260515T150000Z.md",
+    "implementation_runbook": "products/marketplace/redirect-manager/project-planning/plans/implementation-runbook-20260513T194022Z.md",
+    "code_review_report": "products/marketplace/redirect-manager/project-planning/plans/code-review-20260515T140000Z.md",
+    "test_report": "products/marketplace/redirect-manager/project-planning/plans/test-report-20260515T150000Z.md",
     "content_model": null,
     "content_examples": null,
-    "ship_report": "products/redirect-manager/project-planning/plans/ship-report-20260515T163000Z.md",
+    "ship_report": "products/marketplace/redirect-manager/project-planning/plans/ship-report-20260515T163000Z.md",
     "friction_log": null
   },
   "friction_log": {
-    "path": "products/redirect-manager/project-planning/workflow/friction-log-20260513T194022Z.md",
+    "path": "products/marketplace/redirect-manager/project-planning/workflow/friction-log-20260513T194022Z.md",
     "min_severity": "medium",
     "enabled": true
   },
@@ -166,7 +166,7 @@
       "exited_at": "2026-05-15T16:30:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "All 6 smoke gates operator-passed (m2 + host_frame_smoke passed_with_caveats — operator-visual rather than Playwright recipe). Ship report at project-planning/plans/ship-report-20260515T163000Z.md. CHANGELOG PRD-002 entry already present; appended polish-wave addendum inline by /ship."
+      "notes": "All 6 smoke gates operator-passed (m2 + host_frame_smoke passed_with_caveats â€” operator-visual rather than Playwright recipe). Ship report at project-planning/plans/ship-report-20260515T163000Z.md. CHANGELOG PRD-002 entry already present; appended polish-wave addendum inline by /ship."
     },
     {
       "stage": "documented",
@@ -191,28 +191,28 @@
       "gate": "registration",
       "description": "Cloud Portal Test App loads and renders all 3 extension points without console errors",
       "outcome": "passed",
-      "evidence": "Operator manual verification 2026-05-15 — all 3 routes load from the Cloud Portal Test App, no console errors. Screenshots 30, 40, 45 (Full Page general view, Context Panel iterations) captured live.",
+      "evidence": "Operator manual verification 2026-05-15 â€” all 3 routes load from the Cloud Portal Test App, no console errors. Screenshots 30, 40, 45 (Full Page general view, Context Panel iterations) captured live.",
       "notes": null
     },
     "m2": {
       "gate": "host_frame_smoke",
-      "description": "5-axis Playwright comparison (layout, typography, color, component anatomy, state fidelity) against pocs/poc-v1-prd002/ — light + dark + reduced-motion variants on all 3 surfaces",
+      "description": "5-axis Playwright comparison (layout, typography, color, component anatomy, state fidelity) against pocs/poc-v1-prd002/ â€” light + dark + reduced-motion variants on all 3 surfaces",
       "outcome": "passed_with_caveats",
-      "evidence": "Operator visual comparison 2026-05-15 against live PRD-002 build (no Playwright MCP run). All 3 surfaces verified in dark mode at iframe widths used by Cloud Portal Test App. POC clickdummy at pocs/poc-v1-prd002/ now lags production for Context Panel (split hero, direction toggle, toolbar row added during operator polish) — divergence accepted; POC refresh queued as follow-on.",
+      "evidence": "Operator visual comparison 2026-05-15 against live PRD-002 build (no Playwright MCP run). All 3 surfaces verified in dark mode at iframe widths used by Cloud Portal Test App. POC clickdummy at pocs/poc-v1-prd002/ now lags production for Context Panel (split hero, direction toggle, toolbar row added during operator polish) â€” divergence accepted; POC refresh queued as follow-on.",
       "notes": "POC clickdummy refresh deferred. Worth a small follow-on task to bring pocs/poc-v1-prd002/context-panel.html forward."
     },
     "m3": {
       "gate": "crud_round_trip",
       "description": "Every PRD-000 CRUD path (create map / edit / delete / add mapping / reorder / edit mapping / delete mapping) executes successfully on real tenant in the redesigned UI. Inline quick-add on Context Panel exercises the same createRedirectMap / updateRedirectMap mutations.",
       "outcome": "passed",
-      "evidence": "Operator manual verification 2026-05-15 — CRUD round-trip exercised live on solo / solo-website tenant. Create map (image 33 New redirect map dialog), edit map (image 41/46 Edit map settings), inline mapping edit (image 47), delete mapping, inline quick-add via Context Panel QuickRedirectForm with direction toggle all exercised against authoring GraphQL.",
+      "evidence": "Operator manual verification 2026-05-15 â€” CRUD round-trip exercised live on solo / solo-website tenant. Create map (image 33 New redirect map dialog), edit map (image 41/46 Edit map settings), inline mapping edit (image 47), delete mapping, inline quick-add via Context Panel QuickRedirectForm with direction toggle all exercised against authoring GraphQL.",
       "notes": null
     },
     "m4": {
       "gate": "import_export_round_trip",
       "description": "JSON export + import wizard (incl. conflict resolution) work end-to-end on real tenant.",
       "outcome": "passed",
-      "evidence": "Operator manual verification 2026-05-15 — export menu (image 34, Open in new tab / Copy / Download-soon) and import dialog (image 35, file picker + paste JSON + Validate & preview) exercised live.",
+      "evidence": "Operator manual verification 2026-05-15 â€” export menu (image 34, Open in new tab / Copy / Download-soon) and import dialog (image 35, file picker + paste JSON + Validate & preview) exercised live.",
       "notes": null
     },
     "m5": {
@@ -226,7 +226,7 @@
       "gate": "host_frame_smoke",
       "description": "Playwright clipped iframe screenshots vs POC on 5 axes per sitecore:marketplace-sdk-host-frame-testing skill recipe. This is the m2 gate tracking entry for the manifest smoke-outcomes gate check.",
       "outcome": "passed_with_caveats",
-      "evidence": "See m2 evidence — operator visual comparison against the live PRD-002 build; no Playwright MCP run.",
+      "evidence": "See m2 evidence â€” operator visual comparison against the live PRD-002 build; no Playwright MCP run.",
       "notes": "Tracking entry alias for m2; carries the same passed_with_caveats verdict."
     }
   },
@@ -238,7 +238,7 @@
       "item": "V4 'Blok Elevated' marketing POC at pocs/poc-marketing-v4-blok-elevated/ is the canonical visual base. Refined POC for PRD-002 produced at /architect under pocs/poc-v1-prd002/.",
       "raised_at": "2026-05-13T19:40:22Z",
       "resolved_at": null,
-      "references": "brain-dump-20260513T194022Z.md § 1, § 4, § 9"
+      "references": "brain-dump-20260513T194022Z.md Â§ 1, Â§ 4, Â§ 9"
     },
     {
       "stage": "rubber-ducky",
@@ -247,7 +247,7 @@
       "item": "Hardcoded mock data strategy: V4 speculative content (hero stat, sparkline, top-hit list, 4th metric tile) renders with hardcoded values in PRD-002. Per-surface 'Preview data' banner labels mocks. Tracked for follow-on 'data plumbing' PRD that wires real data into pre-built visual chassis.",
       "raised_at": "2026-05-13T19:40:22Z",
       "resolved_at": null,
-      "references": "brain-dump § 7 D2, § 8, § 10 R-Mock-Data-Mistrust"
+      "references": "brain-dump Â§ 7 D2, Â§ 8, Â§ 10 R-Mock-Data-Mistrust"
     },
     {
       "stage": "rubber-ducky",
@@ -256,7 +256,7 @@
       "item": "Mixed motion budget: full V4 motion (drifting plumes, gradient text, kinetic reveals) on IntroPage + Full Page. Quieter on Context Panel + Dashboard Widget (hover lifts only).",
       "raised_at": "2026-05-13T19:40:22Z",
       "resolved_at": null,
-      "references": "brain-dump § 7 D3"
+      "references": "brain-dump Â§ 7 D3"
     },
     {
       "stage": "rubber-ducky",
@@ -265,7 +265,7 @@
       "item": "Hybrid voice: marketing-grade on hero / headline zones (IntroPage, Full Page workspace hero, Dashboard Widget headline); utility-tool voice in dense workflow areas (table rows, modals, Context Panel body, inline forms).",
       "raised_at": "2026-05-13T19:40:22Z",
       "resolved_at": null,
-      "references": "brain-dump § 7 D5"
+      "references": "brain-dump Â§ 7 D5"
     },
     {
       "stage": "rubber-ducky",
@@ -274,25 +274,25 @@
       "item": "Strict no-functional-change rule (D1). PRD-002 is pure visual re-skin; any UX improvements discovered during implementation become follow-on PRDs. Structural guard / code-review gate should enforce.",
       "raised_at": "2026-05-13T19:40:22Z",
       "resolved_at": null,
-      "references": "brain-dump § 7 D1, § 10 R-Scope-Creep-Functional-Improvements"
+      "references": "brain-dump Â§ 7 D1, Â§ 10 R-Scope-Creep-Functional-Improvements"
     },
     {
       "stage": "rubber-ducky",
       "severity": "info",
       "kind": "question",
-      "item": "Full V4-feature classification table — operator answers at /create-prd PM critical review. PM produces complete inventory of every V4 element across all 4 frames classifying real vs trivial-reskin vs hardcoded-mock.",
+      "item": "Full V4-feature classification table â€” operator answers at /create-prd PM critical review. PM produces complete inventory of every V4 element across all 4 frames classifying real vs trivial-reskin vs hardcoded-mock.",
       "raised_at": "2026-05-13T19:40:22Z",
       "resolved_at": null,
-      "references": "brain-dump § 11 OQ-1, OQ-2"
+      "references": "brain-dump Â§ 11 OQ-1, OQ-2"
     },
     {
       "stage": "rubber-ducky",
       "severity": "info",
       "kind": "question",
-      "item": "Motion performance inside Cloud Portal iframe — confirmed at /architect or /test. Risk that drifting plumes + frosted glass degrade host frame rendering.",
+      "item": "Motion performance inside Cloud Portal iframe â€” confirmed at /architect or /test. Risk that drifting plumes + frosted glass degrade host frame rendering.",
       "raised_at": "2026-05-13T19:40:22Z",
       "resolved_at": null,
-      "references": "brain-dump § 11 OQ-4, § 10 R-Performance-Inside-Iframe"
+      "references": "brain-dump Â§ 11 OQ-4, Â§ 10 R-Performance-Inside-Iframe"
     },
     {
       "stage": "rubber-ducky",
@@ -301,25 +301,25 @@
       "item": "Follow-on 'data plumbing' PRD (likely PRD-003 candidate) wires hardcoded mocks to real data sources. Scope sketched at brain-dump; full scope captured when that PRD opens.",
       "raised_at": "2026-05-13T19:40:22Z",
       "resolved_at": null,
-      "references": "brain-dump § 11 OQ-7"
+      "references": "brain-dump Â§ 11 OQ-7"
     },
     {
       "stage": "create-prd",
       "severity": "warn",
       "kind": "decision",
-      "item": "D1 relaxed from 'pure visual re-skin' to 'V4-aligned redesign with reality validation' (ADR-0024). V4 UX evolutions ship (notably Context Panel modal→inline quick-add per ADR-0026). Current site/ source is canonical reality for enum values + component flows; PRD reflects shipped code, not stale PRD-000 prose (RedirectType is 3 values, not 4).",
+      "item": "D1 relaxed from 'pure visual re-skin' to 'V4-aligned redesign with reality validation' (ADR-0024). V4 UX evolutions ship (notably Context Panel modalâ†’inline quick-add per ADR-0026). Current site/ source is canonical reality for enum values + component flows; PRD reflects shipped code, not stale PRD-000 prose (RedirectType is 3 values, not 4).",
       "raised_at": "2026-05-14T00:35:00Z",
       "resolved_at": null,
-      "references": "ADR-0024; prd-002.md § 1, § 5, § 11"
+      "references": "ADR-0024; prd-002.md Â§ 1, Â§ 5, Â§ 11"
     },
     {
       "stage": "create-prd",
       "severity": "warn",
       "kind": "concern",
-      "item": "Context Panel modal (AddRedirectModal) → inline quick-add UX evolution (US-R5, ADR-0026) is the largest test-impact item in PRD-002. Existing modal-flow Vitest tests need rework or re-pointing. R-12 in PRD § 13; Lead Developer audits at /task-breakdown. Architect decides at /architect whether AddRedirectModal is removed entirely (Option A, recommended) or kept as fallback (Option B).",
+      "item": "Context Panel modal (AddRedirectModal) â†’ inline quick-add UX evolution (US-R5, ADR-0026) is the largest test-impact item in PRD-002. Existing modal-flow Vitest tests need rework or re-pointing. R-12 in PRD Â§ 13; Lead Developer audits at /task-breakdown. Architect decides at /architect whether AddRedirectModal is removed entirely (Option A, recommended) or kept as fallback (Option B).",
       "raised_at": "2026-05-14T00:35:00Z",
       "resolved_at": null,
-      "references": "ADR-0026; prd-002.md § 5 (US-R5), § 13 R-12, FR-R13"
+      "references": "ADR-0026; prd-002.md Â§ 5 (US-R5), Â§ 13 R-12, FR-R13"
     },
     {
       "stage": "create-prd",
@@ -328,43 +328,43 @@
       "item": "RedirectType enum confirmed 3 values (Redirect301 / Redirect302 / ServerTransfer) per site/lib/domain/types.ts:17 + site/lib/redirects/redirect-type-enum.ts:26. Redirect307 was dropped during PRD-000 Tranche 6a (real-tenant capture 2026-05-11; recorded in docs/decisions.md). PRD-002 reflects shipped code; PRD-000 prose mentions of 307 are inaccurate and superseded.",
       "raised_at": "2026-05-14T00:35:00Z",
       "resolved_at": "2026-05-14T00:35:00Z",
-      "references": "prd-002.md § 5, § 10; site/lib/domain/types.ts:17; docs/decisions.md Tranche 6a"
+      "references": "prd-002.md Â§ 5, Â§ 10; site/lib/domain/types.ts:17; docs/decisions.md Tranche 6a"
     },
     {
       "stage": "create-prd",
       "severity": "info",
       "kind": "resolved",
-      "item": "V4 feature classification complete — file-driven walk of full-page.html / context-panel.html / dashboard-widget.html with line refs; categorized (a) real / (b) re-skin / (c) hardcoded mock / (d) NEW V4 UX change. Full classification in prd-002.md § 11.",
+      "item": "V4 feature classification complete â€” file-driven walk of full-page.html / context-panel.html / dashboard-widget.html with line refs; categorized (a) real / (b) re-skin / (c) hardcoded mock / (d) NEW V4 UX change. Full classification in prd-002.md Â§ 11.",
       "raised_at": "2026-05-14T00:35:00Z",
       "resolved_at": "2026-05-14T00:35:00Z",
-      "references": "prd-002.md § 11; supersedes brain-dump OQ-1 from 2026-05-13T19:40:22Z"
+      "references": "prd-002.md Â§ 11; supersedes brain-dump OQ-1 from 2026-05-13T19:40:22Z"
     },
     {
       "stage": "create-prd",
       "severity": "info",
       "kind": "question",
-      "item": "Refined POC at pocs/poc-v1-prd002/ lands at /architect — designer applies all reality reconciliations (drop Active/Draft, drop /de paths, drop '7 languages' line, hero count header bound to matchedGroups.length, etc.). Architect records V4-to-refined-POC diff explicitly per R-14 so PRD-002 § 11 line refs remain navigable.",
+      "item": "Refined POC at pocs/poc-v1-prd002/ lands at /architect â€” designer applies all reality reconciliations (drop Active/Draft, drop /de paths, drop '7 languages' line, hero count header bound to matchedGroups.length, etc.). Architect records V4-to-refined-POC diff explicitly per R-14 so PRD-002 Â§ 11 line refs remain navigable.",
       "raised_at": "2026-05-14T00:35:00Z",
       "resolved_at": null,
-      "references": "prd-002.md § 13 R-14; ADR-0024 Consequences"
+      "references": "prd-002.md Â§ 13 R-14; ADR-0024 Consequences"
     },
     {
       "stage": "create-prd",
       "severity": "info",
       "kind": "concern",
-      "item": "Design-token drift (R-13) — V4-specific tunables (plume duration 28s, glass alpha 80%, hover-glow tint 14%, hero clamp 48-96px) must be defined in one CSS variable set (site/styles/elevated.css or equivalent) to prevent drift across files. Architect enforces at /architect.",
+      "item": "Design-token drift (R-13) â€” V4-specific tunables (plume duration 28s, glass alpha 80%, hover-glow tint 14%, hero clamp 48-96px) must be defined in one CSS variable set (site/styles/elevated.css or equivalent) to prevent drift across files. Architect enforces at /architect.",
       "raised_at": "2026-05-14T00:35:00Z",
       "resolved_at": null,
-      "references": "prd-002.md § 11 'Design contract values', § 13 R-13; ADR-0027"
+      "references": "prd-002.md Â§ 11 'Design contract values', Â§ 13 R-13; ADR-0027"
     },
     {
       "stage": "create-prd",
       "severity": "info",
       "kind": "question",
-      "item": "Browser floor for backdrop-filter + color-mix(in oklch, ...) — Cloud Portal evergreen browsers (Chromium / Safari ≥14 / Firefox ≥113) likely fine; if older browsers must be supported, @supports not fallbacks required (recipe in prd-002 NFR-R3 + NFR-R4). Architect confirms at /architect.",
+      "item": "Browser floor for backdrop-filter + color-mix(in oklch, ...) â€” Cloud Portal evergreen browsers (Chromium / Safari â‰¥14 / Firefox â‰¥113) likely fine; if older browsers must be supported, @supports not fallbacks required (recipe in prd-002 NFR-R3 + NFR-R4). Architect confirms at /architect.",
       "raised_at": "2026-05-14T00:35:00Z",
       "resolved_at": null,
-      "references": "prd-002.md § 8 NFR-R3, NFR-R4; § 11 'Design contract values'"
+      "references": "prd-002.md Â§ 8 NFR-R3, NFR-R4; Â§ 11 'Design contract values'"
     },
     {
       "stage": "architect",
@@ -373,7 +373,7 @@
       "item": "ADR-0026 Option A locked: AddRedirectModal removed entirely (ADR-0028). Inline QuickRedirectForm handles add-to-existing-map and create-new-map (with auto-name + default flags). 'Create new map with full flag control' path lives at Full Page workspace via existing NewRedirectMapModal.",
       "raised_at": "2026-05-14T08:30:00Z",
       "resolved_at": "2026-05-14T08:30:00Z",
-      "references": "ADR-0028; architecture § 11.1 Decision 1"
+      "references": "ADR-0028; architecture Â§ 11.1 Decision 1"
     },
     {
       "stage": "architect",
@@ -382,16 +382,16 @@
       "item": "QuickRedirectForm semantics locked (ADR-0029): most-recently-updated matched map as default; RedirectType select disabled-with-display in add-to-existing path; auto-name `${pageSlug}-redirects` for create-new path. Resolves PRD AC-R2.4 ambiguity.",
       "raised_at": "2026-05-14T08:30:00Z",
       "resolved_at": "2026-05-14T08:30:00Z",
-      "references": "ADR-0029; architecture § 11.1 Decision 2"
+      "references": "ADR-0029; architecture Â§ 11.1 Decision 2"
     },
     {
       "stage": "architect",
       "severity": "info",
       "kind": "decision",
-      "item": "Full Page hero CTAs (View activity / Publish all) ship as DECORATIVE in PRD-002 (ADR-0030) — render with V4 chrome; onClick shows 'Coming in a follow-on release' Sonner toast. No new activity-log or bulk-publish backend in scope. Follow-on PRD wires real onClick.",
+      "item": "Full Page hero CTAs (View activity / Publish all) ship as DECORATIVE in PRD-002 (ADR-0030) â€” render with V4 chrome; onClick shows 'Coming in a follow-on release' Sonner toast. No new activity-log or bulk-publish backend in scope. Follow-on PRD wires real onClick.",
       "raised_at": "2026-05-14T08:30:00Z",
       "resolved_at": "2026-05-14T08:30:00Z",
-      "references": "ADR-0030; architecture § 11.1 Decision 3"
+      "references": "ADR-0030; architecture Â§ 11.1 Decision 3"
     },
     {
       "stage": "architect",
@@ -400,7 +400,7 @@
       "item": "z-index hierarchy locked: plume backdrop -1, page content 0, frosted topbar 40, HahnSoloFooter 50, modal overlay 100. Tactical commitment (not separate ADR); flows into elevated.css / elevated-plumes.css implementation.",
       "raised_at": "2026-05-14T08:30:00Z",
       "resolved_at": "2026-05-14T08:30:00Z",
-      "references": "architecture § 11.1 Decision 4; PRD R-10"
+      "references": "architecture Â§ 11.1 Decision 4; PRD R-10"
     },
     {
       "stage": "architect",
@@ -409,22 +409,22 @@
       "item": "Test-rework strategy: dedicated T7 tranche at /implement (R-12 mitigation). Lead Developer audits class-string assertions; QA Specialist enriches with TDD steps; AddRedirectModal tests re-pointed at QuickRedirectForm in T7.",
       "raised_at": "2026-05-14T08:30:00Z",
       "resolved_at": null,
-      "references": "architecture § 11.1 Decision 6; PRD § 13 R-12"
+      "references": "architecture Â§ 11.1 Decision 6; PRD Â§ 13 R-12"
     },
     {
       "stage": "architect",
       "severity": "info",
       "kind": "resolved",
-      "item": "SDK contract verification gate PASSED by enumeration. 0 new external SDK calls. 10 carry-over calls enumerated in architecture § 5.1 with .d.ts citations + envelope (DOUBLE .data.data for xmc.authoring.graphql, SINGLE .data for base-map). All shapes carry from PRD-000; no capture-pending items.",
+      "item": "SDK contract verification gate PASSED by enumeration. 0 new external SDK calls. 10 carry-over calls enumerated in architecture Â§ 5.1 with .d.ts citations + envelope (DOUBLE .data.data for xmc.authoring.graphql, SINGLE .data for base-map). All shapes carry from PRD-000; no capture-pending items.",
       "raised_at": "2026-05-14T08:30:00Z",
       "resolved_at": "2026-05-14T08:30:00Z",
-      "references": "architecture § 5; supersedes /create-prd assumption about no SDK changes"
+      "references": "architecture Â§ 5; supersedes /create-prd assumption about no SDK changes"
     },
     {
       "stage": "test",
       "severity": "warn",
       "kind": "decision",
-      "item": "[BLOCKER] m1 smoke gate PENDING — Cloud Portal Test App registration: load all 3 extension points without console errors. Must pass before status can transition to shipped.",
+      "item": "[BLOCKER] m1 smoke gate PENDING â€” Cloud Portal Test App registration: load all 3 extension points without console errors. Must pass before status can transition to shipped.",
       "raised_at": "2026-05-15T15:00:00Z",
       "resolved_at": null,
       "references": "smoke_outcomes.m1; test-report-20260515T150000Z.md"
@@ -433,16 +433,16 @@
       "stage": "test",
       "severity": "warn",
       "kind": "decision",
-      "item": "[BLOCKER] m2 / host_frame_smoke PENDING — 5-axis Playwright host-frame comparison against pocs/poc-v1-prd002/. Requires operator-supplied host URL + interactive auth. Serve POC via: npx serve products/redirect-manager/pocs/poc-v1-prd002/ (Playwright MCP rejects file:// URLs). 9 combinations: 3 routes × (light / dark / reduced-motion).",
+      "item": "[BLOCKER] m2 / host_frame_smoke PENDING â€” 5-axis Playwright host-frame comparison against pocs/poc-v1-prd002/. Requires operator-supplied host URL + interactive auth. Serve POC via: npx serve products/marketplace/redirect-manager/pocs/poc-v1-prd002/ (Playwright MCP rejects file:// URLs). 9 combinations: 3 routes Ã— (light / dark / reduced-motion).",
       "raised_at": "2026-05-15T15:00:00Z",
       "resolved_at": null,
-      "references": "smoke_outcomes.m2; smoke_outcomes.host_frame_smoke; sitecore:marketplace-sdk-host-frame-testing skill; test-report-20260515T150000Z.md § Visual Testing"
+      "references": "smoke_outcomes.m2; smoke_outcomes.host_frame_smoke; sitecore:marketplace-sdk-host-frame-testing skill; test-report-20260515T150000Z.md Â§ Visual Testing"
     },
     {
       "stage": "test",
       "severity": "warn",
       "kind": "decision",
-      "item": "[BLOCKER] m3 smoke gate PENDING — CRUD round-trip on real tenant: create map / edit / delete / add mapping / reorder / edit mapping / delete mapping in the redesigned UI. Inline quick-add on Context Panel must exercise createRedirectMap + updateRedirectMap mutations.",
+      "item": "[BLOCKER] m3 smoke gate PENDING â€” CRUD round-trip on real tenant: create map / edit / delete / add mapping / reorder / edit mapping / delete mapping in the redesigned UI. Inline quick-add on Context Panel must exercise createRedirectMap + updateRedirectMap mutations.",
       "raised_at": "2026-05-15T15:00:00Z",
       "resolved_at": null,
       "references": "smoke_outcomes.m3; test-report-20260515T150000Z.md"
@@ -451,7 +451,7 @@
       "stage": "test",
       "severity": "warn",
       "kind": "decision",
-      "item": "[BLOCKER] m4 smoke gate PENDING — Import/export round-trip on real tenant. JSON export + import wizard (incl. conflict resolution) end-to-end.",
+      "item": "[BLOCKER] m4 smoke gate PENDING â€” Import/export round-trip on real tenant. JSON export + import wizard (incl. conflict resolution) end-to-end.",
       "raised_at": "2026-05-15T15:00:00Z",
       "resolved_at": null,
       "references": "smoke_outcomes.m4; test-report-20260515T150000Z.md"
@@ -460,7 +460,7 @@
       "stage": "test",
       "severity": "warn",
       "kind": "decision",
-      "item": "[BLOCKER] m5 smoke gate PENDING — Live walkthrough (>=5 min): all 3 redesigned surfaces, every flow, zero unrecoverable errors. Operator confirms redesign reads as premium and inline quick-add is at least as efficient as prior modal. Walk checklist at project-planning/smoke/m5-live-walkthrough-checklist-prd002.md.",
+      "item": "[BLOCKER] m5 smoke gate PENDING â€” Live walkthrough (>=5 min): all 3 redesigned surfaces, every flow, zero unrecoverable errors. Operator confirms redesign reads as premium and inline quick-add is at least as efficient as prior modal. Walk checklist at project-planning/smoke/m5-live-walkthrough-checklist-prd002.md.",
       "raised_at": "2026-05-15T15:00:00Z",
       "resolved_at": null,
       "references": "smoke_outcomes.m5; project-planning/smoke/m5-live-walkthrough-checklist-prd002.md; test-report-20260515T150000Z.md"
@@ -469,10 +469,10 @@
       "stage": "test",
       "severity": "info",
       "kind": "assumption",
-      "item": "Motion performance inside Cloud Portal iframe (NFR-R1) — not verifiable in automated testing. If operator observes jank during live walkthrough (backdrop-filter + plume animations), reduce --v4-plume-blur or plume opacity as a hotfix.",
+      "item": "Motion performance inside Cloud Portal iframe (NFR-R1) â€” not verifiable in automated testing. If operator observes jank during live walkthrough (backdrop-filter + plume animations), reduce --v4-plume-blur or plume opacity as a hotfix.",
       "raised_at": "2026-05-15T15:00:00Z",
       "resolved_at": null,
-      "references": "prd-002.md NFR-R1; test-report-20260515T150000Z.md § Release Readiness"
+      "references": "prd-002.md NFR-R1; test-report-20260515T150000Z.md Â§ Release Readiness"
     }
   ],
   "notes": [
@@ -486,14 +486,14 @@
     "discovery_level: standard",
     "discovery_summary: confirmed_with_changes (IntroPage `/` dropped from scope; status pills use real RedirectType enum; D1 relaxed from pure-re-skin to V4-aligned-with-reality-validation)",
     "critical_review_level: standard",
-    "critical_review: completed (4 blockers + 16 concerns + 7 nitpicks; option-B consistency pass applied — V4 POC re-walked element-by-element against current site/ source; PRD revised in place; 4 new ADRs landed)",
-    "sdk_surface_split: n/a (0 new SDK surfaces — pure visual redesign + one client-side interaction-pattern change)",
+    "critical_review: completed (4 blockers + 16 concerns + 7 nitpicks; option-B consistency pass applied â€” V4 POC re-walked element-by-element against current site/ source; PRD revised in place; 4 new ADRs landed)",
+    "sdk_surface_split: n/a (0 new SDK surfaces â€” pure visual redesign + one client-side interaction-pattern change)",
     "base_branch: main",
-    "PRD-002 V4-aligned redesign scope: 3 extension-point routes (Full Page + Context Panel + Dashboard Widget). IntroPage / out of scope. D1 relaxed: V4 UX evolutions (e.g. Context Panel modal→inline quick-add per ADR-0026) ship alongside chrome. Mock-data architecture via PREVIEW_DATA constants + PREVIEW_DATA_ACTIVE flags + per-surface 'Preview data' banner (ADR-0025).",
+    "PRD-002 V4-aligned redesign scope: 3 extension-point routes (Full Page + Context Panel + Dashboard Widget). IntroPage / out of scope. D1 relaxed: V4 UX evolutions (e.g. Context Panel modalâ†’inline quick-add per ADR-0026) ship alongside chrome. Mock-data architecture via PREVIEW_DATA constants + PREVIEW_DATA_ACTIVE flags + per-surface 'Preview data' banner (ADR-0025).",
     "4 new ADRs landed: ADR-0024 (V4 Blok Elevated visual base + relaxed D1), ADR-0025 (mock-data architecture), ADR-0026 (Context Panel inline quick-add), ADR-0027 (mixed motion budget). ADR README index updated.",
     "RedirectType enum confirmed 3 values (Redirect301 / Redirect302 / ServerTransfer) per site/lib/domain/types.ts:17; 307 dropped during PRD-000 Tranche 6a (documented in docs/decisions.md).",
     "architect run 2026-05-14: 3 new ADRs (0028-0030); ADR README index updated to 30 ADRs. SDK contract gate passed by enumeration (0 new calls; 10 carry-over enumerated). ADR-0026 Option A locked: AddRedirectModal removed entirely. R-13 mitigation: 15 CSS variables locked in single inventory. R-12 mitigation: dedicated T7 test-rework tranche.",
-    "adr_density_split: n/a (3 new ADRs in /architect run — under 5-ADR HARD STOP)",
-    "architecture: products/redirect-manager/project-planning/architecture/architecture-20260514T000000Z.md (553 lines, 11 sections, V4-to-refined-POC diff record in § 11.2)"
+    "adr_density_split: n/a (3 new ADRs in /architect run â€” under 5-ADR HARD STOP)",
+    "architecture: products/marketplace/redirect-manager/project-planning/architecture/architecture-20260514T000000Z.md (553 lines, 11 sections, V4-to-refined-POC diff record in Â§ 11.2)"
   ]
 }

@@ -1,4 +1,4 @@
-{
+﻿{
   "schema_version": 6,
   "run_id": "20260516T194651Z",
   "created_at": "2026-05-16T19:46:51Z",
@@ -10,7 +10,7 @@
   "// tranche_1_complete_at": "2026-05-17T00:08:00Z",
   "// tranche_1_5_spike_complete_at": "2026-05-17T13:00:00Z",
   "// tranche_2_complete_at": "2026-05-17T15:30:00Z",
-  "// status_history_note": "spec_ready → architecture_ready → plan_ready → qa_ready → implementation_in_progress (T1 partial → T1.5 spike → T1.5 cleanup → T2 main) → implemented 2026-05-17T15:30Z (28 tasks done; T028 manual smoke gate pending; 508/508 tests green; build clean)",
+  "// status_history_note": "spec_ready â†’ architecture_ready â†’ plan_ready â†’ qa_ready â†’ implementation_in_progress (T1 partial â†’ T1.5 spike â†’ T1.5 cleanup â†’ T2 main) â†’ implemented 2026-05-17T15:30Z (28 tasks done; T028 manual smoke gate pending; 508/508 tests green; build clean)",
   "product_slug": "redirect-manager",
   "product_root": "products/redirect-manager",
   "status": "shipped_with_caveats",
@@ -33,7 +33,7 @@
   "source": {
     "kind": "raw_idea",
     "values": [
-      "Redirect Manager PRD-003: Wire placeholder 'Publish all' hero CTA on Full Page workspace to a real Sitecore publish job. Rename 'Publish all' → 'Publish Site' (Republish mode, all configured locales, confirmation dialog, fire-and-forget toast). Add per-map 'Publish' action in Redirect Maps rail (item-only Republish, no confirmation, fire-and-forget toast). Target endpoint: SitecoreAI Publishing v1 POST /authoring/publishing/v1/jobs (operator-supplied spec). Tranche 1 probes @sitecore-marketplace-sdk/xmc for a publishing wrapper; if absent (operator's initial finding), add new Next.js API route at app/api/publish/route.ts holding OAuth client-credentials, proxying to REST endpoint. Operator pre-approved REST fallback. Full Page surface only — Context Panel + Dashboard Widget unchanged."
+      "Redirect Manager PRD-003: Wire placeholder 'Publish all' hero CTA on Full Page workspace to a real Sitecore publish job. Rename 'Publish all' â†’ 'Publish Site' (Republish mode, all configured locales, confirmation dialog, fire-and-forget toast). Add per-map 'Publish' action in Redirect Maps rail (item-only Republish, no confirmation, fire-and-forget toast). Target endpoint: SitecoreAI Publishing v1 POST /authoring/publishing/v1/jobs (operator-supplied spec). Tranche 1 probes @sitecore-marketplace-sdk/xmc for a publishing wrapper; if absent (operator's initial finding), add new Next.js API route at app/api/publish/route.ts holding OAuth client-credentials, proxying to REST endpoint. Operator pre-approved REST fallback. Full Page surface only â€” Context Panel + Dashboard Widget unchanged."
     ],
     "analysis_mode": "greenfield",
     "source_analysis_artifact": null,
@@ -42,22 +42,22 @@
   },
   "canonical_artifacts": {
     "brain_dump": null,
-    "prd": "products/redirect-manager/project-planning/PRD/prd-003.md",
-    "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-003.md",
+    "prd": "products/marketplace/redirect-manager/project-planning/PRD/prd-003.md",
+    "prd_minimal": "products/marketplace/redirect-manager/project-planning/PRD/prd-minimal-003.md",
     "architecture": null,
-    "task_breakdown": "products/redirect-manager/project-planning/plans/task-breakdown-20260516T194651Z.md",
+    "task_breakdown": "products/marketplace/redirect-manager/project-planning/plans/task-breakdown-20260516T194651Z.md",
     "task_breakdown_pre_qa": null,
     "qa_report": null,
-    "implementation_runbook": "products/redirect-manager/project-planning/plans/implementation-runbook-20260516T194651Z.md",
+    "implementation_runbook": "products/marketplace/redirect-manager/project-planning/plans/implementation-runbook-20260516T194651Z.md",
     "code_review_report": null,
-    "test_report": "products/redirect-manager/project-planning/plans/test-report-20260517T210000Z.md",
-    "ship_report": "products/redirect-manager/project-planning/plans/ship-report-20260517T213000Z.md",
+    "test_report": "products/marketplace/redirect-manager/project-planning/plans/test-report-20260517T210000Z.md",
+    "ship_report": "products/marketplace/redirect-manager/project-planning/plans/ship-report-20260517T213000Z.md",
     "content_model": null,
     "content_examples": null,
     "friction_log": null
   },
   "friction_log": {
-    "path": "products/redirect-manager/project-planning/workflow/friction-log-20260516T194651Z.md",
+    "path": "products/marketplace/redirect-manager/project-planning/workflow/friction-log-20260516T194651Z.md",
     "min_severity": "medium",
     "enabled": true
   },
@@ -96,7 +96,7 @@
       "exited_at": "2026-05-16T22:06:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "Minimal track — no architecture blueprint file. 3 new ADRs: ADR-0032 (per-map Publish placement: icon button at row end, immediately right of RedirectType Badge, with stopPropagation to not trigger row selection), ADR-0033 (branch-agnostic publish service module contract at site/lib/publish/publish-service.ts — six surfaces: PublishScope union, pure body builders, CallPublish transport adapter, outcomeFrom mapper, ToastAdapter, idempotency via caller-side disabled state), ADR-0034 (Tranche 1 outcome template, Status=Proposed). SDK contract gate satisfied via xmc.sites.Site.languages citation at node_modules/@sitecore-marketplace-sdk/xmc/dist/xmc/src/client-sites/types.gen.d.ts line 1019 + double .data.data unwrap convention (carry-over from PRD-000/002 site/lib/sdk/sites.ts). Bonus side-finding: augmentation.gen.d.ts grep confirms NO publishing surface in xmc.* (only sites.listJobs / sites.retrieveJob exist, which are background jobs, not publishing) — Branch B is the expected Tranche 1 outcome; Tranche 1 is largely confirmation. ADR-density gate: 3 new ADRs (under 5-ADR HARD STOP)."
+      "notes": "Minimal track â€” no architecture blueprint file. 3 new ADRs: ADR-0032 (per-map Publish placement: icon button at row end, immediately right of RedirectType Badge, with stopPropagation to not trigger row selection), ADR-0033 (branch-agnostic publish service module contract at site/lib/publish/publish-service.ts â€” six surfaces: PublishScope union, pure body builders, CallPublish transport adapter, outcomeFrom mapper, ToastAdapter, idempotency via caller-side disabled state), ADR-0034 (Tranche 1 outcome template, Status=Proposed). SDK contract gate satisfied via xmc.sites.Site.languages citation at node_modules/@sitecore-marketplace-sdk/xmc/dist/xmc/src/client-sites/types.gen.d.ts line 1019 + double .data.data unwrap convention (carry-over from PRD-000/002 site/lib/sdk/sites.ts). Bonus side-finding: augmentation.gen.d.ts grep confirms NO publishing surface in xmc.* (only sites.listJobs / sites.retrieveJob exist, which are background jobs, not publishing) â€” Branch B is the expected Tranche 1 outcome; Tranche 1 is largely confirmation. ADR-density gate: 3 new ADRs (under 5-ADR HARD STOP)."
     },
     {
       "stage": "ui_ready",
@@ -105,7 +105,7 @@
       "exited_at": "2026-05-16T22:06:00Z",
       "outcome": "skipped",
       "error": null,
-      "notes": "Skipped per scope_dial.ui_variants=skip. No UI variants, no POC clickdummies. PRD-003 visual surface is a rename + a single new icon-button affordance, both of which re-use existing PRD-002 Blok primitives (Sonner toast, dialog shell, button variants) — no new visual direction needed."
+      "notes": "Skipped per scope_dial.ui_variants=skip. No UI variants, no POC clickdummies. PRD-003 visual surface is a rename + a single new icon-button affordance, both of which re-use existing PRD-002 Blok primitives (Sonner toast, dialog shell, button variants) â€” no new visual direction needed."
     },
     {
       "stage": "plan_ready",
@@ -114,7 +114,7 @@
       "exited_at": "2026-05-16T22:18:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "28 tasks (T001–T028; T014A is Branch-A alternative). Tranche 1 (T001–T005, read-only probe + ADR-0034 flip) ends in HARD operator gate. Tranche 2 split into 4 groups: 2A branch-agnostic core (T006–T013, 8 tasks), 2B Branch-B transport adapter (T014–T018, 5 tasks; collapses to T014A for Branch A), 2C UI integration (T019–T025, 7 tasks), 2D docs + smoke (T026–T028, 3 tasks). All 7 § 4c subsections filled or explicit N/A (4c-4 N/A for variant proposals but reuse anchors + verbatim AC copy + lucide icon recommendation provided; 4c-7 N/A — greenfield extension to existing app). Risks flagged: server-side route inflection (R-1), OAuth credential prereq (R-2), react-virtuoso row recycling (R-6), stopPropagation discipline (R-5). Snapshot setting respected — no task_breakdown_pre_qa file."
+      "notes": "28 tasks (T001â€“T028; T014A is Branch-A alternative). Tranche 1 (T001â€“T005, read-only probe + ADR-0034 flip) ends in HARD operator gate. Tranche 2 split into 4 groups: 2A branch-agnostic core (T006â€“T013, 8 tasks), 2B Branch-B transport adapter (T014â€“T018, 5 tasks; collapses to T014A for Branch A), 2C UI integration (T019â€“T025, 7 tasks), 2D docs + smoke (T026â€“T028, 3 tasks). All 7 Â§ 4c subsections filled or explicit N/A (4c-4 N/A for variant proposals but reuse anchors + verbatim AC copy + lucide icon recommendation provided; 4c-7 N/A â€” greenfield extension to existing app). Risks flagged: server-side route inflection (R-1), OAuth credential prereq (R-2), react-virtuoso row recycling (R-6), stopPropagation discipline (R-5). Snapshot setting respected â€” no task_breakdown_pre_qa file."
     },
     {
       "stage": "qa_ready",
@@ -123,7 +123,7 @@
       "exited_at": "2026-05-16T22:27:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "Edited task breakdown in place. Added § 9 TDD contract (RED → GREEN → REFACTOR; Tranche 1 waived; vitest + jsdom + @testing-library/react confirmed; msw absent — vi.spyOn(globalThis, 'fetch') only). Added § 10 with 35 explicitly specified tests (8 body/outcome unit, 5 orchestration unit, 10 route+token unit, 3 locale unit, 14 component UI, 2 theme/a11y). Split 5 tasks with a/b suffixes (T012a/b, T013a/b, T018a/b, T020a/b, T024a/b) preserving stable IDs. Reordered § 5 Execution Order so all RED test tasks (T012a, T013a, T018a, T020a, T024a) appear before their implementation siblings. T014/T015 now depend on T018a. Added § 4c-8: verbatim const expected body fixtures for buildSitePublishBody + buildItemPublishBody (PRD AC-P1.4 / AC-P2.3), SDK fixture citation (types.gen.d.ts:1019), structural secret-isolation spec for NFR-P2 regression, jsdom-no-msw env note. task_breakdown_style: tdd. No separate qa-report.md per minimal-track + light-rigor; enriched task breakdown is the contract."
+      "notes": "Edited task breakdown in place. Added Â§ 9 TDD contract (RED â†’ GREEN â†’ REFACTOR; Tranche 1 waived; vitest + jsdom + @testing-library/react confirmed; msw absent â€” vi.spyOn(globalThis, 'fetch') only). Added Â§ 10 with 35 explicitly specified tests (8 body/outcome unit, 5 orchestration unit, 10 route+token unit, 3 locale unit, 14 component UI, 2 theme/a11y). Split 5 tasks with a/b suffixes (T012a/b, T013a/b, T018a/b, T020a/b, T024a/b) preserving stable IDs. Reordered Â§ 5 Execution Order so all RED test tasks (T012a, T013a, T018a, T020a, T024a) appear before their implementation siblings. T014/T015 now depend on T018a. Added Â§ 4c-8: verbatim const expected body fixtures for buildSitePublishBody + buildItemPublishBody (PRD AC-P1.4 / AC-P2.3), SDK fixture citation (types.gen.d.ts:1019), structural secret-isolation spec for NFR-P2 regression, jsdom-no-msw env note. task_breakdown_style: tdd. No separate qa-report.md per minimal-track + light-rigor; enriched task breakdown is the contract."
     },
     {
       "stage": "implementation_in_progress",
@@ -132,7 +132,7 @@
       "exited_at": "2026-05-17T00:08:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "Tranche 1 (T001–T005) complete; implementation-runbook-20260516T194651Z.md written. T001 = D-T1.1 = Branch B CONFIRMED via grep of all *.gen.d.ts under @sitecore-marketplace-sdk/xmc — zero xmc.publishing.* surfaces; all `jobs` hits are sites/xmapp background jobs (excluded per ADR-0034 step 1); all `publish*` hits are page-state properties or the `Publishing` type. T002 type-shape captured (Sites.Site.languages?: Array<string> | null at types.gen.d.ts:1019; double .data.data unwrap from site/lib/sdk/sites.ts:35-39; example values in xx-YY format). T003 (Publishing host URL), T004 (locales:['*'] live probe), T005 (D-T1.3 OAuth credentials verification) — all marked OPERATOR ACTION REQUIRED in capture artifact. ADR-0034 partially amended: Status=Proposed (Tranche 1 partial — awaiting T002 values / T003 host / T004 shorthand verdict / D-T1.3 OAuth creds). Branch A struck. Branch B SELECTED with known specifics (route path site/app/api/publish/route.ts, OAuth scopes, env var names). Tranche 1 capture log table appended to ADR. No code under site/ written — Tranche 1 is read-only. HARD OPERATOR GATE pending."
+      "notes": "Tranche 1 (T001â€“T005) complete; implementation-runbook-20260516T194651Z.md written. T001 = D-T1.1 = Branch B CONFIRMED via grep of all *.gen.d.ts under @sitecore-marketplace-sdk/xmc â€” zero xmc.publishing.* surfaces; all `jobs` hits are sites/xmapp background jobs (excluded per ADR-0034 step 1); all `publish*` hits are page-state properties or the `Publishing` type. T002 type-shape captured (Sites.Site.languages?: Array<string> | null at types.gen.d.ts:1019; double .data.data unwrap from site/lib/sdk/sites.ts:35-39; example values in xx-YY format). T003 (Publishing host URL), T004 (locales:['*'] live probe), T005 (D-T1.3 OAuth credentials verification) â€” all marked OPERATOR ACTION REQUIRED in capture artifact. ADR-0034 partially amended: Status=Proposed (Tranche 1 partial â€” awaiting T002 values / T003 host / T004 shorthand verdict / D-T1.3 OAuth creds). Branch A struck. Branch B SELECTED with known specifics (route path site/app/api/publish/route.ts, OAuth scopes, env var names). Tranche 1 capture log table appended to ADR. No code under site/ written â€” Tranche 1 is read-only. HARD OPERATOR GATE pending."
     },
     {
       "stage": "tested",
@@ -150,7 +150,7 @@
       "exited_at": "2026-05-17T21:30:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "Auto-lite emission per scope_dial.docs_at_ship=auto-lite. CHANGELOG.md prepended with [PRD-003] entry (Delivered + Deferred + Known limitations + Stats). README.md not touched — no existing ## Status section to update (per /ship § 15a auto-lite conservative reading; README otherwise customized by operator). Doc Writer (09) not invoked — PM did it inline."
+      "notes": "Auto-lite emission per scope_dial.docs_at_ship=auto-lite. CHANGELOG.md prepended with [PRD-003] entry (Delivered + Deferred + Known limitations + Stats). README.md not touched â€” no existing ## Status section to update (per /ship Â§ 15a auto-lite conservative reading; README otherwise customized by operator). Doc Writer (09) not invoked â€” PM did it inline."
     },
     {
       "stage": "shipped",
@@ -159,7 +159,7 @@
       "exited_at": "2026-05-17T21:30:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "Ship status: shipped_with_caveats. Smoke gate: host_frame_smoke=skipped (no POC; operator-acceptable per scope_dial.ui_variants=skip; mix of passed + skipped forces shipped_with_caveats per /ship § 13). All PRD requirements either delivered (US-P1, US-P3, FR-P1/P2/P4-P14, NFR-P1-P6) or cleanly cut (US-P2 + FR-P3 per ADR-0036, with smoke-evidence rationale). Code-review major fix + 2/3 minors landed; 1 minor deferred (m3 server-side body validation defense-in-depth gap; non-blocking). 7 ADRs authored this PRD (0031-0037). ADR-0035 narrows ADR-0002 for publishing surface only (carve-out documented). Tests 521/521. m_publish operator smoke PASSED 2026-05-17 on solo tenant."
+      "notes": "Ship status: shipped_with_caveats. Smoke gate: host_frame_smoke=skipped (no POC; operator-acceptable per scope_dial.ui_variants=skip; mix of passed + skipped forces shipped_with_caveats per /ship Â§ 13). All PRD requirements either delivered (US-P1, US-P3, FR-P1/P2/P4-P14, NFR-P1-P6) or cleanly cut (US-P2 + FR-P3 per ADR-0036, with smoke-evidence rationale). Code-review major fix + 2/3 minors landed; 1 minor deferred (m3 server-side body validation defense-in-depth gap; non-blocking). 7 ADRs authored this PRD (0031-0037). ADR-0035 narrows ADR-0002 for publishing surface only (carve-out documented). Tests 521/521. m_publish operator smoke PASSED 2026-05-17 on solo tenant."
     }
   ],
   "implementation": {
@@ -218,7 +218,7 @@
       "item": "Operator pre-inspected @sitecore-marketplace-sdk/xmc and found no publishing wrapper; Branch B (server-side OAuth proxy + Next.js API route) is the pre-approved fallback. Tranche 1 probe confirms before commitment.",
       "raised_at": "2026-05-16T19:46:51Z",
       "resolved_at": null,
-      "references": "prd-003.md § 9.3, R-P1; ADR-0031"
+      "references": "prd-003.md Â§ 9.3, R-P1; ADR-0031"
     },
     {
       "stage": "create-prd",
@@ -227,40 +227,40 @@
       "item": "Theme parity (dark/light/system) and reduced-motion compliance patterns from PRD-002 carry forward to the new confirmation dialog + per-map publish button. Re-use existing Blok modal + toast components; no new design tokens.",
       "raised_at": "2026-05-16T19:46:51Z",
       "resolved_at": null,
-      "references": "prd-003.md NFR-P3, NFR-P4, NFR-P5, § 11"
+      "references": "prd-003.md NFR-P3, NFR-P4, NFR-P5, Â§ 11"
     },
     {
       "stage": "create-prd",
       "severity": "warn",
       "kind": "concern",
-      "item": "First server-side route in Redirect Manager (Branch B only). ADR-0002 \"no server-side OAuth proxy\" stance is partially superseded if Branch B lands — successor ADR records the carve-out for publishing. Other Sitecore calls remain Mode A.",
+      "item": "First server-side route in Redirect Manager (Branch B only). ADR-0002 \"no server-side OAuth proxy\" stance is partially superseded if Branch B lands â€” successor ADR records the carve-out for publishing. Other Sitecore calls remain Mode A.",
       "raised_at": "2026-05-16T19:46:51Z",
       "resolved_at": null,
-      "references": "prd-003.md § 9.3, R-P3; ADR-0002 § Consequences; ADR-0031"
+      "references": "prd-003.md Â§ 9.3, R-P3; ADR-0002 Â§ Consequences; ADR-0031"
     },
     {
       "stage": "create-prd",
       "severity": "info",
       "kind": "concern",
-      "item": "Fire-and-forget UX hides the eventual publish outcome. A 201 only confirms the job was QUEUED — not that it completed. Job-status polling explicitly deferred per scope-dial; operator is aware of the simple-PRD trade-off.",
+      "item": "Fire-and-forget UX hides the eventual publish outcome. A 201 only confirms the job was QUEUED â€” not that it completed. Job-status polling explicitly deferred per scope-dial; operator is aware of the simple-PRD trade-off.",
       "raised_at": "2026-05-16T19:46:51Z",
       "resolved_at": null,
-      "references": "prd-003.md R-P6, § 15"
+      "references": "prd-003.md R-P6, Â§ 15"
     },
     {
       "stage": "create-prd",
       "severity": "info",
       "kind": "concern",
-      "item": "Per-map Publish placement is /architect's call — there is NO existing per-row action pattern in the rail (edit/delete live on the detail pane, not on rail rows). Architect picks from the three options enumerated in PRD § 11 (icon button / overflow menu / row-end action).",
+      "item": "Per-map Publish placement is /architect's call â€” there is NO existing per-row action pattern in the rail (edit/delete live on the detail pane, not on rail rows). Architect picks from the three options enumerated in PRD Â§ 11 (icon button / overflow menu / row-end action).",
       "raised_at": "2026-05-16T19:46:51Z",
       "resolved_at": null,
-      "references": "prd-003.md AC-P2.1, § 11, OQ-P5"
+      "references": "prd-003.md AC-P2.1, Â§ 11, OQ-P5"
     },
     {
       "stage": "create-prd",
       "severity": "info",
       "kind": "question",
-      "item": "OQ-P1 — Does @sitecore-marketplace-sdk/xmc expose a publishing surface? Resolution: Tranche 1 .d.ts inspection. Operator's initial finding: no.",
+      "item": "OQ-P1 â€” Does @sitecore-marketplace-sdk/xmc expose a publishing surface? Resolution: Tranche 1 .d.ts inspection. Operator's initial finding: no.",
       "raised_at": "2026-05-16T19:46:51Z",
       "resolved_at": null,
       "references": "prd-003.md OQ-P1, D-T1.1; ADR-0031"
@@ -269,7 +269,7 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "question",
-      "item": "OQ-P2 — Is options.xmc.locales: [\"*\"] accepted by the API, or must locales be enumerated? Resolution: Tranche 1 live probe.",
+      "item": "OQ-P2 â€” Is options.xmc.locales: [\"*\"] accepted by the API, or must locales be enumerated? Resolution: Tranche 1 live probe.",
       "raised_at": "2026-05-16T19:46:51Z",
       "resolved_at": null,
       "references": "prd-003.md OQ-P2, D-T1.2"
@@ -278,7 +278,7 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "question",
-      "item": "OQ-P3 — Canonical SitecoreAI Publishing host URL for the solo tenant. Resolution: Tranche 1 env discovery (likely in Cloud Portal developer settings).",
+      "item": "OQ-P3 â€” Canonical SitecoreAI Publishing host URL for the solo tenant. Resolution: Tranche 1 env discovery (likely in Cloud Portal developer settings).",
       "raised_at": "2026-05-16T19:46:51Z",
       "resolved_at": null,
       "references": "prd-003.md OQ-P3"
@@ -287,7 +287,7 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "question",
-      "item": "OQ-P4 — Does xmc.sites.<site>.languages return locale list in the format required by the Publishing API (xx or xx-YY)? Resolution: Tranche 1 SDK type inspection.",
+      "item": "OQ-P4 â€” Does xmc.sites.<site>.languages return locale list in the format required by the Publishing API (xx or xx-YY)? Resolution: Tranche 1 SDK type inspection.",
       "raised_at": "2026-05-16T19:46:51Z",
       "resolved_at": null,
       "references": "prd-003.md OQ-P4, FR-P6"
@@ -296,10 +296,10 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "question",
-      "item": "OQ-P5 — Final placement of the per-map Publish action in the rail. Resolution: /architect picks from § 11 options.",
+      "item": "OQ-P5 â€” Final placement of the per-map Publish action in the rail. Resolution: /architect picks from Â§ 11 options.",
       "raised_at": "2026-05-16T19:46:51Z",
       "resolved_at": "2026-05-16T22:06:00Z",
-      "references": "prd-003.md AC-P2.1, § 11, OQ-P5"
+      "references": "prd-003.md AC-P2.1, Â§ 11, OQ-P5"
     },
     {
       "stage": "architect",
@@ -314,7 +314,7 @@
       "stage": "architect",
       "severity": "info",
       "kind": "decision",
-      "item": "Publish service module contract locked at site/lib/publish/publish-service.ts (ADR-0033) — branch-agnostic skeleton with six surfaces: PublishScope discriminated union, pure body builders (buildSitePublishBody / buildItemPublishBody), CallPublish transport adapter type (the ONLY thing that differs between Branch A and Branch B), outcomeFrom mapper, ToastAdapter (three states: requested/queued/failed), caller-side idempotency via disabled button state. Branch A vs Branch B differ in exactly one file — the adapter implementation.",
+      "item": "Publish service module contract locked at site/lib/publish/publish-service.ts (ADR-0033) â€” branch-agnostic skeleton with six surfaces: PublishScope discriminated union, pure body builders (buildSitePublishBody / buildItemPublishBody), CallPublish transport adapter type (the ONLY thing that differs between Branch A and Branch B), outcomeFrom mapper, ToastAdapter (three states: requested/queued/failed), caller-side idempotency via disabled button state. Branch A vs Branch B differ in exactly one file â€” the adapter implementation.",
       "raised_at": "2026-05-16T22:06:00Z",
       "resolved_at": "2026-05-16T22:06:00Z",
       "references": "ADR-0033"
@@ -332,19 +332,19 @@
       "stage": "architect",
       "severity": "info",
       "kind": "resolved",
-      "item": "Strong evidence that Branch B (server-side OAuth proxy) is the Tranche 1 outcome: @sitecore-marketplace-sdk/xmc/dist/xmc/src/client-sites/augmentation.gen.d.ts grep reveals NO xmc.publishing.* surface — only xmc.sites.listJobs / xmc.sites.retrieveJob, which are background jobs (not publishing jobs). Tranche 1 D-T1.1 probe becomes confirmation rather than open question. Operator's pre-inspection corroborated.",
+      "item": "Strong evidence that Branch B (server-side OAuth proxy) is the Tranche 1 outcome: @sitecore-marketplace-sdk/xmc/dist/xmc/src/client-sites/augmentation.gen.d.ts grep reveals NO xmc.publishing.* surface â€” only xmc.sites.listJobs / xmc.sites.retrieveJob, which are background jobs (not publishing jobs). Tranche 1 D-T1.1 probe becomes confirmation rather than open question. Operator's pre-inspection corroborated.",
       "raised_at": "2026-05-16T22:06:00Z",
       "resolved_at": "2026-05-16T22:06:00Z",
-      "references": "ADR-0034 § Tranche 1 probe protocol; supersedes (partial) operator_attention 2026-05-16T19:46:51Z OQ-P1"
+      "references": "ADR-0034 Â§ Tranche 1 probe protocol; supersedes (partial) operator_attention 2026-05-16T19:46:51Z OQ-P1"
     },
     {
       "stage": "architect",
       "severity": "info",
       "kind": "resolved",
-      "item": "SDK contract verification gate satisfied — xmc.sites.Site.languages cited at node_modules/@sitecore-marketplace-sdk/xmc/dist/xmc/src/client-sites/types.gen.d.ts:1019 (`Sites.Site.languages?: Array<string> | null`). Unwrap level: double .data.data (carry-over from PRD-000/002 — re-uses site/lib/sdk/sites.ts envelope handling). SitecoreAI Publishing v1 REST contract cited from operator-supplied API spec captured in PRD-003 § 9.1 / AC-P1.4 / AC-P2.3.",
+      "item": "SDK contract verification gate satisfied â€” xmc.sites.Site.languages cited at node_modules/@sitecore-marketplace-sdk/xmc/dist/xmc/src/client-sites/types.gen.d.ts:1019 (`Sites.Site.languages?: Array<string> | null`). Unwrap level: double .data.data (carry-over from PRD-000/002 â€” re-uses site/lib/sdk/sites.ts envelope handling). SitecoreAI Publishing v1 REST contract cited from operator-supplied API spec captured in PRD-003 Â§ 9.1 / AC-P1.4 / AC-P2.3.",
       "raised_at": "2026-05-16T22:06:00Z",
       "resolved_at": "2026-05-16T22:06:00Z",
-      "references": "ADR-0033 § SDK citations"
+      "references": "ADR-0033 Â§ SDK citations"
     },
     {
       "stage": "task-breakdown",
@@ -353,16 +353,16 @@
       "item": "OAuth client-credentials service client (xmcpub.jobs.*:w + xmcloud.cm:admin) must be registered in operator's Cloud Portal BEFORE Tranche 2 starts. Lead Dev flagged R-2 as a HARD STOP gated on Tranche 1 D-T1.3. The credentials become env vars SITECORE_OAUTH_CLIENT_ID / _SECRET / _TOKEN_URL / _PUBLISHING_BASE_URL in .env.local (server-only). Operator action item: create service client + capture credentials before Tranche 2.",
       "raised_at": "2026-05-16T22:27:00Z",
       "resolved_at": null,
-      "references": "task-breakdown-20260516T194651Z.md § Risk Areas R-2; PRD-003 § 9.4; ADR-0031 D-T1.3"
+      "references": "task-breakdown-20260516T194651Z.md Â§ Risk Areas R-2; PRD-003 Â§ 9.4; ADR-0031 D-T1.3"
     },
     {
       "stage": "task-breakdown",
       "severity": "info",
       "kind": "assumption",
-      "item": "QA Specialist split 5 Lead-Dev tasks for RED→GREEN ordering: T012→T012a/b, T013→T013a/b, T018→T018a/b, T020→T020a/b, T024→T024a/b. Stable Lead-Dev Task IDs preserved with a/b suffixes. § 5 Execution Order rewritten so all RED test tasks fire before their implementation siblings. Diff auto-applied per scope_dial.task_breakdown_review=skip_gate; operator may inspect in next /code-review cycle if desired.",
+      "item": "QA Specialist split 5 Lead-Dev tasks for REDâ†’GREEN ordering: T012â†’T012a/b, T013â†’T013a/b, T018â†’T018a/b, T020â†’T020a/b, T024â†’T024a/b. Stable Lead-Dev Task IDs preserved with a/b suffixes. Â§ 5 Execution Order rewritten so all RED test tasks fire before their implementation siblings. Diff auto-applied per scope_dial.task_breakdown_review=skip_gate; operator may inspect in next /code-review cycle if desired.",
       "raised_at": "2026-05-16T22:27:00Z",
       "resolved_at": null,
-      "references": "task-breakdown-20260516T194651Z.md § 10; F3 (PRD-003 friction-log-20260509) — skip_gate convention"
+      "references": "task-breakdown-20260516T194651Z.md Â§ 10; F3 (PRD-003 friction-log-20260509) â€” skip_gate convention"
     },
     {
       "stage": "task-breakdown",
@@ -377,19 +377,19 @@
       "stage": "task-breakdown",
       "severity": "info",
       "kind": "assumption",
-      "item": "§ 4c-4 marked N/A — UI variants skipped per scope_dial; but Lead Dev provided full re-use anchors: existing AlertDialog primitive (verified via DeleteMapConfirmModal.tsx:15-22 grep), Sonner toast surface, lucide-react `Send` icon (sharper for fire-and-forget than UploadCloud) with UploadCloud as fallback if PR review prefers. All AC-verbatim copy strings pinned. § 4c-7 N/A — greenfield extension to existing shipped product (not a rebuild).",
+      "item": "Â§ 4c-4 marked N/A â€” UI variants skipped per scope_dial; but Lead Dev provided full re-use anchors: existing AlertDialog primitive (verified via DeleteMapConfirmModal.tsx:15-22 grep), Sonner toast surface, lucide-react `Send` icon (sharper for fire-and-forget than UploadCloud) with UploadCloud as fallback if PR review prefers. All AC-verbatim copy strings pinned. Â§ 4c-7 N/A â€” greenfield extension to existing shipped product (not a rebuild).",
       "raised_at": "2026-05-16T22:27:00Z",
       "resolved_at": null,
-      "references": "task-breakdown-20260516T194651Z.md § 4c-4, § 4c-7"
+      "references": "task-breakdown-20260516T194651Z.md Â§ 4c-4, Â§ 4c-7"
     },
     {
       "stage": "task-breakdown",
       "severity": "info",
       "kind": "concern",
-      "item": "Branch B server-side secret-leak structural test (per § 9 + § 4c-8): if vitest does not catch a leak because env var resolves at module load before test stubs it, the manual /code-review pass for 'process.env.SITECORE_OAUTH_CLIENT_SECRET referenced only in app/api/publish/ + lib/auth/' is the backstop. NFR-P2 regression risk if the structural test has a false negative.",
+      "item": "Branch B server-side secret-leak structural test (per Â§ 9 + Â§ 4c-8): if vitest does not catch a leak because env var resolves at module load before test stubs it, the manual /code-review pass for 'process.env.SITECORE_OAUTH_CLIENT_SECRET referenced only in app/api/publish/ + lib/auth/' is the backstop. NFR-P2 regression risk if the structural test has a false negative.",
       "raised_at": "2026-05-16T22:27:00Z",
       "resolved_at": null,
-      "references": "task-breakdown-20260516T194651Z.md § 9 secret-isolation spec; PRD-003 NFR-P2"
+      "references": "task-breakdown-20260516T194651Z.md Â§ 9 secret-isolation spec; PRD-003 NFR-P2"
     },
     {
       "stage": "implement",
@@ -398,49 +398,49 @@
       "item": "T001 / D-T1.1 = Branch B CONFIRMED. SDK probe of all @sitecore-marketplace-sdk/xmc *.gen.d.ts files found zero publishing-surface hits; all `jobs` hits are sites/xmapp background jobs (excluded per ADR-0034 step 1). Operator's pre-inspection corroborated. ADR-0034 Branch A struck, Branch B selected.",
       "raised_at": "2026-05-17T00:08:00Z",
       "resolved_at": "2026-05-17T00:08:00Z",
-      "references": "captures/tranche-1-publish-20260516.md § SDK probe; ADR-0034 amended; resolves OQ-P1"
+      "references": "captures/tranche-1-publish-20260516.md Â§ SDK probe; ADR-0034 amended; resolves OQ-P1"
     },
     {
       "stage": "implement",
       "severity": "info",
       "kind": "resolved",
-      "item": "T002 type-shape resolved — Sites.Site.languages?: Array<string> | null at site/node_modules/@sitecore-marketplace-sdk/xmc/dist/xmc/src/client-sites/types.gen.d.ts:1019; double .data.data unwrap convention from site/lib/sdk/sites.ts:35-39; example values in xx-YY ISO format. Resolves SDK contract gate carry-over.",
+      "item": "T002 type-shape resolved â€” Sites.Site.languages?: Array<string> | null at site/node_modules/@sitecore-marketplace-sdk/xmc/dist/xmc/src/client-sites/types.gen.d.ts:1019; double .data.data unwrap convention from site/lib/sdk/sites.ts:35-39; example values in xx-YY ISO format. Resolves SDK contract gate carry-over.",
       "raised_at": "2026-05-17T00:08:00Z",
       "resolved_at": "2026-05-17T00:08:00Z",
-      "references": "captures/tranche-1-publish-20260516.md § Site languages; partially resolves OQ-P4"
+      "references": "captures/tranche-1-publish-20260516.md Â§ Site languages; partially resolves OQ-P4"
     },
     {
       "stage": "implement",
       "severity": "blocker",
       "kind": "decision",
-      "item": "HARD OPERATOR GATE — 4 action items required before Tranche 2 starts: (1) T002 — capture actual `Sites.Site.languages` array values for solo / solo-website tenant (drives buildSitePublishBody locale shape); (2) T003 — provide canonical SitecoreAI Publishing v1 base URL for solo tenant (typically https://xmc-<tenant>.sitecorecloud.io from Cloud Portal → Developer Settings); (3) T004 — run the documented curl probe to confirm whether `options.xmc.locales: [\"*\"]` is accepted by the API (capture artifact has the verbatim curl template); (4) D-T1.3 — verify OAuth client-credentials service client is registered for solo tenant with scopes (xmcpub.jobs.a:w | xmcpub.jobs.t:w | xmcpub.jobs.t:wl) + xmcloud.cm:admin. If service client is NOT registered, this is a HARD STOP — follow sitecore:sitecoreai-auth to create one before Tranche 2.",
+      "item": "HARD OPERATOR GATE â€” 4 action items required before Tranche 2 starts: (1) T002 â€” capture actual `Sites.Site.languages` array values for solo / solo-website tenant (drives buildSitePublishBody locale shape); (2) T003 â€” provide canonical SitecoreAI Publishing v1 base URL for solo tenant (typically https://xmc-<tenant>.sitecorecloud.io from Cloud Portal â†’ Developer Settings); (3) T004 â€” run the documented curl probe to confirm whether `options.xmc.locales: [\"*\"]` is accepted by the API (capture artifact has the verbatim curl template); (4) D-T1.3 â€” verify OAuth client-credentials service client is registered for solo tenant with scopes (xmcpub.jobs.a:w | xmcpub.jobs.t:w | xmcpub.jobs.t:wl) + xmcloud.cm:admin. If service client is NOT registered, this is a HARD STOP â€” follow sitecore:sitecoreai-auth to create one before Tranche 2.",
       "raised_at": "2026-05-17T00:08:00Z",
       "resolved_at": "2026-05-17T13:00:00Z",
-      "references": "captures/tranche-1-publish-20260516.md § Tranche 1.5 — real-tenant captures; ADR-0034 (Status: Accepted 2026-05-17)"
+      "references": "captures/tranche-1-publish-20260516.md Â§ Tranche 1.5 â€” real-tenant captures; ADR-0034 (Status: Accepted 2026-05-17)"
     },
     {
       "stage": "implement",
       "severity": "info",
       "kind": "resolved",
-      "item": "Tranche 1.5 spike — inline publish probe panel landed (site/components/full-page/PublishProbePanel.tsx + 6 server-side proxy routes under site/app/api/publishing/* + site/lib/auth/sitecoreai-token.ts with import \"server-only\"). Env-gated by NEXT_PUBLIC_SHOW_PUBLISH_PROBE=1. Operator pasted 7 endpoint responses + 2 real-tenant 201 Queued POSTs (Site + Items). All wire shapes locked: NESTED options.xmc.site.{mode} + options.xmc.locales for Site; options.items[]+options.xmc.items.{mode, publishChildren, publishRelatedItems} for Items. Error envelope: RFC 7807 ProblemDetails {type, title, status, detail, instance, traceId} + optional errors:{Field:[...]} extension. OAuth service client: id dkX4dPUYJrARgicYCK3W5og6xBaGH1I2, name 'Redirect Manager', type Application. PROBE PANEL IS TEMPORARY — remove at /ship time or before.",
+      "item": "Tranche 1.5 spike â€” inline publish probe panel landed (site/components/full-page/PublishProbePanel.tsx + 6 server-side proxy routes under site/app/api/publishing/* + site/lib/auth/sitecoreai-token.ts with import \"server-only\"). Env-gated by NEXT_PUBLIC_SHOW_PUBLISH_PROBE=1. Operator pasted 7 endpoint responses + 2 real-tenant 201 Queued POSTs (Site + Items). All wire shapes locked: NESTED options.xmc.site.{mode} + options.xmc.locales for Site; options.items[]+options.xmc.items.{mode, publishChildren, publishRelatedItems} for Items. Error envelope: RFC 7807 ProblemDetails {type, title, status, detail, instance, traceId} + optional errors:{Field:[...]} extension. OAuth service client: id dkX4dPUYJrARgicYCK3W5og6xBaGH1I2, name 'Redirect Manager', type Application. PROBE PANEL IS TEMPORARY â€” remove at /ship time or before.",
       "raised_at": "2026-05-17T13:00:00Z",
       "resolved_at": "2026-05-17T13:00:00Z",
-      "references": "captures/tranche-1-publish-20260516.md § Tranche 1.5; ADR-0034; resolves operator_attention 2026-05-17T00:08:00Z HARD OPERATOR GATE"
+      "references": "captures/tranche-1-publish-20260516.md Â§ Tranche 1.5; ADR-0034; resolves operator_attention 2026-05-17T00:08:00Z HARD OPERATOR GATE"
     },
     {
       "stage": "implement",
       "severity": "info",
       "kind": "decision",
-      "item": "ADR-0034 Status FLIPPED Proposed → Accepted (2026-05-17). Branch B (server-side OAuth proxy via Next.js API route) is the locked implementation path for Tranche 2. ADR-0033 service module contract holds unchanged — only the callPublish adapter is Branch B-specific. ADR-0002 is partially superseded for the publishing surface only (carve-out documented in ADR-0034 Consequences); other Sitecore calls remain Mode A.",
+      "item": "ADR-0034 Status FLIPPED Proposed â†’ Accepted (2026-05-17). Branch B (server-side OAuth proxy via Next.js API route) is the locked implementation path for Tranche 2. ADR-0033 service module contract holds unchanged â€” only the callPublish adapter is Branch B-specific. ADR-0002 is partially superseded for the publishing surface only (carve-out documented in ADR-0034 Consequences); other Sitecore calls remain Mode A.",
       "raised_at": "2026-05-17T13:00:00Z",
       "resolved_at": "2026-05-17T13:00:00Z",
-      "references": "ADR-0034 § Status; ADR-0033; ADR-0002"
+      "references": "ADR-0034 Â§ Status; ADR-0033; ADR-0002"
     },
     {
       "stage": "implement",
       "severity": "warn",
       "kind": "decision",
-      "item": "Tranche 1.5 spike code is TEMPORARY — must be removed before /ship. Removal scope: site/components/full-page/PublishProbePanel.tsx + the env-gated render block in site/components/full-page/FullPage.tsx + site/app/api/publishing/* (6 route files); KEEP site/lib/auth/sitecoreai-token.ts (carries forward to Tranche 2's site/app/api/publish/route.ts); KEEP the .env.example block but RENAME the var group from 'PRD-003 publish probe' to 'PRD-003 publish (Branch B OAuth)' once removal lands and re-purpose for production use. Consider snapshotting the panel + routes to a separate `sdk-sandbox` product (memory project_sdk_sandbox_idea.md) before deletion if you want a reusable scaffold for future probes.",
+      "item": "Tranche 1.5 spike code is TEMPORARY â€” must be removed before /ship. Removal scope: site/components/full-page/PublishProbePanel.tsx + the env-gated render block in site/components/full-page/FullPage.tsx + site/app/api/publishing/* (6 route files); KEEP site/lib/auth/sitecoreai-token.ts (carries forward to Tranche 2's site/app/api/publish/route.ts); KEEP the .env.example block but RENAME the var group from 'PRD-003 publish probe' to 'PRD-003 publish (Branch B OAuth)' once removal lands and re-purpose for production use. Consider snapshotting the panel + routes to a separate `sdk-sandbox` product (memory project_sdk_sandbox_idea.md) before deletion if you want a reusable scaffold for future probes.",
       "raised_at": "2026-05-17T13:00:00Z",
       "resolved_at": null,
       "references": "Removal happens at /ship or /code-review; tracked as ship checklist item."
@@ -449,7 +449,7 @@
       "stage": "implement",
       "severity": "info",
       "kind": "question",
-      "item": "OQ-P2 (locales: [\"*\"] shorthand acceptance) DEFERRED — operator skipped the probe this round; enumerated locales work (probe POST 201 with [\"en\"]). PRD AC-P1.4 default = enumerated, so no Tranche 2 impact. Can revisit later if shorthand simplification becomes useful.",
+      "item": "OQ-P2 (locales: [\"*\"] shorthand acceptance) DEFERRED â€” operator skipped the probe this round; enumerated locales work (probe POST 201 with [\"en\"]). PRD AC-P1.4 default = enumerated, so no Tranche 2 impact. Can revisit later if shorthand simplification becomes useful.",
       "raised_at": "2026-05-17T13:00:00Z",
       "resolved_at": null,
       "references": "ADR-0034 Tranche 1 capture log; PRD-003 OQ-P2"
@@ -458,19 +458,19 @@
       "stage": "implement",
       "severity": "info",
       "kind": "resolved",
-      "item": "Tranche 2 main implementation COMPLETE 2026-05-17. 28/28 tasks executed sequentially per § 5 (T028 manual smoke pending). 18 files created, 7 files modified. Lint: 0 errors / 2 baseline warnings. Build: PASS. Tests: 508/508 (baseline 460 + 48 new TDD tests). Branch B route at site/app/api/publish/route.ts; production-ready OAuth via existing site/lib/auth/sitecoreai-token.ts; new service module at site/lib/publish/{types,publish-service,toast-adapter,transport-server,locale-resolver,config}.ts; UI: WorkspaceHero rename + PublishSiteConfirmModal + RedirectMapPublishButton (lucide-react Send icon, e.stopPropagation, in-flight Set on RedirectMapList). vitest server-only alias added. Smoke checklist at site/docs/smoke-publish.md.",
+      "item": "Tranche 2 main implementation COMPLETE 2026-05-17. 28/28 tasks executed sequentially per Â§ 5 (T028 manual smoke pending). 18 files created, 7 files modified. Lint: 0 errors / 2 baseline warnings. Build: PASS. Tests: 508/508 (baseline 460 + 48 new TDD tests). Branch B route at site/app/api/publish/route.ts; production-ready OAuth via existing site/lib/auth/sitecoreai-token.ts; new service module at site/lib/publish/{types,publish-service,toast-adapter,transport-server,locale-resolver,config}.ts; UI: WorkspaceHero rename + PublishSiteConfirmModal + RedirectMapPublishButton (lucide-react Send icon, e.stopPropagation, in-flight Set on RedirectMapList). vitest server-only alias added. Smoke checklist at site/docs/smoke-publish.md.",
       "raised_at": "2026-05-17T15:30:00Z",
       "resolved_at": "2026-05-17T15:30:00Z",
-      "references": "implementation-runbook-20260516T194651Z.md § 4 Tranche 2; resolves Tranche 1.5 spike cleanup gate"
+      "references": "implementation-runbook-20260516T194651Z.md Â§ 4 Tranche 2; resolves Tranche 1.5 spike cleanup gate"
     },
     {
       "stage": "implement",
       "severity": "warn",
       "kind": "decision",
-      "item": "T028 m_publish real-tenant smoke PENDING — operator-driven manual gate per site/docs/smoke-publish.md. Three sub-tests: Publish Site happy path → 201 → success toast → job visible in SitecoreAI publishing list with createdBy.type='Application' name='Redirect Manager'; per-map Publish happy path; force-error case (revoke credential temporarily) → error toast surfaces status + detail. Operator runs at /test or /ship time.",
+      "item": "T028 m_publish real-tenant smoke PENDING â€” operator-driven manual gate per site/docs/smoke-publish.md. Three sub-tests: Publish Site happy path â†’ 201 â†’ success toast â†’ job visible in SitecoreAI publishing list with createdBy.type='Application' name='Redirect Manager'; per-map Publish happy path; force-error case (revoke credential temporarily) â†’ error toast surfaces status + detail. Operator runs at /test or /ship time.",
       "raised_at": "2026-05-17T15:30:00Z",
       "resolved_at": null,
-      "references": "site/docs/smoke-publish.md; task-breakdown § T028; PRD-003 § 12 m_publish"
+      "references": "site/docs/smoke-publish.md; task-breakdown Â§ T028; PRD-003 Â§ 12 m_publish"
     },
     {
       "stage": "implement",
@@ -485,16 +485,16 @@
       "stage": "implement",
       "severity": "info",
       "kind": "assumption",
-      "item": "T025 theme parity test is STRUCTURAL ONLY (6 renders-without-error tests across light/dark/system) because jest-axe is not installed. WCAG axe-scan deferred to manual a11y check at m_publish smoke per task breakdown § 10 T025 conditional path. Operator may install jest-axe later if automated a11y regression is desired.",
+      "item": "T025 theme parity test is STRUCTURAL ONLY (6 renders-without-error tests across light/dark/system) because jest-axe is not installed. WCAG axe-scan deferred to manual a11y check at m_publish smoke per task breakdown Â§ 10 T025 conditional path. Operator may install jest-axe later if automated a11y regression is desired.",
       "raised_at": "2026-05-17T15:30:00Z",
       "resolved_at": null,
-      "references": "site/components/full-page/PublishSiteConfirmModal.theme.test.tsx; task-breakdown § 10 T025"
+      "references": "site/components/full-page/PublishSiteConfirmModal.theme.test.tsx; task-breakdown Â§ 10 T025"
     },
     {
       "stage": "implement",
       "severity": "warn",
       "kind": "decision",
-      "item": "Tranche 3 — Per-map publish REMOVED (operator finding during m_publish smoke 2026-05-17: Sitecore silently no-ops Items publish for Redirect Map items because they're not Edge-published content). US-P2 + FR-P3 + AC-P2.* removed from PRD-003. ADR-0032 (per-map placement) Status → Superseded by ADR-0036. Code: RedirectMapPublishButton.tsx + RedirectMapList.test.tsx deleted; RedirectMapList.tsx reverted to pre-Tranche-2; buildItemPublishBody removed; PublishScope collapsed to site-only.",
+      "item": "Tranche 3 â€” Per-map publish REMOVED (operator finding during m_publish smoke 2026-05-17: Sitecore silently no-ops Items publish for Redirect Map items because they're not Edge-published content). US-P2 + FR-P3 + AC-P2.* removed from PRD-003. ADR-0032 (per-map placement) Status â†’ Superseded by ADR-0036. Code: RedirectMapPublishButton.tsx + RedirectMapList.test.tsx deleted; RedirectMapList.tsx reverted to pre-Tranche-2; buildItemPublishBody removed; PublishScope collapsed to site-only.",
       "raised_at": "2026-05-17T18:00:00Z",
       "resolved_at": "2026-05-17T18:00:00Z",
       "references": "ADR-0036; prd-003.md Tranche 3 amendment block"
@@ -503,7 +503,7 @@
       "stage": "implement",
       "severity": "info",
       "kind": "decision",
-      "item": "Tranche 3 — Lightweight publish-job polling + cross-session resume added (ADR-0037). 3s polling interval via usePublishJobTracker; Tier 2 localStorage resume + Tier 3 name-prefix list scan via usePublishResume. Name format changed: 'Redirect Manager — <collection>/<site> — <iso>' (operator-readable + stable list-scan prefix). Two new GET routes restored from spike: /api/publish/jobs and /api/publish/jobs/[id]. Filter to source=Redirect Manager only (operator chose Option A — our app's jobs only).",
+      "item": "Tranche 3 â€” Lightweight publish-job polling + cross-session resume added (ADR-0037). 3s polling interval via usePublishJobTracker; Tier 2 localStorage resume + Tier 3 name-prefix list scan via usePublishResume. Name format changed: 'Redirect Manager â€” <collection>/<site> â€” <iso>' (operator-readable + stable list-scan prefix). Two new GET routes restored from spike: /api/publish/jobs and /api/publish/jobs/[id]. Filter to source=Redirect Manager only (operator chose Option A â€” our app's jobs only).",
       "raised_at": "2026-05-17T18:00:00Z",
       "resolved_at": "2026-05-17T18:00:00Z",
       "references": "ADR-0037; site/lib/publish/{use-publish-job-tracker,use-publish-resume,in-flight-store}.ts; site/app/api/publish/jobs/**"
@@ -512,7 +512,7 @@
       "stage": "implement",
       "severity": "info",
       "kind": "resolved",
-      "item": "Tranche 3 verification: lint 0 errors / 2 baseline warnings; build clean (9 routes); tests 521/521 (net change vs Tranche 2: -9 item-publish tests removed + +20 tracker/resume/route/in-flight tests = +11). Locale resolver simplified to always return ['en'] (UrlMapping is SHARED — see reference_sitecore_redirect_map_template_field_versioning).",
+      "item": "Tranche 3 verification: lint 0 errors / 2 baseline warnings; build clean (9 routes); tests 521/521 (net change vs Tranche 2: -9 item-publish tests removed + +20 tracker/resume/route/in-flight tests = +11). Locale resolver simplified to always return ['en'] (UrlMapping is SHARED â€” see reference_sitecore_redirect_map_template_field_versioning).",
       "raised_at": "2026-05-17T18:00:00Z",
       "resolved_at": "2026-05-17T18:00:00Z",
       "references": "Tranche 3 Developer 08 subagent report"
@@ -521,7 +521,7 @@
       "stage": "test",
       "severity": "info",
       "kind": "resolved",
-      "item": "/test Phase 1 complete (QA Specialist 07). Automated: lint 0/2-baseline, build clean, 521/521 tests. Mobile responsive 375/768/1280 on /full-page: PASS all axes (no h-scroll, no grid overflow, no fixed sidebar, padding within budget, no headline overflow). Dialog standalone: WARN (env) — Publish button absent without Marketplace SDK context; verified by operator in host frame during m_publish smoke. Code-review fixes (M1 isSubmitting + m1 log + m2 aria-label) all CONFIRMED in source. Phase 2 no-op (zero critical/major findings). Test report at plans/test-report-20260517T210000Z.md.",
+      "item": "/test Phase 1 complete (QA Specialist 07). Automated: lint 0/2-baseline, build clean, 521/521 tests. Mobile responsive 375/768/1280 on /full-page: PASS all axes (no h-scroll, no grid overflow, no fixed sidebar, padding within budget, no headline overflow). Dialog standalone: WARN (env) â€” Publish button absent without Marketplace SDK context; verified by operator in host frame during m_publish smoke. Code-review fixes (M1 isSubmitting + m1 log + m2 aria-label) all CONFIRMED in source. Phase 2 no-op (zero critical/major findings). Test report at plans/test-report-20260517T210000Z.md.",
       "raised_at": "2026-05-17T21:00:00Z",
       "resolved_at": "2026-05-17T21:00:00Z",
       "references": "plans/test-report-20260517T210000Z.md; smoke_outcomes m1/m3/host_frame_smoke appended"
@@ -533,13 +533,13 @@
       "item": "Host-frame Playwright pixel comparison SKIPPED with operator-acceptable reason: ui_design.selected_poc_path is null (scope_dial.ui_variants=skip). Visual scope is rename + new dialog reusing PRD-002 Blok primitives; no new visual direction to compare against. Live walkthrough (m_publish) already passed 2026-05-17 satisfies the visual-fidelity question for this PRD.",
       "raised_at": "2026-05-17T21:00:00Z",
       "resolved_at": "2026-05-17T21:00:00Z",
-      "references": "smoke_outcomes.host_frame_smoke (skipped); test-report-20260517T210000Z.md § Visual Testing"
+      "references": "smoke_outcomes.host_frame_smoke (skipped); test-report-20260517T210000Z.md Â§ Visual Testing"
     },
     {
       "stage": "test",
       "severity": "info",
       "kind": "concern",
-      "item": "Server-side body validation defense gap (code-review minor m3) remains deferred — /api/publish/route.ts validateBody only enforces source non-empty; name + options + strict source equality not checked. No production exposure (client constructs body via typed buildSitePublishBody; route is same-origin). Future-PRD candidate for a defensive cleanup pass.",
+      "item": "Server-side body validation defense gap (code-review minor m3) remains deferred â€” /api/publish/route.ts validateBody only enforces source non-empty; name + options + strict source equality not checked. No production exposure (client constructs body via typed buildSitePublishBody; route is same-origin). Future-PRD candidate for a defensive cleanup pass.",
       "raised_at": "2026-05-17T21:00:00Z",
       "resolved_at": null,
       "references": "code-review-20260517T185230Z.md minor m3; test-report-20260517T210000Z.md Minor findings"
@@ -548,24 +548,24 @@
   "// stage_tested_at": "2026-05-17T21:00:00Z",
   "// stage_shipped_at": "2026-05-17T21:30:00Z",
   "notes": [
-    "PRD-003 lineage: PRD-000 (shipped 2026-05-12 — en-only foundation, PR#1) → PRD-001 (CANCELLED 2026-05-13 — multilingual UrlMapping SHARED, ADR-0023) → PRD-002 (shipped 2026-05-15 — V4 Blok Elevated visual redesign + operator polish wave, PR#3 merged 2026-05-16) → PRD-003 (this run — wire 'Publish all' placeholder + per-map Publish).",
+    "PRD-003 lineage: PRD-000 (shipped 2026-05-12 â€” en-only foundation, PR#1) â†’ PRD-001 (CANCELLED 2026-05-13 â€” multilingual UrlMapping SHARED, ADR-0023) â†’ PRD-002 (shipped 2026-05-15 â€” V4 Blok Elevated visual redesign + operator polish wave, PR#3 merged 2026-05-16) â†’ PRD-003 (this run â€” wire 'Publish all' placeholder + per-map Publish).",
     "scope_dial: light/minimal/skip/auto-lite/skip_gate. Operator-chosen at kickoff (4-question AskUserQuestion). 'Light' applies to BOTH discovery and critical review per scope_dial.rigor inheritance rule.",
-    "prd_input_mode: prompt_only — no brain-dump, operator description in /create-prd invocation + discovery cluster answers + technical anchor (operator-supplied SitecoreAI Publishing v1 API spec).",
+    "prd_input_mode: prompt_only â€” no brain-dump, operator description in /create-prd invocation + discovery cluster answers + technical anchor (operator-supplied SitecoreAI Publishing v1 API spec).",
     "discovery_level: light",
     "discovery_summary: confirmed_with_changes (operator added the SitecoreAI Publishing v1 API spec as the technical anchor; pre-approved REST fallback; Tranche 1 probes SDK first)",
     "critical_review_level: light",
-    "critical_review: completed (0 blockers + 2 concerns; concerns folded as PRD edits — AC-P2.1 affordance reference removed, FR-P6 locales-default note added)",
-    "sdk_surface_split: n/a (0-1 new SDK surface — under heuristic threshold of 3)",
+    "critical_review: completed (0 blockers + 2 concerns; concerns folded as PRD edits â€” AC-P2.1 affordance reference removed, FR-P6 locales-default note added)",
+    "sdk_surface_split: n/a (0-1 new SDK surface â€” under heuristic threshold of 3)",
     "base_branch: main (PR#3 / PRD-002 merged to main 2026-05-16; PRD-003 branches off clean main, not stacked)",
-    "platform_target: marketplace (existing Redirect Manager is a SitecoreAI Marketplace Client-Side iframe app per ADR-0002; PRD-003 may add the FIRST server-side route in this app — architectural inflection anticipated by ADR-0002 § Consequences)",
-    "sitecore_discovery: not invoked (existing Sitecore Marketplace app — lifecycle/scaffold decisions already locked from PRD-000)",
+    "platform_target: marketplace (existing Redirect Manager is a SitecoreAI Marketplace Client-Side iframe app per ADR-0002; PRD-003 may add the FIRST server-side route in this app â€” architectural inflection anticipated by ADR-0002 Â§ Consequences)",
+    "sitecore_discovery: not invoked (existing Sitecore Marketplace app â€” lifecycle/scaffold decisions already locked from PRD-000)",
     "task_breakdown_style: tdd (carries from PRD-002 cadence)",
     "ADR-0031 written at /create-prd: deferred publish-surface decision to Tranche 1 capture.",
-    "/architect (2026-05-16) added 3 ADRs: ADR-0032 (icon button at row end), ADR-0033 (publish service module contract), ADR-0034 (Tranche 1 outcome template — Proposed). No architecture blueprint file (minimal track).",
-    "adr_density_split: n/a (3 new ADRs in /architect run — under 5-ADR HARD STOP)",
+    "/architect (2026-05-16) added 3 ADRs: ADR-0032 (icon button at row end), ADR-0033 (publish service module contract), ADR-0034 (Tranche 1 outcome template â€” Proposed). No architecture blueprint file (minimal track).",
+    "adr_density_split: n/a (3 new ADRs in /architect run â€” under 5-ADR HARD STOP)",
     "ui_design: skipped per scope_dial.ui_variants=skip (no variants, no POCs)",
-    "Architect SDK probe found NO xmc.publishing.* surface in augmentation.gen.d.ts — Branch B (server-side OAuth REST proxy) is the expected Tranche 1 outcome. Operator's pre-inspection corroborated.",
-    "/task-breakdown (2026-05-16) — Lead Developer 06 produced 28 tasks across Tranche 1 (5) + Tranche 2 (23). QA Specialist 07 enriched in place: § 9 TDD contract + § 10 with 35 per-task tests + 5 a/b splits + RED-first reordering + § 4c-8 verbatim body fixtures. task_breakdown_style: tdd. No separate qa-report.md.",
+    "Architect SDK probe found NO xmc.publishing.* surface in augmentation.gen.d.ts â€” Branch B (server-side OAuth REST proxy) is the expected Tranche 1 outcome. Operator's pre-inspection corroborated.",
+    "/task-breakdown (2026-05-16) â€” Lead Developer 06 produced 28 tasks across Tranche 1 (5) + Tranche 2 (23). QA Specialist 07 enriched in place: Â§ 9 TDD contract + Â§ 10 with 35 per-task tests + 5 a/b splits + RED-first reordering + Â§ 4c-8 verbatim body fixtures. task_breakdown_style: tdd. No separate qa-report.md.",
     "Recommended next command: /implement (Developer 08 reads prd-minimal-003 + task-breakdown only; Tranche 1 ends in operator gate; Tranche 2 implements per ADR-0033 contract)"
   ]
 }

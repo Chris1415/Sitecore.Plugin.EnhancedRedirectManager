@@ -1,4 +1,4 @@
-{
+﻿{
   "schema_version": 6,
   "run_id": "20260520T080000Z",
   "created_at": "2026-05-20T08:00:00Z",
@@ -20,15 +20,15 @@
     "proposal_count": 1,
     "divergence": "subtle",
     "variant_paths": [
-      "products/redirect-manager/project-planning/ui-design/ui-design-20260520T080000Z-v1.md"
+      "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260520T080000Z-v1.md"
     ],
-    "selected_variant_path": "products/redirect-manager/project-planning/ui-design/ui-design-20260520T080000Z-v1.md",
-    "selected_poc_path": "products/redirect-manager/pocs/poc-v1-prd004"
+    "selected_variant_path": "products/marketplace/redirect-manager/project-planning/ui-design/ui-design-20260520T080000Z-v1.md",
+    "selected_poc_path": "products/marketplace/redirect-manager/pocs/poc-v1-prd004"
   },
   "source": {
     "kind": "file",
     "values": [
-      "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260519T140000Z.md"
+      "products/marketplace/redirect-manager/project-planning/brain-dumps/brain-dump-20260519T140000Z.md"
     ],
     "analysis_mode": "greenfield",
     "source_analysis_artifact": null,
@@ -36,23 +36,23 @@
     "assets_bundle": null
   },
   "canonical_artifacts": {
-    "brain_dump": "products/redirect-manager/project-planning/brain-dumps/brain-dump-20260519T140000Z.md",
-    "prd": "products/redirect-manager/project-planning/PRD/prd-004.md",
-    "prd_minimal": "products/redirect-manager/project-planning/PRD/prd-minimal-004.md",
-    "architecture": "products/redirect-manager/project-planning/architecture/architecture-20260520T080000Z.md",
-    "task_breakdown": "products/redirect-manager/project-planning/plans/task-breakdown-20260520T080000Z.md",
+    "brain_dump": "products/marketplace/redirect-manager/project-planning/brain-dumps/brain-dump-20260519T140000Z.md",
+    "prd": "products/marketplace/redirect-manager/project-planning/PRD/prd-004.md",
+    "prd_minimal": "products/marketplace/redirect-manager/project-planning/PRD/prd-minimal-004.md",
+    "architecture": "products/marketplace/redirect-manager/project-planning/architecture/architecture-20260520T080000Z.md",
+    "task_breakdown": "products/marketplace/redirect-manager/project-planning/plans/task-breakdown-20260520T080000Z.md",
     "task_breakdown_pre_qa": null,
-    "qa_report": "products/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md",
-    "test_report": "products/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md",
-    "implementation_runbook": "products/redirect-manager/project-planning/plans/implementation-runbook-20260520T080000Z.md",
-    "code_review_report": "products/redirect-manager/project-planning/plans/code-review-20260521T200000Z.md",
+    "qa_report": "products/marketplace/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md",
+    "test_report": "products/marketplace/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md",
+    "implementation_runbook": "products/marketplace/redirect-manager/project-planning/plans/implementation-runbook-20260520T080000Z.md",
+    "code_review_report": "products/marketplace/redirect-manager/project-planning/plans/code-review-20260521T200000Z.md",
     "content_model": null,
     "content_examples": null,
-    "ship_report": "products/redirect-manager/project-planning/plans/ship-report-20260522T000000Z.md",
+    "ship_report": "products/marketplace/redirect-manager/project-planning/plans/ship-report-20260522T000000Z.md",
     "friction_log": null
   },
   "friction_log": {
-    "path": "products/redirect-manager/project-planning/workflow/friction-log-20260520T080000Z.md",
+    "path": "products/marketplace/redirect-manager/project-planning/workflow/friction-log-20260520T080000Z.md",
     "min_severity": "medium",
     "enabled": true
   },
@@ -120,7 +120,7 @@
       "exited_at": "2026-05-20T21:00:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "T006-T015 complete. proxy-simulator.ts (full implementation), proxy-simulator.test.ts (64 tests GREEN), __fixtures__/upstream-cases.json (15 cases from AST extractor), __fixtures__/tenant-cases.json (8 cases), scripts/extract-upstream-fixtures.ts (ADR-0042 AST extractor). Known divergences from upstream: empty (M2 passed). Wall-clock cap test rewritten with Date.now mock — ADR-0039 best-effort constraint documented. tsconfig.json updated to exclude _upstream-source.ts and scripts/ from build compilation. Build + lint (no new errors vs baseline) + full test suite verified."
+      "notes": "T006-T015 complete. proxy-simulator.ts (full implementation), proxy-simulator.test.ts (64 tests GREEN), __fixtures__/upstream-cases.json (15 cases from AST extractor), __fixtures__/tenant-cases.json (8 cases), scripts/extract-upstream-fixtures.ts (ADR-0042 AST extractor). Known divergences from upstream: empty (M2 passed). Wall-clock cap test rewritten with Date.now mock â€” ADR-0039 best-effort constraint documented. tsconfig.json updated to exclude _upstream-source.ts and scripts/ from build compilation. Build + lint (no new errors vs baseline) + full test suite verified."
     },
     {
       "stage": "tranche_3_implemented",
@@ -129,7 +129,7 @@
       "exited_at": "2026-05-19T21:25:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "T016-T026 complete. EditRowModal.tsx (481 lines) + regex-snippets.ts (30 lines) — new files. RedirectMapDetail.tsx + FullPage.tsx — modified. EditRowModal.test.tsx (33 tests — T018a through T025 all GREEN). TDD sequence honored: T018a [RED scaffold] then T016/T017 [GREEN build] then T019a-T024a [RED tests] then T019-T024 [GREEN impl] — all in single file per § 5 Group 3. Carry-over CRUD smoke: automated unit tests GREEN (Save invokes updateRedirectMap with correctly mutated mappings; onSaved called; Cancel-with-changes triggers confirm dialog). Mode defaults to pattern on every open (key-based remount). Snippet library (5 snippets). Capture-group chips ($1..$N + $siteLang). Sample URL tester (collapsible). Save-time validation (invalid regex + $0 + $N>groups; $siteLang exempt). Inline mismatch hint (role=status, muted token). Structural guard: EditRowModal source contains NO RedirectType / IncludeVirtualFolder / PreserveQueryString / PreserveLanguage strings. Build clean. Lint: 10 errors (all pre-existing in error-states.tsx; +1 new warning from new code; 0 new errors). 617/618 tests pass (1 pre-existing structural guard failure from t1-probe-runner.ts — known T5 fix)."
+      "notes": "T016-T026 complete. EditRowModal.tsx (481 lines) + regex-snippets.ts (30 lines) â€” new files. RedirectMapDetail.tsx + FullPage.tsx â€” modified. EditRowModal.test.tsx (33 tests â€” T018a through T025 all GREEN). TDD sequence honored: T018a [RED scaffold] then T016/T017 [GREEN build] then T019a-T024a [RED tests] then T019-T024 [GREEN impl] â€” all in single file per Â§ 5 Group 3. Carry-over CRUD smoke: automated unit tests GREEN (Save invokes updateRedirectMap with correctly mutated mappings; onSaved called; Cancel-with-changes triggers confirm dialog). Mode defaults to pattern on every open (key-based remount). Snippet library (5 snippets). Capture-group chips ($1..$N + $siteLang). Sample URL tester (collapsible). Save-time validation (invalid regex + $0 + $N>groups; $siteLang exempt). Inline mismatch hint (role=status, muted token). Structural guard: EditRowModal source contains NO RedirectType / IncludeVirtualFolder / PreserveQueryString / PreserveLanguage strings. Build clean. Lint: 10 errors (all pre-existing in error-states.tsx; +1 new warning from new code; 0 new errors). 617/618 tests pass (1 pre-existing structural guard failure from t1-probe-runner.ts â€” known T5 fix)."
     },
     {
       "stage": "tranche_4_implemented",
@@ -138,7 +138,7 @@
       "exited_at": "2026-05-19T23:59:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "T027-T041 complete (T040 merged into TraceCardStack). New files: use-staggered-render.ts (98L) + test (184L), scope-picker-state.ts (104L) + test (235L), TestSurface.tsx (537L) + test (324L), ScopePicker.tsx (460L) + test (204L), TraceCard.tsx (354L) + test (199L), TraceCardStack.tsx (86L) + test (130L), ResultCard.tsx (223L) + test (122L), EmptyState.tsx (87L) + test (47L), FullPage.tab.test.tsx (179L), FullPage.deeplink.test.tsx (159L). Modified: FullPage.tsx (526L) + FullPage.layout.test.tsx. TDD honored: T027a [RED tab], T028a [RED stagger hook — resolved Windows+jsdom setInterval hang via stable-ref pattern], T029a [RED scope state], T031a/T032a/T033a/T034a/T035a/T036a/T037a/T038a/T039a all written before GREEN impl. 717/718 tests pass; 1 pre-existing SDK boundary guard (DashboardWidget + T1ProbeButton — known T5 fix). Lint: 67 problems (identical count to pre-T4 baseline — 0 new errors introduced). Build clean (Next 16.1.7 Turbopack). Scope picker key rm-test-picker-v1 + shape confirmed. Deep-link callback passed to TestSurface confirmed (T039 test GREEN). Copy-as-JSON: clipboard.writeText invocation verified in component; jsdom secure-context limitation noted in test with Playwright smoke gate noted."
+      "notes": "T027-T041 complete (T040 merged into TraceCardStack). New files: use-staggered-render.ts (98L) + test (184L), scope-picker-state.ts (104L) + test (235L), TestSurface.tsx (537L) + test (324L), ScopePicker.tsx (460L) + test (204L), TraceCard.tsx (354L) + test (199L), TraceCardStack.tsx (86L) + test (130L), ResultCard.tsx (223L) + test (122L), EmptyState.tsx (87L) + test (47L), FullPage.tab.test.tsx (179L), FullPage.deeplink.test.tsx (159L). Modified: FullPage.tsx (526L) + FullPage.layout.test.tsx. TDD honored: T027a [RED tab], T028a [RED stagger hook â€” resolved Windows+jsdom setInterval hang via stable-ref pattern], T029a [RED scope state], T031a/T032a/T033a/T034a/T035a/T036a/T037a/T038a/T039a all written before GREEN impl. 717/718 tests pass; 1 pre-existing SDK boundary guard (DashboardWidget + T1ProbeButton â€” known T5 fix). Lint: 67 problems (identical count to pre-T4 baseline â€” 0 new errors introduced). Build clean (Next 16.1.7 Turbopack). Scope picker key rm-test-picker-v1 + shape confirmed. Deep-link callback passed to TestSurface confirmed (T039 test GREEN). Copy-as-JSON: clipboard.writeText invocation verified in component; jsdom secure-context limitation noted in test with Playwright smoke gate noted."
     },
     {
       "stage": "tranche_5_implemented",
@@ -147,7 +147,7 @@
       "exited_at": "2026-05-20T08:35:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "T5 SDK boundary fix complete. Two files updated: components/dev/T1ProbeButton.tsx + lib/dev/t1-probe-runner.ts — both changed `import type { ClientSDK } from '@sitecore-marketplace-sdk/client'` to `import type { ClientSDK } from '@/lib/sdk/types'` (re-export was already in place from T4 ScopePicker work). structural-guards.test.ts: 11/11 GREEN (was 10/11). Full suite: 718/718 GREEN (was 717/718). Lint: 67 problems / 18 errors — identical baseline, 0 new errors. Build clean (Next 16.1.7, 9 routes)."
+      "notes": "T5 SDK boundary fix complete. Two files updated: components/dev/T1ProbeButton.tsx + lib/dev/t1-probe-runner.ts â€” both changed `import type { ClientSDK } from '@sitecore-marketplace-sdk/client'` to `import type { ClientSDK } from '@/lib/sdk/types'` (re-export was already in place from T4 ScopePicker work). structural-guards.test.ts: 11/11 GREEN (was 10/11). Full suite: 718/718 GREEN (was 717/718). Lint: 67 problems / 18 errors â€” identical baseline, 0 new errors. Build clean (Next 16.1.7, 9 routes)."
     },
     {
       "stage": "code_reviewed",
@@ -156,7 +156,7 @@
       "exited_at": "2026-05-21T21:00:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "Code review completed. Report at products/redirect-manager/project-planning/plans/code-review-20260521T200000Z.md. 2 Major findings auto-fixed: M1 — REGEXP_CONTEXT_SITE_LANG stateful g-flag race (proxy-simulator.ts, lastIndex reset added); M2 — ResultCard infinite load-more loop (hiddenCount now based on rows.length not rowsConsideredTotal). 3 Minor findings auto-fixed: unused HoverLiftCard import (TraceCard.tsx), redundant onOpenChange destructure (EditRowModal.tsx), unused test imports (TraceCardStack.test.tsx, use-staggered-render.test.tsx). use-staggered-render.ts lint error resolved (eslint-disable-next-line). 3 regression tests added. Post-fix: 10 errors / 44 warnings (down from 11/48 before review), build clean, 691/691 tests GREEN (up from 688). SDK-contract greps: clean (no client.mutate, no .data.data, no empty catches in scope). Zero new SDK surfaces confirmed."
+      "notes": "Code review completed. Report at products/marketplace/redirect-manager/project-planning/plans/code-review-20260521T200000Z.md. 2 Major findings auto-fixed: M1 â€” REGEXP_CONTEXT_SITE_LANG stateful g-flag race (proxy-simulator.ts, lastIndex reset added); M2 â€” ResultCard infinite load-more loop (hiddenCount now based on rows.length not rowsConsideredTotal). 3 Minor findings auto-fixed: unused HoverLiftCard import (TraceCard.tsx), redundant onOpenChange destructure (EditRowModal.tsx), unused test imports (TraceCardStack.test.tsx, use-staggered-render.test.tsx). use-staggered-render.ts lint error resolved (eslint-disable-next-line). 3 regression tests added. Post-fix: 10 errors / 44 warnings (down from 11/48 before review), build clean, 691/691 tests GREEN (up from 688). SDK-contract greps: clean (no client.mutate, no .data.data, no empty catches in scope). Zero new SDK surfaces confirmed."
     },
     {
       "stage": "tested",
@@ -165,7 +165,7 @@
       "exited_at": "2026-05-21T22:00:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "Phase 1 /test pass complete. Automated: 691/691 GREEN (76 test files), build clean (9 routes), lint 10 errors/44 warnings (all pre-existing in gitignored staging file). SDK-contract greps clean. Code-review fixes M1+M2 verified in source. 2026-05-21 simplification verified: snippet library, chips, sample tester, inline hint removed cleanly from EditRowModal.tsx and EditRowModal.test.tsx; no orphan test files. US-R1/R2/T0/T1/T2/T3 all covered. 15 upstream + 8 tenant fixture cases GREEN. Live walkthrough: pass_with_caveats. Host-frame smoke: WARN deferred (host URL not supplied). Status: tested_pending_smoke (tranche_6_real_tenant_smoke pending). 0 Critical, 0 Major, 1 Minor (m5 EmptyState copy -- operator triage). No Phase 2 required. Test report at products/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md."
+      "notes": "Phase 1 /test pass complete. Automated: 691/691 GREEN (76 test files), build clean (9 routes), lint 10 errors/44 warnings (all pre-existing in gitignored staging file). SDK-contract greps clean. Code-review fixes M1+M2 verified in source. 2026-05-21 simplification verified: snippet library, chips, sample tester, inline hint removed cleanly from EditRowModal.tsx and EditRowModal.test.tsx; no orphan test files. US-R1/R2/T0/T1/T2/T3 all covered. 15 upstream + 8 tenant fixture cases GREEN. Live walkthrough: pass_with_caveats. Host-frame smoke: WARN deferred (host URL not supplied). Status: tested_pending_smoke (tranche_6_real_tenant_smoke pending). 0 Critical, 0 Major, 1 Minor (m5 EmptyState copy -- operator triage). No Phase 2 required. Test report at products/marketplace/redirect-manager/project-planning/plans/test-report-20260521T220000Z.md."
     },
     {
       "stage": "shipped",
@@ -174,7 +174,7 @@
       "exited_at": "2026-05-22T00:00:00Z",
       "outcome": "completed",
       "error": null,
-      "notes": "PRD-004 shipped_with_caveats. T6 real-tenant smoke PASSED (operator confirmation 2026-05-22 — all tested URL predictions matched tenant Edge response). 691/691 tests GREEN, build clean, SDK-contract greps clean. Caveats: host_frame_smoke_test_tab skipped (host URL not supplied this run); live_walkthrough pass_with_caveats (TestSurface bug patched mid-smoke); 6 originally-planned affordances deferred per PRD § 16 simplification (FO-9..FO-14: ScopePicker, locale dropdown, snippet library, capture-group chips, sample-URL tester, inline mode-mismatch hint); m5 EmptyState copy left for operator triage. 6 new ADRs (0038 simulator parity, 0039 regex dual-cap safety, 0040 mode transient + async simulator amended 2026-05-21, 0041 state lifted to FullPage, 0042 AST extractor, 0043 EditRowModal replaces inline editing). Ship report at products/redirect-manager/project-planning/plans/ship-report-20260522T000000Z.md."
+      "notes": "PRD-004 shipped_with_caveats. T6 real-tenant smoke PASSED (operator confirmation 2026-05-22 â€” all tested URL predictions matched tenant Edge response). 691/691 tests GREEN, build clean, SDK-contract greps clean. Caveats: host_frame_smoke_test_tab skipped (host URL not supplied this run); live_walkthrough pass_with_caveats (TestSurface bug patched mid-smoke); 6 originally-planned affordances deferred per PRD Â§ 16 simplification (FO-9..FO-14: ScopePicker, locale dropdown, snippet library, capture-group chips, sample-URL tester, inline mode-mismatch hint); m5 EmptyState copy left for operator triage. 6 new ADRs (0038 simulator parity, 0039 regex dual-cap safety, 0040 mode transient + async simulator amended 2026-05-21, 0041 state lifted to FullPage, 0042 AST extractor, 0043 EditRowModal replaces inline editing). Ship report at products/marketplace/redirect-manager/project-planning/plans/ship-report-20260522T000000Z.md."
     },
     {
       "stage": "documented",
@@ -194,38 +194,38 @@
     "status": "in_progress",
     "resumed_from_stage": null,
     "current_tranche": "T5",
-    "current_gate": "T5 gate closed (718/718 tests GREEN — all SDK boundary violations resolved). Ready for /ship."
+    "current_gate": "T5 gate closed (718/718 tests GREEN â€” all SDK boundary violations resolved). Ready for /ship."
   },
   "smoke_outcomes": {
     "tranche_1_regex_roundtrip_probe": {
-      "required_by": "PRD § 12 Tranches T1",
+      "required_by": "PRD Â§ 12 Tranches T1",
       "description": "Author 8 regex rows in tenant; CRUD round-trip; verify preservation per-character-class; capture upstream commit SHAs",
       "outcome": "passed",
       "recorded_at": "2026-05-20T18:32:24.180Z",
-      "evidence": "products/redirect-manager/project-planning/captures/tranche-1-regex-roundtrip-20260520.md",
-      "notes": "Automated via T1 probe button (NEXT_PUBLIC_T1_PROBE=true) — 8/8 rows + 12/12 character classes round-trip byte-identical. Upstream SHAs captured: redirects-proxy.ts=30b0db8fe768b83f03fd6b9772b0d3e14711c6b2, utils.ts=e6153e5e80c2076704cad0876eec3b85ec3a1a9f. Gate decision PASS — queue T2.",
+      "evidence": "products/marketplace/redirect-manager/project-planning/captures/tranche-1-regex-roundtrip-20260520.md",
+      "notes": "Automated via T1 probe button (NEXT_PUBLIC_T1_PROBE=true) â€” 8/8 rows + 12/12 character classes round-trip byte-identical. Upstream SHAs captured: redirects-proxy.ts=30b0db8fe768b83f03fd6b9772b0d3e14711c6b2, utils.ts=e6153e5e80c2076704cad0876eec3b85ec3a1a9f. Gate decision PASS â€” queue T2.",
       "category": "live_walkthrough"
     },
     "tranche_6_real_tenant_smoke": {
-      "required_by": "PRD § 12 Tranches T6, M3",
+      "required_by": "PRD Â§ 12 Tranches T6, M3",
       "description": "Real-tenant smoke: 5-10 known URLs predicted by simulator vs. tenant Edge response; operator-driven walkthrough on Full Page Test tab",
       "outcome": "passed",
       "recorded_at": "2026-05-22T00:00:00Z",
-      "evidence": "operator confirmation 2026-05-22 — real-tenant smoke executed; all tested URL predictions matched tenant Edge behavior",
-      "notes": "≥80% match achieved per operator. Gate decision PASS — ready for /ship.",
+      "evidence": "operator confirmation 2026-05-22 â€” real-tenant smoke executed; all tested URL predictions matched tenant Edge behavior",
+      "notes": "â‰¥80% match achieved per operator. Gate decision PASS â€” ready for /ship.",
       "category": "live_walkthrough"
     },
     "fixture_parity_upstream": {
-      "required_by": "PRD § 3 M2",
-      "description": "100% parity on imported upstream test fixtures (__fixtures__/upstream-cases.json) — failing CI for any regression",
+      "required_by": "PRD Â§ 3 M2",
+      "description": "100% parity on imported upstream test fixtures (__fixtures__/upstream-cases.json) â€” failing CI for any regression",
       "outcome": "passed",
       "recorded_at": "2026-05-21T22:00:00Z",
       "evidence": "site/lib/redirects/proxy-simulator.test.ts",
-      "notes": "15 upstream cases extracted by AST extractor (T010/ADR-0042) from SHA 30b0db8fe768b83f03fd6b9772b0d3e14711c6b2. All 15 upstream cases GREEN. All 8 tenant cases GREEN. Known divergences: empty (100% parity per M2). Wall-clock cap test uses Date.now mock (ADR-0039 best-effort constraint documented — synchronous regex.test() cannot be interrupted by Promise.race in single-threaded JS). Verified in Phase 1 /test pass: 691/691 suite GREEN (76 test files). REGEXP_CONTEXT_SITE_LANG.lastIndex reset (M1 code-review fix) confirmed in source at line 573.",
+      "notes": "15 upstream cases extracted by AST extractor (T010/ADR-0042) from SHA 30b0db8fe768b83f03fd6b9772b0d3e14711c6b2. All 15 upstream cases GREEN. All 8 tenant cases GREEN. Known divergences: empty (100% parity per M2). Wall-clock cap test uses Date.now mock (ADR-0039 best-effort constraint documented â€” synchronous regex.test() cannot be interrupted by Promise.race in single-threaded JS). Verified in Phase 1 /test pass: 691/691 suite GREEN (76 test files). REGEXP_CONTEXT_SITE_LANG.lastIndex reset (M1 code-review fix) confirmed in source at line 573.",
       "category": "other"
     },
     "host_frame_smoke_test_tab": {
-      "required_by": "PRD § 8 NFR-3 + global theme policy",
+      "required_by": "PRD Â§ 8 NFR-3 + global theme policy",
       "description": "5-axis Playwright vs winning POC for the Test tab + edit-modal mode toggle (light + dark + reduced-motion)",
       "outcome": "skipped",
       "recorded_at": "2026-05-21T22:00:00Z",
@@ -234,11 +234,11 @@
       "category": "host_frame_smoke"
     },
     "live_walkthrough": {
-      "required_by": "PRD § 12 operator Level 1 validation",
+      "required_by": "PRD Â§ 12 operator Level 1 validation",
       "description": "Operator live walkthrough of PRD-004 features prior to /test phase",
       "outcome": "pass_with_caveats",
       "recorded_at": "2026-05-21T22:00:00Z",
-      "evidence": "test-report-20260521T220000Z.md § 3 Visual Testing",
+      "evidence": "test-report-20260521T220000Z.md Â§ 3 Visual Testing",
       "notes": "Exercised: (1) URL-mode rules -- passes; (2) Regex-mode rules with capture-group substitution -- passes; (3) Save-time validation (invalid regex blocks save; capture-group cross-check) -- passes; (4) Cheatsheet card in Regex mode -- visually accepted; (5) Shared CollectionPicker + SitePicker across Manage/Test tabs -- scope inheritance works; (6) RedirectMapList readonly in Test tab -- no click handler fires; (7) TestSurface bug (Test button race + null-safety crash) -- found and fixed during operator smoke. Caveat: T6 real-tenant URL-prediction smoke still pending -- 5-10 URL formal pass required before status can advance from shipped_with_caveats to shipped.",
       "category": "live_walkthrough"
     }
@@ -248,7 +248,7 @@
       "stage": "create-prd",
       "severity": "warn",
       "kind": "assumption",
-      "item": "Existing CRUD pipeline preserves regex special chars (^, $, (, ), ?, \\) on save/read round-trip — verified in T1; if false, T0 fix-first triggers in encoder/decoder",
+      "item": "Existing CRUD pipeline preserves regex special chars (^, $, (, ), ?, \\) on save/read round-trip â€” verified in T1; if false, T0 fix-first triggers in encoder/decoder",
       "raised_at": "2026-05-20T08:00:00Z",
       "resolved_at": null,
       "references": null
@@ -257,7 +257,7 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "assumption",
-      "item": "Snippet library set (5 PM-proposed patterns: anchored start, trailing slash, query strip, blog migration, file extension) is pending operator validation in T3 — may be revised before code lands",
+      "item": "Snippet library set (5 PM-proposed patterns: anchored start, trailing slash, query strip, blog migration, file extension) is pending operator validation in T3 â€” may be revised before code lands",
       "raised_at": "2026-05-20T08:00:00Z",
       "resolved_at": null,
       "references": null
@@ -266,7 +266,7 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "assumption",
-      "item": "Capture-group counting via paren-regex over-counts escaped \\( and parens inside char classes [(] — documented v0 known limitation; advisory cross-check only; regex-parse step (new RegExp) is authoritative",
+      "item": "Capture-group counting via paren-regex over-counts escaped \\( and parens inside char classes [(] â€” documented v0 known limitation; advisory cross-check only; regex-parse step (new RegExp) is authoritative",
       "raised_at": "2026-05-20T08:00:00Z",
       "resolved_at": null,
       "references": null
@@ -275,7 +275,7 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "concern",
-      "item": "100% upstream-fixture parity required (M2); any failing fixture is a bug OR requires explicit ADR-0038 waiver entry before merge — never silently skipped",
+      "item": "100% upstream-fixture parity required (M2); any failing fixture is a bug OR requires explicit ADR-0038 waiver entry before merge â€” never silently skipped",
       "raised_at": "2026-05-20T08:00:00Z",
       "resolved_at": null,
       "references": null
@@ -293,7 +293,7 @@
       "stage": "create-prd",
       "severity": "info",
       "kind": "question",
-      "item": "OQ-1 — empty-state sample URL: pre-fill from first rule of first map (default) vs hardcoded sample? Revisit if empty-state quality drops in T4 walkthrough",
+      "item": "OQ-1 â€” empty-state sample URL: pre-fill from first rule of first map (default) vs hardcoded sample? Revisit if empty-state quality drops in T4 walkthrough",
       "raised_at": "2026-05-20T08:00:00Z",
       "resolved_at": null,
       "references": null
@@ -302,7 +302,7 @@
       "stage": "architect",
       "severity": "info",
       "kind": "concern",
-      "item": "R8 added by architect — RowEditForm extraction from RedirectMapDetail introduces regression risk; T3 must follow extract-then-test-parity, then add affordances; R8 extraction-regression test suite must be green before mode toggle / snippet helpers / hint land",
+      "item": "R8 added by architect â€” RowEditForm extraction from RedirectMapDetail introduces regression risk; T3 must follow extract-then-test-parity, then add affordances; R8 extraction-regression test suite must be green before mode toggle / snippet helpers / hint land",
       "raised_at": "2026-05-20T12:00:00Z",
       "resolved_at": null,
       "references": null
@@ -314,13 +314,13 @@
       "item": "PRD wording corrected from 'edit modal' to 'row edit form' (Full Page does inline editing, not modal); operator approved fix 2026-05-20",
       "raised_at": "2026-05-20T12:00:00Z",
       "resolved_at": "2026-05-20T12:00:00Z",
-      "references": "architect § 2.6"
+      "references": "architect Â§ 2.6"
     },
     {
       "stage": "architect",
       "severity": "info",
       "kind": "decision",
-      "item": "Post-write amendment 2026-05-20T13:00: EditRowModal replaces inline row editing (ADR-0043); Test surface is two-column with sticky scope picker (Collection→Site→Map(s)); simulator scope is per-picked-maps not tenant-wide. Operator approved all three changes.",
+      "item": "Post-write amendment 2026-05-20T13:00: EditRowModal replaces inline row editing (ADR-0043); Test surface is two-column with sticky scope picker (Collectionâ†’Siteâ†’Map(s)); simulator scope is per-picked-maps not tenant-wide. Operator approved all three changes.",
       "raised_at": "2026-05-20T13:00:00Z",
       "resolved_at": "2026-05-20T13:00:00Z",
       "references": "architecture amendment block; ADR-0043"
@@ -338,7 +338,7 @@
       "stage": "architect",
       "severity": "info",
       "kind": "concern",
-      "item": "R8b — EditRowModal CRUD path must produce identical persistence behavior to the prior inline edit. T3 carry-over CRUD smoke (read → open modal → edit → save → re-read) is mandatory before mode-toggle / regex affordances land on top",
+      "item": "R8b â€” EditRowModal CRUD path must produce identical persistence behavior to the prior inline edit. T3 carry-over CRUD smoke (read â†’ open modal â†’ edit â†’ save â†’ re-read) is mandatory before mode-toggle / regex affordances land on top",
       "raised_at": "2026-05-20T13:00:00Z",
       "resolved_at": null,
       "references": null
@@ -365,8 +365,8 @@
     "Source brain-dump captured 2026-05-19 with operator decisions D-001..D-016 (D-011..D-016 added during /create-prd discovery)",
     "ADRs introduced: ADR-0038 (simulator verbatim parity), ADR-0039 (dual time-cap regex safety), ADR-0040 (transient mode + async simulator), ADR-0041 (Test-surface state lifted to FullPage), ADR-0042 (committed AST-walking fixture extractor), ADR-0043 (EditRowModal replaces inline editing)",
     "adr_density_check: 3 new ADRs total at /architect (well under 5+ hard stop)",
-    "PRD wording correction applied 2026-05-20: s/'edit modal'/'row edit form'/g across prd-004.md + prd-minimal-004.md — Full Page does inline row editing, not a modal (architect § 2.6 finding)",
-    "Post-write architecture amendment applied 2026-05-20T13:00 — operator pivoted to: (1) small EditRowModal replaces inline editing entirely (ADR-0043); (2) Test surface is two-column with sticky Collection→Site→Map scope picker; (3) simulator scope is per-picked-maps not tenant-wide. Architecture doc has an amendment block at the top; PRD-004 + prd-minimal-004 + UI design spec + POC are all updated to reflect.",
-    "Scope picker reuses existing SDK helpers (lib/sdk/sites.ts:30-50 listCollections + listSites with verified shapes) + existing map-loading — zero new SDK surfaces confirmed"
+    "PRD wording correction applied 2026-05-20: s/'edit modal'/'row edit form'/g across prd-004.md + prd-minimal-004.md â€” Full Page does inline row editing, not a modal (architect Â§ 2.6 finding)",
+    "Post-write architecture amendment applied 2026-05-20T13:00 â€” operator pivoted to: (1) small EditRowModal replaces inline editing entirely (ADR-0043); (2) Test surface is two-column with sticky Collectionâ†’Siteâ†’Map scope picker; (3) simulator scope is per-picked-maps not tenant-wide. Architecture doc has an amendment block at the top; PRD-004 + prd-minimal-004 + UI design spec + POC are all updated to reflect.",
+    "Scope picker reuses existing SDK helpers (lib/sdk/sites.ts:30-50 listCollections + listSites with verified shapes) + existing map-loading â€” zero new SDK surfaces confirmed"
   ]
 }
