@@ -1,0 +1,54 @@
+# ──────────────────────────────────────────────────────────────
+# project-planning/.gitignore — artifact durability tiering
+#
+# Tier 1 (durable record) is TRACKED — it is the intent → decisions
+# → outcome story a future run or reader needs.
+# Tiers 2-4 are working material: produced and read by the pipeline
+# DURING a run, superseded by shipped code + ADRs + the ship report.
+#
+# gitignore != delete. Every ignored file still exists on disk and is
+# still written/read by the pipeline exactly as before. Nothing about
+# what a stage PRODUCES changes — only what survives as the committed
+# documentation surface.
+#
+# Contract: .agent/manifests/README.md § "Artifact durability tiers"
+# ──────────────────────────────────────────────────────────────
+
+# Tier 2 — compiler output (mechanically extracted from the spec)
+specs/*-minimal-*.md
+PRD/*-minimal-*.md
+
+# Tier 3 — run-scoped working material
+plans/task-breakdown-*.md
+plans/qa-report.md
+plans/qa-report-*.md
+plans/code-review-*.md
+plans/test-report-*.md
+architecture/
+brain-dumps/
+ui-design/
+design-prototypes/
+
+# Tier 4 — mutable machine state
+# (byte-identical to the latest workflow/run-<id>.json, which IS tracked;
+#  "which run is live" is derivable as latest-by-timestamp — the fallback
+#  /status already implements)
+workflow/current-run.json
+
+# Retired destination — no longer written to by any stage.
+# Pre-existing contents stay on disk and in git history.
+archive/
+
+# ──────────────────────────────────────────────────────────────
+# TRACKED BY OMISSION (deliberate — this is the durable record):
+#   specs/{prd,frd,bug}-NNN.md   ADR/            baseline.md
+#   STATUS.md                    tasks.md        smoke/
+#   plans/ship-report-*.md       captures/       spike-notes/
+#   plans/*probe-findings*.md    source-analysis/
+#   workflow/run-*.json
+#
+# NOTE: plans/ is deliberately NOT ignored wholesale. The three transient
+# families are named individually so ship reports and probe findings stay
+# tracked — a negation pattern could not rescue them, because git cannot
+# un-ignore a file inside an ignored directory.
+# ──────────────────────────────────────────────────────────────
