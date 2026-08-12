@@ -1,34 +1,13 @@
 "use client";
 
 /**
- * T027 (PRD-004) — FullPage
+ * Shell for the xmc:fullscreen extension point: two-pane at >=960px, tabbed
+ * below. The breakpoint is JS (window.innerWidth), not a media query, so the
+ * behaviour is observable in jsdom — see docs/build-decisions.md#js-breakpoint.
  *
- * Top-level shell for the Full Page extension point (xmc:fullscreen).
- *
- * Layout:
- *   ≥960px:  two-pane — TopActionRow (full width), then:
- *              left rail 280px fixed (CollectionPicker + SitePicker + RedirectMapList)
- *              right pane (fluid) — RedirectMapDetail
- *   <960px:  tabbed fallback — Tabs with "Browse" (left content) and "Detail" (right content)
- *             Tab state is persisted: switching from Detail back to Browse keeps the map selection.
- *
- * Breakpoint: 960px implemented via JS window.innerWidth (not media query) so it works in jsdom.
- *
- * Tranche 6b: owns the CRUD orchestration —
- *   - New Map modal (TopActionRow → onCreateClick).
- *   - Delete Map confirm modal (RedirectMapDetail → onDeleteRequested).
- *   - listRefreshKey: incremented after every write so RedirectMapList refetches.
- *   - onLoaded reconciles selectedMap against the freshly-loaded list (re-selects by id).
- *
- * T027 (PRD-004 T4): Manage/Test segmented tab control (ADR-0041).
- *   - activeTab: 'manage' | 'test' lives here (never persisted).
- *   - lastTrace: SimulationTrace | null lives here (survives tab toggles within one page lifecycle).
- *
- * T036 (PRD-004 T4): Lifted state — lastTrace + activeTab.
- *
- * T039 (PRD-004 T4): Test→Manage deep-link via forwardRef imperative handle on RedirectMapDetail.
- *   - handleRequestEditRow(mapId, rowIndex): switches to Manage tab, selects the parent map,
- *     drives startEditRow() on the RedirectMapDetail via detailRef.
+ * Owns the CRUD orchestration, the Manage/Test tab state and lastTrace, plus
+ * the Test->Manage deep link (an imperative handle on the detail pane, not a
+ * state cascade).
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";

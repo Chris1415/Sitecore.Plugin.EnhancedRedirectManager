@@ -1,31 +1,15 @@
 "use client";
 
 /**
- * EditRowModal.tsx — Blok dialog for editing a single redirect mapping row.
+ * The single row-editing surface — it REPLACES inline row editing entirely, so
+ * there is no UX duality. Mode is transient, defaults to 'pattern' on every
+ * open, and is never persisted to Sitecore.
  *
- * ADR-0043: This modal REPLACES the inline row editing in RedirectMapDetail entirely.
- *           One way to edit. No UX duality.
- *
- * ADR-0040: Mode is transient UI state. Defaults to 'pattern' on every modal open.
- *           Never persisted to Sitecore. Inline mode-mismatch hint removed
- *           2026-05-21 (operator UX feedback — simplification pass).
- *
- * STRUCTURAL GUARD (T045 / FR-A8 / ADR-0043):
- *   This file MUST NOT contain RedirectType, IncludeVirtualFolder,
- *   PreserveQueryString, or PreserveLanguage references as rendered controls.
- *   Those are map-level SHARED fields owned by the existing map-settings UI.
- *
- * Removed in 2026-05-21 simplification (operator UX feedback after visual smoke):
- *   - Snippet library (5 patterns)
- *   - Capture-group chips ($1, $2, $siteLang)
- *   - Live regex sample-URL tester subform
- *   - Inline mode-mismatch hint (This pattern looks like a plain URL...)
- *
- * Layout (top -> bottom):
- *   1. Mode toggle (Pattern / Regex segmented control, full-width above source)
- *   2. Source input (font-mono)
- *   3. Destination input (font-mono)
- *   4. Footer: Cancel (secondary) + Save (primary)
+ * ⚠ STRUCTURAL GUARD: this file must NOT render RedirectType,
+ * IncludeVirtualFolder, PreserveQueryString or PreserveLanguage. Those are
+ * map-level SHARED fields owned by the map-settings UI; a per-row control would
+ * imply a scope that does not exist.
+ * See docs/build-decisions.md#one-edit-surface.
  */
 
 import { useState, useCallback, useId } from "react";
