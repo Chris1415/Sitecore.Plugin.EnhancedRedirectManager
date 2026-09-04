@@ -1,27 +1,13 @@
 /**
- * T013 — lib/sdk/page-context.ts
+ * Typed wrapper around pages.context subscribe-via-query. The onSuccess
+ * callback receives the PagesContext DIRECTLY — no extra .data unwrap.
  *
- * Typed wrapper around pages.context subscribe-via-query (Path A).
- * Verb: client.query('pages.context', { subscribe: true, onSuccess })
- * Unwrap: the onSuccess callback receives the PagesContext directly (no extra .data unwrap).
+ * The matcher key is pageInfo.url, which was a working assumption, so the first
+ * message logs BOTH pageInfo.url and pageInfo.route to close it by inspection.
+ * pageInfo.path is the Sitecore item tree path and is NOT the matcher key.
+ * See docs/build-decisions.md#page-context-key.
  *
- * Per UI v1 § 1.6 working assumption (OQ-A): matcher key is pageInfo.url.
- * Divergence-detection: logs both pageInfo.url AND pageInfo.route on first message so the
- * smoke checklist (T065) can close OQ-A by inspection.
- *
- * Type import:
- *   node_modules/@sitecore-marketplace-sdk/client/dist/sdk-types.d.ts → PagesContext (line ~73)
- *   PagesContext.pageInfo.url — published URL (matcher key in MVP)
- *   PagesContext.pageInfo.route — route path (logged for OQ-A divergence detection)
- *   PagesContext.pageInfo.path — Sitecore item tree path (NOT the matcher key)
- *
- * assumed-shape: tests/fixtures/graphql/page-context.json
- * Capture point: T065 real-tenant CRUD smoke
- *
- * Divergence-detection logging: logs pageInfo.url and pageInfo.route on first message
- * under [redirect-manager:dev:capture] prefix, gated on NODE_ENV !== 'production'.
- *
- * Depends on: T009 (requireContextId indirectly; context is pre-resolved by Provider)
+ * type: node_modules/@sitecore-marketplace-sdk/client/dist/sdk-types.d.ts → PagesContext
  */
 
 import type { ClientSDK, PagesContext } from '@sitecore-marketplace-sdk/client';

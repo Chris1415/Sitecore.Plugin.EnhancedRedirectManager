@@ -1,32 +1,11 @@
 /**
- * T012 — useLetterReveal hook (kinetic letter-split helper).
+ * Splits an element's textContent into per-character spans with staggered
+ * reveal delays, inside useEffect. Under prefers-reduced-motion it skips the
+ * split entirely and sets opacity to 1 — it does not merely animate faster.
  *
- * On mount (inside useEffect), splits the element's textContent into per-character
- * <span> elements with staggered --reveal-delay CSS custom properties.
- *
- * Stagger uses --v4-letter-reveal-stagger (default 28ms) from elevated.css.
- * Duration uses --v4-letter-reveal-total (default 800ms) from elevated.css.
- *
- * Reduced-motion gate: if prefers-reduced-motion: reduce is set, skips the
- * splitting entirely and sets opacity to 1 on the element immediately.
- *
- * HYDRATION SAFETY (R-Hydration / feedback_hydration_mismatch_pattern):
- * All DOM manipulation and browser-global access (window.matchMedia,
- * getComputedStyle) is inside useEffect. Never branches on typeof window
- * in render body or useState initializer.
- *
- * Note on gradient-text conflict: this hook splits top-level textContent.
- * If the element contains nested <span>s (e.g. for GradientText), the splitter
- * preserves the full text content but may flatten nested spans. The Full Page
- * hero usage in T3 will decide how to handle this conflict.
- *
- * Signature:
- *   useLetterReveal(
- *     elementRef: RefObject<HTMLElement | null>,
- *     options?: { staggerMs?: number; durationMs?: number; enabled?: boolean }
- *   ): void
- *
- * Depends on: T001 (elevated.css defines --v4-letter-reveal-stagger + --v4-letter-reveal-total)
+ * ⚠ Known conflict: the splitter operates on top-level textContent, so an
+ * element containing nested spans (gradient text) keeps its text but may have
+ * those spans flattened. See docs/build-decisions.md#hydration-safety.
  */
 
 import { useEffect, type RefObject } from 'react';

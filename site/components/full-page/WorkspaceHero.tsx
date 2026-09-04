@@ -1,30 +1,13 @@
 "use client";
 
 /**
- * WorkspaceHero — slimmer Full Page hero.
+ * Full Page hero: eyebrow chip, gradient headline, and the real Publish Site
+ * action (job-status polling, cross-session resume, terminal toasts —
+ * Completed auto-dismisses, Failed and Canceled are sticky).
  *
- * PRD-003 Tranche 1/2 changes:
- *   - "Publish all" DecorativeCta replaced with real "Publish Site" Button
- *     wired to PublishSiteConfirmModal + SitecoreAI Publishing v1 (T019/T021)
- *
- * PRD-003 Tranche 3b changes:
- *   - Job-status polling via usePublishJobTracker
- *   - Cross-session resume via usePublishResume
- *   - In-flight store writes via setInFlightJob / clearInFlightJob
- *   - Button label shows "Publishing… Xs" while polling
- *   - Terminal toasts: Completed (8s auto-dismiss) / Failed (sticky) / Canceled (sticky)
- *
- * Layout:
- *   - Eyebrow chip: "Workspace · {siteName}"
- *   - Gradient headline: "{N} active maps."
- *   - Sub-line: "Last modified {relativeTime} by {updatedBy}"
- *   - CTAs: Refresh · View activity · Validate health (placeholder) · Publish Site (real)
- *
- * Discipline:
- * - No #hex literals (T040 guard)
- * - No "N languages" copy (FR-R11 / T045 guard)
- * - No status-pill--active/--draft (T042 guard)
- * - Hydration-safe: no typeof window in render body
+ * Discipline: no #hex literals, no "N languages" copy, no legacy status-pill
+ * modifiers, and no `typeof window` in the render body. Each is guarded.
+ * See docs/build-decisions.md#semantic-tokens and #hydration-safety.
  */
 
 import { useEffect, useMemo, useRef, useState } from "react";

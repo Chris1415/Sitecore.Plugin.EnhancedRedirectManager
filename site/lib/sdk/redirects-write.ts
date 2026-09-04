@@ -1,44 +1,13 @@
 /**
- * T012 — lib/sdk/redirects-write.ts
+ * Typed wrappers for the createItem / updateItem / deleteItem / renameItem
+ * Authoring GraphQL mutations. Envelope: body INSIDE params. Unwrap: DOUBLE —
+ * result.data.data.<mutation>. All mutations pass language: 'en'.
  *
- * Typed wrappers for createItem / updateItem / deleteItem / renameItem
- * Authoring GraphQL mutations.
- *
- * Verb: client.mutate('xmc.authoring.graphql', ...)
- * Envelope: body INSIDE params (verified 2026-05-11)
- * Unwrap: DOUBLE — result.data.data.<mutation> (verified 2026-05-11)
- *
- * Per ADR-0010: ALL mutations pass language: 'en' (MVP language scope).
- *
- * VERIFIED 2026-05-11 (Tranche 6a real-tenant capture session — closes all 7 assumed-shape annotations):
- *
- *   - createItem(input: CreateItemInput!) { item { itemId name path } }
- *     CreateItemInput accepts: name (required), templateId (required), parent (required), language, fields.
- *     **`id` field is NOT accepted** — server returns EXEC_INVALID_TYPE.
- *     This closes OQ-B / ADR-0009: caller-supplied id is impossible; cross-env
- *     imports always mint a NEW GUID on "create" actions. The import summary
- *     screen must flag newly minted GUIDs as a fast-follow indicator.
- *
- *   - updateItem(input: UpdateItemInput!) { item { itemId } }
- *     Single-field semantics: sending only one field in fields[] updates just
- *     that field and leaves the rest untouched. Boolean write repr: '0' / '1'
- *     (string). The server also tolerates 'true' / 'false' strings, but '0' /
- *     '1' is the canonical write repr we ship.
- *     **`name` field is NOT accepted on UpdateItemInput** — rename has its own
- *     dedicated mutation (see renameRedirectMap below).
- *
- *   - deleteItem(input: DeleteItemInput!) { successful }
- *
- *   - renameItem(input: RenameItemInput!) { item { itemId name } }
- *     RenameItemInput accepts: itemId (required), newName (required).
- *
- *   - RedirectType field values (string at GraphQL level — NOT an enum):
- *     'ServerTransfer', 'Redirect301', 'Redirect302'.
- *     'Redirect307' is rejected by the head-app resolver (operator confirmation).
- *
- * Fixtures: tests/fixtures/graphql/redirect-map.{create,update,delete,rename}.json.
- *
- * Depends on: T009 (requireContextId), T016 (domain types), T017 (serialize).
+ * ⚠ createItem does NOT accept `id` (EXEC_INVALID_TYPE), so a cross-environment
+ * import always mints a NEW GUID. updateItem does NOT accept `name` — rename is
+ * its own mutation. RedirectType is a string, not an enum, and 'Redirect307' is
+ * rejected by the head-app resolver.
+ * Verified against a live tenant — docs/build-decisions.md#authoring-mutations.
  */
 
 import type { ClientSDK } from '@sitecore-marketplace-sdk/client';

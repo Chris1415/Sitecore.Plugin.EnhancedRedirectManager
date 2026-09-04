@@ -1,35 +1,10 @@
 /**
- * DashboardWidget — V4 redesign (T036).
+ * Dashboard widget. Shows per-site stats behind a site picker because NEITHER
+ * the iframe URL NOR the SDK ApplicationContext expose "current site" —
+ * verified against shared-types.d.ts. See
+ * docs/build-decisions.md#dashboard-site-picker.
  *
- * V4 composition order:
- *   1. <PreviewDataBanner surface="dashboardWidget" /> — at top (AC-R3.7)
- *   2. Widget header: utility-voice h2 + site meta + Open ghost button
- *   3. <DashboardHero /> — marketing subhead + hero count-up + delta (MOCK)
- *   4. <Sparkline /> — gradient SVG sparkline (MOCK)
- *   5. 3 real stat tiles (Maps / Mappings / Last-updated) + 4th mock tile from
- *      <RecentlyShippedTile /> — in a 2×2 .dw-tiles grid
- *   6. <TopDestinations /> — 5 mock rows
- *   7. <RecentlyShipped /> — 3 mock rows mini-widget
- *   8. Footer attribution: "Last publish N ago by Author" + <HealthBadge /> (MOCK)
- *
- * Deleted: FootnoteSeparated "Redirect counts only..." line (AC-R3.7 / ADR-0025 —
- *   consolidated into the PreviewDataBanner; T036 explicitly removes it).
- *
- * Real tiles (Maps / Mappings / Last-updated): carry V4 chrome via StatTile
- *   (which now uses .dw-tile). They do NOT carry data-preview-mock.
- *
- * Existing site-selection logic (discoverSites, fetchForSite, handleSiteChange,
- *   detectSiteFromHostContext, localStorage, aggregateStats) all carry unchanged.
- *
- * Cloud Portal embeds the widget on a site dashboard page, but the iframe
- * URL and the @sitecore-marketplace-sdk ApplicationContext do NOT expose
- * "current site" today (verified against shared-types.d.ts — no site field
- * on ApplicationContext, ApplicationResourceContext, or extensionPointContext).
- *
- * Workaround: the widget shows per-site stats with a small site picker.
- *   - If only one site exists in the tenant → auto-selected.
- *   - If the operator has picked before → restore from localStorage.
- *   - Otherwise → small dropdown in the header so they can switch any time.
+ * Mock surfaces carry data-preview-mock; the three real stat tiles do not.
  */
 
 "use client";

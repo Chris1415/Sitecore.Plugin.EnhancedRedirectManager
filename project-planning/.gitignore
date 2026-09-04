@@ -19,15 +19,38 @@ specs/*-minimal-*.md
 PRD/*-minimal-*.md
 
 # Tier 3 — run-scoped working material
+plans/interrogation-*.md
 plans/task-breakdown-*.md
 plans/qa-report.md
 plans/qa-report-*.md
-plans/code-review-*.md
-plans/test-report-*.md
 architecture/
 brain-dumps/
 ui-design/
 design-prototypes/
+
+# PROMOTED TO TIER 1 on 2026-08-12 — code-review and test reports are TRACKED.
+#
+# They were ignored here as "superseded by shipped code". They are not: they
+# carry WHY a Critical was fixed the way it was, which alternative was rejected
+# and what was measured — none of which the shipped code states. With no
+# durable home, agents wrote that reasoning into source-file headers instead
+# (measured: 183 files, 8,477 lines of header essay; two head apps with more
+# comment than code). Rule `87-comment-economy` closes the source-side hole;
+# this closes the destination-side one that caused it.
+#
+# The cost is real and accepted: these are verbose and land per tranche. That
+# is cheaper than the alternative, which was the same prose in .tsx files where
+# it bloats every file that opens it and no gate could see it.
+#   plans/code-review-*.md
+#   plans/test-report-*.md
+
+# Tier 3 — Components Map screenshots (regenerable by re-running
+# /discover-components). The map's TEXT is tracked and is deliberately
+# written to be self-sufficient in prose, so it survives a fresh clone
+# where these images are absent. Added 2026-08-09: the command contract
+# already asserted these were ignored, but no rule implemented it — a
+# blanket `git add` committed ~2 MB of PNGs on the first real run.
+components-information/images/
 
 # Tier 4 — mutable machine state
 # (byte-identical to the latest workflow/run-<id>.json, which IS tracked;
@@ -45,10 +68,12 @@ archive/
 #   STATUS.md                    tasks.md        smoke/
 #   plans/ship-report-*.md       captures/       spike-notes/
 #   plans/*probe-findings*.md    source-analysis/
+#   plans/code-review-*.md       plans/test-report-*.md
 #   workflow/run-*.json
 #
-# NOTE: plans/ is deliberately NOT ignored wholesale. The three transient
-# families are named individually so ship reports and probe findings stay
-# tracked — a negation pattern could not rescue them, because git cannot
-# un-ignore a file inside an ignored directory.
+# NOTE: plans/ is deliberately NOT ignored wholesale. The transient families
+# are named individually so ship reports, probe findings and (since
+# 2026-08-12) code-review + test reports stay tracked — a negation pattern
+# could not rescue them, because git cannot un-ignore a file inside an
+# ignored directory.
 # ──────────────────────────────────────────────────────────────

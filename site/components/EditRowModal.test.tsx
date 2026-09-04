@@ -1,29 +1,8 @@
 /**
- * EditRowModal.test.tsx — T018a/T018 + T019a/T019 + T023a/T023 + T025
- *
- * Simplified 2026-05-21 (operator UX feedback):
- *   Removed tests for: T020 (snippet library), T021 (capture-group chips),
- *   T022 (sample URL tester), T024 (inline mode-mismatch hint).
- *   Those affordances were removed from EditRowModal.
- *
- * Covers (per remaining affordances):
- *
- * T018a / T018 — CRUD parity (R8b gate):
- *   - Save invokes updateRedirectMap with correctly mutated mappings array
- *   - Cancel with unsaved changes triggers alert-dialog confirmation
- *   - Cancel without changes closes immediately (no confirm)
- *
- * T019a / T019 — Mode toggle:
- *   - Defaults to 'pattern' on every open (FR-A2)
- *   - Switching mode preserves source + target edits
- *
- * T023a / T023 — Save-time validation:
- *   - Invalid regex blocks save + inline error + modal stays open
- *   - $0 reference rejected
- *   - $N where N > group count rejected
- *   - $siteLang exempt from count cross-check
- *
- * T025 — Additional coverage
+ * Covers CRUD parity, the mode toggle and save-time validation. Four
+ * affordances were removed after operator UX feedback and their tests removed
+ * with them rather than left skipped —
+ * see docs/build-decisions.md#one-edit-surface.
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";

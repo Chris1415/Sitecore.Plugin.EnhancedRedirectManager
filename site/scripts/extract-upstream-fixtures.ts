@@ -1,31 +1,18 @@
 #!/usr/bin/env node
 /**
- * extract-upstream-fixtures.ts — AST-walking extractor for upstream RedirectsProxy test fixtures.
+ * AST-walking extractor for the upstream RedirectsProxy test fixtures.
  *
- * ADR-0042: Upstream fixture extraction via committed AST-walking script.
- *   Input:  site/lib/redirects/__fixtures__/_upstream-source.ts (gitignored)
- *           Fetched from upstream SHA: 30b0db8fe768b83f03fd6b9772b0d3e14711c6b2
- *           URL: https://github.com/Sitecore/content-sdk/blob/30b0db8.../packages/nextjs/src/proxy/redirects-proxy.test.ts
- *   Output: site/lib/redirects/__fixtures__/upstream-cases.json (committed)
+ *   in:  site/lib/redirects/__fixtures__/_upstream-source.ts  (gitignored)
+ *   out: site/lib/redirects/__fixtures__/upstream-cases.json   (committed)
+ *   run: npm run extract:upstream-fixtures
  *
- * Usage:
- *   npm run extract:upstream-fixtures
- *   # or: npx tsx site/scripts/extract-upstream-fixtures.ts
+ * Pinned to upstream SHA 30b0db8fe768b83f03fd6b9772b0d3e14711c6b2 —
+ * re-extracting against a different SHA is a deliberate act, not a refresh.
+ * Fetch the input with:
+ *   curl -s "https://raw.githubusercontent.com/Sitecore/content-sdk/30b0db8fe768b83f03fd6b9772b0d3e14711c6b2/packages/nextjs/src/proxy/redirects-proxy.test.ts" > site/lib/redirects/__fixtures__/_upstream-source.ts
  *
- * If the input file is missing, the operator must fetch it:
- *   curl -s "https://raw.githubusercontent.com/Sitecore/content-sdk/30b0db8fe768b83f03fd6b9772b0d3e14711c6b2/packages/nextjs/src/proxy/redirects-proxy.test.ts" \
- *     > site/lib/redirects/__fixtures__/_upstream-source.ts
- *
- * Implementation notes:
- *   The upstream test file uses Chai + Sinon + Next.js mocks. Tests call proxy.handle(req, res)
- *   and assert on NextResponse.redirect stub args. The AST extractor walks each it() block to
- *   extract createProxy config (pattern, target, redirectType, flags) + createRequest pathname.
- *   The expected result field is derived by running our simulate() against the extracted inputs,
- *   since we claim 100% parity (ADR-0038 / M2). Cases where the upstream test asserts a
- *   "rewrite" (SERVER_TRANSFER) produce matched:true with redirectType: 'ServerTransfer'.
- *   Cases exercising file-detection, preview, or prefetch skip behavior are excluded (these
- *   are pre-filter-only cases with no redirect rule matching — they test middleware plumbing,
- *   not our simulator's matching algorithm).
+ * Why a walker rather than a hand-port, and what is deliberately excluded:
+ * docs/build-decisions.md#upstream-fixtures.
  */
 
 import * as ts from 'typescript';

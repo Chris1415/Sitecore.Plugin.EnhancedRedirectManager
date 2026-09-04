@@ -1,35 +1,14 @@
 "use client";
 
 /**
- * TraceCard.tsx — T035 + T038 (PRD-004 T4)
+ * Exhaustive switch-renderer over the SimulationStage union — assertNeverStage
+ * in the default branch makes a new stage a COMPILE-time failure rather than a
+ * silently unrendered card.
  *
- * Exhaustive switch-renderer for SimulationStage discriminated union.
- *
- * Each card uses HoverLiftCard from @/components/ui/hover-lift-card.
- * Color-coding per stage (left-border accent):
- *   - pre-filter:           var(--muted-foreground)  — informational
- *   - normalize:            var(--primary)            — process step
- *   - candidates:           var(--primary)            — process step
- *   - evaluate-row/match:   var(--primary)            — success tint
- *   - evaluate-row/no-match: var(--muted-foreground) — neutral
- *   - evaluate-row/timeout:  var(--destructive)       — warning
- *   - substitute:           var(--primary)
- *   - flag-effects:         var(--primary)
- *   - dispatch:             var(--primary)
- *   - diagnostic-incomplete: derived warning via color-mix
- *
- * IMPORTANT: All colors are semantic tokens via var(--token), NEVER hex literals.
- * Warning tint: color-mix(in oklch, var(--destructive) 30%, var(--card))
- * (memory reference_hsl_var_token_broken_with_hex_values.md — DO NOT use hsl(var(--hex)))
- *
- * Visual contract:
- *   pocs/poc-v1-prd004/test-matched.html
- *   pocs/poc-v1-prd004/test-unmatched.html
- *   pocs/poc-v1-prd004/test-timeout-row.html
- *   pocs/poc-v1-prd004/test-diagnostic-incomplete.html
- *
- * `assertNeverStage` from proxy-simulator is called in the default branch
- * for compile-time exhaustiveness verification (T007).
+ * ⚠ All colours are semantic tokens via var(--token), never hex, and never
+ * hsl(var(--token)) — the tokens carry hex values, so wrapping one in hsl()
+ * yields an invalid colour that silently collapses.
+ * See docs/build-decisions.md#semantic-tokens.
  */
 
 import type { SimulationStage } from "@/lib/redirects/proxy-simulator";
